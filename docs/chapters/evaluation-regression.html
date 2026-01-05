@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Evaluating Regression Models – Machine Learning Intuition</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/trees-intuition.html" rel="next">
+<link href="../chapters/evaluation-classification.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Machine Learning Intuition</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction to Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Model Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Decision Trees</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Preprocessing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bringing it all Together</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#evaluating-distances" id="toc-evaluating-distances" class="nav-link active" data-scroll-target="#evaluating-distances"><span class="header-section-number">10.1</span> Evaluating Distances</a></li>
+  <li><a href="#beyond-subtraction" id="toc-beyond-subtraction" class="nav-link" data-scroll-target="#beyond-subtraction"><span class="header-section-number">10.2</span> Beyond Subtraction</a>
+  <ul class="collapse">
+  <li><a href="#mean-absolute-error" id="toc-mean-absolute-error" class="nav-link" data-scroll-target="#mean-absolute-error"><span class="header-section-number">10.2.1</span> Mean Absolute Error</a></li>
+  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">10.2.2</span> Mean Squared Error</a></li>
+  <li><a href="#average-error-is-still-useful" id="toc-average-error-is-still-useful" class="nav-link" data-scroll-target="#average-error-is-still-useful"><span class="header-section-number">10.2.3</span> Average Error is still useful</a></li>
+  </ul></li>
+  <li><a href="#practice-exercise" id="toc-practice-exercise" class="nav-link" data-scroll-target="#practice-exercise"><span class="header-section-number">10.3</span> Practice Exercise</a></li>
+  <li><a href="#choosing-between-metrics" id="toc-choosing-between-metrics" class="nav-link" data-scroll-target="#choosing-between-metrics"><span class="header-section-number">10.4</span> Choosing Between Metrics</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">10.5</span> Final Thoughts</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>The previous chapter described how to evaluate classification models. The main approach was simple:</p>
+<ul>
+<li>Set aside a fraction of the training dataset as test set</li>
+<li>Train the model on the train set, do not use the test set</li>
+<li>Use the trained model to generate predictions on the test set</li>
+<li>Compute the distance between the predictions and the labels of the test</li>
+</ul>
+<p>The exact same approach can be applied to regression models. The only difference with the previous chapter is the computation of the distance between predictions and true labels.</p>
+<p>As a reminder, a regression task is the prediction of <strong>any continuous quantity</strong>, such as the temperature tomorrow, the price of a property or a crop yield.</p>
+<p>The general idea is still the same: <span class="math display">\[
+\text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
+\]</span></p>
+<section id="evaluating-distances" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="evaluating-distances"><span class="header-section-number">10.1</span> Evaluating Distances</h2>
+<p>Let’s start with a simple example of a model predicting the price of a property:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Predicted Price</th>
+<th>Actual Price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>140</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>110</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>100</td>
+<td>130</td>
+</tr>
+</tbody>
+</table>
+<p>How would you measure the error of this model? One way to do this is to measure the <strong>distance</strong> between each prediction and the ground truth using the distance functions explored in the <a href="../chapters/distance.html" target="_blank">Distance chapter</a>.</p>
+<p>The error of each prediction can be computed with the following formula:</p>
+<p><span class="math display">\[
+\text{Prediction Error} = \text{Prediction} - \text{Ground Truth}
+\]</span></p>
+<p>The error in the prediction for property 1 is:</p>
+<p><span class="math display">\[
+\text{Prediction Error}_1 = 140 - 120 = 20
+\]</span></p>
+<p>The model over-predicted the price of the property by 20.</p>
+<div id="exr-pred-err" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 10.1</strong></span> Show that the prediction errors for property 2 and 3 are <span class="math inline">\(10\)</span> and <span class="math inline">\(-30\)</span> respectively.</p>
+</div>
+<div id="sol-pred-err" class="proof solution">
+<p><span class="proof-title"><em>Solution 10.1</em>. </span>You should get the following table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Property</th>
+<th style="text-align: center;">Predicted Price</th>
+<th style="text-align: center;">Actual Price</th>
+<th style="text-align: center;">Prediction Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">-30</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Now, how can we <strong>aggregate</strong> these errors to come up with an evaluation of the model? One idea would be to compute the <strong>average error</strong> (for <span class="math inline">\(n\)</span> observations):</p>
+<p><span class="math display">\[
+\text{Average Error} = \frac{\text{Error}_1 + \text{Error}_2 + \cdots + \text{Error}_n}{n}
+\]</span></p>
+<p>Computing the average error of the example model, we get:</p>
+<p><span class="math display">\[
+\text{Average Error} = \frac{20 + 10 + (-30)}{3} = \frac{0}{3} = 0
+\]</span></p>
+<p>Using the <span class="math inline">\(\Sigma\)</span> operator described in the <a href="../chapters/distance.html" target="_blank">Distance chapter</a>, this notation can be made more compact:</p>
+<p><span class="math display">\[
+\text{Average Error} = \frac{1}{n} \sum_{i=1}^{n} (\text{Prediction}_i - \text{Truth}_i)
+\]</span></p>
+<p>If you are not familiar with the <span class="math inline">\(\Sigma\)</span> operator, please refer to the <a href="../chapters/distance.html" target="_blank">Distance chapter</a> in which this concept is clearly explained.</p>
+</section>
+<section id="beyond-subtraction" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="beyond-subtraction"><span class="header-section-number">10.2</span> Beyond Subtraction</h2>
+<p>Do you notice something strange? The average model error is <span class="math inline">\(0\)</span>, which would describe a <em>perfect model</em>. Yet, we do see that this model is <strong>not</strong> perfect, it makes errors, it does not perfectly predict the actual price of any property listed above.</p>
+<p>The issue with averaging errors is that they cancel out. The numerator of the fraction becomes <span class="math inline">\(0\)</span>.</p>
+<p>Remembering the <a href="../chapters/distance.html" target="_blank">Distance chapter</a>, could we use another distance function to avoid this problem?</p>
+<p>There are two main methods we could use:</p>
+<ul>
+<li>Averaging the <strong>absolute values</strong> of the errors</li>
+<li>Averaging the <strong>squared errors</strong></li>
+</ul>
+<section id="mean-absolute-error" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="mean-absolute-error"><span class="header-section-number">10.2.1</span> Mean Absolute Error</h3>
+<p>The absolute value of a number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>. It is the <strong>magnitude</strong> of the number, regardless of its sign. As an example <span class="math inline">\(|2| = |-2| = 2\)</span>. When we average the absolute values of the error, we can compute the <strong>Mean Absolute Error (MAE)</strong>:</p>
+<p><span class="math display">\[
+\text{Mean Absolute Error} = \frac{| \text{Error}_1 | + | \text{Error}_2 | + \cdots + | \text{Error}_n |}{n}
+\]</span></p>
+<p>Using the <span class="math inline">\(\Sigma\)</span> notation to make this more compact:</p>
+<p><span class="math display">\[
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} | \text{Prediction}_i - \text{Truth}_i |
+\]</span></p>
+<p>Computing the Mean Absolute Error for the example data:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Property</th>
+<th style="text-align: center;">Predicted Price</th>
+<th style="text-align: center;">Actual Price</th>
+<th style="text-align: center;">Prediction Error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">-30</td>
+</tr>
+</tbody>
+</table>
+<p>We get:</p>
+<p><span class="math display">\[
+\text{MAE} = \frac{|20| + |10| + |-30|}{3} = \frac{20 + 10 + 30}{3} = \frac{60}{3} = 20
+\]</span></p>
+<p>This metric is much better than the average error as it gives us an idea of the average distance between individual predictions and the ground truth. Looking at the example data, the model is on average <span class="math inline">\(20\)</span> away from the ground truth.</p>
+</section>
+<section id="mean-squared-error" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">10.2.2</span> Mean Squared Error</h3>
+<p>Another way to do so is to compute the average of the <strong>squared errors</strong>. This metric is called the <strong>Mean Squared Error (MSE)</strong>:</p>
+<p><span class="math display">\[
+\text{Mean Squared Error} = \frac{\text{Error}_1^2 + \text{Error}_2^2 + \cdots + \text{Error}_n^2}{n}
+\]</span></p>
+<p>Or, in <span class="math inline">\(\Sigma\)</span> notation:</p>
+<p><span class="math display">\[
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (\text{Prediction}_i - \text{Truth}_i)^2
+\]</span></p>
+<p>This method has the advantage of turning every error into a positive number before averaging. This way, errors do not cancel out.</p>
+<p>Computing the Mean Squared Error for the example data, we get:</p>
+<p><span class="math display">\[
+\text{MSE} = \frac{20^2 + 10^2 + (-30)^2}{3} = \frac{400 + 100 + 900}{3} = \frac{1400}{3} \approx 466.67
+\]</span></p>
+<p>Do you notice something strange? The resulting metric is <strong>much larger</strong> than expected, beyond the scale of the original errors.</p>
+<p>One way to make this metric more interpretable is to take the square root of this number:</p>
+<p><span class="math display">\[
+\sqrt{466.67} \approx 21.6
+\]</span></p>
+<p>This is called the <strong>Root Mean Squared Error (RMSE)</strong>, another commonly used regression model performance metric. It is computed as follows:</p>
+<p><span class="math display">\[
+\text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (\text{Prediction}_i - \text{Truth}_i)^2 } = \sqrt{\text{MSE}}
+\]</span></p>
+</section>
+<section id="average-error-is-still-useful" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="average-error-is-still-useful"><span class="header-section-number">10.2.3</span> Average Error is still useful</h3>
+<p>Does that mean that we should never use average Error? Not exactly.</p>
+<p>The Average Error is still a useful metric to see if a prediction model has a <strong>bias</strong>; i.e., if a model consistently over- or under-predicts. If the average error of the model is not close to <span class="math inline">\(0\)</span>, it means that there is <strong>systematic</strong> over- or under-prediction.</p>
+<p>This can be illustrated with the following example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Property</th>
+<th style="text-align: center;">Predicted Price</th>
+<th style="text-align: center;">Actual Price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">150</td>
+<td style="text-align: center;">120</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">130</td>
+</tr>
+</tbody>
+</table>
+<div id="exr-avg-err" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 10.2</strong></span> Calculate the Average Error of this model and determine whether the model over- or under-predicts.</p>
+</div>
+<div id="sol-avg-err" class="proof solution">
+<p><span class="proof-title"><em>Solution 10.2</em>. </span><span class="math display">\[\begin{aligned}
+\text{Prediction Error}_1 &amp;= 150 - 120 = 30 \\
+\text{Prediction Error}_2 &amp;= 130 - 100 = 30 \\
+\text{Prediction Error}_3 &amp;= 140 - 130 = 10 \\
+\text{Average Error} &amp;= \frac{30 + 30 + 10}{3} = \frac{70}{3} \approx 23.33
+\end{aligned}
+\]</span></p>
+<p>Since the average error is positive, the model <strong>over-predicts</strong>.</p>
+</div>
+</section>
+</section>
+<section id="practice-exercise" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="practice-exercise"><span class="header-section-number">10.3</span> Practice Exercise</h2>
+<p>Looking at these two pricing models, which one would you pick?</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Property</th>
+<th style="text-align: center;">Model A Prediction</th>
+<th style="text-align: center;">Model B Prediction</th>
+<th style="text-align: center;">Truth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">150</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">120</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">140</td>
+<td style="text-align: center;">140</td>
+</tr>
+</tbody>
+</table>
+<div id="exr-acc-mod" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 10.3</strong></span> Show that Model B generates predictions that are closer to the truth than Model A, using the error metrics shown above.</p>
+</div>
+<div id="sol-acc-mod" class="proof solution">
+<p><span class="proof-title"><em>Solution 10.3</em>. </span><br><strong>Model A:</strong></p>
+<ul>
+<li>Errors: <span class="math inline">\(150-120=30\)</span>, <span class="math inline">\(110-100=10\)</span>, <span class="math inline">\(100-140=-40\)</span></li>
+<li>Average Error: <span class="math inline">\(\frac{30 + 10 + (-40)}{3} = 0\)</span></li>
+<li>MAE: <span class="math inline">\(\frac{|30| + |10| + |-40|}{3} = \frac{30 + 10 + 40}{3} = 26.67\)</span></li>
+<li>MSE: <span class="math inline">\(\frac{30^2 + 10^2 + (-40)^2}{3} = \frac{900 + 100 + 1600}{3} = \frac{2600}{3} \approx 866.67\)</span></li>
+<li>RMSE: <span class="math inline">\(\sqrt{866.67} \approx 29.43\)</span></li>
+</ul>
+<p><strong>Model B:</strong></p>
+<ul>
+<li>Errors: <span class="math inline">\(140-120=20\)</span>, <span class="math inline">\(100-100=0\)</span>, <span class="math inline">\(140-140=0\)</span></li>
+<li>Average Error: <span class="math inline">\(\frac{20 + 0 + 0}{3} = 6.67\)</span></li>
+<li>MAE: <span class="math inline">\(\frac{|20| + |0| + |0|}{3} = \frac{20}{3} \approx 6.67\)</span></li>
+<li>MSE: <span class="math inline">\(\frac{20^2 + 0^2 + 0^2}{3} = \frac{400}{3} \approx 133.33\)</span></li>
+<li>RMSE: <span class="math inline">\(\sqrt{133.33} \approx 11.55\)</span></li>
+</ul>
+<p>All metrics show that Model B is <strong>closer</strong> to the truth.</p>
+</div>
+</section>
+<section id="choosing-between-metrics" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="choosing-between-metrics"><span class="header-section-number">10.4</span> Choosing Between Metrics</h2>
+<p>This chapter has introduced four performance metrics:</p>
+<ul>
+<li>Average Error</li>
+<li>Mean Absolute Error</li>
+<li>Mean Squared Error</li>
+<li>Root Mean Squared Error</li>
+</ul>
+<p>In the example above, all metrics <strong>agreed</strong>; in other words, all metrics gave an advantage to Model B. This is not always the case.</p>
+<div id="exr-dis" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 10.4</strong></span> Compute the MSE and MAE of the two models below:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Property</th>
+<th style="text-align: center;">Model A Prediction</th>
+<th style="text-align: center;">Model B Prediction</th>
+<th style="text-align: center;">Truth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">115</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">125</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">140</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">150</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sol-dis" class="proof solution">
+<p><span class="proof-title"><em>Solution 10.4</em>. </span><br><strong>Model A:</strong></p>
+<ul>
+<li>Errors: <span class="math inline">\(115-100=15\)</span>, <span class="math inline">\(105-120=-15\)</span>, <span class="math inline">\(125-140=-15\)</span>, <span class="math inline">\(100-150=-50\)</span></li>
+<li>MAE: <span class="math inline">\(\frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75\)</span></li>
+<li>MSE: <span class="math inline">\(\frac{15^2 + (-15)^2 + (-15)^2 + (-50)^2}{4} = \frac{225 + 225 + 225 + 2500}{4} = \frac{3175}{4} = 793.75\)</span></li>
+</ul>
+<p><strong>Model B:</strong></p>
+<ul>
+<li>Errors: <span class="math inline">\(110-100=10\)</span>, <span class="math inline">\(110-120=-10\)</span>, <span class="math inline">\(130-140=-10\)</span>, <span class="math inline">\(90-150=-60\)</span></li>
+<li>MAE: <span class="math inline">\(\frac{|10| + |-10| + |-10| + |-60|}{4} = \frac{10 + 10 + 10 + 60}{4} = \frac{90}{4} = 22.5\)</span></li>
+<li>MSE: <span class="math inline">\(\frac{10^2 + (-10)^2 + (-10)^2 + (-60)^2}{4} = \frac{100 + 100 + 100 + 3600}{4} = \frac{3900}{4} = 975\)</span></li>
+</ul>
+</div>
+<p>As you can see, Model A has a higher MAE than Model B, and Model B has a higher MSE than model A. How can that be? To understand the reason why, we need to understand the difference between the absolute value and the squared value of a number. These two functions are visualised below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/evaluation/abs_vs_square.png" class="img-fluid figure-img"></p>
+<figcaption>Absolute value and square functions</figcaption>
+</figure>
+</div>
+<details>
+<summary>
+Figure code
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">200</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>abs_x <span class="op">=</span> np.<span class="bu">abs</span>(x)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sq_x <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, abs_x, label<span class="op">=</span><span class="st">'Absolute Value $|x|$'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.plot(x, sq_x, label<span class="op">=</span><span class="st">'Square $x^2$'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparison of $|x|$ and $x^2$'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Value'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>You may see that the square function <strong>increases faster</strong> as numbers grow larger or more negative, whereas the growth rate of the absolute value function <strong>stays constant</strong>. This means that the Mean Squared Error will strongly penalise <strong>extreme errors</strong>. Remembering the previous example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Property</th>
+<th style="text-align: center;">Model A Prediction</th>
+<th style="text-align: center;">Model B Prediction</th>
+<th style="text-align: center;">Truth</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">115</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">105</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">125</td>
+<td style="text-align: center;">130</td>
+<td style="text-align: center;">140</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">90</td>
+<td style="text-align: center;">150</td>
+</tr>
+</tbody>
+</table>
+<p>Model B has a very high prediction error on property 4 (<span class="math inline">\(-60\)</span>), which results in a higher MSE value than Model A, despite having a lower Mean Absolute Error. What to do in these cases?</p>
+<p>First, this does not happen often. It was a bit of work to build an example that would show this edge case.</p>
+<p>Practical considerations aside, there is no one-size-fits-all metric. The best metric is the one that best measures the <strong>consequences of an error</strong> in the real world.</p>
+<p>Taking the example of property pricing, <strong>large errors</strong> can have a strong negative impact:</p>
+<ul>
+<li>Over-pricing may lead to <strong>financial losses</strong> as the pricing company may not be able to sell the property</li>
+<li>Under-pricing may <strong>reduce</strong> the number of deals a real estate company can make</li>
+</ul>
+<p>Given these considerations, the Mean Squared Error is a better choice.</p>
+<p>There are also mathematical reasons why the Mean Squared Error and Root Mean Squared Errors are <strong>sometimes preferred</strong> over the Mean Absolute Error. One of them is explained in the note below.</p>
+<details>
+<summary>
+Mean Square Error and Differentiability
+</summary>
+<p>The Mean Absolute Error (MAE) function is <strong>not differentiable</strong> at <span class="math inline">\(0\)</span>, because the absolute value function <span class="math inline">\(|x|\)</span> has a “sharp corner” at <span class="math inline">\(x=0\)</span>.</p>
+<p>This is an issue for many machine learning algorithms, which rely on <strong>differentiability</strong> for optimisation (such as gradient descent). In contrast, the Mean Squared Error (MSE) is differentiable everywhere, making it easier to use for training models.</p>
+</details>
+</section>
+<section id="final-thoughts" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">10.5</span> Final Thoughts</h2>
+<p>This section described regression model evaluation. It is very similar to the approach used for classification models described in the previous chapter:</p>
+<ul>
+<li>Set aside a share of the training data as a test set</li>
+<li>Using the trained model, generate predictions on this test set</li>
+<li>Calculate the distance to the truth of the predictions generated using performance metrics such as Average Error, MAE, MSE or RMSE</li>
+</ul>
+<p>The main difference is the <strong>distance calculation</strong> used.</p>
+<p>This is it for model evaluation. The next chapter will introduce this book’s second Machine Learning model architecture: Decision Trees.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/evaluation-classification.html" class="pagination-link" aria-label="Evaluating Classification Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/trees-intuition.html" class="pagination-link" aria-label="Decision Trees">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright © Eliott Kalfon 2025. All rights reserved.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
