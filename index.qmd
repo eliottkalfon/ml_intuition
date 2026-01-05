@@ -1,0 +1,21 @@
+# Preface {.unnumbered}
+
+Machine Learning and AI have taken our world by storm. And yet, so few people truly understand these technologies.
+
+I spent a large share of my adult life solving complex problems with Machine Learning algorithms. Now is the time to share with my family and friends what has occupied so much of my time.
+
+This book will give you an intuition of using Machine Learning to predict anything. If that sounds exciting, welcome!
+
+The first part is a self-contained introduction to prediction with Machine Learning. It shows the main intuition behind predicting anything with an algorithm that learns from data.
+
+The rest of the book explores other important aspects of Machine Learning practice such as: [modelling approaches](chapters/trees-intuition.qmd), [model evaluation](chapters/model-evaluation.qmd), and [data preprocessing](chapters/data-preprocessing.qmd).
+
+The last section brings this all together with an [end-to-end Machine Learning project](chapters/end-to-end.qmd).
+
+The [last chapter](chapters/generative-ai.qmd) discusses the link between the content of this book and the Generative AI models that have revolutionised our understanding of intelligence.
+
+### Notes
+
+- This book is not a theoretical reference and will not teach you how to write Machine Learning code. If you would like to me to expand on these topics, [please get in touch](https://eliottkalfon.com/contact)!
+- All of the data shown in this book is synthetic (i.e., not real). Nothing in this book is medical, legal or investment advice.
+

@@ -1,0 +1,29 @@
+details {
+  background-color: #f8f9fa;
+  border-radius: 8px;          
+  margin: 1em 0;
+  border: 1px solid #e0e0e0;
+}
+
+details summary {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #6c757d;
+  outline: none;
+}
+
+details > *:not(summary) {
+  padding: 0 15px 15px 15px;
+}
+
+blockquote, 
+blockquote p {
+  color: #333333 !important; /* Forces the text to a dark charcoal/black */
+  opacity: 1 !important;      /* Some themes use opacity to make it look gray */
+}
+
+/* This ensures the citation inside the quote doesn't look washed out either */
+blockquote .citation {
+  color: #333333 !important;
+}

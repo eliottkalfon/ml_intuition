@@ -1,0 +1,63 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Machine Learning Intuition"
+  author: "Eliott Kalfon"
+  date: "1/04/2026"
+  chapters:
+    - index.qmd
+    - part: "Introduction to Machine Learning"
+      chapters:
+      - intro.qmd
+      - chapters/defining-prediction.qmd
+      - chapters/types-ml.qmd
+      - chapters/ai-ml-ds.qmd
+      - chapters/data-space.qmd
+      - chapters/distance.qmd
+      - chapters/neighbours.qmd
+    - part: "Model Evaluation"
+      chapters: 
+        - chapters/model-evaluation.qmd
+        - chapters/evaluation-classification.qmd
+        - chapters/evaluation-regression.qmd
+    - part: "Decision Trees"
+      chapters:
+        - chapters/trees-intuition.qmd
+        - chapters/splitting-maths.qmd
+        - chapters/recursion.qmd
+        - chapters/trees-proba-reg.qmd
+    - part: "Data Preprocessing"
+      chapters:
+      - chapters/data-preprocessing.qmd
+      - chapters/categorical-variables.qmd
+      - chapters/datetime.qmd
+      - chapters/missing-numerical-values.qmd
+      - chapters/missing-categorical-values.qmd
+      - chapters/scaling.qmd
+    - part: "Bringing it all Together"
+      chapters:
+      - chapters/end-to-end.qmd
+      - chapters/generative-ai.qmd
+    - references.qmd
+  page-footer:
+    left: "Copyright &copy; Eliott Kalfon 2025. All rights reserved."
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    number-sections: true
+    exercise:
+      solutions: true
+  pdf:
+    documentclass: book
+    number-sections: true
+    exercise:
+      solutions: true
+
+
+
