@@ -1,0 +1,147 @@
+---
+title: Data and Space
+---
+
+Prediction models need information stored as input/output pairs. To predict the diagnosis of a tumour based on its characteristics, these models require many examples of tumour characteristics and tumour diagnosis pairs.
+
+This collection is called a **dataset**, or a data sample. **Data** refers to any information being recorded and stored. From its Latin origin, it means “what is given”.
+
+From the point of view of the practitioner, data is rarely given, it is earned with sweat and tears. A sacrifice worth making, as a prediction model is only as good as its training data.
+
+The simplest form of data is tabular data. The first known examples of data tables are 4000 years old (!) dating back to the Old Babylonian period. Then, these clay tablets were used for accounting and trade.
+
+![Ancient Babylonian clay tablet showing a table [@CDLI2025Terms]](/images/data-space/tablet.jpg)
+
+## The Anatomy of a Table
+
+Tables are made of columns and rows.
+
+![Basic elements of a table](/images/data-space/table.png)
+
+Rows generally represent a real-world **entity**, with columns describing the **attributes** of this entity. Here, each row is a property, and each column describes an attribute of this property.
+
+As shown in this table, the values stored in tables can have different data types:
+
+- numeric: integer or continuous values
+- categorical: text or category
+- boolean: true or false
+- datetime: representing a point in time
+
+For prediction purposes, the label to predict is generally one of the many columns describing various entities. In the case of the example above, it is the “Sale Price (€)” column.
+
+In most organisations today, tabular data is stored in **relational databases**, also called Relational Database Management Systems. It is a mouthful, frequently abbreviated as RDBMS, still a mouthful.
+
+## Data is Anything Stored
+
+Data is any piece of information that is recorded. The text that I am typing now is data. The signal sent from my laptop keyboard strokes, to the CPU, and over a network to Google Docs... All of this is data.
+
+To put some structure to this, the following are the main data modalities:
+
+- Images: generally represented as grids of pixel (Picture Elements) values
+- Audio: sound wave, amplitude of a signal over time
+- Video: a combination of frames and one or more audio tracks
+- Text: sequence of characters, each encoded as bits
+- Binary files: any file stored with bits, sequence of 0s and 1s
+
+The above data types are ultimately stored as binary data on a computer. Some, like text files, are **human-readable**, while others—such as images, audio, and video—are often stored in binary file formats that are **not** directly readable by humans.
+
+This book will focus on building an intuition for Machine Learning using tabular data only.
+
+## From Data to Space
+
+Getting back to tabular data, these first sections will focus on **numerical columns only**. Categorical and datetime features will be explored in the later sections. Spoiler alert: they will all be converted to numbers.
+
+Looking at the table below, each tumour can be represented by a list of its characteristics, a list of numbers.
+
+| Diagnosis | Perimeter Mean (µm) | Area Mean (µm²) | Texture Mean |
+|:-----------:|:-------------------:|:---------------:|:-----------:|
+| Benign      | 80                  | 700             | 17.5        |
+| Malignant   | 110                 | 1200            | 23.0        |
+
+In Mathematics, a list of numbers can represent a **point in space**. In the example above, each tumour is associated with three numbers. We can use these numbers to represent each tumour as a point in a three-dimensional space.
+
+<details><summary>Note: But what is space?</summary>
+
+This is a fascinating question. The short answer is: a **set** with a degree of **structure**. A set can be thought of as a collection. But any set is not necessarily a space, as spaces require structure.
+
+As an example, I can see objects on my desk: a glass of water and my notebook. These objects lie somewhere in a three dimensional space, with a certain position with regards to my computer. Using these positions, I could compute the **distance** between the different objects in space around me. But there, we are already getting carried away.
+
+</details>
+
+Below are two charts plotting suspicious mass observations in two and three dimensions:
+
+![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png)
+
+![Plotting observations in three dimensions](/images/data-space/scatter_plot_3d.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.datasets import load_breast_cancer
+
+# Use breast cancer dataset for realistic texture means
+data = load_breast_cancer()
+benign_texture = data.data[data.target == 1][:, 1]  # texture_mean for benign
+malignant_texture = data.data[data.target == 0][:, 1]  # texture_mean for malignant
+
+benign_center = [80, 700]
+malignant_center = [110, 1200]
+
+n_samples = 70
+
+X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
+X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
+
+benign_std = [10, 120]
+malignant_std = [12, 300]
+
+X_benign = X_benign * benign_std + benign_center
+X_malignant = X_malignant * malignant_std + malignant_center
+
+# Sample realistic texture means
+np.random.seed(42)
+benign_texture_sample = np.random.choice(benign_texture, n_samples)
+malignant_texture_sample = np.random.choice(malignant_texture, n_samples)
+
+plt.figure(figsize=(8,6))
+plt.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign')
+plt.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant')
+plt.xlabel('Perimeter Mean (µm)', fontsize=16)
+plt.ylabel('Area Mean (µm²)', fontsize=16)
+plt.title('Tumours: Perimeter Mean vs Area Mean', fontsize=18)
+plt.legend(fontsize=12)
+plt.grid(True)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.show()
+
+# 3D plot
+from mpl_toolkits.mplot3d import Axes3D
+
+fig = plt.figure(figsize=(8,6))
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(X_benign[:,0], X_benign[:,1], benign_texture_sample, marker='o', color='blue', label='Benign')
+ax.scatter(X_malignant[:,0], X_malignant[:,1], malignant_texture_sample, marker='x', color='red', label='Malignant')
+ax.set_xlabel('Perimeter Mean (µm)', fontsize=16)
+ax.set_ylabel('Area Mean (µm²)', fontsize=16)
+ax.set_zlabel('Texture Mean', fontsize=16)
+ax.set_title('Tumours in 3D Feature Space', fontsize=18)
+ax.legend(fontsize=12)
+ax.tick_params(axis='x', labelsize=14)
+ax.tick_params(axis='y', labelsize=14)
+ax.tick_params(axis='z', labelsize=14)
+plt.show()
+```
+
+</details>
+
+This text is printed on a flat surface. And yet, using perspective and transparency, one can create the illusion of a third dimension. If you think that this 3D chart is barely legible, I agree with you.
+
+What is true in a two- and three-dimensional space also applies to **any number of dimensions**. As the number of dimensions increases, plotting data on paper gets more difficult.
+
+## Final Thoughts
+
+But why do we bother with space and with these lists of numbers? Representing entities and observations in this way allows us to use **mathematical tricks to make predictions**. The nature of these tools will be studied in the next sections, starting with **distance**, and answering the question: how **similar** are two observations?

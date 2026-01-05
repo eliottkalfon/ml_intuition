@@ -1,0 +1,150 @@
+---
+title: Machine Learning and Generative AI
+---
+
+These days, it is hard to write anything about Machine Learning without mentioning Generative Artificial Intelligence (GenAI). GenAI took the world by storm with the public release of ChatGPT in 2022.
+
+Breaking down this term:
+
+- **Generative:** producing content such as texts, images, audio or video
+- **Artificial:** not human
+- **Intelligence:** “the ability to learn, understand, and make judgments or have opinions that are based on reason”[@cambridge_intelligence]
+
+More generally, artificial intelligence can be thought of as the emulation of human intelligence, defined above. Further developments may invalidate this definition as the algorithms developed acquire capabilities going beyond human understanding.
+
+GenAI was one of the major technological breakthroughs of the early 21st century. It was built on a **combination of the different Machine Learning types** listed [earlier](defining-prediction.qmd).
+
+## Starting with the Foundation
+
+The foundation of GenAI models is a **next word (or token) predictor**. When we send a request to a GenAI model, we send the following input:
+
+```
+User: What is the capital of France?
+
+Assistant:
+```
+
+The model takes this input and predicts `The` as output. 
+
+The answer would be a bit disappointing if it ended there. To continue, the model uses the previous input sequence and adds the `The` token it predicted:
+
+```
+User: What is the capital of France?
+
+Assistant: The
+```
+
+and outputs `capital`. This process goes on until the model predicts an `<end>` token, meaning that the response is over. The practice of appending a prediction to the original input sequence to generate another prediction is called **auto-regression**.
+
+Note: Large Language Models do not predict the next word but the next **token**. A token is a string of characters which could be a part of a word (“ing”) or a full word (“the”). We will stick to words in this simple explanation.
+
+::: {.exercise #exr-class}
+What type of prediction is the task of next word/token prediction?
+:::
+
+::: {.solution #sol-class}
+It is a classification task, with as many labels as possible words/tokens. This number is generally called the **vocabulary size**, which is just above 100,000 for OpenAI's GPT-4 model.
+:::
+
+Even though this is a classification task, the foundational training of Large Language Models is generally referred to as **self-supervised** learning, instead of just **supervised** learning. This is because, unlike the classification tasks listed in the previous section, there is no dataset of input and outputs. The model is simply trained to predict the next word of every sentence it finds.
+
+As an example, if the training corpus contains the sentence:
+
+> “The Second World War ended in 1945.”
+
+It would include the following input/output pairs in its training:
+
+| Input                              | Output |
+|-------------------------------------|--------|
+| The                                | Second |
+| The Second                         | World  |
+| The Second World                   | War    |
+| The Second World War               | ended  |
+| The Second World War ended         | in     |
+| The Second World War ended in      | 1945   |
+| The Second World War ended in 1945 | .      |
+
+You may see that some guesses are much easier than others.
+
+The foundation model is trained with supervised learning as it learns from input/output pairs. Yet, this is self-supervised as these input/output pairs do not require special curation.
+
+## Is Next Word Prediction Enough?
+
+If you simply train a model to predict the next word using all of the text of the internet, you may come across surprising behaviours. As an example, the request:
+
+> “3 x 1=”
+
+could be answered:
+
+> “3, 3 x 2 = 6, 3 x 3 = 9” …
+
+This is helpful, but only “3” was needed there; unless you are in the business of writing schoolbooks.
+
+In this case, only the answer of “3 x 1” was needed, and yet, most texts including the string “3 x 1” simply list the multiplication table for 3. You could validate this by looking for this sequence of characters in the books you have at home, many of which should be elementary Maths textbooks.
+
+More work is needed to build a model that helps users and answers queries. There are two main ways to do this.
+
+## Learning from Questions and Answers
+
+In addition to using the text published on the internet for training, one could further train a foundation model to predict the next word of texts involving **useful** questions and answers. This could solve the issue described above. This additional training is called **fine-tuning**. It is called **supervised** fine-tuning as instead of learning from raw internet texts, it learns from **selected** question/answer interactions.
+
+As an example, we can fine-tune the model with the following interactions:
+
+```
+User: 3 x 2 =
+Assistant: 3 x 2 = 6
+```
+
+```
+User: 7 x 2 =
+Assistant: 7 x 2 = 14
+```
+
+etc.
+
+This should train the model to reply to the user query instead of simply completing a text. Supervised fine-tuning does help, but is not enough to build the GenAI models we use every day.
+
+## Optimising for Helpfulness
+
+The goal of GenAI model providers is to offer models that are as **helpful** as possible. Achieving high degrees of helpfulness cannot be done through the pretraining of foundation models or supervised fine-tuning. 
+
+From these two steps, helpfulness can emerge as a by-product (see previous section). Instead, could we optimise a model for helpfulness? If we could, what type of Machine Learning task could we use?
+
+Hint: consider the degree of helpfulness as a reward the model can maximise by choosing the word to use in its reply.
+
+If this makes you think of [reinforcement learning](types-ml.qmd), well done. Helpfulness is the **reward** the model would try to maximise, and the words it uses are its **actions**. But how would you measure helpfulness?
+
+First, you could ask human judges to rate each model output on a scale of 0 (not helpful) to 100 (unbelievably helpful). These may be problematic as the helpfulness scales of different humans may vary. Can we do better?
+
+Easier than a rating, human judges could simply choose the most helpful of two model outputs. This is called **pairwise ranking**. It has several advantages:
+
+- It is less cognitively demanding than rating or grading
+- It is more robust to variations of individual helpfulness scales
+
+During training, the model would learn to generate more helpful output. This is called **Reinforcement Learning from Human Feedback** (RLHF), the last building block of today's GenAI models.
+
+<details><summary>Beyond human pairwise ranking</summary>
+
+Once we gather enough examples of human pairwise assessments, we can train a model to predict the winner of two candidate suggestions.
+
+In doing so, we get back to the supervised learning territory.
+
+$$
+\text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
+$$
+
+The input here would be the two candidate suggestions, and the prediction would be the winning prediction ($0$ for the first and $1$ for the second). The training data is all the candidate suggestions and human assessments collected in the process described above.
+
+However, this is not a **tabular** Machine Learning problem. The candidate suggestions are two variable-length sequences of text. This is part of Natural Language Processing, a fascinating area of research.
+
+</details>
+
+## Final Thoughts
+
+In essence, Generative AI models are next word predictors, further trained to provide more helpful answers to user questions. They are built on the same principles studied in this book. Next word prediction is yet another (complex) classification task.
+
+This description of Large Language Models is simplified. Please refer to *Hands-on Large Language Models* [@alammar_grootendorst_2023] for a more rigorous presentation.
+
+
+
+

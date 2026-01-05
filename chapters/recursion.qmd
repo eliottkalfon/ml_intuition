@@ -1,0 +1,222 @@
+---
+title: "Splitting Recursively"
+---
+
+The Decision Tree learning algorithm is a **recursive** algorithm.
+
+## Functions
+
+Recursion is a fascinating idea that builds on the concept of **function**. In programming, functions are reusable pieces of code that execute a piece of code
+
+As an example, the following function adds two numbers and returns the result:
+
+```{.plaintext .number-lines}
+Adder(a, b):
+    result = a + b
+    return result
+```
+
+This is a simple program represented in pseudocode, a language between natural language (like English) and code.
+
+<details><summary>What is pseudocode?</summary>
+
+Pseudocode is a language in between natural language and code.
+
+Natural languages are languages like English, French or Chinese that we use to communicate with one another. It is both:
+
+- ambiguous: the same word can mean two or more meanings
+- context-dependent: the meaning of a word depends on its context
+
+Code is an unambiguous and context-free language. We use it to define programs to be run by computers.
+
+Pseudocode is closer to natural language and allows us to communicate programs and ideas.
+
+</details>
+
+Going through this function line by line:
+
+1. Defines a new function called `Adder`, that takes two input parameters `a` and `b`
+2. Sums the two parameters and stores the result in the `result` variable
+3. Returns the `result` variable to the user
+
+In python code, this function definition would look like this:
+
+```python
+def adder(a,b):
+    result = a + b
+    return result
+```
+
+Once defined, this function can be called over and over again, without having to copy-paste any code. Functions are a core building block of programming.
+
+To call this function in python, you could write `adder(2,3)` and `5` would be the result.
+
+## Recursion
+
+In Computer Science, recursion is when a **function calls itself**, directly or indirectly, to solve a problem by breaking it down into smaller subproblems. 
+
+This is the technical definition, this chapter will make this concept more concrete.
+
+Let's take the Fibonacci sequence as an example:
+
+0, 1, 1, 2, 3, 5, 8, ...
+
+In the Fibonacci sequence, the $n^{th}$ term is the sum of the previous two, with the first two terms of the series being 0 and 1.
+
+To calculate the 3rd term, we add the first two numbers together: 0 + 1 = 1
+To calculate the 4th, we add the second and the third number: 1 + 1 = 2
+
+We can continue this process:
+
+- 5th: 1 + 2 = 3
+- 6th: 2 + 3 = 5
+
+:::{.exercise #exr-fib}
+Compute the 7th and 8th term of the Fibonacci sequence.
+:::
+
+To make this process more general, we can compute the $n^{th}$ Fibonacci term, $Fibonacci(n)$, with the following expression:
+
+$$
+Fibonacci(n) = Fibonacci(n-1) + Fibonacci(n-2)
+$$
+
+This could be confusing, as a function is used in its own definition. Yet, it simply means that each term is the sum of the **two previous ones** in the series.
+
+This expression could also be turned into the following program, which would compute the $n^{th}$ Fibonacci term:
+
+```{.plaintext .number-lines}
+Fibonacci(n):
+    if n == 0: return 0
+    if n == 1: return 1
+    return Fibonacci(n-1) + Fibonacci(n-2)
+```
+
+If you have never seen pseudocode before, this may look intimidating. It simply means the following (numbers in the list follow the line number in the code snippet):
+
+1. Defines a new function called `Fibonacci`, this function takes one parameter called `n`
+2. If that parameter is 0, the function returns 0
+3. If that parameter is 1, the function returns 1
+4. Otherwise, the function should return the sum of the two previous Fibonacci terms, represented as `Fibonacci(n-1)` and `Fibonacci(n-2)`
+
+The last line is recursion in action: a function calling itself! To get `Fibonacci(3)` we need to compute `Fibonacci(2)` and `Fibonacci(1)`. To get `Fibonacci(2)`, we need `Fibonacci(1)` and `Fibonacci(0)`. This is exactly what recursion is about.
+
+Note: In Computer Science, lists start at index 0. So the first term is index 0, the second is index 1 etc...
+
+If you find this confusing, you are not alone. Let's compute an example with `Fibonacci(3)`, which will return the 4th term of the Fibonacci series (starting at index 0). The following will run the function line by line:
+
+```{.plaintext .number-lines}
+Fibonacci(3)
+3 is neither 0 nor 1
+Calling Fibonacci(2) and Fibonacci(1)
+    Fibonacci(2)
+    2 is neither 0 nor 1
+        Calling Fibonacci(1) and Fibonacci(0)
+            Fibonacci(1)
+            Return 1
+            Fibonacci(0)
+            Return 0
+    Return 1 + 0 = 1
+    Fibonacci(1)
+    Return 1
+Return 1 + 1 = 2
+```
+
+In the above example, each indentation represents a level of recursion.
+
+### Recursive Splitting
+
+The splitting logic of a Decision Tree works in a similar way. It keeps splitting subgroups until the stopping condition is met. It could be defined in pseudocode as follows:
+
+```{.plaintext .number-lines}
+Split(Group):
+    If the group is “pure” do nothing
+    Find the best split feature and split value
+    Split the group into two: Subgroup A, and Subgroup B
+    Apply Split(SubgroupA) and Split(SubgroupB)
+```
+
+In the program defined above, line 2 defines the stopping criterion. In the case that the group contains only one class, the function terminates. Otherwise, it continues recursion with lines 3-5. It keeps splitting the data.
+
+Let's apply this logic to the example data step by step:
+
+```plaintext
+Split(Dataset)  
+Group contains two classes, proceed to splitting
+Best split is found at x1 = 2
+Splits Dataset into Groups A and B
+Calls Split(Group A) and Split(Group B)
+```
+
+![Splitting the dataset](/images/trees/split1_AB.png){width=60%}
+
+```plaintext
+    Split(Group B)  
+    Proceed to splitting as group contains two classes  
+    Best split is found at x2 = 1
+    Splits B into Groups C and D
+    Calls Split(Group C) and Split(Group D)    
+    :::
+```
+
+![Splitting Group B](/images/trees/split2_ACD.png){width=60%}
+
+
+```plaintext
+        Split(Group C)
+        Does nothing as Group C contains only one class
+        Split(Group D)
+        Does nothing as Group D contains only one class
+    Split(Group A)  
+    Proceed to splitting as group contains two classes  
+    Best split is found at x2 = 2
+    Splits Group A into Groups E and F
+    Calls Split(Group E) and Split(Group F)
+```
+
+![Splitting Group A](/images/trees/split3_EFCD.png){width=60%}
+
+```plaintext
+        Split(Group E)
+        Does nothing as Group E contains only one class
+        Split(Group F)
+        Does nothing as Group F contains only one class
+Algorithm terminates
+```
+
+In Computer Science, it is not recursion if your head does not hurt thinking about it.
+
+## Reviewing the Decision Tree Learning Algorithm
+
+The previous chapter has reviewed two foundational concepts of Decision Tree learning:
+
+1. **Recursion**: process calling itself
+2. **Gini Impurity Coefficient**: a way to grade different data splits
+
+The Decision Tree Learning algorithm can then be summarised as follows:
+
+```{.plaintext .number-lines}
+Split(Group)
+    If the group contains only one class or is too small, do nothing
+    Find the best split using the Gini Impurity criterion
+    Split the data into two subgroups
+    Apply the Split function to the two resulting subgroups
+```
+
+This function will build a tree, i.e., a collection of splits and leaf nodes, until there is no further way to split the data. That is it!
+
+To predict for a new observation, they can be passed down the tree. The resulting prediction will be the label that constitutes the majority of the observations in the leaf.
+
+## Final Thoughts
+
+This chapter introduced the foundational concept of **recursion**. Recursion happens when a function calls itself. In the case of Decision Trees the splitting function first splits the dataset into two groups (see [previous chapter](splitting-maths.qmd)), and then **calls itself** on each of the subgroups. This is done until no further groups can be split.
+
+The next chapter will add some nuance and bring the entire Decision Tree algorithm together.
+
+## Solutions
+:::{.solution #sol-fib}
+@exr-fib
+
+- 7th: $3 + 5 = 8$
+- 8th: $5 + 8 = 13$
+:::

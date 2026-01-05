@@ -1,0 +1,471 @@
+---
+title: "Probabilities and Regression with Decision Trees"
+---
+
+The Decision Tree algorithm introduced in this section has two components:
+
+- Identifying the best split with an **evaluation criterion** (e.g., the Gini Impurity Coefficient)
+- Splitting the data **recursively** until no more splitting is possible
+
+The following chapter will explore how to use this algorithm to output probabilities instead of class labels, and extend this to regression with Decision Trees.
+
+## From labels to probabilities
+
+The Decision Tree algorithm shown above only outputs class labels as prediction (“malignant” or “benign”). In the simple version described above, an observation is assigned a prediction using a **majority vote** within the leaf. This is similar to the [KNN model](neighbours.qmd). How could the Decision Tree algorithm be used to output **probabilities**?
+
+Let's think about this problem using a modified version of the example data:
+
+![Non separable example data](/images/trees/non_separable_data.png){width=60%}
+
+In this example, leaf number 3 and 4 both contain observations from the two classes. Now, imagine that a new observation has $x_1=2.1$ and $x_2=0.5$, what prediction would we output?
+
+Based on the values of this observation's feature, it will land in leaf number 3. In this leaf, the large majority of training observations are of class $\times$ (10 out of 11) with a single $\circ$ observation.
+
+Using a similar approach to what was used in KNN, instead of applying a majority vote within a leaf, we could use the **frequency** of the class as a predicted probability.
+
+In this example, the new observation will have a probability of $\times$ of:
+
+$$
+\frac{10}{11} \approx 0.909
+$$
+
+:::{.exercise #exr-proba}
+Compute the probability of $\times$ for an observation with features: $x_1 = 3$ and $x_2 = 2$. Show that it is approximately 0.17
+:::
+
+That is it, nothing more complex.
+
+## From classification to regression
+
+So far, we have focussed on classification problems, in which the objective is to assign a label (such as the malignancy of a tumour) to new observations. How can the same model be applied to a regression problem, i.e., to the prediction of a continuous variable, like the price of a property.
+
+The core idea would remain the same: split the data recursively into subgroups to make them as "pure" as possible. This concept of "purity" or "homogeneity" is easy to define in a classification problem. A group that is "pure" is a group that contains a large majority of one class.
+
+In regression problems, how could we define this concept of homogeneity? Think about it in terms of property prices. A homogeneous group would be a group that contains properties with **similar prices**. In such a group, each item would have little difference with the average price.
+
+Now, how to generate predictions of **continuous values** from these subgroups? In the classification case, we could just use majority vote or average for probability predictions. In line with what was shown with KNN, the same principle of average can be used for regression problems.
+
+The predicted price of each new property would be the **average of all the property prices in the same subgroup.** This is similar to the logic of probability prediction described earlier. 
+
+A split is good if the average in each leaf has a low error, if the average is an accurate prediction of the observations in this leaf.
+
+Let's illustrate this with a simple example.
+
+#### Splitting Data
+
+Imagine we are building a model predicting property prices based on Property Size ($m^2$) and Distance to Centre ($km$):
+
+![Properties by Size and Distance coloured by Property Price](/images/trees/property_prices.png)
+
+<details><summary>Figure Code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Generate features
+size = np.random.uniform(50, 150, 30)
+distance = np.random.uniform(1, 5, 30)
+
+# Generate price with some relationship: higher size increases price, higher distance decreases price
+price = 200000 + size * 2500 - distance * 15000 + np.random.normal(0, 15000, 30)
+
+# Plot
+plt.figure(figsize=(8,6))
+sc = plt.scatter(size, distance, c=price, cmap='viridis', s=100, edgecolor='k')
+plt.xlabel('Size (m²)', fontsize=14)
+plt.ylabel('Distance to Center (km)', fontsize=14)
+plt.title('Property Prices by Size and Distance', fontsize=16)
+cbar = plt.colorbar(sc)
+cbar.set_label('Price ($)', fontsize=12)
+plt.grid(True)
+plt.savefig("images/trees/property_prices.png")
+plt.show()
+```
+</details>
+
+We could take a subset of this data (prices now in **k €**):
+
+| Size (m²) | Distance (km) | Price (k €) |
+|:---------:|:-------------:|:-----------:|
+| 60        | 2.0           | 320         |
+| 80        | 1.5           | 400         |
+| 120       | 5.0           | 350         |
+| 70        | 3.0           | 310         |
+| 150       | 1.0           | 600         |
+| 90        | 4.0           | 330         |
+
+Suppose the first split is on `size < 100`. This divides the data into two groups:
+
+- **Group A sizes** (`size < 100`): 60, 80, 70, 90
+- **Group B sizes** (`size ≥ 100`): 120, 150
+
+How good is this split? To do this, we would compute the average of Group A and B, these will be our prediction for both groups.
+
+The prediction for Group A is the average price in Group A:
+
+$\text{Group A Mean} = \frac{320 + 400 + 310 + 330}{4} = 340$
+
+The prediction for Group B is the average price in Group B:
+
+$\text{Group B Mean} = \frac{350 + 600}{2} = 475$
+
+We now need to measure how good of a prediction these averages are. How would you do it? 
+
+If you thought of the Mean Squared Error, well done! You can refer to the [Model Evaluation chapter](evaluation-regression.qmd) if this concept is still not clear enough.
+
+For each group, we can compute the **Mean Squared Error (MSE)** of the prices:
+
+- Group A:
+$$
+  \begin{aligned}
+  \text{MSE}_a &= \frac{(320-340)^2 + (400-340)^2 + (310-340)^2 + (330-340)^2}{4} \\
+  &= \frac{400 + 3600 + 900 + 100}{4}  \\
+  &= \frac{5000}{4} = 1250
+  \end{aligned}
+$$
+
+- Group B:
+$$
+  \begin{aligned}
+  \text{MSE}_b &= \frac{(350-475)^2 + (600-475)^2}{2} \\
+  &= \frac{(-125)^2 + (125)^2}{2} \\
+  &= \frac{15625 + 15625}{2} \\
+  &= \frac{31250}{2} = 15625
+  \end{aligned}
+$$
+
+This is a good start, but leaves us with two MSE numbers. How could we summarise these into one?
+
+One idea is to compute the **average MSE**. It is a weighted average of the MSEs of the two groups (weighted by the number of observations in each group):
+
+$$ \begin{aligned}
+\text{Weighted MSE} &= \frac{n_a}{n_a + n_b} \cdot \text{MSE}_a + \frac{n_b}{n_a + n_b} \cdot \text{MSE}_b \\
+&=\frac{4}{6} \cdot 1250 + \frac{2}{6} \cdot 15625 = 833.33 + 5208.33 = 6041.67
+\end{aligned}
+$$
+
+### Trying Different Splits
+
+At each splitting step, the algorithm would try different splitting features and values, and would pick the one that minimises average MSE.
+
+This process can be visualised by showing the average MSE for each splitting value of the **size** feature:
+
+![Trying different splitting values of the size feature](/images/trees/property_mse_vs_size.png)
+
+<details><summary>Figure Code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate sample data
+np.random.seed(42)
+size = np.random.uniform(50, 150, 30)
+distance = np.random.uniform(1, 5, 30)
+price = 200000 + size * 2500 - distance * 15000 + np.random.normal(0, 15000, 30)
+price = price / 1000  # convert to k€
+
+X = np.column_stack([size, distance])
+
+def avg_mse(split_value, X, price):
+    left_mask = X[:, 0] < split_value
+    right_mask = ~left_mask
+    n = len(price)
+    n_left = np.sum(left_mask)
+    n_right = np.sum(right_mask)
+    if n_left == 0 or n_right == 0:
+        return np.nan
+    mean_left = price[left_mask].mean()
+    mean_right = price[right_mask].mean()
+    mse_left = np.mean((price[left_mask] - mean_left) ** 2)
+    mse_right = np.mean((price[right_mask] - mean_right) ** 2)
+    avg = (n_left / n) * mse_left + (n_right / n) * mse_right
+    return avg
+
+split_values = np.linspace(size.min() + 1, size.max() - 1, 200)
+avg_mses = np.array([avg_mse(sv, X, price) for sv in split_values])
+best_idx = np.nanargmin(avg_mses)
+best_split = split_values[best_idx]
+best_mse = avg_mses[best_idx]
+
+# Plot
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 8), sharex=True, gridspec_kw={'height_ratios': [2, 1]})
+
+# Top: Data scatter
+sc = ax1.scatter(size, distance, c=price, cmap='viridis', s=120, edgecolor='k')
+ax1.set_ylabel('Distance to Center (km)', fontsize=16)
+ax1.set_title('Property Prices by Size and Distance', fontsize=18)
+ax1.axvline(best_split, color='green', linestyle='--', lw=2, label=f'Split at {best_split:.1f}')
+ax1.legend(fontsize=12)
+ax1.grid(True)
+ax1.tick_params(axis='both', which='major', labelsize=14)
+
+# Bottom: MSE vs Size
+ax2.plot(split_values, avg_mses, color='blue', lw=2)
+ax2.scatter([best_split], [best_mse], color='red', s=80, zorder=5, label='Minimum MSE')
+ax2.axvline(best_split, color='green', linestyle='--', lw=2, label=f'Split at {best_split:.1f}')
+ax2.set_xlabel('Size (m²)', fontsize=16)
+ax2.set_ylabel('Average MSE', fontsize=16)
+ax2.set_title('Average MSE vs. Size Split', fontsize=18)
+ax2.grid(True)
+ax2.tick_params(axis='both', which='major', labelsize=14)
+ax2.legend(fontsize=12, loc='upper right')
+
+# Add a colorbar that doesn't affect axis alignment
+fig.subplots_adjust(right=0.88)
+cbar_ax = fig.add_axes([0.90, 0.38, 0.025, 0.48]) 
+cbar = fig.colorbar(sc, cax=cbar_ax)
+cbar.set_label('Price (k€)', fontsize=12)
+
+plt.tight_layout(rect=[0, 0, 0.88, 1])
+plt.savefig("images/trees/property_mse_vs_size.png")
+plt.show()
+```
+
+</details>
+
+Following the same **recursive process** as the one shown in the classification case, we can build a Decision Tree that partitions the overall space into subgroups.
+
+This stepwise learning process is shown below:
+
+![The Decision Tree learning algorithm selects the best split at each step](/images/trees/property_regression_splits_stepwise.png)
+
+<details><summary>Figure Code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeRegressor
+
+np.random.seed(42)
+n = 30
+
+# Generate two size bands, each with a narrow range
+size = np.concatenate([
+    np.random.uniform(65, 95, n//2),   # left band
+    np.random.uniform(100, 125, n//2)  # right band
+])
+
+# Distance: spread out for both bands
+distance = np.concatenate([
+    np.random.uniform(1, 5, n//2),
+    np.random.uniform(1, 5, n//2)
+])
+
+# Price: within each band, a strong step at different distance values
+price = np.empty(n)
+# Left band: step at distance=3
+price[:n//2] = np.where(distance[:n//2] < 3, 350, 320) + np.random.normal(0, 10, n//2)
+# Right band: step at distance=2.2
+price[n//2:] = np.where(distance[n//2:] < 2.2, 480, 455) + np.random.normal(0, 10, n//2)
+
+X = np.column_stack([size, distance])
+feature_names = ['Size (m²)', 'Distance to Center (km)']
+
+# Fit regression tree with depth=2
+tree = DecisionTreeRegressor(max_depth=2, random_state=0)
+tree.fit(X, price)
+
+# Helper: collect splits recursively
+def collect_splits(tree, node_id=0, path=[], splits=[]):
+    feature = tree.tree_.feature[node_id]
+    threshold = tree.tree_.threshold[node_id]
+    if feature >= 0:
+        splits.append((path.copy(), feature, threshold))
+        collect_splits(tree, tree.tree_.children_left[node_id], path + [(feature, threshold, 'left')], splits)
+        collect_splits(tree, tree.tree_.children_right[node_id], path + [(feature, threshold, 'right')], splits)
+    return splits
+
+splits = collect_splits(tree, 0, [], [])
+
+# Print splits for verification
+for i, (path, feat, thresh) in enumerate(splits):
+    print(f"Split {i+1}: feature {feat} ({feature_names[feat]}), threshold {thresh:.2f}")
+
+# Plot (reuse your plotting code here)
+x0min, x0max = size.min() - 5, size.max() + 5
+x1min, x1max = distance.min() - 0.5, distance.max() + 0.5
+
+n_splits = len(splits)
+fig, axes = plt.subplots(1, n_splits, figsize=(6*n_splits, 6), sharex=True, sharey=True)
+
+if n_splits == 1:
+    axes = [axes]
+
+for i in range(n_splits):
+    ax = axes[i]
+    sc = ax.scatter(size, distance, c=price, cmap='viridis', s=100, edgecolor='k')
+    # Draw all previous splits as black lines, in their respective regions
+    for j in range(i):
+        path, feat, thresh = splits[j]
+        xlims = [x0min, x0max]
+        ylims = [x1min, x1max]
+        for (pf, pt, dirn) in path:
+            if pf == 0:
+                if dirn == 'left':
+                    xlims[1] = min(xlims[1], pt)
+                else:
+                    xlims[0] = max(xlims[0], pt)
+            else:
+                if dirn == 'left':
+                    ylims[1] = min(ylims[1], pt)
+                else:
+                    ylims[0] = max(ylims[0], pt)
+        if feat == 0:
+            ax.plot([thresh, thresh], ylims, color='black', linewidth=2)
+        else:
+            ax.plot(xlims, [thresh, thresh], color='black', linewidth=2)
+
+    # Draw current split as green dashed line, in its region
+    path, feat, thresh = splits[i]
+    xlims = [x0min, x0max]
+    ylims = [x1min, x1max]
+    for (pf, pt, dirn) in path:
+        if pf == 0:
+            if dirn == 'left':
+                xlims[1] = min(xlims[1], pt)
+            else:
+                xlims[0] = max(xlims[0], pt)
+        else:
+            if dirn == 'left':
+                ylims[1] = min(ylims[1], pt)
+            else:
+                ylims[0] = max(ylims[0], pt)
+    if feat == 0:
+        ax.plot([thresh, thresh], ylims, color='green', linestyle='--', linewidth=2,
+                label=f'Split {i+1}: {feature_names[feat]} = {thresh:.1f}')
+    else:
+        ax.plot(xlims, [thresh, thresh], color='green', linestyle='--', linewidth=2,
+                label=f'Split {i+1}: {feature_names[feat]} = {thresh:.2f}')
+    ax.set_xlabel('Size (m²)', fontsize=16)
+    if i == 0:
+        ax.set_ylabel('Distance to Center (km)', fontsize=16)
+    ax.set_title(f'Split {i+1}', fontsize=18)
+    ax.grid(True)
+    ax.tick_params(axis='both', which='major', labelsize=14)
+    ax.legend(fontsize=12, loc='upper left')
+
+# Add colorbar
+fig.subplots_adjust(right=0.92)
+cbar_ax = fig.add_axes([0.93, 0.15, 0.02, 0.7])
+cbar = fig.colorbar(sc, cax=cbar_ax)
+cbar.set_label('Price (k€)', fontsize=14)
+
+plt.tight_layout(rect=[0, 0, 0.92, 1])
+plt.savefig("images/trees/property_regression_splits_stepwise.png")
+plt.show()
+```
+
+As described in this section, Decision Trees can be easily applied to regression tasks. The only significant change is the evaluation of split quality with the **Mean Squared Error** instead of the Gini Impurity Coefficient.
+
+</details>
+
+## Final Thoughts
+
+This chapter concludes our exploration of Decision Trees. Summarising once more the Decision Tree Learning algorithm:
+
+- Evaluate splits using a homogeneity criterion: Gini or MSE
+- Split groups recursively
+- Output either class labels or probabilities using averaging
+
+To test your knowledge, you can try the practice exercise below.
+
+Looking back, we now know how to train and evaluate two different Machine Learning models. This is already a lot. The next section will explore the last missing piece of the puzzle: Data Preprocessing, making data ready for modelling.
+
+## Practice Exercise
+
+:::{.exercise #exr-tree-fraud-proba}
+Suppose you are building a Decision Tree to detect fraudulent transactions. You use two features, both measured on a 0–100 scale:
+
+- **Transaction Amount (\$)** (0–100)
+- **Customer Age (years)** (0–100)
+
+You have the following 10 transactions in your training data:
+
+| Transaction Amount | Customer Age | Fraudulent? |
+|:------------------:|:------------:|:-----------:|
+| 95                 | 22           | Yes         |
+| 90                 | 25           | Yes         |
+| 92                 | 23           | Yes         |
+| 97                 | 21           | Yes         |
+| 93                 | 24           | Yes         |
+| 94                 | 23           | No          |
+| 20                 | 80           | No          |
+| 25                 | 78           | No          |
+| 18                 | 82           | No          |
+| 23                 | 77           | No          |
+
+A new transaction occurs with an amount of **93** and customer age **23**.
+
+1. Build a Decision Tree with a **single split** (for simplicity) using the training data and finding the splits that minimise the Gini Impurity Coefficient?
+2. Using the tree generated, what is the predicted probability of fraud of the new observation?
+
+@sol-tree-fraud-proba
+
+:::
+
+## Solutions
+:::{.solution #sol-proba}
+@exr-proba
+
+$\frac{2}{12} = \frac{1}{6} \approx = 0.17$
+:::
+
+:::{.solution #sol-tree-fraud-proba}
+@exr-tree-fraud-proba
+
+1. We try splitting the data using different features and feature values. For each split, we compute the weighted Gini Impurity Coefficient. The resulting coefficients can be seen in the two tables below. For each table, the symbols $\leq$ and $>$ represent the two resulting subgroups:
+
+- $\leq$: observations with feature value lower or equal to the splitting value
+- $>$: observations with feature value greater than the splitting value
+
+Splits for **Transaction Amount**
+
+| Split at | ≤ Split Fraud | ≤ Split Non-Fraud | > Split Fraud | > Split Non-Fraud | Weighted Gini |
+|:--------:|:-------------:|:-----------------:|:-------------:|:-----------------:|:--------------|
+| 19.00 | 0 | 1 | 5 | 4 | 0.444 |
+| 21.50 | 0 | 2 | 5 | 3 | 0.375 |
+| 24.00 | 0 | 3 | 5 | 2 | 0.286 |
+| 57.50 | 0 | 4 | 5 | 1 | **0.167** |
+| 91.00 | 1 | 4 | 4 | 1 | 0.320 |
+| 92.50 | 2 | 4 | 3 | 1 | 0.417 |
+| 93.50 | 3 | 4 | 2 | 1 | 0.476 |
+| 94.50 | 3 | 5 | 2 | 0 | 0.375 |
+| 96.00 | 4 | 5 | 1 | 0 | 0.444 |
+
+
+Splits for **Customer Age**
+
+| Split at | ≤ Split Fraud | ≤ Split Non-Fraud | > Split Fraud | > Split Non-Fraud | Weighted Gini |
+|:--------:|:-------------:|:-----------------:|:-------------:|:-----------------:|:--------------|
+| 21.50 | 1 | 0 | 4 | 5 | 0.444 |
+| 22.50 | 2 | 0 | 3 | 5 | 0.375 |
+| 23.00 | 3 | 1 | 2 | 4 | 0.417 |
+| 23.50 | 3 | 1 | 2 | 4 | 0.417 |
+| 24.50 | 4 | 1 | 1 | 4 | 0.320 |
+| 51.00 | 5 | 1 | 0 | 4 | **0.167** |
+| 77.50 | 5 | 2 | 0 | 3 | 0.286 |
+| 79.00 | 5 | 3 | 0 | 2 | 0.375 |
+| 81.00 | 5 | 4 | 0 | 1 | 0.444 |
+
+Both Transaction Amount of 57.5 and Customer Age of 51 achieve a Gini Coefficient of 0.167. Both of them would work. This solution will pick Customer Age = 51 as splitting value.
+
+The resulting tree is:
+
+![Resulting tree splitting on Customer Age ≤ 51](/images/trees/fraud_tree_example.png)
+
+1. Generating the prediction for observation: Customer Age: 23 and Transaction Amount: 93, the observation will fall into the left leaf, as $23 \leq 51$.
+
+The predicted probability for this observation is then the average probability of Fraud in the leaf:
+
+$$
+P(\text{Fraud}) = \frac{5}{5+1} \approx 83\%
+$$
+
+:::
+
+

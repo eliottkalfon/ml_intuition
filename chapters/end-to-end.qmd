@@ -1,0 +1,165 @@
+---
+title: End-to-End Machine Learning Project
+---
+
+It's now time to bring everything we've studied together to build a Machine Learning model to predict **anything**.
+
+## Problem Formulation
+
+The most important step is to **define** the problem you want to solve as a supervised learning problem. Using examples studied in this book:
+
+  - What is the diagnosis of this suspicious mass?
+  - What is the price of this property?
+
+There are many other examples. The important part is to follow the supervised learning paradigm:
+
+$$
+\text{Input Features} \rightarrow \text{Model} \rightarrow \text{Prediction}
+$$
+
+What would you like to predict to solve an everyday problem? 
+
+:::{.exercise #exr-probs}
+
+How would you solve these problems with a Machine Learning model? What would you predict?
+
+  1. How many bartenders do I need to hire for that date?
+  2. Should I increase the stock of a particular item at my shop?
+  3. Is this online transaction fraudulent?
+:::
+
+## Evaluation Metric
+
+Now that the problem is formulated as a supervised learning task, let's select an error metric to minimise. This error metric should reflect the real-world consequences of an error.
+
+In the tumour diagnosis case, **False Negatives**, malignant tumours diagnosed as “benign”, can have fatal consequences. For that reason, **Recall** and **F1 Score** could be interesting metrics to track.
+
+In the property pricing example, extreme pricing errors can have a negative impact on any real estate business. For this reason, the **Mean Squared Error** (MSE) or **Root Mean Squared Error** (RMSE) could be good choices.
+
+You may want to select several error metrics, but you will generally have to choose one to rank different models.
+
+
+:::{.exercise #exr-err-met-sel}
+Which error metrics would you choose for the following problems?
+
+1. Spam detection
+2. Credit card fraud detection
+3. Customer churn prediction
+:::
+
+
+## Data Collection
+
+Now that you have a problem, gather as much relevant data as possible. Keeping supervised learning in mind, the goal is to give the model enough data to learn the relationship between input features and the target variable.
+
+Looking at the property pricing example, the model should have access to as many price-relevant features as possible:
+
+  - Surface Area
+  - Number of Rooms
+  - Neighbourhood
+  - Balcony
+  - Floor
+  - etc…
+
+It is generally a good idea to include whatever information about the property that would help humans to price it, and a bit more. Why more? Because models can sometimes learn patterns that we cannot spot.
+
+:::{.exercise #exr-beer-sales}
+Beer sales forecasting: Imagine you want to forecast beer sales at your bar. What features would you choose?
+:::
+
+## Partitioning the Data
+
+Once you have gathered the data, and before you start data preprocessing, it is critical to set aside a portion of the data for testing. You could either take a random sample of the data or use a time cut-off to mimic the model’s prediction conditions.
+
+If you develop a property pricing model, you may want to keep the latest weeks of your training set as a test set, to make sure that the model does not have access to future price trends in training. For the tumour diagnosis case, a random sample of the entire dataset should be enough.
+
+## Data Preprocessing
+
+You will most likely have to clean and preprocess the data you have gathered:
+
+  - Is there missing data?
+  - Are the numeric values on the same scale?
+  - How do you want to handle date features?
+  - Are there categorical variables to process?
+
+Note: different models sometimes require different preprocessing. As this is an introductory text, we will leave finer distinctions to more advanced material. As a quick example, unlike K-Nearest Neighbours, Decision Trees do not require numerical feature scaling.
+
+Once you've preprocessed the training data, apply the same transformations on the test set, using the statistics computed with the training data. If this is not clear enough, you can refer to the Data Preprocessing section.
+
+## Model Evaluation and Selection
+
+This is already a lot of work, and we still haven't trained a single Machine Learning model. Welcome to the reality of Machine Learning professionals. A lot of our time is spent formulating problems, gathering and preprocessing data.
+
+Now, train a KNN model and a Decision Tree model on the training data. You can then use both of these models to generate predictions on the test set.
+
+With these predictions, compare the error metric of both models and pick the best one! You can then use this model to generate predictions on unseen observations. The goal of this book.
+
+## Final Thoughts
+
+This chapter reviewed the main steps of solving a problem with Machine Learning predictions:
+
+  - Problem Formulation
+  - Evaluation Metric
+  - Data Collection
+  - Data Partition
+  - Data Preprocessing
+  - Model Evaluation and Selection
+
+That's it! The purpose of this book was to give an idea of what building Machine Learning solutions can look like. Interested readers can explore how to put this knowledge in practice with further resources like: *Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow* [@hands_on_ml_2022].
+
+The Appendix below explores some of the differences between the description made above and Machine Learning in practice.
+
+The following chapter links Generative AI models to traditional Machine Learning; showing how the models we use every day were built upon everything studied in this book.
+
+## Appendix: Some Nuances
+
+This chapter presents a simplified view of Machine Learning practice. If you are not interested in the details, you can skip directly to the [conclusion](#final-thoughts).
+
+
+First, a lot of time would be spent on "**Feature Engineering**", the task of computing features from raw data to make models more accurate. 
+
+Then, model selection would involve more than just two models. The book compared two model families: KNN and Decision Trees. There are many more. Model selection would also involve "**Hyperparameter Tuning**". These hyperparameters are the settings or configuration of the models. They determine how the models work. Some examples of hyperparameters include:
+
+  - **KNN**: The number of neighbours used to generate predictions. The text used 5, but 3, 10 or 15 can also be viable choices
+  - **Decision Tree**: the maximum depth of a tree, to avoid making too many data splits
+
+To choose between all of these model families and hyperparameter combinations, a single test set is not enough. ML practitioners generally use **cross-validation** over the training set. The interested reader can find more on this at [@sklearn_cross_validation_2025].
+
+## Final Thoughts
+
+This is it. You now have an intuition for the Machine Learning workflow. This was the core purpose of this book.
+
+But what about Generative AI and LLMs? I thought you would never ask. If you are interested in understanding the many parallels between traditional Machine Learning and LLMs, read the next chapters.
+
+Otherwise, I wish you all the best on your Machine Learning journey.
+
+## Solutions
+
+:::{.solution #sol-probs}
+@exr-probs
+
+  1. How much staff do I need to hire for that date at my bar? Beer sales forecasting
+  2. Should I increase the stock of a particular item at my shop? Unit sales forecasting
+  3. Is this online transaction fraudulent? Transaction classification as "legitimate"/"fraudulent"
+
+:::
+
+:::{.solution #sol-err-met-sel}
+@exr-err-met-sel
+
+1. Spam detection: Precision, Recall Accuracy. A False Positive, a legitimate email marked as "spam" can be more problematic than a False Negative, a spam email classified as "legitimate".
+2. Credit card fraud detection: Recall, Precision, F1 Score. The model should catch most fraudulent transactions (high Recall) while not having too many False Positives, as they could be an inconvenience to customers.
+3. Customer churn prediction: F1 Score. A balance between Precision and Recall is needed to identify customers who are likely to churn without having too many False Positives.
+:::
+
+:::{.solution #sol-beer-sales}
+@exr-beer-sales
+
+Some potential features for beer sales forecasting could be:
+
+  - **Date/Time**: Month, day of the week, time of day.
+  - **Weather**: Temperature, rain, sun.
+  - **Events**: Are there any major events happening in the city, like a football match or a concert?
+  - **Promotions**: Is there a special offer on beer?
+  - **Historical sales data**: Sales from previous days, weeks, or months.
+:::

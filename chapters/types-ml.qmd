@@ -1,0 +1,121 @@
+---
+title: Other Types of Machine Learning
+---
+
+Generating predictions by learning from input/output pairs only refers to a part of the discipline of Machine Learning, also known as **supervised learning**.
+
+It is called “supervised” because the algorithm learns from **labelled examples**. As an example, a model learns to predict the diagnosis of a suspicious mass from its measurements.
+
+Supervised learning will be the main focus of this book. This section will briefly explore other types of Machine Learning.
+
+Sometimes, these labels do not exist. Let's imagine an archaeologist who stumbles upon a **pile of bones**. They want to understand if all the bones belong to the same species. One possible approach would be to measure all of these bones. In a simplified case, there are two measurements, length and width.
+
+Plotting all these bone measurements on a chart, two clusters emerge:
+
+![Plotting bones by measurements](/images/defining-prediction/clusters.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+np.random.seed(0)
+# Cluster 1
+x1 = np.random.normal(10, 1, 30)
+y1 = np.random.normal(5, 0.5, 30)
+# Cluster 2
+x2 = np.random.normal(15, 1, 30)
+y2 = np.random.normal(8, 0.5, 30)
+
+plt.figure(figsize=(7, 5))
+plt.scatter(x1, y1, label='Cluster 1', s=70)
+plt.scatter(x2, y2, label='Cluster 2', s=70)
+plt.xlabel('Length (cm)', fontsize=16)
+plt.ylabel('Width (cm)', fontsize=16)
+plt.title('Bone Measurements: Two Clusters', fontsize=18)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.legend(fontsize=14)
+plt.tight_layout()
+plt.savefig("images/defining-prediction/clusters.png")
+plt.show()
+```
+</details>
+
+The exact species are still unknown, but the bones seem to belong to two different clusters. You have gained this information through the use of **unsupervised learning**, learning patterns or underlying structures of the data.
+
+::: {.exercise #exr-clu-cus}
+Could a similar approach be used to discover the different customer groups of an online business? What data would you collect? And what would you do with it?
+:::
+
+### Reinforcement Learning
+
+Another type of Machine Learning is **reinforcement learning** (RL), in which the Machine Learning algorithm does not generate predictions, but selects **actions** to maximise a certain **reward** within an **environment**. As an example, the objective of a RL algorithm could be to win at chess. At each move:
+
+- the algorithm chooses an action: the next move
+- based on its environment: the current state of the board
+- to maximise a reward/objective: probability of winning the game
+
+![Autonomous vacuum cleaner, an example RL problem](/images/defining-prediction/vacuum_grid.png)
+
+::: {.exercise #exr-vac-cle}
+Autonomous vacuum cleaners can be powered by reinforcement learning systems. Give examples of their:
+
+- actions
+- environment
+- reward/objective
+:::
+
+::: {.exercise #exr-rl-app}
+Think of another example application of reinforcement learning.
+:::
+
+## Final Thoughts
+
+There are three main types of Machine Learning:
+
+- Supervised learning: generate predictions based on input/output pairs ([previous chapter](/chapters/defining-prediction.qmd))
+- Unsupervised learning: discover patterns and underlying structure in data 
+- Reinforcement learning: build models that select actions to maximise a reward while observing an environment
+
+Machine Learning is a very exciting field. But how is this related to Artificial Intelligence and Data Science? This will be covered by the next chapter.
+
+## Solutions
+
+::: {.solution #sol-clu-cust}
+@exr-clu-cus
+
+Data to collect:
+
+- Purchase history: frequency of purchase, quantity/amount purchased
+- Browsing behaviour: activity in the last month
+- Demographic data: gender, age
+
+What to do with it:
+
+- Plot the data and observe trends or clusters
+- Use clustering algorithms to identify these clusters in higher dimensions (out of this book's scope)
+:::
+
+::: {.solution #sol-vac-cle}
+@exr-vac-cle
+
+Autonomous vacuum cleaners can be powered by reinforcement learning systems. Give examples of their:
+
+- actions: move forward/back/left/right, change power, start/stop, dock to recharge
+- environment: room layout, location of dirt, battery level
+- reward/objective: maximise dust collected, reduce cleaning time, avoid collisions
+:::
+
+::: {.solution #sol-rl-app}
+@exr-rl-app
+
+Other RL example: self-driving cars
+
+- actions: accelerate, brake, steer, signal, change lanes
+- environment: road, traffic, pedestrians, weather conditions
+- reward/objective: reach destination safely
+
+Many other examples work here.
+:::

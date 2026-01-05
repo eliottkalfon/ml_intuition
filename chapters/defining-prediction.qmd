@@ -1,0 +1,164 @@
+---
+title: "Defining Prediction"
+---
+
+## The Prediction Task
+
+Pre-diction, or, “to say before”. To be able to describe the future, to **make the unknown known**.
+
+Predictions are all around us. When you unlock your phone and look at the weather forecast (another word for "prediction"). When you open your email inbox, a prediction algorithm has already classified your incoming messages as “spam” or “non-spam”. But you do not need your phone to be exposed to predictions.
+
+In many regards, prediction is indistinguishable from perception. When we perceive the world around us, we are constantly predicting what we will be **perceiving next**. For example, as you read this sentence, you are predicting its next ___.
+
+Thinking about predictions, there are two main prediction tasks:
+
+- **Regression:** prediction of a continuous value, a real number
+  - The temperature tomorrow
+  - The price of a property
+
+- **Classification:** prediction of class labels
+  - Emails: “spam” or “non-spam”
+  - Images: “dog” or “cat”
+  - Type of tumour: “malignant” or “benign”
+  - The following word in this ___
+
+::: {.exercise #exr-reg-clas}
+Come up with more examples of problems for:
+
+1. Classification
+2. Regression
+:::
+
+We do not necessarily need Machine Learning to make these predictions. Historically, we have relied on both (1) hand-crafted rules and (2) human intuition.
+
+### Hand-crafted rules
+
+These hand-crafted rules are simplified models of reality. As an example, to price a property, I could simply multiply the **average price per square metre** in the neighbourhood by the number of square metres of the property. Rules like this one can work surprisingly well.
+
+The number of special characters in an email address can be a relatively reliable spam filter. For instance, an address like `!_!urgent$!_deal@secure.offer.xyz` immediately raises red flags due to its chaotic combination of **punctuation** and a suspicious, **non-standard top-level domain**. These red flags could be coded into the spam filter program to classify incoming messages as “spam”.
+
+### Human intuition
+
+The Merriam-Webster dictionary defines intuition as: 
+
+> “intuition, noun:
+>
+> a. The power or faculty of attaining direct knowledge or cognition without evident rational thought and inference  
+> b. immediate apprehension or cognition”  
+> [@merriamwebster_intuition]
+
+Intuition is access to knowledge, making the unknown known, **without apparent effort**. It is generally built over time from the following [@parrish_kahneman_intuition_2016]:
+
+- A slow and unchanging environment
+- Lots of practice and a large sample size
+- Frequent and accurate feedback
+
+Making this concrete, after 20 years of experience, a good oncologist can spot a malignant tumour on an x-ray without even having to think about it. They have seen so many examples that they have built an intuition over time. A seasoned real estate agent (in a slowly changing market) can “feel” the price of a property. An experienced recruiter can spot highly talented individuals after only a short conversation.
+
+Looking at the example of spam prevention, if I receive an email from the address `!_!urgent$!_deal@secure.offer.xyz` telling me I have won the lottery and just need to click a link to claim my prize, I will be sceptical. I do not need to use explicit rules for this, human experience is enough. (This may not apply to my grandparents)
+
+### Drawbacks
+
+The world is complex, messy, and in a state of constant change. 
+
+- Complexity makes building a rule-based system nearly impossible
+- Constant change means that market trends fluctuate, attackers learn to circumvent simple spam-detection algorithms, and new types of diseases emerge. Organisations relying on rules or human intuition must constantly update their approach
+- Building intuition is a costly and time-consuming process tied to specific individuals
+- Human performance is inconsistent, we all have bad days
+
+Machine Learning systems are not perfect either, but address many of these drawbacks.
+
+## What is Machine Learning?
+
+Now, how is Machine Learning (ML) different?
+
+Machine Learning can be defined from its terms:
+
+- **Machine:** a computerised system, not human
+- **Learning:** a system that adapts to data, not a rule-based method
+
+As its name indicates, ML algorithms **learn** to predict either continuous values or class labels from historical data. As an example, a Machine Learning **algorithm** or **model** would learn the relationship between the features of a property and its price, or the dimensions of a tumour and its type (“malignant” or “benign”). Exactly how this learning happens is the purpose of this book, but let's not get ahead of ourselves.
+
+### Machine Learning Models
+
+Throughout this book, Machine Learning “model” and “algorithm” will be used interchangeably. A model can be defined by what it does. In the context of predictive Machine Learning, it takes an **input** and outputs a **prediction**.
+
+$$
+\text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
+$$
+
+Adapting this framework to the tumour diagnosis example, the model takes tumour measurements as features and outputs a diagnosis:
+
+$$
+\text{Tumour Measurements} \longrightarrow \text{Model} \longrightarrow \text{Diagnosis}
+$$
+
+For property pricing, the input is the characteristics of the property and the output a price prediction.
+
+$$
+\text{Property Characteristics} \longrightarrow \text{Model} \longrightarrow \text{Price Prediction}
+$$
+
+In English, models and algorithms have slightly different meanings. The Cambridge Dictionary defines a model as:
+
+> “model, noun: a simple representation of a system or process, especially one that can be used in calculations or predictions of what might happen”  
+> [@cambridge_model]
+
+On the other hand, an algorithm is defined as:
+
+> “algorithm, noun: a set of [...] instructions or rules that, especially if given to a computer, will help to calculate an answer to a problem”  
+> [@cambridge_algorithm]
+
+Combining these two definitions, a Machine Learning model is a system adapting to data to generate predictions. It **learns** the relationship between an input and an output.
+
+### What makes a good model?
+
+The job of a Machine Learning model is to make the most accurate predictions, to be as close to reality as possible.
+$$
+\text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
+$$
+
+Predictions must be as close as possible to the **ground truth**, which is the true label or output. For example, the ground truth for a tumor is its actual diagnosis. The ground truth for a property is its final sale price. The ground truth for an email is whether it is actually spam or not.
+
+<details><summary>Defining Truth</summary>
+
+I love definitions, but defining truth is often disappointing. In this book, anything that is true is confirmed by the reality around us; i.e., empirical observation. This choice is made out of convenience. If you want to have some fun, I would recommend opening a few dictionaries and reading the definitions of the word “truth”.
+
+In the Cambridge Dictionary, “truth” is defined as:
+
+> “the quality of being true”  
+> [@cambridge_truth]
+
+Hoping to find an answer there, I looked up the definition of “true”:
+
+> “right and not wrong; correct”  
+> [@cambridge_true]
+
+As you can see, with limited success. This links back to the circularity of words and dictionaries. We only define words with more words.
+
+</details>
+
+Measuring this degree of closeness to ground truth and building accurate models are topics that will be discussed in the next sections.
+
+## Final Thoughts
+
+Machine Learning models are everywhere. At their essence, these are just **adaptive prediction systems**. They learn relationships between input and output from historical data.
+
+$$
+\text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
+$$
+
+How these models adapt and learn is the topic of this book.
+
+Yet, these prediction models are only one part of the field of Machine Learning. The following chapter will explore two other types of Machine Learning: Unsupervised Learning and Reinforcement Learning.
+
+## Solutions
+
+::: {.solution #sol-reg-clas}
+@exr-reg-clas
+
+Some ideas:
+
+1. Classification: fraud detection, object detection, credit approval
+2. Regression: energy demand prediction, sales prediction, stock price prediction
+:::

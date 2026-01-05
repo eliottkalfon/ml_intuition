@@ -1,0 +1,45 @@
+---
+title: "Machine Learning, Artificial Intelligence and Data Science"
+---
+
+The hype is real. Words like Artificial Intelligence (AI), Machine Learning (ML) and Data Science (DS) are frequently thrown around. This short chapter will explore the relations between these different concepts.
+
+## Artificial Intelligence
+
+Artificial Intelligence is the design of computational (i.e., non-human) systems that can perform tasks typically requiring human intelligence [see @russell_norvig_2021, pp. 1–4]. These tasks include learning, reasoning, problem-solving and planning, among others. Anything that we commonly associate with our own cognitive capabilities. AI is concerned both with the understanding of intelligence and the building of intelligent systems.
+
+The reason the new Generative AI models like ChatGPT or Claude feel so “AI” is that they replicate aspects of human intelligence. They can generate helpful answers to user queries, in a human-like way.
+
+## Machine Learning
+
+Machine Learning (ML) is a subset of Artificial Intelligence focused on designing algorithms that learn from data. These Machine Learning algorithms, also called “models”, can generalise the rules learnt on training data to new, unseen data points. As opposed to rule-based systems, ML algorithms are **not** explicitly programmed; they learn rules from the data. The next chapter will explore Machine Learning in more detail.
+
+## Deep Learning
+
+Deep Learning is a subset of Machine Learning concerned with the development of multi-layer Neural Networks to perform tasks like classification and regression. These Neural Networks are (roughly) inspired by the workings of the human brain. Since the 1990s they have pushed the state of the art in Machine Learning research and are the backbone of the current AI revolution. As these models are more complex, they will not be covered in this book.
+
+## Data Science
+
+Machine Learning is closely related to Data Science. For a few years (my first years on the job market), Data Scientist was the sexiest job of the 21st century [@davenport_patil_2012_hbr].
+
+Data Science is the extraction of generalisable knowledge from data. This is not knowledge at a given point in time, but **generalisable** knowledge. Knowledge that can be used on unseen data to predict the future. 
+
+Whereas Data Analysis is the study of what happened, Data Science focusses on predicting future trends. Looking at the case of property pricing, Data Analysts would create reports and analyse what happened. On the other hand, Data Scientists would build models to predict the price of new properties.
+
+Beyond the hype, Data Science is a field concerned with extracting and extrapolating knowledge from data [@dhar_2013].
+
+- Extract: to obtain something from something else, to get information from data.
+- Extrapolate: to predict by projecting past experience or known data [@merriamwebster_extrapolate].
+
+To summarise, Data Science uses data to extract useful knowledge from data to inform the future.
+
+## Final Thoughts
+
+This chapter defined some important concepts:
+
+- Artificial Intelligence (AI): design of intelligent systems, emulation of human cognition
+- Machine Learning (ML): algorithms that learn from data
+- Deep Learning: branch of ML focused on Neural Network modelling
+- Data Science (DS): extraction of generalisable knowledge from data
+
+Now that these definitions are out of the way, the next chapters will show how Machine Learning models work. The next chapter will explore the role of **data** in Machine Learning.

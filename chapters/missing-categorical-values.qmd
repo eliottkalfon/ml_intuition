@@ -1,0 +1,70 @@
+---
+title: Dealing with Missing Categorical Data
+---
+
+Categorical values can also be missing. As a reminder, categorical features represent **groups** or **categories**. In the Berlin property pricing example, the neighbourhood of the property (e.g., “Neukölln”, “Kreuzberg” or “Charlottenburg”) is a categorical feature. As neighbourhood is such an important feature in property pricing, it may make sense to filter out observations for which it is missing.
+
+Just like numerical features, there are many reasons why a categorical value may be missing:
+
+- Missing at Random: the observation is missing for an unknown reason, without any apparent pattern
+- Not Collected: optional question in a survey
+- Not Applicable: as a man donating blood, I leave the answer to the question “are you pregnant?” blank, as this is not applicable
+- Missing Measurement: a missing energy efficiency grade reading could mean that the property still needs an inspection
+
+It is important to understand why data may be missing before coming up with an imputation strategy.
+
+## Excluding Rows with Missing Observations
+
+If a missing value is critical to the prediction task, filtering out rows with missing values is the safest strategy. You would not want to price a property without knowing its neighbourhood or its post code.
+
+## Excluding Columns with Missing Observations
+
+If a column contains many missing values, removing the column or reviewing the data processing script should be the preferred strategy. This is similar to the method used for [numerical missing values](missing-numerical-values.qmd).
+
+## Excluding Rows with Missing Observations
+
+Likewise, if the missing categorical value is critical to the prediction task, excluding the observation is the safest approach. Could you consider a property without knowing if it is a house or a flat? Or without knowing its neighbourhood?
+
+## Creating a new Null Category
+
+In other cases, all missing values could be replaced by a "missing" category and treated as another value for that categorical variable. Let's make this more concrete with this example:
+
+| Property | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood | Energy Rating | Outdoor Space | Sell Price (K€) | Years since Build |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | 85 | 4.2 | Neukölln | B | Balcony | 420 |  |
+| B | 120 | 2.5 | Kreuzberg | A | Terrace | 610 | 8 |
+| C | 95 | 6.1 | Charlott. | C |   | 390 |  |
+| D | 70 | 3.8 | Kreuzberg | D | Garden | 370 | 22 |
+| E | 110 | 1.2 | Charlott. | B | Balcony | 700 | 12 |
+| F | 60 | 5.0 | Neukölln | F |  | 310 |  |
+
+Here, some of the "Outdoor Space" values are missing. As mentioned above, the missing values can be replaced by an "Unknown" value.
+
+| Property | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood | Energy Rating | Outdoor Space | Sell Price (K€) | Years since Build |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| A | 85 | 4.2 | Neukölln | B | Balcony | 420 |  |
+| B | 120 | 2.5 | Kreuzberg | A | Terrace | 610 | 8 |
+| C | 95 | 6.1 | Charlott. | C | **Unknown** | 390 |  |
+| D | 70 | 3.8 | Kreuzberg | D | Garden | 370 | 22 |
+| E | 110 | 1.2 | Charlott. | B | Balcony | 700 | 12 |
+| F | 60 | 5.0 | Neukölln | F | **Unknown** | 310 |  |
+
+This value can then be treated in the same way as all the other [categorical values](categorical-variables.qmd), with methods like One-Hot Encoding or Target Encoding.
+
+## Information Leakage
+
+Just like [categorical variable encoding](categorical-variables.qmd), handling missing categorical values can create information leakage.
+
+This process should be done on the training data only, and applied to the test set. Any new category seen in the test set only should be either excluded or labelled as missing.
+
+## Final Thoughts
+
+This chapter walked through handling missing values with the following steps:
+
+- Understand why the values are missing
+- Explore whether filtering is needed
+- Flag missing values with a new categorical value
+
+It is important to remember to avoid information leakage in null value handling. This can be done by a clear separation of the training and test set, before data preprocessing.
+
+The next chapter will go back to numerical data and explore the issue of scaling.

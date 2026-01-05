@@ -4,13 +4,13 @@ title: First Prediction with Machine Learning
 
 With Machine Learning, we can generate predictions based on historical data. These predictions can solve problems in the real world.
 
-Imagine that as a starting doctor, you have just received results from the tissue biopsy of a new patient. The lab report shows **two measurements** of the cell nuclei of the suspicious mass: their average perimeter is **100 µm**, and their average area is **1200 µm²**. Based on these measurements: **is this mass more likely benign (non-cancerous) or malignant (cancerous)?**
+Imagine this scenario: you are an early-career doctor and you receive a biopsy report. The lab lists **two measurements** from the cell nuclei of a suspicious mass — an average perimeter of **100 µm** and an average area of **1200 µm²**. From just those two numbers: **is the mass more likely benign (non-cancerous) or malignant (cancerous)?**
 
-If the above paragraph sounds like gibberish, do not worry. The problem is the following: **can we predict the diagnosis of this tumour based on two measurements**?
+If that vocabulary sounds unfamiliar, don’t worry — the question is straightforward: **can we predict the diagnosis of this tumour from two measurements**?
 
 ## A visual approach
 
-It may seem impossible for us to predict the diagnosis. Yet, what if we were given a database of thousands of tumour examples? We could start by **plotting these examples by the two measurements** given by the lab reports; average perimeter and area of their cell nuclei. On this chart, each point is labelled as malignant or benign.
+At first it might feel impossible. But suppose we have a database of many tumours, each labelled benign or malignant. A natural first step is to **plot those examples** using the two measurements from the report: perimeter and area. Each point on the chart would carry a label.
 
 ![Plotting historical observations](images/intro/scatter.png)
 
@@ -95,7 +95,7 @@ plt.show()
 
 Would you now feel comfortable making an educated guess?
 
-It seems that most **neighbours** of this observation are malignant. Based on this historical data, we could predict that this observation is also a malignant tumour. This is not certain, but based on the data, this is probably the **best guess** that can be made.
+Look carefully: most of the unknown point’s nearest neighbours are malignant. From the data’s perspective, the most reasonable guess is that the tumour is malignant. That is not a certainty — it’s a probabilistic judgement based on the available examples.
 
 ## From intuition to algorithms
 
@@ -133,7 +133,7 @@ plt.show()
 
 <details><summary>Answer</summary>
 
-![Thinking of distance as the hypothenuse of a right-angle triangle](images/intro/distance_triangle.png)
+![Thinking of distance as the hypotenuse of a right-angle triangle](images/intro/distance_triangle.png)
 
 To find the distance between point A $(1,1)$ and point B $(5,4)$ using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
 
@@ -232,5 +232,5 @@ That is it! We have our first **model** that can **generate predictions** about 
 
 This is only our first step into the fascinating world of Machine Learning. ML models can map **any input**, such as the above measurements, **to any output**, like tumour diagnosis.
 
-Now, let's get started.
+Ready? Let’s get started.
 

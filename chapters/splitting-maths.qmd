@@ -1,0 +1,788 @@
+---
+title: "Evaluating Splits"
+---
+
+In most problems, the different groups cannot be **separated**. Going back to the tumour diagnosis example, the training data looks messy:
+
+![Tumour diagnosis classification problem](/images/intro/scatter.png)
+
+How could we build a tree from there?
+
+## Best Split First
+
+We could start by finding the **best split**, the split that separates the data best. The split will create two groups:
+
+![First split](/images/trees/example_first_split.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.tree import DecisionTreeClassifier
+
+benign_center = [80, 700]
+malignant_center = [110, 1200]
+n_samples = 70
+
+X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
+X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
+
+benign_std = [10, 120]
+malignant_std = [12, 300]
+
+X_benign = X_benign * benign_std + benign_center
+X_malignant = X_malignant * malignant_std + malignant_center
+
+# Stack data and create labels
+X = np.vstack([X_benign, X_malignant])
+y = np.array([0]*n_samples + [1]*n_samples)  # 0: Benign, 1: Malignant
+
+# Fit a decision tree with depth=1 (stump)
+tree = DecisionTreeClassifier(max_depth=1, random_state=0)
+tree.fit(X, y)
+
+# Get split info
+feature_names = ['Perimeter Mean (µm)', 'Area Mean (µm²)']
+split_feature = tree.tree_.feature[0] 
+split_threshold = tree.tree_.threshold[0]
+print(f"First split: {feature_names[split_feature]} < {split_threshold:.2f}")
+
+# Plot
+plt.figure(figsize=(8,6))
+plt.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign')
+plt.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant')
+
+# Plot the split
+if split_feature == 0:
+    plt.axvline(split_threshold, color='green', linestyle='--', linewidth=2, label=f'Split')
+elif split_feature == 1:
+    plt.axhline(split_threshold, color='green', linestyle='--', linewidth=2, label=f'Split')
+
+plt.xlabel('Perimeter Mean (µm)', fontsize=16)
+plt.ylabel('Area Mean (µm²)', fontsize=16)
+plt.title('Tumours: Perimeter Mean vs Area Mean', fontsize=18)
+plt.legend(fontsize=12)
+plt.grid(True)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.savefig("images/trees/example_first_split.png")
+plt.show()
+```
+</details>
+
+For each of the new groups, we can find the **best splits**, apply them, and **create two new groups**:
+
+![All splits](/images/trees/example_three_splits.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.tree import DecisionTreeClassifier
+
+benign_center = [80, 700]
+malignant_center = [110, 1200]
+n_samples = 70
+
+X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
+X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
+
+benign_std = [10, 120]
+malignant_std = [12, 300]
+
+X_benign = X_benign * benign_std + benign_center
+X_malignant = X_malignant * malignant_std + malignant_center
+
+# Stack data and create labels
+X = np.vstack([X_benign, X_malignant])
+y = np.array([0]*n_samples + [1]*n_samples)  # 0: Benign, 1: Malignant
+
+# Fit a decision tree (no max_depth limit)
+tree = DecisionTreeClassifier(random_state=0,max_depth=2)
+tree.fit(X, y)
+
+feature_names = ['Perimeter Mean (µm)', 'Area Mean (µm²)']
+
+# Helper function to recursively collect all splits
+def collect_splits(tree, node_id=0, path=[], splits=[]):
+    feature = tree.tree_.feature[node_id]
+    threshold = tree.tree_.threshold[node_id]
+    if feature >= 0:
+        # Save the split with its path (list of (feature, threshold, direction))
+        splits.append((path.copy(), feature, threshold))
+        # Left child: feature <= threshold
+        collect_splits(tree, tree.tree_.children_left[node_id], path + [(feature, threshold, 'left')], splits)
+        # Right child: feature > threshold
+        collect_splits(tree, tree.tree_.children_right[node_id], path + [(feature, threshold, 'right')], splits)
+    return splits
+
+splits = collect_splits(tree, 0, [], [])
+
+# For plotting, get the data limits
+x0min, x0max = X[:,0].min() - 5, X[:,0].max() + 5
+x1min, x1max = X[:,1].min() - 50, X[:,1].max() + 50
+
+n_splits = len(splits)
+fig, axes = plt.subplots(1, n_splits, figsize=(6*n_splits, 6), sharex=True, sharey=True)
+
+if n_splits == 1:
+    axes = [axes]  # Make iterable
+
+for i in range(n_splits):
+    ax = axes[i]
+    ax.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign' if i==0 else "")
+    ax.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant' if i==0 else "")
+
+    # Draw all previous splits as black lines, in their respective regions
+    for j in range(i):
+        path, feat, thresh = splits[j]
+        xlims = [x0min, x0max]
+        ylims = [x1min, x1max]
+        for (pf, pt, dirn) in path:
+            if pf == 0:
+                if dirn == 'left':
+                    xlims[1] = min(xlims[1], pt)
+                else:
+                    xlims[0] = max(xlims[0], pt)
+            else:
+                if dirn == 'left':
+                    ylims[1] = min(ylims[1], pt)
+                else:
+                    ylims[0] = max(ylims[0], pt)
+        if feat == 0:
+            ax.plot([thresh, thresh], ylims, color='black', linewidth=2)
+        else:
+            ax.plot(xlims, [thresh, thresh], color='black', linewidth=2)
+
+    # Draw current split as green dashed line, in its region
+    path, feat, thresh = splits[i]
+    xlims = [x0min, x0max]
+    ylims = [x1min, x1max]
+    for (pf, pt, dirn) in path:
+        if pf == 0:
+            if dirn == 'left':
+                xlims[1] = min(xlims[1], pt)
+            else:
+                xlims[0] = max(xlims[0], pt)
+        else:
+            if dirn == 'left':
+                ylims[1] = min(ylims[1], pt)
+            else:
+                ylims[0] = max(ylims[0], pt)
+    if feat == 0:
+        ax.plot([thresh, thresh], ylims, color='green', linestyle='--', linewidth=2,
+                label=f'Split {i+1}: {feature_names[feat]} = {thresh:.1f}')
+    else:
+        ax.plot(xlims, [thresh, thresh], color='green', linestyle='--', linewidth=2,
+                label=f'Split {i+1}: {feature_names[feat]} = {thresh:.1f}')
+
+    ax.set_xlabel('Perimeter Mean (µm)', fontsize=16)
+    if i == 0:
+        ax.set_ylabel('Area Mean (µm²)', fontsize=16)
+    ax.set_title(f'Split {i+1}', fontsize=18)
+    ax.grid(True)
+    ax.tick_params(axis='both', which='major', labelsize=14)
+    ax.legend(fontsize=12, loc='upper left')
+
+plt.tight_layout()
+plt.savefig("images/trees/example_three_splits.png")
+plt.show()
+
+```
+</details>
+
+We can keep splitting until the subgroups are “pure”; i.e., there are only observations belonging to the same class.
+
+In practice, other constraints are applied. In general it makes sense to limit the **depth** of a tree to make the size of the resulting model manageable. These simple models generally have stronger generalisation abilities.
+
+<details><summary>What is tree depth?</summary>
+
+The depth of a tree is the **distance** from the root node, here the first split, to the leaf node, here the last node, responsible for assigning the prediction.
+
+What is the depth of the tree built in the previous examples?
+
+![Example tree](/images/trees/tree_example.png)
+
+It is two, as there are two edges (connections) on the path from the root node (top) to the leaf node (bottom).
+
+</details>
+
+## Gini Impurity Coefficient
+
+How would you measure the **quality of a split**? Or the purity of the resulting groups?
+
+Imagine that Split 1 creates the following two groups:
+
+| Group | Malignant | Benign |
+|:-----:|:---------:|:------:|
+| A     | 9         | 1      |
+| B     | 2         | 8      |
+
+And that Split 2 creates the following two groups:
+
+| Group | Malignant | Benign |
+|:-----:|:---------:|:------:|
+| C     | 6         | 4      |
+| D     | 5         | 5      |
+
+Intuitively, we know that Split 1 has done better, as the resulting subgroups are **more homogeneous**. Group A contains mostly malignant observations and Group B more benign ones. On the other hand, Group C and D are both mixed. But how to quantify this intuition? 
+
+This is exactly what the **Gini Impurity Coefficient** measures.
+
+The Gini Coefficient measures "impurity" through the probability of randomly picking **two items of different classes** within the same group. 
+
+But why would this probability measure impurity? If this probability is low, it means that we are not likely to pick items of different classes. In other words, we are likely to pick items from the **same class**. This probability will be 0 if all the items of a group are of a single class.
+
+On the other hand, when this probability is high, we are likely to pick items of a different class. This will happen when the group is **mixed**. It will be 1 in the extreme case in which the group contains only a single item from each class.
+
+Let's illustrate this with Group A in the table below:
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| A     | 9         | 1      |
+
+If we randomly picked two items in this group (with replacement) what would be the probability of picking items **from two different classes** (malignant and benign)?
+
+Try thinking about it before reading on.
+
+To make this simpler, what is the probability to pick first a malignant tumour, then a benign tumour?
+
+The probability of picking a malignant and benign tumour are the following:
+$$
+P(\text{malignant}) = \frac{9}{9+1} = 0.9
+$$
+$$
+P(\text{benign}) = \frac{1}{9+1} = 0.1
+$$
+
+As the two picks are random and with replacement, the probability of picking one, then the other is:
+
+$$
+P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.9 \cdot 0.1 = 0.09
+$$
+
+Now, what would be the probability of picking a benign observation then a malignant one (reversing the order)? We have already computed the probabilities above, we just need to reverse the order:
+$$
+P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.1 \cdot 0.9 = 0.09
+$$
+
+Which, **by symmetry**, gives the same results. As this sampling is independent, the probability of picking malignant then benign is the same as benign then malignant. To get the probability of these two events we just have to sum them:
+
+$$
+\begin{aligned}
+P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= 0.09 + 0.09 = 0.18
+\end{aligned}
+$$
+
+That is it, we have calculated the Gini Impurity Coefficient for Group A.
+
+:::{.exercise #exr-gini}
+Compute the Gini Impurity Coefficient for Group B and show that it is 0.32.
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| B     | 2         | 8      |
+:::
+
+The Gini Impurity Coefficient of Group B is slightly higher than Group A, as it is slightly more mixed.
+
+### Evaluating Splits
+
+Now, let's get back to quantifying the quality of a split. To do so, we will compute the average Gini Coefficient of each split.
+
+Split 1:
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| A     | 9         | 1      |
+| B     | 2         | 8      |
+
+Split 2:
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| C     | 6         | 4      |
+| D     | 5         | 5      |
+
+As covered in the previous section, we know the Gini Coefficient of both Group A and B: 0.18 and 0.32 respectively.
+
+The average Gini Coefficient for Split 1, Group A and B, can be computed as follows:
+
+$$
+\frac{n_a}{n_a + n_b} \cdot \text{Gini}_{a} + \frac{n_b}{n_a + n_b} \cdot \text{Gini}_{b}
+$$
+
+$$
+\frac{10}{10+10} \cdot 0.18 + \frac{10}{10+10} \cdot 0.32 = 0.25
+$$
+
+:::{.exercise #exr-gini-split}
+Compute the Gini Coefficients for both groups (C and D) in Split 2, and prove that they are equal to: 0.48 and 0.5 respectively.
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| C     | 6         | 4      |
+| D     | 5         | 5      |
+:::
+
+Now, computing the average Gini Impurity Coefficient for Split 2, we get:
+
+$$
+\frac{n_c}{n_c + n_d} \cdot \text{Gini}_{c} + \frac{n_d}{n_c + n_d} \cdot \text{Gini}_{d}
+$$
+
+We get:
+
+$$
+\frac{10}{10+10} \cdot 0.48 + \frac{10}{10+10} \cdot 0.5 = 0.49
+$$
+
+Concluding this section, Split 1 has an average Gini Impurity Coefficient of 0.25 compared to 0.49 for Split 2. It is the split that separates the data best.
+
+Now that we have a way to measure the quality of a split, we can simply try splitting the data at **all feature values** for **all features**, and pick the best one.
+
+## Trying Different Splits
+
+To find the best data split, the Decision Tree learning algorithm evaluates **each possible splitting feature and value**, and picks the one that has the lowest Gini Impurity Coefficient.
+
+The example above only shows two different splits. This process can be repeated for all features and all splitting values. At each trial, the Gini Impurity Coefficient is recorded. The algorithm then selects the split achieving the lowest Gini Impurity Coefficient. This can be represented visually:
+
+![Trying all combinations and picking the first split achieving the minimum Gini Impurity Coefficient](/images/trees/split_and_gini_vs_x1.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# --- Data generation ---
+np.random.seed(0)
+x1_plus = np.random.uniform(0.5, 1.8, 10)
+x2_plus = np.random.uniform(1.0, 3.5, 10)
+x1_circle = np.random.uniform(2.2, 3.8, 12)
+x2_circle = np.random.uniform(1.5, 3.8, 12)
+
+X_plus = np.column_stack([x1_plus, x2_plus])
+X_circle = np.column_stack([x1_circle, x2_circle])
+X = np.vstack([X_plus, X_circle])
+y = np.array([1]*len(X_plus) + [0]*len(X_circle))  # 1: x, 0: o
+
+# --- Gini impurity for a split ---
+def gini_impurity(y_left, y_right):
+    def gini(y):
+        if len(y) == 0:
+            return 0
+        p = np.mean(y)
+        return 2 * p * (1 - p)
+    n = len(y_left) + len(y_right)
+    return (len(y_left) * gini(y_left) + len(y_right) * gini(y_right)) / n
+
+# --- Gini vs x1 threshold ---
+fidx = 0  # x1
+fmin, fmax = X[:, fidx].min(), X[:, fidx].max()
+thresholds = np.linspace(fmin, fmax, 300)
+ginis = []
+for t in thresholds:
+    left = y[X[:, fidx] <= t]
+    right = y[X[:, fidx] > t]
+    gini = gini_impurity(left, right)
+    ginis.append(gini)
+ginis = np.array(ginis)
+min_idx = np.argmin(ginis)
+min_thresh = thresholds[min_idx]
+min_gini = ginis[min_idx]
+
+# --- Plot ---
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 10), sharex=True)
+
+# Top: Data scatter
+ax1.set_xticks(np.arange(0, 5, 1))
+ax1.set_yticks(np.arange(0, 5, 1))
+ax1.grid(True, linestyle='-', color='lightgrey', linewidth=0.8)
+ax1.set_xlim(0, 4.5)
+ax1.set_ylim(0, 4.5)
+ax1.set_xlabel('$x_1$', fontsize=16)
+ax1.set_ylabel('$x_2$', rotation=0, ha='right', fontsize=16)
+ax1.tick_params(axis='both', which='major', labelsize=14)
+
+ax1.scatter(x1_plus, x2_plus, marker='x', color='red', s=120, linewidths=3, label='Class x')
+ax1.scatter(x1_circle, x2_circle, marker='o', color='blue', s=100, facecolors='none', edgecolors='blue', linewidths=2, label='Class O')
+
+# Green split line at best threshold
+ax1.axvline(min_thresh, color='green', linestyle='--', lw=2, label=f'Split at $x_1$={min_thresh:.2f}')
+
+ax1.set_title('Decision Trees: Splitting Data', fontsize=18, pad=20)
+plt.gca().set_aspect('equal', adjustable='box')
+
+# To avoid duplicate legend
+handles, labels = ax1.get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+ax1.legend(by_label.values(), by_label.keys(), fontsize=12)
+
+# Bottom: Gini vs x1
+ax2.plot(thresholds, ginis, color='blue', lw=2)
+ax2.scatter([min_thresh], [min_gini], color='red', s=80, zorder=5, label='Minimum Gini')
+ax2.axvline(min_thresh, color='green', linestyle='--', lw=2, label=f'Split at $x_1$={min_thresh:.2f}')
+ax2.set_xlabel('$x_1$', fontsize=16)
+ax2.set_ylabel('Gini impurity', fontsize=16)
+ax2.set_title('Gini vs. $x_1$ Split', fontsize=18)
+ax2.grid(True)
+ax2.tick_params(axis='both', which='major', labelsize=14)
+
+
+plt.tight_layout()
+plt.savefig("images/trees/split_and_gini_vs_x1.png")
+plt.show()
+```
+
+</details>
+
+From the value 1.76, the split **perfectly separates** the two data classes, achieving a Gini Impurity Coefficient of 0.
+
+But what happens when data is **not** fully separable? For these cases, the Gini Impurity Coefficient will not reach 0. Still, the split that achieves the lowers Gini Impurity Coefficient will be selected.
+
+This splitting trial and error can be visualised with the tumour diagnosis dataset:
+
+![Splitting this initial dataset](/images/intro/scatter.png).
+
+We first try splitting the data using the Perimeter Mean of the cell nuclei. The following line chart plots the Gini Impurity criterion for **different splitting values** over this feature.
+
+![Trying different split values for Perimeter Mean](/images/trees/scatter_and_gini_vs_perimeter.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.tree import DecisionTreeClassifier
+
+# --- Data generation ---
+benign_center = [80, 700]
+malignant_center = [110, 1200]
+n_samples = 70
+
+X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
+X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
+
+benign_std = [10, 120]
+malignant_std = [12, 300]
+
+X_benign = X_benign * benign_std + benign_center
+X_malignant = X_malignant * malignant_std + malignant_center
+
+X = np.vstack([X_benign, X_malignant])
+y = np.array([0]*n_samples + [1]*n_samples)  # 0: Benign, 1: Malignant
+
+feature_names = ['Perimeter Mean (µm)', 'Area Mean (µm²)']
+
+# --- Fit tree ---
+tree = DecisionTreeClassifier(random_state=0, max_depth=2)
+tree.fit(X, y)
+
+# --- Gini impurity for a split ---
+def gini_impurity(y_left, y_right):
+    def gini(y):
+        if len(y) == 0:
+            return 0
+        p = np.mean(y)
+        return 2 * p * (1 - p)
+    n = len(y_left) + len(y_right)
+    return (len(y_left) * gini(y_left) + len(y_right) * gini(y_right)) / n
+
+# --- Gini vs Perimeter Mean ---
+fidx = 0  # Perimeter Mean
+fmin, fmax = X[:, fidx].min(), X[:, fidx].max()
+thresholds = np.linspace(fmin, fmax, 300)
+ginis = []
+for t in thresholds:
+    left = y[X[:, fidx] <= t]
+    right = y[X[:, fidx] > t]
+    gini = gini_impurity(left, right)
+    ginis.append(gini)
+ginis = np.array(ginis)
+min_idx = np.argmin(ginis)
+min_thresh = thresholds[min_idx]
+min_gini = ginis[min_idx]
+
+# Actual split(s) used by the tree for Perimeter Mean
+splits = []
+tree_ = tree.tree_
+for node in range(tree_.node_count):
+    if tree_.feature[node] == fidx:
+        splits.append(tree_.threshold[node])
+
+# --- Plot ---
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 8), sharex=True, gridspec_kw={'height_ratios': [2, 1]})
+
+# Top: Data scatter
+ax1.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign')
+ax1.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant')
+ax1.set_ylabel('Area Mean (µm²)', fontsize=16)
+ax1.set_title('Tumours: Perimeter Mean vs Area Mean', fontsize=18)
+ax1.legend(fontsize=12)
+ax1.grid(True)
+ax1.tick_params(axis='both', which='major', labelsize=14)
+# Green split line
+ax1.axvline(min_thresh, color='green', linestyle='--', lw=2, label=f'Split at {min_thresh:.1f}')
+# To avoid duplicate legend
+handles, labels = ax1.get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+ax1.legend(by_label.values(), by_label.keys(), fontsize=12)
+
+# Bottom: Gini vs Perimeter Mean
+ax2.plot(thresholds, ginis, color='blue', lw=2)
+ax2.scatter([min_thresh], [min_gini], color='red', s=80, zorder=5, label='Minimum Gini')
+ax2.axvline(min_thresh, color='green', linestyle='--', lw=2, label=f'Split at {min_thresh:.1f}')
+ax2.set_xlabel('Perimeter Mean (µm)', fontsize=16)
+ax2.set_ylabel('Gini impurity', fontsize=16)
+ax2.set_title('Gini vs. Perimeter Mean', fontsize=18)
+ax2.grid(True)
+ax2.tick_params(axis='both', which='major', labelsize=14)
+# To avoid duplicate legend
+handles, labels = ax2.get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+ax2.legend(by_label.values(), by_label.keys(), fontsize=12, loc='upper right')
+
+plt.tight_layout(h_pad=2)
+plt.savefig("images/trees/scatter_and_gini_vs_perimeter.png")
+plt.show()
+```
+</details>
+
+This Gini Impurity Coefficient reaches a minimum of approximately 15.2 at a split value of about 96.6.
+
+The same could be done with the Mean Area of the cell nuclei:
+
+![Trying different split values for Perimeter Mean](/images/trees/gini_vs_area_and_scatter.png)
+
+<details><summary>Figure code</summary>
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.tree import DecisionTreeClassifier
+
+# --- Data generation ---
+benign_center = [80, 700]
+malignant_center = [110, 1200]
+n_samples = 70
+
+X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
+X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
+
+benign_std = [10, 120]
+malignant_std = [12, 300]
+
+X_benign = X_benign * benign_std + benign_center
+X_malignant = X_malignant * malignant_std + malignant_center
+
+X = np.vstack([X_benign, X_malignant])
+y = np.array([0]*n_samples + [1]*n_samples)  # 0: Benign, 1: Malignant
+
+feature_names = ['Perimeter Mean (µm)', 'Area Mean (µm²)']
+
+# --- Fit tree ---
+tree = DecisionTreeClassifier(random_state=0, max_depth=2)
+tree.fit(X, y)
+
+# --- Gini impurity for a split ---
+def gini_impurity(y_left, y_right):
+    def gini(y):
+        if len(y) == 0:
+            return 0
+        p = np.mean(y)
+        return 2 * p * (1 - p)
+    n = len(y_left) + len(y_right)
+    return (len(y_left) * gini(y_left) + len(y_right) * gini(y_right)) / n
+
+# --- Gini vs Perimeter Mean ---
+fidx = 0  # Perimeter Mean
+fmin, fmax = X[:, fidx].min(), X[:, fidx].max()
+thresholds = np.linspace(fmin, fmax, 300)
+ginis = []
+for t in thresholds:
+    left = y[X[:, fidx] <= t]
+    right = y[X[:, fidx] > t]
+    gini = gini_impurity(left, right)
+    ginis.append(gini)
+ginis = np.array(ginis)
+min_idx = np.argmin(ginis)
+min_thresh = thresholds[min_idx]
+min_gini = ginis[min_idx]
+
+# Actual split(s) used by the tree for Perimeter Mean
+splits = []
+tree_ = tree.tree_
+for node in range(tree_.node_count):
+    if tree_.feature[node] == fidx:
+        splits.append(tree_.threshold[node])
+
+# --- Plot ---
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 8), sharex=True, gridspec_kw={'height_ratios': [2, 1]})
+
+# Top: Data scatter
+ax1.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign')
+ax1.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant')
+ax1.set_ylabel('Area Mean (µm²)', fontsize=16)
+ax1.set_title('Tumours: Perimeter Mean vs Area Mean', fontsize=18)
+ax1.legend(fontsize=12)
+ax1.grid(True)
+ax1.tick_params(axis='both', which='major', labelsize=14)
+# Green split line
+ax1.axvline(min_thresh, color='green', linestyle='--', lw=2, label=f'Split at {min_thresh:.1f}')
+# To avoid duplicate legend
+handles, labels = ax1.get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+ax1.legend(by_label.values(), by_label.keys(), fontsize=12)
+
+# Bottom: Gini vs Perimeter Mean
+ax2.plot(thresholds, ginis, color='blue', lw=2)
+ax2.scatter([min_thresh], [min_gini], color='red', s=80, zorder=5, label='Minimum Gini')
+ax2.axvline(min_thresh, color='green', linestyle='--', lw=2, label=f'Split at {min_thresh:.1f}')
+ax2.set_xlabel('Perimeter Mean (µm)', fontsize=16)
+ax2.set_ylabel('Gini impurity', fontsize=16)
+ax2.set_title('Gini vs. Perimeter Mean', fontsize=18)
+ax2.grid(True)
+ax2.tick_params(axis='both', which='major', labelsize=14)
+# To avoid duplicate legend
+handles, labels = ax2.get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+ax2.legend(by_label.values(), by_label.keys(), fontsize=12, loc='upper right')
+
+plt.tight_layout(h_pad=2)
+plt.savefig("images/trees/scatter_and_gini_vs_perimeter.png")
+plt.show()
+```
+</details>
+
+The Gini Impurity Coefficient reaches a minimum of approximately 16.5 at a split value of about 885.7.
+
+The best split is obtained by splitting the data based on Perimeter Mean at 96.6. This process is repeated every time a group is split.
+
+## Final Thoughts
+
+The Gini Impurity Coefficient is the measure used to evaluate the quality of a split in Decision Tree learning. A good split partitions the data into two homogeneous groups.
+
+To train a Decision Tree model, the algorithm finds the best data splits, using the Gini Impurity Coefficient as evaluation criterion.
+
+The next chapter will explore how this splitting process is applied **recursively**.
+
+## Solutions
+:::{.solution #sol-gini}
+@exr-gini
+
+First, compute the probabilities:
+
+$$
+P(\text{malignant}) = \frac{2}{2+8} = 0.2
+$$
+$$
+P(\text{benign}) = \frac{8}{2+8} = 0.8
+$$
+
+
+Now, the probability of picking first a malignant tumour, then a benign tumour:
+
+$$
+P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.2 \cdot 0.8 = 0.16
+$$
+
+The probability of picking first a benign tumour, then a malignant tumour:
+
+$$
+P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.8 \cdot 0.2 = 0.16
+$$
+
+Sum the two to get the probability of picking items of different classes:
+
+$$\begin{aligned}
+P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= 0.16 + 0.16 = 0.32
+\end{aligned}
+$$
+
+The Gini Impurity Coefficient is therefore $0.32$. This is in line with our intuition as this number should be higher than for Group A, as Group B is more mixed.
+:::
+
+:::{.solution #sol-gini-split}
+@exr-gini-split
+
+**Group C**
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| C     | 6         | 4      |
+
+$$
+P(\text{malignant}) = \frac{6}{6+4} = 0.6
+$$
+$$
+P(\text{benign}) = \frac{4}{6+4} = 0.4
+$$
+
+Now, the probability of picking first a malignant tumour, then a benign tumour:
+
+$$
+P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.6 \cdot 0.4 = 0.24
+$$
+
+The probability of picking first a benign tumour, then a malignant tumour:
+
+$$
+P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.4 \cdot 0.6 = 0.24
+$$
+
+Sum the two to get the probability of picking items of different classes:
+
+$$
+\begin{aligned}
+P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= 0.24 + 0.24 = 0.48
+\end{aligned}
+$$
+
+The Gini Impurity Coefficient for Group C is therefore $0.48$.
+
+**Group D**
+
+| Group | Malignant | Benign |
+|-------|-----------|--------|
+| D     | 5         | 5      |
+
+$$
+P(\text{malignant}) = \frac{5}{5+5} = 0.5
+$$
+$$
+P(\text{benign}) = \frac{5}{5+5} = 0.5
+$$
+
+Now, the probability of picking first a malignant tumour, then a benign tumour:
+
+$$
+P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.5 \cdot 0.5 = 0.25
+$$
+
+The probability of picking first a benign tumour, then a malignant tumour:
+
+$$
+P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.5 \cdot 0.5 = 0.25
+$$
+
+Sum the two to get the probability of picking items of different classes:
+
+$$
+\begin{aligned}
+P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= 0.25 + 0.25 = 0.5
+\end{aligned}
+$$
+
+The Gini Impurity Coefficient for Group D is therefore $0.5$.
+:::
