@@ -39,147 +39,11 @@ This model acts as a **map from feature values to a prediction**. Using the algo
 
 ![KNN prediction map](/images/neighbours/classification_boundary.png)
 
-<details>
-<summary>Figure code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsClassifier
-from matplotlib.colors import ListedColormap
-from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import make_blobs
-
-
-benign_center = [80, 700]
-malignant_center = [110, 1200]
-n_samples = 70
-X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
-X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
-benign_std = [10, 120]
-malignant_std = [12, 300]
-X_benign = X_benign * benign_std + benign_center
-X_malignant = X_malignant * malignant_std + malignant_center
-
-# Combine into features and target 
-X = np.vstack([X_benign, X_malignant])
-y = np.hstack([np.zeros(len(X_benign)), np.ones(len(X_malignant))])
-
-# Scale the features
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# Create custom colors with brighter hues
-custom_cmap = ListedColormap(['#80C2FF', '#FF8080'])
-
-# Fit a KNN classifier with scaled data
-clf = KNeighborsClassifier(
-    n_neighbors=5,
-    weights='uniform',
-    algorithm='auto',
-    metric='euclidean'
-)
-clf.fit(X_scaled, y)
-
-# Create the decision boundary plot
-plt.figure(figsize=(8, 6))
-
-# Create a meshgrid for displaying the decision boundary
-h = 0.5  # step size in the mesh
-x_min, x_max = X[:, 0].min() - 5, X[:, 0].max() + 5
-y_min, y_max = X[:, 1].min() - 50, X[:, 1].max() + 50
-xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                     np.arange(y_min, y_max, h))
-
-# Scale the mesh points the same way the training data was scaled
-mesh_points = np.c_[xx.ravel(), yy.ravel()]
-mesh_points_scaled = scaler.transform(mesh_points)
-
-# Predict using the scaled mesh points
-Z = clf.predict(mesh_points_scaled)
-Z = Z.reshape(xx.shape)
-
-# Plot the decision boundary
-plt.contourf(xx, yy, Z, alpha=0.4, cmap=custom_cmap)
-
-# Plot the data points (using original unscaled coordinates for display)
-plt.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign', 
-            s=60, edgecolor='darkblue', alpha=0.9, linewidth=1)
-plt.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant', 
-            s=60, linewidth=2)
-
-plt.title('Nearest Neighbour Classification Boundary', fontsize=16)
-plt.xlabel('Perimeter Mean (µm)', fontsize=16)
-plt.ylabel('Area Mean (µm²)', fontsize=16)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.legend(fontsize=12)
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.savefig("images/neighbours/classification_boundary.png")
-plt.show()
-```
-</details>
-
 ## Adding some nuance
 
 This is all very exciting. But let's consider the following example from a **patient's perspective**. Let's imagine we have to predict the diagnosis of the following tumours:
 
 ![Neighbours with different class ratios](/images/intro/five_neighbours.png)
-
-<details>
-<summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-def plot_neighbours(num_malignant, ax, total_neighbours=5):
-    num_malignant = min(num_malignant, total_neighbours)
-    num_benign = total_neighbours - num_malignant
-    angles_malignant = np.linspace(0, np.pi, num_malignant + 1, endpoint=False)[:-1] if num_malignant > 0 else []
-    angles_benign = np.linspace(np.pi, 2*np.pi, num_benign + 1, endpoint=False)[:-1] if num_benign > 0 else []
-    radius = 0.5
-    
-    # Plot malignant neighbours
-    for i in range(num_malignant):
-        ax.plot(radius * np.cos(angles_malignant[i]), radius * np.sin(angles_malignant[i]), 'rx', markersize=10)
-    
-    # Plot benign neighbours
-    for i in range(num_benign):
-        ax.plot(radius * np.cos(angles_benign[i]), radius * np.sin(angles_benign[i]), 'bo', markersize=10)
-    
-    # Central unknown point
-    ax.plot(0, 0, 'g', markersize=18, marker=r'$\mathbf{?}$') 
-    
-    ax.set_title(f'{num_malignant} Malignant, {num_benign} Benign', fontsize=18)
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_xlim([-1, 1])
-    ax.set_ylim([-1, 1])
-    ax.set_aspect('equal', adjustable='box')
-
-# Create a 2x3 subplot layout
-fig, axes = plt.subplots(2, 3, figsize=(15, 10))
-fig.suptitle('Classification based on Nearest Neighbours', fontsize=20, y=0.98)
-
-# Flatten the axes array for easier iteration
-axes = axes.flatten()
-
-for i in range(6):
-    plot_neighbours(i, axes[i])
-
-# Add a legend to the first subplot
-axes[0].plot([], [], 'rx', markersize=10, label='Malignant')
-axes[0].plot([], [], 'bo', markersize=10, label='Benign')
-axes[0].plot([], [], ' ', markersize=18, marker=r'$\mathbf{?}$', label='Unknown')
-axes[0].legend(loc='upper right', fontsize=12)
-
-
-plt.subplots_adjust(top=0.9)
-plt.show()
-```
-</details>
 
 There, a simple majority vote would mean that the observation with 2 malignant neighbours could be classified as "benign". As a patient, I would prefer to have a second opinion there.
 
@@ -187,11 +51,12 @@ As 2 out of the 5 neighbours of this observation are malignant, we are **less ce
 
 One way to do this would be, instead of taking the winner of a majority vote, we could estimate the **probability** of a tumour to be malignant.
 
-<details><summary>Note: Defining Probability</summary>
+::: {.callout-note collapse="true"}
+## Note: Defining Probability
 
 The probability assigns a degree of belief to an event, between 0 and 1. For example, the probability of rolling a 4 on a fair six-sided die is $1/6 \approx 0.167$. The probability of getting heads on a fair coin is $1/2 = 0.5$.
 
-</details>
+:::
 
 Before computing the predicted probability of malignancy, we could start with intuition. If the 5 neighbours of the observation are malignant, the model should be 100% sure that the tumour is malignant. Conversely, if none of its 5 neighbours is malignant, the model would assign a probability of 0% to malignancy.
 
@@ -213,104 +78,6 @@ This approach can be used to revise the map visualised in the previous section. 
 
 ![KNN probability map](/images/neighbours/classification_boundary_proba.png)
 
-<details>
-<summary>Figure code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsClassifier
-from matplotlib.colors import ListedColormap, BoundaryNorm
-from sklearn.preprocessing import StandardScaler
-from sklearn.datasets import make_blobs
-
-benign_center = [80, 700]
-malignant_center = [110, 1200]
-n_samples = 70
-X_benign, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=1)
-X_malignant, _ = make_blobs(n_samples=n_samples, centers=[(0, 0)], cluster_std=1, random_state=2)
-benign_std = [10, 120]
-malignant_std = [12, 300]
-X_benign = X_benign * benign_std + benign_center
-X_malignant = X_malignant * malignant_std + malignant_center
-
-# Combine into features and target
-X = np.vstack([X_benign, X_malignant])
-y = np.hstack([np.zeros(len(X_benign)), np.ones(len(X_malignant))])
-
-# Scale the features
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# Fit a KNN classifier with scaled data
-clf = KNeighborsClassifier(
-    n_neighbors=5,
-    weights='uniform',
-    algorithm='auto',
-    metric='euclidean'
-)
-clf.fit(X_scaled, y)
-
-# Create the decision boundary plot
-plt.figure(figsize=(10, 6))
-
-# Create a meshgrid for displaying the decision boundary
-h = 0.5  # step size in the mesh
-x_min, x_max = X[:, 0].min() - 5, X[:, 0].max() + 5
-y_min, y_max = X[:, 1].min() - 50, X[:, 1].max() + 50
-xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                     np.arange(y_min, y_max, h))
-
-# Scale the mesh points the same way the training data was scaled
-mesh_points = np.c_[xx.ravel(), yy.ravel()]
-mesh_points_scaled = scaler.transform(mesh_points)
-
-# Predict probabilities using the scaled mesh points
-Z_proba = clf.predict_proba(mesh_points_scaled)[:, 1]  # Probability of class 1 (malignant)
-Z_proba = Z_proba.reshape(xx.shape)
-
-# Create a discrete colormap with exactly 6 levels
-# Define the boundaries for the 6 levels
-bounds = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.01]  # Adding 1.01 to ensure 1.0 is included in the last bin
-# Define the colors for each level - blue to red gradient
-colors = ['#0050FF', '#5080FF', '#80AAFF', '#FFB080', '#FF8050', '#FF5000']
-# Create a custom discrete colormap with these colors and boundaries
-cmap = ListedColormap(colors)
-norm = BoundaryNorm(bounds, cmap.N)
-
-# Plot the decision boundary with discrete probability levels
-contour = plt.contourf(xx, yy, Z_proba, levels=bounds, cmap=cmap, norm=norm, alpha=0.7)
-
-# Plot the data points (using original unscaled coordinates for display)
-plt.scatter(X_benign[:,0], X_benign[:,1], marker='o', color='blue', label='Benign',
-           s=60, edgecolor='darkblue', alpha=0.9, linewidth=1)
-plt.scatter(X_malignant[:,0], X_malignant[:,1], marker='x', color='red', label='Malignant',
-           s=60, linewidth=2)
-
-# Add a colorbar with discrete ticks
-cbar = plt.colorbar(contour, ticks=[0.1, 0.3, 0.5, 0.7, 0.9])  # Position ticks in middle of each bin
-cbar.set_label('Probability of Malignant', fontsize=14)
-
-# Set custom labels on the colorbar
-cbar.ax.set_yticklabels(['0%', '20%', '40%', '60%', '80%'])
-cbar.ax.tick_params(labelsize=12)
-
-# Add a 100% label at the top
-cbar.ax.text(0.5, 1.02, '100%', transform=cbar.ax.transAxes, 
-             ha='center', va='bottom', fontsize=12)
-
-plt.title('Nearest Neighbour Classification Boundary', fontsize=16)
-plt.xlabel('Perimeter Mean (µm)', fontsize=16)
-plt.ylabel('Area Mean (µm²)', fontsize=16)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.legend(fontsize=12, loc='upper left')
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-```
-</details>
-
 ## From classification to regression
 
 The above section only showed the application of KNN to a **classification** problem, predicting the diagnosis of a suspicious mass. 
@@ -331,60 +98,6 @@ For simplicity, let's use the following features: number of rooms and distance f
 The training data looks like this:
 
 ![Property pricing training data](/images/neighbours/property_price_data.png)
-
-<details>
-<summary>Figure code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsRegressor, NearestNeighbors
-
-np.random.seed(42)
-
-num_samples = 50
-number_of_rooms = np.random.uniform(1, 5, num_samples)
-distance_to_centre = np.random.uniform(1, 5, num_samples)
-
-# Price formula: base price + price per room - price per km from centre + noise
-price = 300000 + 60000 * number_of_rooms - 40000 * distance_to_centre + np.random.normal(0, 25000, num_samples)
-
-X = np.vstack([number_of_rooms, distance_to_centre]).T
-
-new_observation = np.array([[3, 2.5]])
-
-nbrs = NearestNeighbors(n_neighbors=5, algorithm='ball_tree').fit(X)
-distances, indices = nbrs.kneighbors(new_observation)
-
-# Print the neighbours' data for the table
-print("The 5 closest neighbours are:")
-for i in range(len(indices.flatten())):
-    idx = indices.flatten()[i]
-    # Rounding for display purposes
-    print(
-        f"Rooms: {round(X[idx, 0])}, "
-        f"Distance: {X[idx, 1]:.1f} km, "
-        f"Price: €{price[idx]:,.0f}"
-    )
-
-plt.figure(figsize=(8, 6))
-sc = plt.scatter(number_of_rooms, distance_to_centre, c=price, cmap='plasma', s=80, edgecolor='k')
-plt.scatter(new_observation[0, 0], new_observation[0, 1], marker=r'$\mathbf{?}$', color='lime', s=400, label='New Property')
-
-plt.scatter(X[indices, 0], X[indices, 1], facecolors='none', edgecolors='lime', s=200, linewidth=2, label='5 Closest Neighbours')
-
-plt.xlabel('Number of Rooms', fontsize=16)
-plt.ylabel('Distance to Centre (km)', fontsize=16)
-plt.title('Berlin Property Price Training Data', fontsize=18)
-cbar = plt.colorbar(sc)
-cbar.set_label('Price (€)', fontsize=14)
-cbar.ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
-plt.legend(fontsize=12)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.grid(True, linestyle='--', alpha=0.6)
-```
-</details>
 
 Each dot represents a property, coloured by its price. The question mark ($?$) is the new property we want to price.
 
@@ -409,36 +122,6 @@ That is it, we have our predictions! This process should remind you of probabili
 Using this method, we could also compute a **map of property prices** over the two features: number of rooms and distance from centre.
 
 ![KNN regression map](/images/neighbours/knn_regression_map.png)
-
-<details>
-<summary>Figure code</summary>
-
-```python
-knn_reg = KNeighborsRegressor(n_neighbors=5)
-knn_reg.fit(X, price)
-
-xx, yy = np.meshgrid(np.linspace(1, 5, 100), np.linspace(1, 5, 100))
-Z = knn_reg.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
-
-plt.figure(figsize=(8, 6))
-plt.contourf(xx, yy, Z, cmap='plasma', alpha=0.8, levels=20)
-
-sc = plt.scatter(number_of_rooms, distance_to_centre, c=price, cmap='plasma', s=80, edgecolor='k')
-plt.scatter(new_observation[0, 0], new_observation[0, 1], marker=r'$\mathbf{?}$', color='lime', s=400, label='New Property')
-
-plt.xlabel('Number of Rooms', fontsize=16)
-plt.ylabel('Distance to Centre (km)', fontsize=16)
-plt.title('KNN Regression Map (5 Neighbours)', fontsize=18)
-cbar = plt.colorbar(sc)
-cbar.set_label('Price (€)', fontsize=14)
-cbar.ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
-
-plt.legend(fontsize=12)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.grid(True, linestyle='--', alpha=0.6)
-```
-</details>
 
 The map shows that there is a positive **relationship** between number of rooms and price, and the negative relationship between distance to centre and price. The most expensive properties are both central and have a high number of rooms. The (simple) model built allows us to map **any** given combination of number of rooms and distance to centre to a price.
 

@@ -18,7 +18,8 @@ Adder(a, b):
 
 This is a simple program represented in pseudocode, a language between natural language (like English) and code.
 
-<details><summary>What is pseudocode?</summary>
+::: {.callout-note collapse="true"}
+## What is pseudocode?
 
 Pseudocode is a language in between natural language and code.
 
@@ -31,7 +32,7 @@ Code is an unambiguous and context-free language. We use it to define programs t
 
 Pseudocode is closer to natural language and allows us to communicate programs and ideas.
 
-</details>
+:::
 
 Going through this function line by line:
 

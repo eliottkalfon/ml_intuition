@@ -57,13 +57,14 @@ Here, the **law of large numbers** comes to the rescue. The law of large numbers
 
 This is the statistical foundation of **polling**. Before elections, polling agencies **randomly sample** a large group of people to get a representative sample of the population.
 
-<details><summary>Some issues with polling</summary>
+::: {.callout-note collapse="true"}
+## Some issues with polling
 
 Polling suffers from selection bias. Some people will not reply to a call from a polling agency. Some groups are more likely to reply than others, which introduces a bias in the composition of the sample. As an example, retired individuals spend more time at home close to their phones and are more likely to pick up the phone.
 
 To make sure that they obtain representative samples, these agencies have to use some sophisticated mathematical tricks to ensure representativeness. With mixed success.
 
-</details>
+:::
 
 Going back to Machine Learning, by randomly selecting a large number of observations from the training set, you can ensure that the test set is a representative sample of the training data.
 
@@ -71,69 +72,9 @@ This can be visualised with a simple example. Let's imagine that the training da
 
 ![Surface area distribution for both Flats and Houses](/images/model-evaluation/whole_dataset.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-
-# Simulate a population with two property types
-n_total = 1000
-types = np.random.choice(['Flat', 'House'], size=n_total, p=[0.7, 0.3])
-areas = np.where(types == 'Flat', np.random.normal(60, 10, n_total), np.random.normal(120, 20, n_total))
-
-fig, ax = plt.subplots(figsize=(7, 5))
-
-ax.hist(areas[types == 'Flat'], bins=15, alpha=0.7, label='Flat')
-ax.hist(areas[types == 'House'], bins=15, alpha=0.7, label='House')
-ax.set_title('Whole dataset', fontsize=18)
-ax.set_xlabel('Surface area (m$^2$)', fontsize=16)
-ax.set_ylabel('Count', fontsize=16)
-ax.tick_params(axis='both', labelsize=14)
-ax.legend(fontsize=14)
-
-plt.tight_layout()
-plt.show()
-```
-
-</details>
-
 By randomly sampling 200 of the observations to create a test set, both the training and test sets have roughly similar distributions:
 
 ![Surface area distributions in the training and test sets](/images/model-evaluation/two_sets.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-
-n_total = 1000
-types = np.random.choice(['Flat', 'House'], size=n_total, p=[0.7, 0.3])
-areas = np.where(types == 'Flat', np.random.normal(60, 10, n_total), np.random.normal(120, 20, n_total))
-
-test_idx = np.random.choice(n_total, size=200, replace=False)
-train_idx = np.setdiff1d(np.arange(n_total), test_idx)
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-
-for ax, idx, title in zip(axes, [train_idx, test_idx], ['Train set', 'Test set']):
-    ax.hist(areas[idx][types[idx] == 'Flat'], bins=15, alpha=0.7, label='Flat')
-    ax.hist(areas[idx][types[idx] == 'House'], bins=15, alpha=0.7, label='House')
-    ax.set_title(title, fontsize=18)
-    ax.set_xlabel('Surface area (m$^2$)', fontsize=16)
-    ax.set_ylabel('Count', fontsize=16)
-    ax.tick_params(axis='both', labelsize=14)
-    ax.legend(fontsize=14)
-
-plt.tight_layout()
-plt.show()
-```
-</details>
 
 This is the law of large numbers in action! The larger the dataset and test set, the more similar the two distributions will look like.
 

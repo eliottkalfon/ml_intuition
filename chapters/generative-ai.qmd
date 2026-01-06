@@ -123,7 +123,8 @@ Easier than a rating, human judges could simply choose the most helpful of two m
 
 During training, the model would learn to generate more helpful output. This is called **Reinforcement Learning from Human Feedback** (RLHF), the last building block of today's GenAI models.
 
-<details><summary>Beyond human pairwise ranking</summary>
+::: {.callout-note collapse="true"}
+## Beyond human pairwise ranking
 
 Once we gather enough examples of human pairwise assessments, we can train a model to predict the winner of two candidate suggestions.
 
@@ -137,7 +138,7 @@ The input here would be the two candidate suggestions, and the prediction would 
 
 However, this is not a **tabular** Machine Learning problem. The candidate suggestions are two variable-length sequences of text. This is part of Natural Language Processing, a fascinating area of research.
 
-</details>
+:::
 
 ## Final Thoughts
 

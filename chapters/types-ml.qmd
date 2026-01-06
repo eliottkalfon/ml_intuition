@@ -14,35 +14,6 @@ Plotting all these bone measurements on a chart, two clusters emerge:
 
 ![Plotting bones by measurements](/images/defining-prediction/clusters.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-np.random.seed(0)
-# Cluster 1
-x1 = np.random.normal(10, 1, 30)
-y1 = np.random.normal(5, 0.5, 30)
-# Cluster 2
-x2 = np.random.normal(15, 1, 30)
-y2 = np.random.normal(8, 0.5, 30)
-
-plt.figure(figsize=(7, 5))
-plt.scatter(x1, y1, label='Cluster 1', s=70)
-plt.scatter(x2, y2, label='Cluster 2', s=70)
-plt.xlabel('Length (cm)', fontsize=16)
-plt.ylabel('Width (cm)', fontsize=16)
-plt.title('Bone Measurements: Two Clusters', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.legend(fontsize=14)
-plt.tight_layout()
-plt.savefig("images/defining-prediction/clusters.png")
-plt.show()
-```
-</details>
-
 The exact species are still unknown, but the bones seem to belong to two different clusters. You have gained this information through the use of **unsupervised learning**, learning patterns or underlying structures of the data.
 
 ::: {.exercise #exr-clu-cus}

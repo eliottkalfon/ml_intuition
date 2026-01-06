@@ -265,31 +265,6 @@ As you can see, Model A has a higher MAE than Model B, and Model B has a higher 
 
 ![Absolute value and square functions](/images/evaluation/abs_vs_square.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-x = np.linspace(-10, 10, 200)
-abs_x = np.abs(x)
-sq_x = x**2
-
-plt.figure(figsize=(7,5))
-plt.plot(x, abs_x, label='Absolute Value $|x|$', linewidth=2)
-plt.plot(x, sq_x, label='Square $x^2$', linewidth=2)
-plt.title('Comparison of $|x|$ and $x^2$', fontsize=18)
-plt.xlabel('$x$', fontsize=16)
-plt.ylabel('Value', fontsize=16)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.legend(fontsize=14)
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-```
-</details>
-
 You may see that the square function **increases faster** as numbers grow larger or more negative, whereas the growth rate of the absolute value function **stays constant**. This means that the Mean Squared Error will strongly penalise **extreme errors**. Remembering the previous example:
 
 | Property | Model A Prediction | Model B Prediction | Truth |
@@ -314,13 +289,14 @@ Given these considerations, the Mean Squared Error is a better choice.
 
 There are also mathematical reasons why the Mean Squared Error and Root Mean Squared Errors are **sometimes preferred** over the Mean Absolute Error. One of them is explained in the note below.
 
-<details><summary>Mean Square Error and Differentiability</summary>
+::: {.callout-note collapse="true"}
+## Mean Square Error and Differentiability
 
 The Mean Absolute Error (MAE) function is **not differentiable** at $0$, because the absolute value function $|x|$ has a "sharp corner" at $x=0$.
 
 This is an issue for many machine learning algorithms, which rely on **differentiability** for optimisation (such as gradient descent). In contrast, the Mean Squared Error (MSE) is differentiable everywhere, making it easier to use for training models.
 
-</details>
+:::
 
 ## Final Thoughts
 

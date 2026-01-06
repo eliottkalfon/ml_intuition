@@ -120,7 +120,8 @@ $$
 
 Predictions must be as close as possible to the **ground truth**, which is the true label or output. For example, the ground truth for a tumor is its actual diagnosis. The ground truth for a property is its final sale price. The ground truth for an email is whether it is actually spam or not.
 
-<details><summary>Defining Truth</summary>
+::: {.callout-note collapse="true"}
+## Defining Truth
 
 I love definitions, but defining truth is often disappointing. In this book, anything that is true is confirmed by the reality around us; i.e., empirical observation. This choice is made out of convenience. If you want to have some fun, I would recommend opening a few dictionaries and reading the definitions of the word “truth”.
 
@@ -136,7 +137,7 @@ Hoping to find an answer there, I looked up the definition of “true”:
 
 As you can see, with limited success. This links back to the circularity of words and dictionaries. We only define words with more words.
 
-</details>
+:::
 
 Measuring this degree of closeness to ground truth and building accurate models are topics that will be discussed in the next sections.
 

@@ -31,41 +31,6 @@ For this reason, the sale date cannot be used in the model. The pricing date can
 
 ![Sale price by pricing date](/images/datetime/prices_by_date.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.dates import DateFormatter
-
-data = [
-    ("A", 85, 3, "2024-12-15", "2025-02-13", 302000),
-    ("B", 86, 3, "2025-01-15", "2025-03-16", 305000),
-    ("C", 84, 3, "2025-02-15", "2025-04-16", 303000),
-    ("D", 87, 3, "2025-03-15", "2025-05-14", 311000),
-    ("E", 85, 3, "2025-04-15", "2025-06-14", 309000),
-    ("F", 86, 3, "2025-05-15", "2025-07-14", 316000),
-    ("G", 84, 3, "2025-06-15", "2025-08-14", 314000),
-    ("H", 87, 3, "2025-07-15", "2025-09-13", 322000),
-]
-df = pd.DataFrame(data, columns=["Property","Surface","Rooms","Pricing date","Sale date","Sale price"])
-df["Pricing date"] = pd.to_datetime(df["Pricing date"])
-
-fig, ax = plt.subplots(figsize=(7,4))
-ax.plot(df["Pricing date"], df["Sale price"], marker="o", linestyle="-", color="tab:blue")
-ax.set_title("Sale price by pricing date", fontsize=18)
-ax.set_xlabel("Pricing date", fontsize=16)
-ax.set_ylabel("Sale price (£)", fontsize=16)
-ax.tick_params(axis="both", labelsize=14)
-ax.grid(True, alpha=0.2)
-ax.xaxis.set_major_formatter(DateFormatter("%Y-%m"))
-fig.autofmt_xdate()
-plt.tight_layout()
-plt.show()
-```
-
-</details>
-
 ### Seasonality
 
 Changing example, let’s say that as the manager of a pub, you are trying to predict the quantity of beer the bar will sell next week. Having an accurate beer sales forecast could help you better plan your staff and inventory. If you predict to sell a lot of beer, you should buy a lot of inventory and hire a larger team.
@@ -73,39 +38,6 @@ Changing example, let’s say that as the manager of a pub, you are trying to pr
 Beer sales over the last two years look like this:
 
 ![Beer sales over the last two years with seasonality and trend](/images/datetime/beer_sales.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-np.random.seed(42)
-dates = pd.date_range(end="2025-08-15", periods=104, freq="W-SUN")
-t = np.arange(len(dates))
-
-baseline = 800
-trend = 5 * t
-seasonality = 150 * np.sin(2 * np.pi * t / 52)
-noise = np.random.normal(0, 40, size=len(dates))
-
-sales = baseline + trend + seasonality + noise
-sales = np.clip(sales, a_min=0, a_max=None)
-
-fig, ax = plt.subplots(figsize=(8,4))
-ax.plot(dates, sales, color="tab:green", linewidth=2)
-ax.set_title("Weekly beer sales (last two years)", fontsize=18)
-ax.set_xlabel("Week", fontsize=16)
-ax.set_ylabel("Pints sold", fontsize=16)
-ax.tick_params(axis="both", labelsize=14)
-ax.grid(True, alpha=0.2)
-fig.autofmt_xdate()
-plt.tight_layout()
-plt.show()
-```
-
-</details>
 
 From this chart, we could see both an **upward trend** and **seasonality effects**. The next section will investigate how to encode this information into numbers.
 
@@ -160,38 +92,6 @@ Why go through the trouble of learning about this alternative representation? It
 Going back to the example of property prices over time, imagine that the average price evolves in the following way:
 
 ![Upward linear trend](/images/datetime/property_trend.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.dates import DateFormatter
-
-np.random.seed(7)
-n = 36
-dates = pd.date_range(start="2024-01-01", periods=n, freq="MS")
-t = np.arange(n)
-baseline = 300000
-trend = 1200 * t 
-noise = np.cumsum(np.random.normal(0, 2000, size=n))
-y = baseline + trend + noise
-
-fig, ax = plt.subplots(figsize=(7,4))
-ax.plot(dates, y, color="tab:orange", linewidth=2)
-ax.set_title("Upward Trend in Property Prices", fontsize=18)
-ax.set_xlabel("Date", fontsize=16)
-ax.set_ylabel("Average price (€)", fontsize=16)
-ax.tick_params(axis="both", labelsize=14)
-ax.grid(True, alpha=0.2)
-ax.xaxis.set_major_formatter(DateFormatter("%Y-%m"))
-fig.autofmt_xdate()
-plt.tight_layout()
-plt.show()
-```
-
-</details>
 
 Having a feature that represents a **point in time**, can help determine the price of a property taking this upward trend into account. For example, a model could learn that the average price of property increases by 1% every 130 days.
 

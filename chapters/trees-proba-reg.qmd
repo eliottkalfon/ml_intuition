@@ -57,36 +57,6 @@ Imagine we are building a model predicting property prices based on Property Siz
 
 ![Properties by Size and Distance coloured by Property Price](/images/trees/property_prices.png)
 
-<details><summary>Figure Code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Set random seed for reproducibility
-np.random.seed(42)
-
-# Generate features
-size = np.random.uniform(50, 150, 30)
-distance = np.random.uniform(1, 5, 30)
-
-# Generate price with some relationship: higher size increases price, higher distance decreases price
-price = 200000 + size * 2500 - distance * 15000 + np.random.normal(0, 15000, 30)
-
-# Plot
-plt.figure(figsize=(8,6))
-sc = plt.scatter(size, distance, c=price, cmap='viridis', s=100, edgecolor='k')
-plt.xlabel('Size (m²)', fontsize=14)
-plt.ylabel('Distance to Center (km)', fontsize=14)
-plt.title('Property Prices by Size and Distance', fontsize=16)
-cbar = plt.colorbar(sc)
-cbar.set_label('Price ($)', fontsize=12)
-plt.grid(True)
-plt.savefig("images/trees/property_prices.png")
-plt.show()
-```
-</details>
-
 We could take a subset of this data (prices now in **k €**):
 
 | Size (m²) | Distance (km) | Price (k €) |
@@ -156,85 +126,14 @@ This process can be visualised by showing the average MSE for each splitting val
 
 ![Trying different splitting values of the size feature](/images/trees/property_mse_vs_size.png)
 
-<details><summary>Figure Code</summary>
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Generate sample data
-np.random.seed(42)
-size = np.random.uniform(50, 150, 30)
-distance = np.random.uniform(1, 5, 30)
-price = 200000 + size * 2500 - distance * 15000 + np.random.normal(0, 15000, 30)
-price = price / 1000  # convert to k€
-
-X = np.column_stack([size, distance])
-
-def avg_mse(split_value, X, price):
-    left_mask = X[:, 0] < split_value
-    right_mask = ~left_mask
-    n = len(price)
-    n_left = np.sum(left_mask)
-    n_right = np.sum(right_mask)
-    if n_left == 0 or n_right == 0:
-        return np.nan
-    mean_left = price[left_mask].mean()
-    mean_right = price[right_mask].mean()
-    mse_left = np.mean((price[left_mask] - mean_left) ** 2)
-    mse_right = np.mean((price[right_mask] - mean_right) ** 2)
-    avg = (n_left / n) * mse_left + (n_right / n) * mse_right
-    return avg
-
-split_values = np.linspace(size.min() + 1, size.max() - 1, 200)
-avg_mses = np.array([avg_mse(sv, X, price) for sv in split_values])
-best_idx = np.nanargmin(avg_mses)
-best_split = split_values[best_idx]
-best_mse = avg_mses[best_idx]
-
-# Plot
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(9, 8), sharex=True, gridspec_kw={'height_ratios': [2, 1]})
-
-# Top: Data scatter
-sc = ax1.scatter(size, distance, c=price, cmap='viridis', s=120, edgecolor='k')
-ax1.set_ylabel('Distance to Center (km)', fontsize=16)
-ax1.set_title('Property Prices by Size and Distance', fontsize=18)
-ax1.axvline(best_split, color='green', linestyle='--', lw=2, label=f'Split at {best_split:.1f}')
-ax1.legend(fontsize=12)
-ax1.grid(True)
-ax1.tick_params(axis='both', which='major', labelsize=14)
-
-# Bottom: MSE vs Size
-ax2.plot(split_values, avg_mses, color='blue', lw=2)
-ax2.scatter([best_split], [best_mse], color='red', s=80, zorder=5, label='Minimum MSE')
-ax2.axvline(best_split, color='green', linestyle='--', lw=2, label=f'Split at {best_split:.1f}')
-ax2.set_xlabel('Size (m²)', fontsize=16)
-ax2.set_ylabel('Average MSE', fontsize=16)
-ax2.set_title('Average MSE vs. Size Split', fontsize=18)
-ax2.grid(True)
-ax2.tick_params(axis='both', which='major', labelsize=14)
-ax2.legend(fontsize=12, loc='upper right')
-
-# Add a colorbar that doesn't affect axis alignment
-fig.subplots_adjust(right=0.88)
-cbar_ax = fig.add_axes([0.90, 0.38, 0.025, 0.48]) 
-cbar = fig.colorbar(sc, cax=cbar_ax)
-cbar.set_label('Price (k€)', fontsize=12)
-
-plt.tight_layout(rect=[0, 0, 0.88, 1])
-plt.savefig("images/trees/property_mse_vs_size.png")
-plt.show()
-```
-
-</details>
-
 Following the same **recursive process** as the one shown in the classification case, we can build a Decision Tree that partitions the overall space into subgroups.
 
 This stepwise learning process is shown below:
 
 ![The Decision Tree learning algorithm selects the best split at each step](/images/trees/property_regression_splits_stepwise.png)
 
-<details><summary>Figure Code</summary>
+::: {.callout-note collapse="true"}
+## Figure Code
 
 ```python
 import numpy as np
@@ -362,7 +261,7 @@ plt.show()
 
 As described in this section, Decision Trees can be easily applied to regression tasks. The only significant change is the evaluation of split quality with the **Mean Squared Error** instead of the Gini Impurity Coefficient.
 
-</details>
+:::
 
 ## Final Thoughts
 

@@ -32,41 +32,6 @@ In this example, the surface area represents the single dimension of this space.
 
 ![Distance in one dimension](/images/distance/1d_distance.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-areas = np.array([22, 35, 55])
-labels = np.array(['A', 'B', 'C'])
-
-sort_idx = np.argsort(areas)
-areas_sorted = areas[sort_idx]
-labels_sorted = labels[sort_idx]
-
-plt.figure(figsize=(10, 2.5))
-plt.axhline(0, color='grey', linewidth=1, zorder=1)
-plt.scatter(areas_sorted, np.zeros_like(areas_sorted), s=200, color='royalblue', zorder=2)
-
-plt.yticks([])
-plt.xlabel('Surface Area (m²)', fontsize=16)
-plt.title('Flats on the Number Line', fontsize=18)
-plt.grid(True, axis='x', linestyle='--', alpha=0.5)
-
-xtick_vals = np.arange(20, 61, 10)
-plt.xticks(xtick_vals, xtick_vals, fontsize=14)
-
-for x, label in zip(areas_sorted, labels_sorted):
-    plt.annotate(label, (x, 0), xytext=(0, 20), textcoords='offset points',
-                 ha='center', va='bottom', fontsize=16, fontweight='bold', color='royalblue')
-
-plt.xlim(15, 60)
-plt.tight_layout()
-plt.show()
-```
-</details>
-
 In this space, what is the difference between A and C? How would you compute it?
 
 A simple subtraction would be a good start:
@@ -124,27 +89,6 @@ Plotting the absolute value of all numbers between $-5$ and $5$, we get the foll
 
 ![Absolute value function](/images/distance/asbolute_value.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(-5, 5, 100)
-y = np.abs(x)
-plt.figure(figsize=(8, 5))
-plt.plot(x, y, color='royalblue', linewidth=3)
-plt.title('Absolute Value Function', fontsize=18)
-plt.xlabel('x', fontsize=16)
-plt.ylabel('|x|', fontsize=16)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.grid(True, linestyle='--', alpha=0.5)
-plt.tight_layout()
-plt.show()
-```
-</details>
-
 One of the main advantages of the absolute value function as a distance metric is the following:
 
 $$
@@ -184,27 +128,6 @@ $$
 Plotting the square of all numbers in the range $-5$ to $5$, we notice that it has a parabolic shape:
 
 ![Square function](/images/distance/square_function.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(-5, 5, 100)
-y = x**2
-plt.figure(figsize=(8, 5))
-plt.plot(x, y, color='royalblue', linewidth=3)
-plt.title('Square Function', fontsize=18)
-plt.xlabel('x', fontsize=16)
-plt.ylabel('$x^2$', fontsize=16)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.grid(True, linestyle='--', alpha=0.5)
-plt.tight_layout()
-plt.show()
-```
-</details>
 
 This function **increases faster** as the input number grows.
 

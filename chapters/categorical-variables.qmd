@@ -22,30 +22,6 @@ All of the Machine Learning models studied so far deal with observations as **po
 
 ![Properties plotted by surface area and distance to centre](/images/categorical-variables/surface_distance.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-
-surface_area = [85, 120, 95, 70, 110, 60]
-distance_centre = [4.2, 2.5, 6.1, 3.8, 1.2, 5.0]
-labels = ['A', 'B', 'C', 'D', 'E', 'F']
-
-plt.figure(figsize=(7,5))
-plt.scatter(surface_area, distance_centre, s=120, c='royalblue')
-for i, label in enumerate(labels):
-    plt.text(surface_area[i]+1, distance_centre[i], label, fontsize=16)
-plt.xlabel('Surface Area (sq m)', fontsize=16)
-plt.ylabel('Distance to Centre (km)', fontsize=16)
-plt.title('Properties by Surface Area and Distance to Centre', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.tight_layout()
-plt.show()
-```
-
-</details>
-
 We could try building a model that ignores neighbourhood, and uses “Distance to the Centre” as a proxy. This is not a bad idea, but a lot of information is **lost** in the process. And what is the centre of Berlin anyway?
 
 How would models handle these categorical variables like neighbourhoods? This is what this chapter is about.
@@ -74,35 +50,6 @@ Ordinal variables can be converted to numbers relatively easily. As an example, 
 Below is a plot of the properties in three dimensions: surface area, distance to centre, and encoded energy class.
 
 ![Properties in 3D: Surface Area, Distance to Centre, Encoded Energy Class](/images/categorical-variables/3d_surface_distance_energy.png)
-
-<details><summary>Figure code</summary>
-
-```python
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
-
-surface_area = [85, 120, 95, 70, 110, 60]
-distance_centre = [4.2, 2.5, 6.1, 3.8, 1.2, 5.0]
-energy_rating = ['B', 'A', 'C', 'D', 'B', 'F']
-encoded_energy = [2, 1, 3, 4, 2, 6]
-labels = ['A', 'B', 'C', 'D', 'E', 'F']
-
-fig = plt.figure(figsize=(8,6))
-ax = fig.add_subplot(111, projection='3d')
-ax.scatter(surface_area, distance_centre, encoded_energy, s=120, c='royalblue')
-for i, label in enumerate(labels):
-    ax.text(surface_area[i]+1, distance_centre[i], encoded_energy[i], label, fontsize=16)
-ax.set_xlabel('Surface Area (sq m)', fontsize=16)
-ax.set_ylabel('Distance to Centre (km)', fontsize=16)
-ax.set_zlabel('Encoded Energy Class', fontsize=16)
-ax.set_title('Properties in 3D: Surface, Distance, Energy', fontsize=18)
-ax.tick_params(axis='both', labelsize=14)
-plt.tight_layout()
-plt.savefig('figures/3d_surface_distance_energy.png')
-plt.show()
-```
-
-</details>
 
 If the notion of space is not fully clear, refer to the [chapter on data space](data-space.qmd){target=_blank}.
 
@@ -140,7 +87,8 @@ One-Hot Encoding converts a categorical variable into a list of **binary columns
 
 A drawback of this approach is that it can create **many columns**. Imagine that you want to apply the same method to the street name. You may end up with **thousands of columns**. For mathematical reasons we will not go into, this can be an issue for Machine Learning algorithms. This is sometimes referred to as **the curse of dimensionality**. If you want to develop a quick intuition of why, just remember that a lot of strange things happen in a space with many dimensions.
 
-<details><summary>One-Hot Encoding in practice</summary>
+::: {.callout-note collapse="true"}
+## One-Hot Encoding in practice
 
 In practice, One-Hot Encoding converts a categorical variable with $N$ distinct values into $N-1$ binary columns. Why do we remove one?
 
@@ -159,7 +107,7 @@ Going back to the example with three neighbourhood values (Kreuzberg, Charlotten
 
 Having both Kreuzberg and Charlottenburg as 0 would mean that the property is in Neukölln.
 
-</details>
+:::
 
 One-Hot Encoding solves the categorical variable problem for variables with **few categories**. How could we encode categorical variables like street name? Ignoring these variables with many distinct values is one possibility. However, in the example of property pricing, the street name could carry some relevant information. The next section will explore one idea.
 
@@ -204,11 +152,12 @@ This way, a lot of the price relevant information of the street name is preserve
 
 A possible drawback of this method is that if there are street names for which there is only one or a few properties, the average would only be the price of the **single property on this street**. There are smart ways to deal with these cases, though they are beyond the scope of this book. 
 
-<details><summary>If you are curious</summary>
+::: {.callout-note collapse="true"}
+## If you are curious
 
-One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the **global average** instead of the average for this street name. 
+One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the **global average** instead of the average for this street name.
 
-</details>
+:::
 
 This averaging process can also be used in the binary classification context. The average of the target variable for a given categorical value could be the average of 0’s and 1’s of the target label (i.e., negatives and positives).
 

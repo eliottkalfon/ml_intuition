@@ -122,7 +122,8 @@ Using mean imputation to fill missing Grade values, what would be the Grade of s
 
 The **median** could also be a good choice of substitute value for imputation. The median of a series is the **middle number** in a sorted list. Taking the list: $[2,3,4,5,7,9,50]$ as example, the median is $5$. In other words, it is the value such that at least 50% of the values are inferior or equal to. One advantage of the median is that it is not sensitive to outliers.
 
-<details><summary>Mean, median and outliers</summary>
+::: {.callout-note collapse="true"}
+## Mean, median and outliers
 
 An **outlier** is a data point that is very different to the others
 
@@ -131,31 +132,6 @@ Considering the following series:
 $[2,3,4,5,7,9,50]$
 
 ![Series with outlier](/images/missing-values/series_with_outlier.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-series1 = np.array([2,3,4,5,7,9,50])
-
-sort_idx = np.argsort(series1)
-areas_sorted = series1[sort_idx]
-
-plt.figure(figsize=(10, 2.5))
-plt.axhline(0, color='grey', linewidth=1, zorder=1)  # horizontal line
-plt.scatter(areas_sorted, np.zeros_like(areas_sorted), s=200, color='royalblue', zorder=2)
-
-plt.yticks([])
-plt.title('Series with Outlier', fontsize=18)
-plt.grid(True, axis='x', linestyle='--', alpha=0.5)
-
-plt.tight_layout()
-plt.show()
-```
-
-</details>
 
 The point at $50$ is an outlier of this distribution, as it is very far from the others. The mean of the series is affected by this number:
 
@@ -169,7 +145,7 @@ Show that after removing the item $50$, the mean is $5.0$, and the median is $4.
 
 As you may have observed, the mean varies widely, whereas the median remains stable.
 
-</details>
+:::
 
 :::{.exercise #exr-odd-median}
 Find the median of the following series:
@@ -230,33 +206,12 @@ Time-series data is also often represented as a line chart:
 
 ![Temperature time series with missing values](/images/missing-values/time_series_missing_values.png)
 
-<details><summary>Figure code</summary>
+::: {.callout-note collapse="true"}
+## But what is time?
 
-```python
-import matplotlib.pyplot as plt
-import numpy as np
+Time can be defined as the continuous and apparently irreversible progress of existence. Just like "truth" or "space", the definitions of the foundational aspects of experience can sometimes be disappointing.
 
-time = np.arange(1, 12)
-temp = [18.0, 18.5, 19.1, 20.0, 20.8, np.nan, 22.1, 22.8, 23.5, np.nan, 26.2]
-
-plt.figure(figsize=(8,4))
-plt.plot(time, temp, marker='o', linestyle='-', color='royalblue', label='Temperature')
-plt.xlabel('Time', fontsize=16)
-plt.ylabel('Temperature (°C)', fontsize=16)
-plt.title('Temperature Time Series with Missing Values', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.tight_layout()
-plt.show()
-```
-
-</details>
-
-<details><summary>But what is time?</summary>
-
-Time can be defined as the continuous and apparently irreversible progress of existence. Just like “truth” or “space”, the definitions of the foundational aspects of experience can sometimes be disappointing.
-
-</details>
+:::
 
 ##### Using the Mean and Median
 
@@ -284,94 +239,17 @@ Impute the null values of the following series using mean, then the median. To d
 
 ![Imputation of missing values by mean](/images/missing-values/time_series_mean.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-time = np.arange(1, 12)
-temp = [18.0, 18.5, 19.1, 20.0, 20.8, np.nan, 22.1, 22.8, 23.5, np.nan, 26.2]
-mean_temp = np.nanmean(temp)
-temp_mean = [v if not np.isnan(v) else mean_temp for v in temp]
-
-plt.figure(figsize=(8,4))
-plt.plot(time, temp_mean, marker='o', linestyle='-', color='royalblue', label=f'Imputed by Mean ({mean_temp:.2f}°C)')
-plt.xlabel('Time', fontsize=16)
-plt.ylabel('Temperature (°C)', fontsize=16)
-plt.title('Imputation by Mean', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.tight_layout()
-plt.show()
-```
-
-</details>
-
-As you can see, the mean imputation works very well for the observation 6. However, observation 10 is not imputed in a realistic way and introduces a jump in the series.
-
 ##### Alternative Methods
 
 What would be a better method? In these time-series tasks, imputation by the **previous value** could be a good idea. This method is called **forward-fill**. It assumes that the value remains constant until a new measurement is taken.
 
 ![Imputation by previous value](/images/missing-values/time_series_previous.png)
 
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-
-time = np.arange(1, 12)
-temp = [18.0, 18.5, 19.1, 20.0, 20.8, np.nan, 22.1, 22.8, 23.5, np.nan, 26.2]
-temp_series = pd.Series(temp)
-temp_ffill = temp_series.ffill()
-
-plt.figure(figsize=(8,4))
-plt.plot(time, temp_ffill, marker='o', linestyle='-', color='royalblue', label='Imputed by Previous')
-plt.xlabel('Time', fontsize=16)
-plt.ylabel('Temperature (°C)', fontsize=16)
-plt.title('Imputation by Previous Value', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.tight_layout()
-plt.show()
-```
-
-</details>
-
 The series looks more natural than with mean-imputation. Still, we can do better.
 
 Another approach is to impute the missing values by computing the average of the two neighboring values. This method, often called **linear interpolation**, is particularly useful for data with a clear trend, as it smoothly connects the known data points.
 
 ![Imputation by neighbours](/images/missing-values/time_series_neighbours.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-time = np.arange(1,12)
-temp = [18.0, 18.5, 19.1, 20.0, 20.8, np.nan, 22.1, 22.8, 23.5, np.nan, 26.2]
-temp_neigh = temp.copy()
-for i in range(1, len(temp_neigh)-1):
-    if np.isnan(temp_neigh[i]):
-        temp_neigh[i] = (temp_neigh[i-1] + temp_neigh[i+1]) / 2
-
-plt.figure(figsize=(8,4))
-plt.plot(time, temp_neigh, marker='o', linestyle='-', color='royalblue', label='Imputed by Neighbours')
-plt.xlabel('Time', fontsize=16)
-plt.ylabel('Temperature (°C)', fontsize=16)
-plt.title('Imputation by Neighbouring Values', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.tight_layout()
-plt.show()
-```
-
-</details>
 
 That looks more like it!
 

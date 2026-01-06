@@ -44,7 +44,8 @@ You could start by counting the number of errors of each model:
 
 In other words, Model A was correct three times out of five whereas Model B was correct four times out of five. Model B seems **more correct on average**.
 
-<details><summary>Sample Size</summary>
+::: {.callout-note collapse="true"}
+## Sample Size
 
 A sample of five observations is too low to draw conclusions about the performance of these two models. As a general rule, the **more test samples the better**. This allows us to get a better estimate of the performance of the model. As a rule of thumb, practitioners allocate between **5% and 20%** of the training data as a test set.
 
@@ -52,7 +53,7 @@ There is always a **trade-off** between the amount of data given to the model fo
 
 The later sections of this book will cover some methods designed to address this challenge.
 
-</details>
+:::
 
 More than just "three out of five", we can say that Model A was correct **60% of the time**. This metric is called the **accuracy** of a Machine Learning model.
 
@@ -357,34 +358,6 @@ Which translates to the following Confusion Matrices:
 The following line chart shows the evolution of the different metrics described in this chapter as the prediction **threshold increases**:
 
 ![Visualising recall and precision as the threshold increases](/images/evaluation/metrics.png)
-
-<details><summary>Figure code</summary>
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-thresholds = [0.3, 0.5, 0.7]
-recall = [1.0, 1.0, 0.67]
-precision = [0.75, 1.0, 1.0]
-accuracy = [0.83, 1, 0.83]
-
-plt.figure(figsize=(8,5))
-plt.plot(thresholds, recall, marker='o', label='Recall')
-plt.plot(thresholds, precision, marker='o', label='Precision')
-plt.plot(thresholds, accuracy, marker='o', label='Accuracy')
-plt.xlabel('Threshold', fontsize=16)
-plt.ylabel('Score', fontsize=16)
-plt.title('Effect of Threshold on Metrics', fontsize=18)
-plt.xticks(fontsize=14)
-plt.yticks(fontsize=14)
-plt.legend(fontsize=14)
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-```
-
-</details>
 
 We see that **decreasing** the prediction threshold to 0.3 has the following effects on the three metrics we analysed:
 
