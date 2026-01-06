@@ -10,13 +10,13 @@ From the point of view of the practitioner, data is rarely given, it is earned w
 
 The simplest form of data is tabular data. The first known examples of data tables are 4000 years old (!) dating back to the Old Babylonian period. Then, these clay tablets were used for accounting and trade.
 
-![Ancient Babylonian clay tablet showing a table [@CDLI2025Terms]](/images/data-space/tablet.jpg)
+![Ancient Babylonian clay tablet showing a table [@CDLI2025Terms]](/images/data-space/tablet.jpg){width=50%}
 
 ## The Anatomy of a Table
 
 Tables are made of columns and rows.
 
-![Basic elements of a table](/images/data-space/table.png)
+![Basic elements of a table](/images/data-space/table.png){width=60%}
 
 Rows generally represent a real-world **entity**, with columns describing the **attributes** of this entity. Here, each row is a property, and each column describes an attribute of this property.
 
@@ -71,9 +71,9 @@ As an example, I can see objects on my desk: a glass of water and my notebook. T
 
 Below are two charts plotting suspicious mass observations in two and three dimensions:
 
-![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png)
+![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png){width=50%}
 
-![Plotting observations in three dimensions](/images/data-space/scatter_plot_3d.png)
+![Plotting observations in three dimensions](/images/data-space/scatter_plot_3d.png){width=50%}
 
 This text is printed on a flat surface. And yet, using perspective and transparency, one can create the illusion of a third dimension. If you think that this 3D chart is barely legible, I agree with you.
 

@@ -29,7 +29,7 @@ The depth of a tree is the **distance** from the root node, here the first split
 
 What is the depth of the tree built in the previous examples?
 
-![Example tree](/images/trees/tree_example.png)
+![Example tree](/images/trees/tree_example.png){width=50%}
 
 It is two, as there are two edges (connections) on the path from the root node (top) to the leaf node (bottom).
 

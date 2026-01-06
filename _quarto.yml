@@ -60,6 +60,11 @@ format:
     number-sections: true
     exercise:
       solutions: true
+    classoption: 
+      - oneside              # Makes margins equal and removes forced blank pages
+    geometry:
+      - margin=1in           # Ensures margins are consistent on all sides
+      - heightrounded        # Better for LaTeX layout stability
 
 
 

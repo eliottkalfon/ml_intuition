@@ -13,7 +13,7 @@ A Machine Learning model learns the **relationship** between input/output pairs 
 
 Using the example of tumour diagnosis:
 
-![Tumour dataset: Perimeter Mean vs Area Mean](/images/intro/scatter_unknown.png)
+![Tumour dataset: Perimeter Mean vs Area Mean](/images/intro/scatter_unknown.png){width=60%}
 
 We want to predict the diagnosis of the observation labelled with a question mark ($?$). How could this be done using distance?
 
