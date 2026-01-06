@@ -53,6 +53,7 @@ format:
     number-sections: true
     exercise:
       solutions: true
+    include-in-header: google-analytics.html
   pdf:
     documentclass: book
     number-sections: true
