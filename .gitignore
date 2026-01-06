@@ -3,4 +3,4 @@ venv/
 .DS_Store
 
 **/*.quarto_ipynb
-**/*.pdf
+docs/Machine-Learning-Intuition.pdf
