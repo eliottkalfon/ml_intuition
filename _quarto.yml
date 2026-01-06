@@ -54,6 +54,7 @@ format:
     exercise:
       solutions: true
     include-in-header: google-analytics.html
+    include-after-body: cookie_banner.html
   pdf:
     documentclass: book
     number-sections: true

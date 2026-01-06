@@ -581,6 +581,24 @@ CDLI contributors. 2025. <span>“Terms of <span>Use</span>.”</span> https://c
 </section>
 
 </main> <!-- /main -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: #f9f9f9; padding: 10px; text-align: center; border-top: 1px solid #ccc; z-index: 1000; font-size: 14px;">
+  <p style="margin: 0; display: flex; justify-content: center; align-items: center; gap: 10px;">
+    As a data guy, I collect data. 🍪 By using this site, you agree to the use of cookies.
+    <button id="accept-cookies" style="padding: 10px 20px; background-color: #517699; border: none; border-radius: 6px; font-size: 14px; color: #fff; font-weight: bold; cursor: pointer; transition: background-color 0.3s;">
+      Got it!
+    </button>
+  </p>
+</div>
+<script>
+  document.getElementById('accept-cookies').addEventListener('click', function() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'true');
+  });
+
+  if (localStorage.getItem('cookiesAccepted') === 'true') {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
