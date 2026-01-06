@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -514,28 +479,6 @@ window.Quarto = {
 <figcaption>Properties plotted by surface area and distance to centre</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>surface_area <span class="op">=</span> [<span class="dv">85</span>, <span class="dv">120</span>, <span class="dv">95</span>, <span class="dv">70</span>, <span class="dv">110</span>, <span class="dv">60</span>]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>distance_centre <span class="op">=</span> [<span class="fl">4.2</span>, <span class="fl">2.5</span>, <span class="fl">6.1</span>, <span class="fl">3.8</span>, <span class="fl">1.2</span>, <span class="fl">5.0</span>]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>, <span class="st">'E'</span>, <span class="st">'F'</span>]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.scatter(surface_area, distance_centre, s<span class="op">=</span><span class="dv">120</span>, c<span class="op">=</span><span class="st">'royalblue'</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>(labels):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    plt.text(surface_area[i]<span class="op">+</span><span class="dv">1</span>, distance_centre[i], label, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Surface Area (sq m)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Distance to Centre (km)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Properties by Surface Area and Distance to Centre'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>We could try building a model that ignores neighbourhood, and uses “Distance to the Centre” as a proxy. This is not a bad idea, but a lot of information is <strong>lost</strong> in the process. And what is the centre of Berlin anyway?</p>
 <p>How would models handle these categorical variables like neighbourhoods? This is what this chapter is about.</p>
 <section id="types-of-categorical" class="level2" data-number="16.1">
@@ -618,33 +561,6 @@ Figure code
 <figcaption>Properties in 3D: Surface Area, Distance to Centre, Encoded Energy Class</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>surface_area <span class="op">=</span> [<span class="dv">85</span>, <span class="dv">120</span>, <span class="dv">95</span>, <span class="dv">70</span>, <span class="dv">110</span>, <span class="dv">60</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>distance_centre <span class="op">=</span> [<span class="fl">4.2</span>, <span class="fl">2.5</span>, <span class="fl">6.1</span>, <span class="fl">3.8</span>, <span class="fl">1.2</span>, <span class="fl">5.0</span>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>energy_rating <span class="op">=</span> [<span class="st">'B'</span>, <span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>, <span class="st">'B'</span>, <span class="st">'F'</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>encoded_energy <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">6</span>]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>, <span class="st">'D'</span>, <span class="st">'E'</span>, <span class="st">'F'</span>]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ax.scatter(surface_area, distance_centre, encoded_energy, s<span class="op">=</span><span class="dv">120</span>, c<span class="op">=</span><span class="st">'royalblue'</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, label <span class="kw">in</span> <span class="bu">enumerate</span>(labels):</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ax.text(surface_area[i]<span class="op">+</span><span class="dv">1</span>, distance_centre[i], encoded_energy[i], label, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Surface Area (sq m)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Distance to Centre (km)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Encoded Energy Class'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Properties in 3D: Surface, Distance, Energy'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'figures/3d_surface_distance_energy.png'</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>If the notion of space is not fully clear, refer to the <a href="../chapters/data-space.html" target="_blank">chapter on data space</a>.</p>
 </section>
 <section id="nominal-variables" class="level2" data-number="16.3">
@@ -775,10 +691,18 @@ Figure code
 <p>What happened there? The original neighbourhood column disappeared, and was replaced by three columns containing either 1 or 0.</p>
 <p>One-Hot Encoding converts a categorical variable into a list of <strong>binary columns</strong>, indicating whether or not the property <strong>belongs</strong> to a category. The advantage of this method is that it assumes no order.</p>
 <p>A drawback of this approach is that it can create <strong>many columns</strong>. Imagine that you want to apply the same method to the street name. You may end up with <strong>thousands of columns</strong>. For mathematical reasons we will not go into, this can be an issue for Machine Learning algorithms. This is sometimes referred to as <strong>the curse of dimensionality</strong>. If you want to develop a quick intuition of why, just remember that a lot of strange things happen in a space with many dimensions.</p>
-<details>
-<summary>
-One-Hot Encoding in practice
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>One-Hot Encoding in practice
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>In practice, One-Hot Encoding converts a categorical variable with <span class="math inline">\(N\)</span> distinct values into <span class="math inline">\(N-1\)</span> binary columns. Why do we remove one?</p>
 <p>In statistics and Machine Learning, many issues arise when the features of a dataset are <strong>perfectly correlated</strong>. To avoid this, One-Hot Encoding drops one of the binary columns.</p>
 <p>Going back to the example with three neighbourhood values (Kreuzberg, Charlottenburg and Neukölln), the processed dataset would look like this:</p>
@@ -845,7 +769,9 @@ One-Hot Encoding in practice
 </tbody>
 </table>
 <p>Having both Kreuzberg and Charlottenburg as 0 would mean that the property is in Neukölln.</p>
-</details>
+</div>
+</div>
+</div>
 <p>One-Hot Encoding solves the categorical variable problem for variables with <strong>few categories</strong>. How could we encode categorical variables like street name? Ignoring these variables with many distinct values is one possibility. However, in the example of property pricing, the street name could carry some relevant information. The next section will explore one idea.</p>
 </section>
 </section>
@@ -981,12 +907,22 @@ One-Hot Encoding in practice
 </table>
 <p>This way, a lot of the price relevant information of the street name is preserved. The main advantage of this method is that it can deal with categorical variables with many values <strong>without creating too many dimensions</strong>.</p>
 <p>A possible drawback of this method is that if there are street names for which there is only one or a few properties, the average would only be the price of the <strong>single property on this street</strong>. There are smart ways to deal with these cases, though they are beyond the scope of this book.</p>
-<details>
-<summary>
-If you are curious
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>If you are curious
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the <strong>global average</strong> instead of the average for this street name.</p>
-</details>
+</div>
+</div>
+</div>
 <p>This averaging process can also be used in the binary classification context. The average of the target variable for a given categorical value could be the average of 0’s and 1’s of the target label (i.e., negatives and positives).</p>
 </section>
 <section id="information-leakage" class="level2" data-number="16.5">

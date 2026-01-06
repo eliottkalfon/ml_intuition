@@ -476,10 +476,10 @@ $\text{Recall} = \frac{48}{48 + 2} = \frac{48}{50} = 96\%$
 
 For Model B:
 
-- TP = 50  
-- TN = 30  
-- FP = 20  
-- FN = 0  
+- TP = 50
+- TN = 30
+- FP = 20
+- FN = 0
 
 $\text{Precision} = \frac{50}{50 + 20} = \frac{50}{70} \approx 71\%$
 

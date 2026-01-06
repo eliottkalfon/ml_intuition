@@ -518,10 +518,18 @@ Assistant: 7 x 2 = 14</code></pre>
 <li>It is more robust to variations of individual helpfulness scales</li>
 </ul>
 <p>During training, the model would learn to generate more helpful output. This is called <strong>Reinforcement Learning from Human Feedback</strong> (RLHF), the last building block of today’s GenAI models.</p>
-<details>
-<summary>
-Beyond human pairwise ranking
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Beyond human pairwise ranking
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Once we gather enough examples of human pairwise assessments, we can train a model to predict the winner of two candidate suggestions.</p>
 <p>In doing so, we get back to the supervised learning territory.</p>
 <p><span class="math display">\[
@@ -529,7 +537,9 @@ Beyond human pairwise ranking
 \]</span></p>
 <p>The input here would be the two candidate suggestions, and the prediction would be the winning prediction (<span class="math inline">\(0\)</span> for the first and <span class="math inline">\(1\)</span> for the second). The training data is all the candidate suggestions and human assessments collected in the process described above.</p>
 <p>However, this is not a <strong>tabular</strong> Machine Learning problem. The candidate suggestions are two variable-length sequences of text. This is part of Natural Language Processing, a fascinating area of research.</p>
-</details>
+</div>
+</div>
+</div>
 </section>
 <section id="final-thoughts" class="level2" data-number="22.5">
 <h2 data-number="22.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">22.5</span> Final Thoughts</h2>

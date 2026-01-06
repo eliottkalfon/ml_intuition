@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -757,10 +722,18 @@ window.Quarto = {
 <section id="imputation-by-the-median" class="level4" data-number="18.1.4.3">
 <h4 data-number="18.1.4.3" class="anchored" data-anchor-id="imputation-by-the-median"><span class="header-section-number">18.1.4.3</span> Imputation by the Median</h4>
 <p>The <strong>median</strong> could also be a good choice of substitute value for imputation. The median of a series is the <strong>middle number</strong> in a sorted list. Taking the list: <span class="math inline">\([2,3,4,5,7,9,50]\)</span> as example, the median is <span class="math inline">\(5\)</span>. In other words, it is the value such that at least 50% of the values are inferior or equal to. One advantage of the median is that it is not sensitive to outliers.</p>
-<details>
-<summary>
-Mean, median and outliers
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Mean, median and outliers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>An <strong>outlier</strong> is a data point that is very different to the others</p>
 <p>Considering the following series:</p>
 <p><span class="math inline">\([2,3,4,5,7,9,50]\)</span></p>
@@ -770,29 +743,6 @@ Mean, median and outliers
 <figcaption>Series with outlier</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>series1 <span class="op">=</span> np.array([<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">50</span>])</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sort_idx <span class="op">=</span> np.argsort(series1)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>areas_sorted <span class="op">=</span> series1[sort_idx]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.5</span>))</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'grey'</span>, linewidth<span class="op">=</span><span class="dv">1</span>, zorder<span class="op">=</span><span class="dv">1</span>)  <span class="co"># horizontal line</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.scatter(areas_sorted, np.zeros_like(areas_sorted), s<span class="op">=</span><span class="dv">200</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.yticks([])</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Series with Outlier'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, axis<span class="op">=</span><span class="st">'x'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>The point at <span class="math inline">\(50\)</span> is an outlier of this distribution, as it is very far from the others. The mean of the series is affected by this number:</p>
 <div id="exr-outlier" class="exercise theorem">
 <p><span class="theorem-title"><strong>Exercise 18.2</strong></span> Calculate the mean and median of this series. Show that the mean is <span class="math inline">\(11.43\)</span>, and that the median is <span class="math inline">\(5\)</span>.</p>
@@ -801,7 +751,9 @@ Figure code
 <p><span class="theorem-title"><strong>Exercise 18.3</strong></span> Show that after removing the item <span class="math inline">\(50\)</span>, the mean is <span class="math inline">\(5.0\)</span>, and the median is <span class="math inline">\(4.5\)</span>.</p>
 </div>
 <p>As you may have observed, the mean varies widely, whereas the median remains stable.</p>
-</details>
+</div>
+</div>
+</div>
 <div id="exr-odd-median" class="exercise theorem">
 <p><span class="theorem-title"><strong>Exercise 18.4</strong></span> Find the median of the following series:</p>
 <ul>
@@ -937,32 +889,22 @@ Figure code
 <figcaption>Temperature time series with missing values</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">12</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> [<span class="fl">18.0</span>, <span class="fl">18.5</span>, <span class="fl">19.1</span>, <span class="fl">20.0</span>, <span class="fl">20.8</span>, np.nan, <span class="fl">22.1</span>, <span class="fl">22.8</span>, <span class="fl">23.5</span>, np.nan, <span class="fl">26.2</span>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.plot(time, temp, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'Temperature'</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Temperature Time Series with Missing Values'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<details>
-<summary>
-But what is time?
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>But what is time?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>Time can be defined as the continuous and apparently irreversible progress of existence. Just like “truth” or “space”, the definitions of the foundational aspects of experience can sometimes be disappointing.</p>
-</details>
+</div>
+</div>
+</div>
 <section id="using-the-mean-and-median" class="level5" data-number="18.1.4.4.1">
 <h5 data-number="18.1.4.4.1" class="anchored" data-anchor-id="using-the-mean-and-median"><span class="header-section-number">18.1.4.4.1</span> Using the Mean and Median</h5>
 <p>Imputing null values with the mean and median could lead to some unintuitive results.</p>
@@ -1029,29 +971,6 @@ But what is time?
 <figcaption>Imputation of missing values by mean</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">12</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> [<span class="fl">18.0</span>, <span class="fl">18.5</span>, <span class="fl">19.1</span>, <span class="fl">20.0</span>, <span class="fl">20.8</span>, np.nan, <span class="fl">22.1</span>, <span class="fl">22.8</span>, <span class="fl">23.5</span>, np.nan, <span class="fl">26.2</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mean_temp <span class="op">=</span> np.nanmean(temp)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>temp_mean <span class="op">=</span> [v <span class="cf">if</span> <span class="kw">not</span> np.isnan(v) <span class="cf">else</span> mean_temp <span class="cf">for</span> v <span class="kw">in</span> temp]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.plot(time, temp_mean, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="ss">f'Imputed by Mean (</span><span class="sc">{</span>mean_temp<span class="sc">:.2f}</span><span class="ss">°C)'</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Imputation by Mean'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<p>As you can see, the mean imputation works very well for the observation 6. However, observation 10 is not imputed in a realistic way and introduces a jump in the series.</p>
 </section>
 <section id="alternative-methods" class="level5" data-number="18.1.4.4.2">
 <h5 data-number="18.1.4.4.2" class="anchored" data-anchor-id="alternative-methods"><span class="header-section-number">18.1.4.4.2</span> Alternative Methods</h5>
@@ -1062,29 +981,6 @@ Figure code
 <figcaption>Imputation by previous value</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">12</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> [<span class="fl">18.0</span>, <span class="fl">18.5</span>, <span class="fl">19.1</span>, <span class="fl">20.0</span>, <span class="fl">20.8</span>, np.nan, <span class="fl">22.1</span>, <span class="fl">22.8</span>, <span class="fl">23.5</span>, np.nan, <span class="fl">26.2</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>temp_series <span class="op">=</span> pd.Series(temp)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>temp_ffill <span class="op">=</span> temp_series.ffill()</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.plot(time, temp_ffill, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'Imputed by Previous'</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Imputation by Previous Value'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>The series looks more natural than with mean-imputation. Still, we can do better.</p>
 <p>Another approach is to impute the missing values by computing the average of the two neighboring values. This method, often called <strong>linear interpolation</strong>, is particularly useful for data with a clear trend, as it smoothly connects the known data points.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -1093,30 +989,6 @@ Figure code
 <figcaption>Imputation by neighbours</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>time <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">12</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> [<span class="fl">18.0</span>, <span class="fl">18.5</span>, <span class="fl">19.1</span>, <span class="fl">20.0</span>, <span class="fl">20.8</span>, np.nan, <span class="fl">22.1</span>, <span class="fl">22.8</span>, <span class="fl">23.5</span>, np.nan, <span class="fl">26.2</span>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>temp_neigh <span class="op">=</span> temp.copy()</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(temp_neigh)<span class="op">-</span><span class="dv">1</span>):</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.isnan(temp_neigh[i]):</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        temp_neigh[i] <span class="op">=</span> (temp_neigh[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> temp_neigh[i<span class="op">+</span><span class="dv">1</span>]) <span class="op">/</span> <span class="dv">2</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.plot(time, temp_neigh, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'Imputed by Neighbours'</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Temperature (°C)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Imputation by Neighbouring Values'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>That looks more like it!</p>
 </section>
 </section>

@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -440,63 +405,6 @@ window.Quarto = {
 <figcaption>First split</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>benign_center <span class="op">=</span> [<span class="dv">80</span>, <span class="dv">700</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>malignant_center <span class="op">=</span> [<span class="dv">110</span>, <span class="dv">1200</span>]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>X_benign, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>X_malignant, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>benign_std <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">120</span>]</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>malignant_std <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">300</span>]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>X_benign <span class="op">=</span> X_benign <span class="op">*</span> benign_std <span class="op">+</span> benign_center</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>X_malignant <span class="op">=</span> X_malignant <span class="op">*</span> malignant_std <span class="op">+</span> malignant_center</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Stack data and create labels</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.vstack([X_benign, X_malignant])</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">0</span>]<span class="op">*</span>n_samples <span class="op">+</span> [<span class="dv">1</span>]<span class="op">*</span>n_samples)  <span class="co"># 0: Benign, 1: Malignant</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a decision tree with depth=1 (stump)</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>tree.fit(X, y)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Get split info</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'Perimeter Mean (µm)'</span>, <span class="st">'Area Mean (µm²)'</span>]</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>split_feature <span class="op">=</span> tree.tree_.feature[<span class="dv">0</span>] </span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>split_threshold <span class="op">=</span> tree.tree_.threshold[<span class="dv">0</span>]</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"First split: </span><span class="sc">{</span>feature_names[split_feature]<span class="sc">}</span><span class="ss"> &lt; </span><span class="sc">{</span>split_threshold<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">6</span>))</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_benign[:,<span class="dv">0</span>], X_benign[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Benign'</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_malignant[:,<span class="dv">0</span>], X_malignant[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Malignant'</span>)</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the split</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> split_feature <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    plt.axvline(split_threshold, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split'</span>)</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> split_feature <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    plt.axhline(split_threshold, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split'</span>)</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Perimeter Mean (µm)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Area Mean (µm²)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Tumours: Perimeter Mean vs Area Mean'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>plt.legend(fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/example_first_split.png"</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>For each of the new groups, we can find the <strong>best splits</strong>, apply them, and <strong>create two new groups</strong>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -504,129 +412,20 @@ Figure code
 <figcaption>All splits</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>benign_center <span class="op">=</span> [<span class="dv">80</span>, <span class="dv">700</span>]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>malignant_center <span class="op">=</span> [<span class="dv">110</span>, <span class="dv">1200</span>]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X_benign, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>X_malignant, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>benign_std <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">120</span>]</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>malignant_std <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">300</span>]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>X_benign <span class="op">=</span> X_benign <span class="op">*</span> benign_std <span class="op">+</span> benign_center</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>X_malignant <span class="op">=</span> X_malignant <span class="op">*</span> malignant_std <span class="op">+</span> malignant_center</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Stack data and create labels</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.vstack([X_benign, X_malignant])</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">0</span>]<span class="op">*</span>n_samples <span class="op">+</span> [<span class="dv">1</span>]<span class="op">*</span>n_samples)  <span class="co"># 0: Benign, 1: Malignant</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a decision tree (no max_depth limit)</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>,max_depth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>tree.fit(X, y)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'Perimeter Mean (µm)'</span>, <span class="st">'Area Mean (µm²)'</span>]</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Helper function to recursively collect all splits</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> collect_splits(tree, node_id<span class="op">=</span><span class="dv">0</span>, path<span class="op">=</span>[], splits<span class="op">=</span>[]):</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    feature <span class="op">=</span> tree.tree_.feature[node_id]</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    threshold <span class="op">=</span> tree.tree_.threshold[node_id]</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> feature <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Save the split with its path (list of (feature, threshold, direction))</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        splits.append((path.copy(), feature, threshold))</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Left child: feature &lt;= threshold</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        collect_splits(tree, tree.tree_.children_left[node_id], path <span class="op">+</span> [(feature, threshold, <span class="st">'left'</span>)], splits)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Right child: feature &gt; threshold</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        collect_splits(tree, tree.tree_.children_right[node_id], path <span class="op">+</span> [(feature, threshold, <span class="st">'right'</span>)], splits)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> splits</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>splits <span class="op">=</span> collect_splits(tree, <span class="dv">0</span>, [], [])</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co"># For plotting, get the data limits</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>x0min, x0max <span class="op">=</span> X[:,<span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">5</span>, X[:,<span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">5</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>x1min, x1max <span class="op">=</span> X[:,<span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">50</span>, X[:,<span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">50</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>n_splits <span class="op">=</span> <span class="bu">len</span>(splits)</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, n_splits, figsize<span class="op">=</span>(<span class="dv">6</span><span class="op">*</span>n_splits, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> n_splits <span class="op">==</span> <span class="dv">1</span>:</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> [axes]  <span class="co"># Make iterable</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_splits):</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[i]</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X_benign[:,<span class="dv">0</span>], X_benign[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Benign'</span> <span class="cf">if</span> i<span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span>)</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    ax.scatter(X_malignant[:,<span class="dv">0</span>], X_malignant[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Malignant'</span> <span class="cf">if</span> i<span class="op">==</span><span class="dv">0</span> <span class="cf">else</span> <span class="st">""</span>)</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw all previous splits as black lines, in their respective regions</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i):</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        path, feat, thresh <span class="op">=</span> splits[j]</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>        xlims <span class="op">=</span> [x0min, x0max]</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        ylims <span class="op">=</span> [x1min, x1max]</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (pf, pt, dirn) <span class="kw">in</span> path:</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> pf <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dirn <span class="op">==</span> <span class="st">'left'</span>:</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>                    xlims[<span class="dv">1</span>] <span class="op">=</span> <span class="bu">min</span>(xlims[<span class="dv">1</span>], pt)</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>                    xlims[<span class="dv">0</span>] <span class="op">=</span> <span class="bu">max</span>(xlims[<span class="dv">0</span>], pt)</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dirn <span class="op">==</span> <span class="st">'left'</span>:</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>                    ylims[<span class="dv">1</span>] <span class="op">=</span> <span class="bu">min</span>(ylims[<span class="dv">1</span>], pt)</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>                    ylims[<span class="dv">0</span>] <span class="op">=</span> <span class="bu">max</span>(ylims[<span class="dv">0</span>], pt)</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> feat <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>            ax.plot([thresh, thresh], ylims, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>            ax.plot(xlims, [thresh, thresh], color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Draw current split as green dashed line, in its region</span></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    path, feat, thresh <span class="op">=</span> splits[i]</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    xlims <span class="op">=</span> [x0min, x0max]</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    ylims <span class="op">=</span> [x1min, x1max]</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (pf, pt, dirn) <span class="kw">in</span> path:</span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pf <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> dirn <span class="op">==</span> <span class="st">'left'</span>:</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>                xlims[<span class="dv">1</span>] <span class="op">=</span> <span class="bu">min</span>(xlims[<span class="dv">1</span>], pt)</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>                xlims[<span class="dv">0</span>] <span class="op">=</span> <span class="bu">max</span>(xlims[<span class="dv">0</span>], pt)</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> dirn <span class="op">==</span> <span class="st">'left'</span>:</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>                ylims[<span class="dv">1</span>] <span class="op">=</span> <span class="bu">min</span>(ylims[<span class="dv">1</span>], pt)</span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>                ylims[<span class="dv">0</span>] <span class="op">=</span> <span class="bu">max</span>(ylims[<span class="dv">0</span>], pt)</span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> feat <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>        ax.plot([thresh, thresh], ylims, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span><span class="ss">f'Split </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>feature_names[feat]<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>thresh<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>        ax.plot(xlims, [thresh, thresh], color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span><span class="ss">f'Split </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>feature_names[feat]<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>thresh<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Perimeter Mean (µm)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'Area Mean (µm²)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'Split </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">True</span>)</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    ax.legend(fontsize<span class="op">=</span><span class="dv">12</span>, loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/example_three_splits.png"</span>)</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>We can keep splitting until the subgroups are “pure”; i.e., there are only observations belonging to the same class.</p>
 <p>In practice, other constraints are applied. In general it makes sense to limit the <strong>depth</strong> of a tree to make the size of the resulting model manageable. These simple models generally have stronger generalisation abilities.</p>
-<details>
-<summary>
-What is tree depth?
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>What is tree depth?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>The depth of a tree is the <strong>distance</strong> from the root node, here the first split, to the leaf node, here the last node, responsible for assigning the prediction.</p>
 <p>What is the depth of the tree built in the previous examples?</p>
 <div class="quarto-figure quarto-figure-center">
@@ -636,7 +435,9 @@ What is tree depth?
 </figure>
 </div>
 <p>It is two, as there are two edges (connections) on the path from the root node (top) to the leaf node (bottom).</p>
-</details>
+</div>
+</div>
+</div>
 </section>
 <section id="gini-impurity-coefficient" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="gini-impurity-coefficient"><span class="header-section-number">12.2</span> Gini Impurity Coefficient</h2>
@@ -851,92 +652,6 @@ P(\text{picking items of different class}) &amp;= P(\text{malignant then benign}
 <figcaption>Trying all combinations and picking the first split achieving the minimum Gini Impurity Coefficient</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Data generation ---</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>x1_plus <span class="op">=</span> np.random.uniform(<span class="fl">0.5</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>x2_plus <span class="op">=</span> np.random.uniform(<span class="fl">1.0</span>, <span class="fl">3.5</span>, <span class="dv">10</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>x1_circle <span class="op">=</span> np.random.uniform(<span class="fl">2.2</span>, <span class="fl">3.8</span>, <span class="dv">12</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>x2_circle <span class="op">=</span> np.random.uniform(<span class="fl">1.5</span>, <span class="fl">3.8</span>, <span class="dv">12</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>X_plus <span class="op">=</span> np.column_stack([x1_plus, x2_plus])</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>X_circle <span class="op">=</span> np.column_stack([x1_circle, x2_circle])</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.vstack([X_plus, X_circle])</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">1</span>]<span class="op">*</span><span class="bu">len</span>(X_plus) <span class="op">+</span> [<span class="dv">0</span>]<span class="op">*</span><span class="bu">len</span>(X_circle))  <span class="co"># 1: x, 0: o</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gini impurity for a split ---</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gini_impurity(y_left, y_right):</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gini(y):</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(y) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> np.mean(y)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(y_left) <span class="op">+</span> <span class="bu">len</span>(y_right)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="bu">len</span>(y_left) <span class="op">*</span> gini(y_left) <span class="op">+</span> <span class="bu">len</span>(y_right) <span class="op">*</span> gini(y_right)) <span class="op">/</span> n</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gini vs x1 threshold ---</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>fidx <span class="op">=</span> <span class="dv">0</span>  <span class="co"># x1</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>fmin, fmax <span class="op">=</span> X[:, fidx].<span class="bu">min</span>(), X[:, fidx].<span class="bu">max</span>()</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.linspace(fmin, fmax, <span class="dv">300</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>ginis <span class="op">=</span> []</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> thresholds:</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    left <span class="op">=</span> y[X[:, fidx] <span class="op">&lt;=</span> t]</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    right <span class="op">=</span> y[X[:, fidx] <span class="op">&gt;</span> t]</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    gini <span class="op">=</span> gini_impurity(left, right)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    ginis.append(gini)</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>ginis <span class="op">=</span> np.array(ginis)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>min_idx <span class="op">=</span> np.argmin(ginis)</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>min_thresh <span class="op">=</span> thresholds[min_idx]</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>min_gini <span class="op">=</span> ginis[min_idx]</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot ---</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">10</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Top: Data scatter</span></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>ax1.set_xticks(np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>ax1.set_xlim(<span class="dv">0</span>, <span class="fl">4.5</span>)</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>ax1.set_ylim(<span class="dv">0</span>, <span class="fl">4.5</span>)</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'$x_2$'</span>, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>ax1.scatter(x1_plus, x2_plus, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">120</span>, linewidths<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Class x'</span>)</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>ax1.scatter(x1_circle, x2_circle, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Class O'</span>)</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Green split line at best threshold</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>ax1.axvline(min_thresh, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split at $x_1$=</span><span class="sc">{</span>min_thresh<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Decision Trees: Splitting Data'</span>, fontsize<span class="op">=</span><span class="dv">18</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate legend</span></span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> ax1.get_legend_handles_labels()</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>by_label <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(labels, handles))</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>ax1.legend(by_label.values(), by_label.keys(), fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="co"># Bottom: Gini vs x1</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>ax2.plot(thresholds, ginis, color<span class="op">=</span><span class="st">'blue'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>ax2.scatter([min_thresh], [min_gini], color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">80</span>, zorder<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span><span class="st">'Minimum Gini'</span>)</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>ax2.axvline(min_thresh, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split at $x_1$=</span><span class="sc">{</span>min_thresh<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Gini impurity'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'Gini vs. $x_1$ Split'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>)</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/split_and_gini_vs_x1.png"</span>)</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>From the value 1.76, the split <strong>perfectly separates</strong> the two data classes, achieving a Gini Impurity Coefficient of 0.</p>
 <p>But what happens when data is <strong>not</strong> fully separable? For these cases, the Gini Impurity Coefficient will not reach 0. Still, the split that achieves the lowers Gini Impurity Coefficient will be selected.</p>
 <p>This splitting trial and error can be visualised with the tumour diagnosis dataset:</p>
@@ -948,106 +663,6 @@ Figure code
 <figcaption>Trying different split values for Perimeter Mean</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Data generation ---</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>benign_center <span class="op">=</span> [<span class="dv">80</span>, <span class="dv">700</span>]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>malignant_center <span class="op">=</span> [<span class="dv">110</span>, <span class="dv">1200</span>]</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>X_benign, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>X_malignant, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>benign_std <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">120</span>]</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>malignant_std <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">300</span>]</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>X_benign <span class="op">=</span> X_benign <span class="op">*</span> benign_std <span class="op">+</span> benign_center</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>X_malignant <span class="op">=</span> X_malignant <span class="op">*</span> malignant_std <span class="op">+</span> malignant_center</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.vstack([X_benign, X_malignant])</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">0</span>]<span class="op">*</span>n_samples <span class="op">+</span> [<span class="dv">1</span>]<span class="op">*</span>n_samples)  <span class="co"># 0: Benign, 1: Malignant</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'Perimeter Mean (µm)'</span>, <span class="st">'Area Mean (µm²)'</span>]</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Fit tree ---</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>tree.fit(X, y)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gini impurity for a split ---</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gini_impurity(y_left, y_right):</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gini(y):</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(y) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> np.mean(y)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(y_left) <span class="op">+</span> <span class="bu">len</span>(y_right)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="bu">len</span>(y_left) <span class="op">*</span> gini(y_left) <span class="op">+</span> <span class="bu">len</span>(y_right) <span class="op">*</span> gini(y_right)) <span class="op">/</span> n</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gini vs Perimeter Mean ---</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>fidx <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Perimeter Mean</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>fmin, fmax <span class="op">=</span> X[:, fidx].<span class="bu">min</span>(), X[:, fidx].<span class="bu">max</span>()</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.linspace(fmin, fmax, <span class="dv">300</span>)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>ginis <span class="op">=</span> []</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> thresholds:</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    left <span class="op">=</span> y[X[:, fidx] <span class="op">&lt;=</span> t]</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    right <span class="op">=</span> y[X[:, fidx] <span class="op">&gt;</span> t]</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    gini <span class="op">=</span> gini_impurity(left, right)</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    ginis.append(gini)</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>ginis <span class="op">=</span> np.array(ginis)</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>min_idx <span class="op">=</span> np.argmin(ginis)</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>min_thresh <span class="op">=</span> thresholds[min_idx]</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>min_gini <span class="op">=</span> ginis[min_idx]</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Actual split(s) used by the tree for Perimeter Mean</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>splits <span class="op">=</span> []</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>tree_ <span class="op">=</span> tree.tree_</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> <span class="bu">range</span>(tree_.node_count):</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tree_.feature[node] <span class="op">==</span> fidx:</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>        splits.append(tree_.threshold[node])</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot ---</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">8</span>), sharex<span class="op">=</span><span class="va">True</span>, gridspec_kw<span class="op">=</span>{<span class="st">'height_ratios'</span>: [<span class="dv">2</span>, <span class="dv">1</span>]})</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Top: Data scatter</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>ax1.scatter(X_benign[:,<span class="dv">0</span>], X_benign[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Benign'</span>)</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>ax1.scatter(X_malignant[:,<span class="dv">0</span>], X_malignant[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Malignant'</span>)</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Area Mean (µm²)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Tumours: Perimeter Mean vs Area Mean'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>ax1.legend(fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>)</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Green split line</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>ax1.axvline(min_thresh, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split at </span><span class="sc">{</span>min_thresh<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate legend</span></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> ax1.get_legend_handles_labels()</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>by_label <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(labels, handles))</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>ax1.legend(by_label.values(), by_label.keys(), fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Bottom: Gini vs Perimeter Mean</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>ax2.plot(thresholds, ginis, color<span class="op">=</span><span class="st">'blue'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>ax2.scatter([min_thresh], [min_gini], color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">80</span>, zorder<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span><span class="st">'Minimum Gini'</span>)</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>ax2.axvline(min_thresh, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split at </span><span class="sc">{</span>min_thresh<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Perimeter Mean (µm)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Gini impurity'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'Gini vs. Perimeter Mean'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>)</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate legend</span></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> ax2.get_legend_handles_labels()</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>by_label <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(labels, handles))</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>ax2.legend(by_label.values(), by_label.keys(), fontsize<span class="op">=</span><span class="dv">12</span>, loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/scatter_and_gini_vs_perimeter.png"</span>)</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>This Gini Impurity Coefficient reaches a minimum of approximately 15.2 at a split value of about 96.6.</p>
 <p>The same could be done with the Mean Area of the cell nuclei:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -1056,106 +671,6 @@ Figure code
 <figcaption>Trying different split values for Perimeter Mean</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Data generation ---</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>benign_center <span class="op">=</span> [<span class="dv">80</span>, <span class="dv">700</span>]</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>malignant_center <span class="op">=</span> [<span class="dv">110</span>, <span class="dv">1200</span>]</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">70</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>X_benign, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>X_malignant, _ <span class="op">=</span> make_blobs(n_samples<span class="op">=</span>n_samples, centers<span class="op">=</span>[(<span class="dv">0</span>, <span class="dv">0</span>)], cluster_std<span class="op">=</span><span class="dv">1</span>, random_state<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>benign_std <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">120</span>]</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>malignant_std <span class="op">=</span> [<span class="dv">12</span>, <span class="dv">300</span>]</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>X_benign <span class="op">=</span> X_benign <span class="op">*</span> benign_std <span class="op">+</span> benign_center</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>X_malignant <span class="op">=</span> X_malignant <span class="op">*</span> malignant_std <span class="op">+</span> malignant_center</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.vstack([X_benign, X_malignant])</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">0</span>]<span class="op">*</span>n_samples <span class="op">+</span> [<span class="dv">1</span>]<span class="op">*</span>n_samples)  <span class="co"># 0: Benign, 1: Malignant</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> [<span class="st">'Perimeter Mean (µm)'</span>, <span class="st">'Area Mean (µm²)'</span>]</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Fit tree ---</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>, max_depth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>tree.fit(X, y)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gini impurity for a split ---</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gini_impurity(y_left, y_right):</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gini(y):</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(y) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> np.mean(y)</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> p <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(y_left) <span class="op">+</span> <span class="bu">len</span>(y_right)</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="bu">len</span>(y_left) <span class="op">*</span> gini(y_left) <span class="op">+</span> <span class="bu">len</span>(y_right) <span class="op">*</span> gini(y_right)) <span class="op">/</span> n</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Gini vs Perimeter Mean ---</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>fidx <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Perimeter Mean</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>fmin, fmax <span class="op">=</span> X[:, fidx].<span class="bu">min</span>(), X[:, fidx].<span class="bu">max</span>()</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>thresholds <span class="op">=</span> np.linspace(fmin, fmax, <span class="dv">300</span>)</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>ginis <span class="op">=</span> []</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> thresholds:</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    left <span class="op">=</span> y[X[:, fidx] <span class="op">&lt;=</span> t]</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    right <span class="op">=</span> y[X[:, fidx] <span class="op">&gt;</span> t]</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    gini <span class="op">=</span> gini_impurity(left, right)</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    ginis.append(gini)</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>ginis <span class="op">=</span> np.array(ginis)</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>min_idx <span class="op">=</span> np.argmin(ginis)</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>min_thresh <span class="op">=</span> thresholds[min_idx]</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>min_gini <span class="op">=</span> ginis[min_idx]</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Actual split(s) used by the tree for Perimeter Mean</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>splits <span class="op">=</span> []</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>tree_ <span class="op">=</span> tree.tree_</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> <span class="bu">range</span>(tree_.node_count):</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> tree_.feature[node] <span class="op">==</span> fidx:</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>        splits.append(tree_.threshold[node])</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Plot ---</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">8</span>), sharex<span class="op">=</span><span class="va">True</span>, gridspec_kw<span class="op">=</span>{<span class="st">'height_ratios'</span>: [<span class="dv">2</span>, <span class="dv">1</span>]})</span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Top: Data scatter</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>ax1.scatter(X_benign[:,<span class="dv">0</span>], X_benign[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Benign'</span>)</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>ax1.scatter(X_malignant[:,<span class="dv">0</span>], X_malignant[:,<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Malignant'</span>)</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Area Mean (µm²)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Tumours: Perimeter Mean vs Area Mean'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>ax1.legend(fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>)</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Green split line</span></span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>ax1.axvline(min_thresh, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split at </span><span class="sc">{</span>min_thresh<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate legend</span></span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> ax1.get_legend_handles_labels()</span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>by_label <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(labels, handles))</span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>ax1.legend(by_label.values(), by_label.keys(), fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Bottom: Gini vs Perimeter Mean</span></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>ax2.plot(thresholds, ginis, color<span class="op">=</span><span class="st">'blue'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>ax2.scatter([min_thresh], [min_gini], color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">80</span>, zorder<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span><span class="st">'Minimum Gini'</span>)</span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>ax2.axvline(min_thresh, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Split at </span><span class="sc">{</span>min_thresh<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">'Perimeter Mean (µm)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Gini impurity'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'Gini vs. Perimeter Mean'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>ax2.grid(<span class="va">True</span>)</span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>ax2.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="co"># To avoid duplicate legend</span></span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> ax2.get_legend_handles_labels()</span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>by_label <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(labels, handles))</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a>ax2.legend(by_label.values(), by_label.keys(), fontsize<span class="op">=</span><span class="dv">12</span>, loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(h_pad<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/scatter_and_gini_vs_perimeter.png"</span>)</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>The Gini Impurity Coefficient reaches a minimum of approximately 16.5 at a split value of about 885.7.</p>
 <p>The best split is obtained by splitting the data based on Perimeter Mean at 96.6. This process is repeated every time a group is split.</p>
 </section>

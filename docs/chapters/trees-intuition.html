@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -448,43 +413,6 @@ window.Quarto = {
 <figcaption>New observation and example data</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">4.5</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="fl">4.5</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$x_2$'</span>, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>x1_plus <span class="op">=</span> np.random.uniform(<span class="fl">0.5</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>x2_plus <span class="op">=</span> np.random.uniform(<span class="fl">1.0</span>, <span class="fl">3.5</span>, <span class="dv">10</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_plus, x2_plus, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">120</span>, linewidths<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Class x'</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>x1_circle <span class="op">=</span> np.random.uniform(<span class="fl">2.2</span>, <span class="fl">3.8</span>, <span class="dv">12</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>x2_circle <span class="op">=</span> np.random.uniform(<span class="fl">1.5</span>, <span class="fl">3.8</span>, <span class="dv">12</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_circle, x2_circle, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Class o'</span>)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>plt.scatter(<span class="fl">1.3</span>, <span class="dv">2</span>, marker<span class="op">=</span><span class="vs">r'</span><span class="dv">$\m</span><span class="vs">athbf{</span><span class="op">?</span><span class="vs">}</span><span class="dv">$</span><span class="vs">'</span>, color<span class="op">=</span><span class="st">'green'</span>, s<span class="op">=</span><span class="dv">400</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Example Data'</span>, fontsize<span class="op">=</span><span class="dv">18</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/example_data.png"</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>One possibility would be to <strong>split the data at <span class="math inline">\(x_1 = 2\)</span></strong>. Any observation with <span class="math inline">\(x_1\)</span> greater than <span class="math inline">\(2\)</span> would be classified as <span class="math inline">\(\circ\)</span>; the rest would be classified as <span class="math inline">\(\times\)</span>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -492,43 +420,6 @@ Figure code
 <figcaption>Example data with a single split</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(np.arange(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">1</span>))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">4.5</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="fl">4.5</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$x_2$'</span>, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">0</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>x1_plus <span class="op">=</span> np.random.uniform(<span class="fl">0.5</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>x2_plus <span class="op">=</span> np.random.uniform(<span class="fl">1.0</span>, <span class="fl">3.5</span>, <span class="dv">10</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_plus, x2_plus, marker<span class="op">=</span><span class="st">'+'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">120</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>x1_circle <span class="op">=</span> np.random.uniform(<span class="fl">2.2</span>, <span class="fl">3.8</span>, <span class="dv">12</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>x2_circle <span class="op">=</span> np.random.uniform(<span class="fl">1.5</span>, <span class="fl">3.8</span>, <span class="dv">12</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_circle, x2_circle, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Class O'</span>)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="fl">4.5</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Decision Trees: Splitting Data'</span>, fontsize<span class="op">=</span><span class="dv">18</span>, pad<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/split.png"</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <section id="multiple-splits" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="multiple-splits"><span class="header-section-number">11.1</span> Multiple Splits</h2>
 <p>For a more complex case, how would you predict the class of the unknown observation with this training data? How would you split the <span class="math inline">\(\times\)</span> from the <span class="math inline">\(\circ\)</span>?</p>
@@ -538,55 +429,19 @@ Figure code
 <figcaption>A more complex example problem</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(np.arange(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ax.set_yticks(np.arange(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">3.5</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="fl">3.5</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$x_2$'</span>, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>x1_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>x2_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_region1, x2_region1, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Class O'</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>x1_region2 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>x2_region2 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">0.9</span>, <span class="dv">10</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_region2, x2_region2, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Class X'</span>)</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>x1_region3 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>x2_region3 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_region3, x2_region3, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>x1_region4 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>x2_region4 <span class="op">=</span> np.random.uniform(<span class="fl">1.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>ax.scatter(x1_region4, x2_region4, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'More Complex Problem'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>plt.gca().set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/complex_problem.png"</span>)</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>In this example, there is <strong>no single line</strong> that can perfectly split the two groups. In Computer Science, this is also called the <strong>XOR problem</strong>.</p>
-<details>
-<summary>
-XOR Problem
-</summary>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>XOR Problem
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>The XOR (Exclusive Or) Problem refers to a foundational Machine Learning and Computer Science problem in which two classes cannot be separated by any single straight line. It demonstrates <strong>the weaknesses of simple linear models</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -594,36 +449,6 @@ XOR Problem
 <figcaption>XOR Problem: Can you find a single line separating the x from the o?</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([<span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ax.set_yticks([<span class="dv">0</span>, <span class="dv">1</span>])</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># XOR points</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>points <span class="op">=</span> np.array([[<span class="dv">0</span>,<span class="dv">0</span>],[<span class="dv">0</span>,<span class="dv">1</span>],[<span class="dv">1</span>,<span class="dv">0</span>],[<span class="dv">1</span>,<span class="dv">1</span>]])</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>]</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pt, lbl <span class="kw">in</span> <span class="bu">zip</span>(points, labels):</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lbl <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        ax.scatter(pt[<span class="dv">0</span>], pt[<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">120</span>, edgecolor<span class="op">=</span><span class="st">'blue'</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        ax.scatter(pt[<span class="dv">0</span>], pt[<span class="dv">1</span>], marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">120</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'XOR Problem'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/xor_problem.png"</span>)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>The XOR is a logical operation that takes two Boolean (<code>True</code>/<code>False</code> or 1/0) values as inputs and returns 1 (or <code>True</code>) if they are different and 0 or <code>False</code> otherwise. You can see the truth table for this operation below.</p>
 <p><strong>XOR Truth Table</strong></p>
 <table class="caption-top table">
@@ -658,7 +483,9 @@ Figure code
 </tbody>
 </table>
 <p>More information on the XOR problem at <span class="citation" data-cites="xorwiki">(<a href="../references.html#ref-xorwiki" role="doc-biblioref"><span>“Exclusive Or,”</span> n.d.</a>)</span></p>
-</details>
+</div>
+</div>
+</div>
 <p>Instead of splitting the data once, what if you could split the data <strong>multiple times</strong>? An example is shown below:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -666,52 +493,6 @@ Figure code
 <figcaption>Splitting the data multiple times</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>x1_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>x2_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>x1_region2 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>x2_region2 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">0.9</span>, <span class="dv">10</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>x1_region3 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>x2_region3 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>x1_region4 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>x2_region4 <span class="op">=</span> np.random.uniform(<span class="fl">1.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">6</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>splits <span class="op">=</span> [</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'lines'</span>: [([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="fl">3.5</span>])]},</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'lines'</span>: [([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="fl">3.5</span>]), ([<span class="dv">2</span>, <span class="fl">3.5</span>], [<span class="dv">1</span>, <span class="dv">1</span>])]},</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'lines'</span>: [([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="fl">3.5</span>]), ([<span class="dv">2</span>, <span class="fl">3.5</span>], [<span class="dv">1</span>, <span class="dv">1</span>]), ([<span class="dv">0</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">2</span>])]}</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>titles <span class="op">=</span> [<span class="st">'First Split'</span>, <span class="st">'Second Split'</span>, <span class="st">'Third Split'</span>]</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, ax <span class="kw">in</span> <span class="bu">enumerate</span>(axs):</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks(np.arange(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks(np.arange(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="dv">0</span>, <span class="fl">3.5</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="fl">3.5</span>)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    ax.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    ax.scatter(x1_region1, x2_region1, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    ax.scatter(x1_region2, x2_region2, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    ax.scatter(x1_region3, x2_region3, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    ax.scatter(x1_region4, x2_region4, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> splits[i][<span class="st">'lines'</span>]:</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        ax.plot(line[<span class="dv">0</span>], line[<span class="dv">1</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    ax.set_title(titles[i], fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/three_splits.png"</span>)</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </section>
 <section id="from-splits-to-predictions" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="from-splits-to-predictions"><span class="header-section-number">11.2</span> From Splits to Predictions</h2>
@@ -748,47 +529,6 @@ Figure code
 <figcaption>Visualising splits as a Decision Tree</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> graphviz <span class="im">import</span> Digraph</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> Digraph()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, fontsize<span class="op">=</span><span class="st">'16'</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>) <span class="co"># Top to bottom, Helvetica font</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Decision nodes (ovals)</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'ellipse'</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'A'</span>, <span class="st">'x₁ ≥ 2?'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'B'</span>, <span class="st">'x₂ ≥ 1?'</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'C'</span>, <span class="st">'x₂ ≥ 2?'</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Leaf nodes (circles)</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'circle'</span>, style<span class="op">=</span><span class="st">'filled'</span>, fillcolor<span class="op">=</span><span class="st">"#D46363"</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'E'</span>, <span class="st">'x'</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'F'</span>, <span class="st">'x'</span>)</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'circle'</span>, style<span class="op">=</span><span class="st">'filled'</span>, fillcolor<span class="op">=</span><span class="st">"#5B90C4"</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'D'</span>, <span class="st">'o'</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'G'</span>, <span class="st">'o'</span>)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph() <span class="im">as</span> s:</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    s.attr(rank<span class="op">=</span><span class="st">'same'</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'D'</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'E'</span>) </span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'F'</span>) </span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'G'</span>) </span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'D'</span>, <span class="st">'E'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'E'</span>, <span class="st">'F'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'F'</span>, <span class="st">'G'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Edges</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'Yes'</span>)</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'No'</span>)</span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'B'</span>, <span class="st">'D'</span>, <span class="st">'Yes'</span>)</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'C'</span>, <span class="st">'F'</span>, <span class="st">'Yes'</span>)</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'B'</span>, <span class="st">'E'</span>, <span class="st">'No'</span>)</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'C'</span>, <span class="st">'G'</span>, <span class="st">'No'</span>)</span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Render the graph</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>dot.render(<span class="st">'images/trees/tree_example'</span>, <span class="bu">format</span><span class="op">=</span><span class="st">'png'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div id="exr-tree-pred" class="exercise theorem">
 <p><span class="theorem-title"><strong>Exercise 11.2</strong></span> Generate predictions for the following observations by going down the Decision Tree above:</p>
 <ul>
@@ -804,129 +544,6 @@ Figure code
 <figcaption>Decision Tree as a partition of space</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> graphviz <span class="im">import</span> Digraph</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create and render the Graphviz tree with leaf numbers BELOW the node</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>dot <span class="op">=</span> Digraph()</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>dot.attr(rankdir<span class="op">=</span><span class="st">'TB'</span>, fontsize<span class="op">=</span><span class="st">'16'</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'ellipse'</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'A'</span>, <span class="st">'x₁ ≥ 2?'</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'B'</span>, <span class="st">'x₂ ≥ 1?'</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'C'</span>, <span class="st">'x₂ ≥ 2?'</span>)</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Leaves: label is just the class, number is a separate node below</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'circle'</span>, style<span class="op">=</span><span class="st">'filled'</span>, fillcolor<span class="op">=</span><span class="st">"#D46363"</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'E'</span>, <span class="st">'x'</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'F'</span>, <span class="st">'x'</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'circle'</span>, style<span class="op">=</span><span class="st">'filled'</span>, fillcolor<span class="op">=</span><span class="st">"#5B90C4"</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'D'</span>, <span class="st">'o'</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'G'</span>, <span class="st">'o'</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Add invisible nodes for numbers below each leaf</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>dot.attr(<span class="st">'node'</span>, shape<span class="op">=</span><span class="st">'plaintext'</span>, fontname<span class="op">=</span><span class="st">'Helvetica'</span>, fontsize<span class="op">=</span><span class="st">'24'</span>, fillcolor<span class="op">=</span><span class="st">'white'</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'E_num'</span>, <span class="st">'2'</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'F_num'</span>, <span class="st">'3'</span>)</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'D_num'</span>, <span class="st">'1'</span>)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>dot.node(<span class="st">'G_num'</span>, <span class="st">'4'</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Position numbers below leaves using invisible edges</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'E'</span>, <span class="st">'E_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>, weight<span class="op">=</span><span class="st">'100'</span>)</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'F'</span>, <span class="st">'F_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>, weight<span class="op">=</span><span class="st">'100'</span>)</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'D'</span>, <span class="st">'D_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>, weight<span class="op">=</span><span class="st">'100'</span>)</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'G'</span>, <span class="st">'G_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>, weight<span class="op">=</span><span class="st">'100'</span>)</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph() <span class="im">as</span> s:</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    s.attr(rank<span class="op">=</span><span class="st">'same'</span>)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'D'</span>)</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'E'</span>) </span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'F'</span>) </span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'G'</span>) </span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'D'</span>, <span class="st">'E'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'E'</span>, <span class="st">'F'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'F'</span>, <span class="st">'G'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> dot.subgraph() <span class="im">as</span> s:</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>    s.attr(rank<span class="op">=</span><span class="st">'same'</span>)</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'D_num'</span>)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'E_num'</span>)</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'F_num'</span>)</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    s.node(<span class="st">'G_num'</span>)</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'D_num'</span>, <span class="st">'E_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'E_num'</span>, <span class="st">'F_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>    s.edge(<span class="st">'F_num'</span>, <span class="st">'G_num'</span>, style<span class="op">=</span><span class="st">'invis'</span>)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'Yes'</span>)</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'No'</span>)</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'B'</span>, <span class="st">'D'</span>, <span class="st">'Yes'</span>)</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'B'</span>, <span class="st">'E'</span>, <span class="st">'No'</span>)</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'C'</span>, <span class="st">'F'</span>, <span class="st">'Yes'</span>)</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>dot.edge(<span class="st">'C'</span>, <span class="st">'G'</span>, <span class="st">'No'</span>)</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>tree_img_name <span class="op">=</span> <span class="st">'images/trees/tree_numbered'</span></span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>dot.render(tree_img_name, <span class="bu">format</span><span class="op">=</span><span class="st">'png'</span>, cleanup<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">8</span>))</span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Tree plot ---</span></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>ax0 <span class="op">=</span> axes[<span class="dv">0</span>]</span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a>ax0.axis(<span class="st">'off'</span>)</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>tree_img <span class="op">=</span> Image.<span class="bu">open</span>(tree_img_name <span class="op">+</span> <span class="st">".png"</span>)</span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>ax0.imshow(tree_img)</span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>ax0.set_title(<span class="st">'Decision Tree'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Partition plot ---</span></span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> axes[<span class="dv">1</span>]</span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>ax1.set_xticks(np.arange(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(np.arange(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>ax1.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, color<span class="op">=</span><span class="st">'lightgrey'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>ax1.set_xlim(<span class="dv">0</span>, <span class="fl">3.5</span>)</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>ax1.set_ylim(<span class="dv">0</span>, <span class="fl">3.5</span>)</span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'$x_2$'</span>, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>ax1.tick_params(axis<span class="op">=</span><span class="st">'both'</span>, which<span class="op">=</span><span class="st">'major'</span>, labelsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>x1_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>x2_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>ax1.scatter(x1_region1, x2_region1, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Class O'</span>)</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>x1_region2 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>x2_region2 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">0.9</span>, <span class="dv">10</span>)</span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a>ax1.scatter(x1_region2, x2_region2, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">'Class X'</span>)</span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>x1_region3 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>x2_region3 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>ax1.scatter(x1_region3, x2_region3, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>x1_region4 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a>x2_region4 <span class="op">=</span> np.random.uniform(<span class="fl">1.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>ax1.scatter(x1_region4, x2_region4, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="co"># Partition lines</span></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>ax1.plot([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="fl">3.5</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>ax1.plot([<span class="dv">0</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>ax1.plot([<span class="dv">2</span>, <span class="fl">3.5</span>], [<span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Partition of Input Space'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>ax1.set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay region numbers (matching tree leaves)</span></span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a>ax1.text(<span class="dv">1</span>, <span class="fl">2.7</span>, <span class="st">'3'</span>, fontsize<span class="op">=</span><span class="dv">90</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.15</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>ax1.text(<span class="dv">1</span>, <span class="dv">1</span>, <span class="st">'4'</span>, fontsize<span class="op">=</span><span class="dv">90</span>, color<span class="op">=</span><span class="st">'blue'</span>, alpha<span class="op">=</span><span class="fl">0.15</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>ax1.text(<span class="fl">2.7</span>, <span class="fl">0.5</span>, <span class="st">'2'</span>, fontsize<span class="op">=</span><span class="dv">90</span>, color<span class="op">=</span><span class="st">'red'</span>, alpha<span class="op">=</span><span class="fl">0.15</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>ax1.text(<span class="fl">2.7</span>, <span class="fl">2.2</span>, <span class="st">'1'</span>, fontsize<span class="op">=</span><span class="dv">90</span>, color<span class="op">=</span><span class="st">'blue'</span>, alpha<span class="op">=</span><span class="fl">0.15</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, weight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/tree_numbered_partition.png"</span>)</span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <p>Each split or comparison creates a <strong>linear separation</strong> in the feature space, represented by a black line in the chart above.</p>
 <p>In Computer Science, trees are a type of graph. Graphs are collections of <strong>nodes and edges</strong>.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -980,66 +597,6 @@ Figure code
 <figcaption>Building a map with Decision Trees</figcaption>
 </figure>
 </div>
-<details>
-<summary>
-Figure code
-</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate meshgrid</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>xx, yy <span class="op">=</span> np.meshgrid(np.linspace(<span class="dv">0</span>, <span class="fl">3.5</span>, <span class="dv">200</span>), np.linspace(<span class="dv">0</span>, <span class="fl">3.5</span>, <span class="dv">200</span>))</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.zeros_like(xx, dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the tree rules</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(xx.shape[<span class="dv">0</span>]):</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(xx.shape[<span class="dv">1</span>]):</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        x1, x2 <span class="op">=</span> xx[i, j], yy[i, j]</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x1 <span class="op">&gt;=</span> <span class="dv">2</span>:</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> x2 <span class="op">&gt;=</span> <span class="dv">1</span>:</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>                Z[i, j] <span class="op">=</span> <span class="dv">0</span>  <span class="co"># circle</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                Z[i, j] <span class="op">=</span> <span class="dv">1</span>  <span class="co"># x</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> x2 <span class="op">&gt;=</span> <span class="dv">2</span>:</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                Z[i, j] <span class="op">=</span> <span class="dv">1</span>  <span class="co"># x</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                Z[i, j] <span class="op">=</span> <span class="dv">0</span>  <span class="co"># circle</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> ListedColormap([<span class="st">'#80C2FF'</span>, <span class="st">'#FF8080'</span>])</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>plt.contourf(xx, yy, Z, cmap<span class="op">=</span>cmap, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay the data points</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>x1_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>x2_region1 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>x1_region2 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>x2_region2 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">0.9</span>, <span class="dv">10</span>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>x1_region3 <span class="op">=</span> np.random.uniform(<span class="fl">0.2</span>, <span class="fl">1.8</span>, <span class="dv">10</span>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>x2_region3 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>x1_region4 <span class="op">=</span> np.random.uniform(<span class="fl">2.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>x2_region4 <span class="op">=</span> np.random.uniform(<span class="fl">1.1</span>, <span class="fl">3.2</span>, <span class="dv">10</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>plt.scatter(x1_region1, x2_region1, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>plt.scatter(x1_region2, x2_region2, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>plt.scatter(x1_region3, x2_region3, marker<span class="op">=</span><span class="st">'x'</span>, color<span class="op">=</span><span class="st">'red'</span>, s<span class="op">=</span><span class="dv">100</span>, linewidths<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>plt.scatter(x1_region4, x2_region4, marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, s<span class="op">=</span><span class="dv">100</span>, facecolors<span class="op">=</span><span class="st">'none'</span>, edgecolors<span class="op">=</span><span class="st">'blue'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="fl">3.5</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">2</span>, <span class="fl">3.5</span>], [<span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">16</span>)</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Decision Tree Partition Map'</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"images/trees/decision_tree_partition_map.png"</span>)</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 </section>
 <section id="final-thoughts" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">11.5</span> Final Thoughts</h2>
