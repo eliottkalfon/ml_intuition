@@ -7,7 +7,7 @@ Data can sometimes be missing. These missing points are often represented as nul
 | Flat | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood   | Energy Rating | Sell Price (K€) |
 |:----:|:------------------:|:----------------------:|:---------------:|:-------------:|:---------------:|
 | A    | 85                 | 4.2                    | Neukölln        | B             | 420             |
-| B    | <MISSING>          | 2.5                    | Kreuzberg       | A             | 610             |
+| B    | NULL          | 2.5                    | Kreuzberg       | A             | 610             |
 | C    | 95                 | 6.1                    | Charlott.       | C             | 390             |
 | D    | 70                 |                        | Kreuzberg       | D             | 370             |
 | E    | 110                | 1.2                    | Charlott.       | B             | 700             |
@@ -53,7 +53,7 @@ Is the missing data point critical? In the context of property pricing with only
 | Flat | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood   | Energy Rating | Sell Price (K€) |
 |:----:|:------------------:|:----------------------:|:---------------:|:-------------:|:---------------:|
 | A    | 85                 | 4.2                    | Neukölln        | B             | 420             |
-| B    | <MISSING>          | 2.5                    | Kreuzberg       | A             | 610             |
+| B    | NULL          | 2.5                    | Kreuzberg       | A             | 610             |
 | C    | 95                 | 6.1                    | Charlott.       | C             | 390             |
 
 Looking at the example above, you would remove property B from the training data.
@@ -86,7 +86,7 @@ Imagine the data above also included "Balcony Area" in square meters. A missing 
 | Property | Total Area (sq m) | Balcony Area (sq m) | Sell Price (K€) |
 |:---:|:---:|:---:|:---:|
 | A | 95 | 12 | 450 |
-| B | 55 | <MISSING> | 280 |
+| B | 55 | NULL | 280 |
 | C | 110 | 15 | 510 |
 
 #### Imputation by the Mean

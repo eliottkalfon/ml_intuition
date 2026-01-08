@@ -205,7 +205,7 @@ Show that Model B generates predictions that are closer to the truth than Model 
 
 :::{.solution #sol-acc-mod}
 
-<br>**Model A:**
+**Model A:**
 
 - Errors: $150-120=30$, $110-100=10$, $100-140=-40$
 - Average Error: $\frac{30 + 10 + (-40)}{3} = 0$
@@ -248,7 +248,7 @@ Compute the MSE and MAE of the two models below:
 
 :::{.solution #sol-dis}
 
-<br>**Model A:**
+**Model A:**
 
 - Errors: $115-100=15$, $105-120=-15$, $125-140=-15$, $100-150=-50$
 - MAE: $\frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75$

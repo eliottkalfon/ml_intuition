@@ -191,7 +191,7 @@ $$
 $$
 
 :::{.exercise #exr-recall-a}
-Calculate the recall of Model A, and prove that it is $75%$.
+Calculate the recall of Model A, and prove that it is $75\%$.
 :::
 
 In the case of disease diagnosis, Recall is a critical metric as **missing positive cases** can have dire consequences on a patient's life.

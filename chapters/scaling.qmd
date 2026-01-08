@@ -198,8 +198,6 @@ Why can we say that these two series have different distributions?
 
 These are the two discrepancies that Standardisation aims to correct.
 
-</details>
-
 ### Describing a series
 
 Before we start, it is important to define some important concepts of **descriptive statistics**. 
