@@ -67,6 +67,9 @@ format:
     geometry:
       - margin=1in           # Ensures margins are consistent on all sides
       - heightrounded        # Better for LaTeX layout stability
+  epub:
+    toc: true
+    number-sections: true       
 
 
 

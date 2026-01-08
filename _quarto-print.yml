@@ -1,0 +1,21 @@
+project:
+  output-dir: print-build
+
+format:
+  pdf:
+    output-file: "Machine-Learning-Intuition-PRINT"
+    documentclass: scrbook     # Better for professional publishing
+    classoption: 
+      - paper=6in:9in          # Standard KDP Trim Size
+      - twoside                # Alternating margins for the spine
+      - openany                # Prevents forced blank pages before chapters
+    geometry:
+      - top=0.75in
+      - bottom=0.75in
+      - inner=0.85in           # Extra space for the "gutter" (the glue/spine)
+      - outer=0.5in
+      - heightrounded
+    include-in-header: 
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, commandchars=\\\{\}}
