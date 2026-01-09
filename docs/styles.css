@@ -49,32 +49,32 @@ blockquote .citation {
     line-height: 1.6;
 }
 
-/* Bold highlights in gold or deep gray */
+/* Bold highlights */
 .reciprocity-text strong, .reciprocity-text b {
-    color: #222;
-    font-weight: 700;
+  color: #1f2a33;
+  font-weight: 700;
 }
 
-/* The majestic button */
+/* CTA button styled in brand blue */
 .reciprocity-button {
-    display: inline-block;
-    padding: 16px 35px;
-    background-color: #D4AF37; /* Majestic Gold */
-    color: white !important;
-    text-decoration: none !important;
-    font-weight: bold;
-    font-size: 1.1rem;
-    border-radius: 4px; /* Classic slight-round for formal look */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+  display: inline-block;
+  padding: 16px 35px;
+  background-color: #517699; /* Replaced gold with blue */
+  color: white !important;
+  text-decoration: none !important;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 14px rgba(81, 118, 153, 0.18);
 }
 
-/* Hover effects */
+/* Hover effects (darker blue) */
 .reciprocity-button:hover {
-    background-color: #b8952e;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+  background-color: #3f5e78;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(63, 94, 120, 0.25);
 }
 
 /* Responsive adjustment for mobile */
