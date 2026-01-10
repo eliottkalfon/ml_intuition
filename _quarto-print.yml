@@ -4,15 +4,18 @@ project:
 format:
   pdf:
     output-file: "Machine-Learning-Intuition-PRINT"
-    documentclass: scrbook     # Better for professional publishing
+    pdf-engine: xelatex        # Highly recommended for KDP to handle fonts better
+    documentclass: scrbook
     classoption: 
-      - paper=6in:9in          # Standard KDP Trim Size
-      - twoside                # Alternating margins for the spine
-      - openany                # Prevents forced blank pages before chapters
+      - paper=6in:9in          # Native KOMA-Script size
+      - twoside
+      - openany
     geometry:
+      - paperwidth=6in         # Use this instead of papersize={6in,9in}
+      - paperheight=9in        # Use this instead of papersize={6in,9in}
       - top=0.75in
       - bottom=0.75in
-      - inner=0.85in           # Extra space for the "gutter" (the glue/spine)
+      - inner=0.85in
       - outer=0.5in
       - heightrounded
     include-in-header: 
