@@ -10,14 +10,19 @@ format:
       - paper=6in:9in          # Native KOMA-Script size
       - twoside
       - openany
+      - parskip=half*
     geometry:
-      - paperwidth=6in         # Use this instead of papersize={6in,9in}
-      - paperheight=9in        # Use this instead of papersize={6in,9in}
+      - paperwidth=6in
+      - paperheight=9in
       - top=0.75in
       - bottom=0.75in
       - inner=0.85in
       - outer=0.5in
       - heightrounded
+      - includehead    # Moves headers inside the top 0.75in margin
+      - includefoot    # Moves page numbers inside the bottom 0.75in margin
+      - footskip=0.35in # Controls the gap between text and page number
+      
     include-in-header: 
       text: |
         \usepackage{fvextra}

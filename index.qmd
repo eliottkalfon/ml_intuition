@@ -22,5 +22,15 @@ I am an Applied Science Manager and Computer Science Lecturer in Berlin. I have 
 
 ## Notes
 
-- **Intuition first:** the book focuses on intuition and real-world thinking rather than formal proofs. If you would like a more code-heavy or mathematical approach, [please get in touch](https://eliottkalfon.com/contact).
+- **Intuition first:** the book focuses on intuition and real-world thinking rather than formal proofs. If you would like a more code-heavy or mathematical approach, [please get in touch](https://eliottkalfon.com/contact){target="_blank"}[ (https://eliottkalfon.com/contact)]{.content-visible when-format="pdf"}.
 - **Synthetic data:** all examples use synthetic data for clarity. Nothing in this book is medical, legal or financial advice.
+
+::: {.content-visible when-format="pdf"}
+\vspace{2cm}
+
+---
+
+Copyright © 2025 Eliott Kalfon. All rights reserved.
+
+No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the author, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+:::
