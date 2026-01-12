@@ -358,10 +358,17 @@ The median of the Grade series is the middle number of the sorted series: ${9, 9
 For imputation, we need to compute both the mean and median:
 
 $$
-\text{Mean} = \frac{18 + 18.5 + 19.1 + 20 + 20.8 + 22.1 + 22.8 + 23.5 + 26.2}{9} = \frac{191}{9} = 21.22
+\begin{aligned}
+\text{Mean} &= \frac{18 + 18.5 + 19.1 + 20 + 20.8 + 22.1 + 22.8 + 23.5 + 26.2}{9} \\
+&= \frac{191}{9} = 21.22
+\end{aligned}
 $$
 
-The median is the middle number of the sorted series: ${18, 18.5, 19.1, 20.0, 20.8, 22.1, 22.8, 23.5, 26.2}$, here, $20.8$
+The median is the middle number of the sorted series: 
+
+${18, 18.5, 19.1, 20.0, 20.8, 22.1, 22.8, 23.5, 26.2}$
+
+Here: $20.8$
 
 | Time | Temperature (°C) | Temperature (Mean Imputation) | Temperature (Median Imputation) |
 |:----:|:---------------:|:-----------------------------:|:-------------------------------:|

@@ -32,19 +32,19 @@ The dominance of surface area over the number of rooms can also be seen when cal
 
 $$
 \begin{aligned}
-\text{Distance between property A and B:} \\
-d_{AB} &= \sqrt{(80 - 60)^2 + (3 - 2)^2} \\
-       &= \sqrt{20^2 + 1^2} \\
-       &= \sqrt{400 + 1} \quad \text{surface area dwarfs the difference in number of rooms}\\
-       &= \sqrt{401} \\
-       &\approx 20.02 \\
+&\text{Distance between property A and B:} \\
+&d_{AB} = \sqrt{(80 - 60)^2 + (3 - 2)^2} \\
+&\phantom{d_{AB}} = \sqrt{20^2 + 1^2} \\
+&\phantom{d_{AB}} = \sqrt{400 + 1} \quad \text{surface area dominates}\\
+&\phantom{d_{AB}} = \sqrt{401} \\
+&\phantom{d_{AB}} \approx 20.02 \\
 \\
-\text{Distance between property A and C:} \\
-d_{AC} &= \sqrt{(120 - 60)^2 + (5 - 2)^2} \\
-       &= \sqrt{60^2 + 3^2} \\
-       &= \sqrt{3600 + 9} \quad \text{here again}\\
-       &= \sqrt{3609} \\
-       &\approx 60.08
+&\text{Distance between property A and C:} \\
+&d_{AC} = \sqrt{(120 - 60)^2 + (5 - 2)^2} \\
+&\phantom{d_{AC}} = \sqrt{60^2 + 3^2} \\
+&\phantom{d_{AC}} = \sqrt{3600 + 9} \quad \text{here again}\\
+&\phantom{d_{AC}} = \sqrt{3609} \\
+&\phantom{d_{AC}} \approx 60.08
 \end{aligned}
 $$
 

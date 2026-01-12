@@ -10,7 +10,7 @@ format:
       - paper=6in:9in          # Native KOMA-Script size
       - twoside
       - openany
-      - parskip=half*
+      - parskip=half
     geometry:
       - paperwidth=6in
       - paperheight=9in
@@ -27,3 +27,4 @@ format:
       text: |
         \usepackage{fvextra}
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines, commandchars=\\\{\}}
+        \raggedbottom

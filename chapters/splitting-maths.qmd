@@ -98,7 +98,8 @@ Which, **by symmetry**, gives the same results. As this sampling is independent,
 
 $$
 \begin{aligned}
-P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= P(\text{malignant then benign}) 
++ P(\text{benign then malignant}) \\
 &= 0.09 + 0.09 = 0.18
 \end{aligned}
 $$
@@ -237,7 +238,7 @@ $$
 Sum the two to get the probability of picking items of different classes:
 
 $$\begin{aligned}
-P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
 &= 0.16 + 0.16 = 0.32
 \end{aligned}
 $$
@@ -277,7 +278,7 @@ Sum the two to get the probability of picking items of different classes:
 
 $$
 \begin{aligned}
-P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
 &= 0.24 + 0.24 = 0.48
 \end{aligned}
 $$
@@ -313,7 +314,7 @@ Sum the two to get the probability of picking items of different classes:
 
 $$
 \begin{aligned}
-P(\text{picking items of different class}) &= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
+&= P(\text{malignant then benign}) + P(\text{benign then malignant}) \\
 &= 0.25 + 0.25 = 0.5
 \end{aligned}
 $$
