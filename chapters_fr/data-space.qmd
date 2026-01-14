@@ -10,7 +10,7 @@ Du point de vue du praticien, les données sont rarement données, elles se gagn
 
 La forme la plus simple de données est le format tabulaire. Les premiers exemples connus de tableaux de données datent de 4000 ans (!), remontant à la période paléo-babylonienne. À l'époque, ces tablettes d'argile servaient à la comptabilité et au commerce.
 
-![Ancienne tablette d'argile babylonienne montrant un tableau [@CDLI2025Terms]](/images/data-space/tablet.jpg){width=50%}
+![Dessin d'une tablette d'argile babylonienne généré par intelligence artificielle, en raison des capacités artisitiques de l'auteur](/images/data-space/tablet.png){width=50%}
 
 ## L'Anatomie d'un Tableau
 

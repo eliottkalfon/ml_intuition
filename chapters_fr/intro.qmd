@@ -12,11 +12,11 @@ Si ce vocabulaire vous semble peu familier, ne vous inquiétez pas — la questi
 
 Au premier abord, cela peut sembler impossible. Mais supposons que nous ayons une base de données de nombreuses tumeurs, chacune étiquetée comme bénigne ou maligne. Une première étape naturelle serait de **tracer ces exemples** en utilisant les deux mesures du rapport : périmètre et aire. Chaque point sur le graphique porterait une étiquette.
 
-![Tracer les observations historiques](images/intro/scatter.png){width=60%}
+![Tracer les observations historiques](/images/intro/scatter.png){width=60%}
 
 Nous pourrions ensuite tracer la nouvelle observation sur le même graphique. Nous l'étiquetons avec un point d'interrogation car son diagnostic est encore **inconnu**.
 
-![Observer l'observation inconnue](images/intro/scatter_unknown.png){width=60%}
+![Observer l'observation inconnue](/images/intro/scatter_unknown.png){width=60%}
 
 Vous sentiriez-vous maintenant à l'aise pour faire une estimation éclairée ?
 
@@ -32,12 +32,12 @@ Ces calculs de distance seront étudiés plus tard. Comme casse-tête, comment c
 
 Indice : le théorème de Pythagore devrait être utile
 
-![Calculer la distance entre A et B](images/intro/distance.png){width=60%}
+![Calculer la distance entre A et B](/images/intro/distance.png){width=60%}
 
 ::: {.callout-note collapse="true"}
 ## Réponse
 
-![Penser à la distance comme l'hypoténuse d'un triangle rectangle](images/intro/distance_triangle.png){width=60%}
+![Penser à la distance comme l'hypoténuse d'un triangle rectangle](/images/intro/distance_triangle.png){width=60%}
 
 Pour trouver la distance entre le point A $(1,1)$ et le point B $(5,4)$ en utilisant le théorème de Pythagore, nous pouvons considérer ces points comme deux sommets d'un triangle rectangle.
 
@@ -76,7 +76,7 @@ La distance entre le point A $(1,1)$ et le point B $(5,4)$ est $5$.
 
 Avec la liste des voisins les plus proches, comment feriez-vous une **prédiction** ? Avant de proposer une réponse, réfléchissez à comment vous classeriez les exemples suivants :
 
-![Différents scénarios de voisins](images/intro/five_neighbours.png)
+![Différents scénarios de voisins](/images/intro/five_neighbours.png)
 
 Comme vous l'avez peut-être compris, un simple **vote à la majorité** devrait suffire. Pour générer des prédictions, comptez le nombre de voisins appartenant à chaque diagnostic, et **attribuez le diagnostic ayant le plus grand nombre de voisins**.
 

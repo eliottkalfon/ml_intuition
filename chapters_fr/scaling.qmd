@@ -181,7 +181,7 @@ Utilisez Min-Max Scaling pour mapper à la fois la surface et le nombre de pièc
 
 ## Standardisation
 
-La section suivante sera un peu plus mathématique et peut être ignorée ([section suivante](#fuite-dinformation)).
+La section suivante sera un peu plus mathématique et peut être ignorée ([section suivante](#fuite-dinformation-scaling)).
 
 Min-Max Scaling n'est pas la seule façon de prétraiter une série de nombres à différentes échelles. Une autre approche s'appelle la **Standardisation**. L'idée de la standardisation est de rendre les **distributions des séries** similaires. La distribution est une représentation de la fréquence à laquelle les valeurs d'une variable apparaissent.
 
@@ -215,7 +215,7 @@ Cette section introduira d'autres concepts de statistique descriptive :
 - Variance
 - Écart-type
 
-Si vous êtes déjà familier avec ceux-ci, n'hésitez pas à passer à la [section suivante](#fuite-dinformation).
+Si vous êtes déjà familier avec ceux-ci, n'hésitez pas à passer à la [section suivante](#fuite-dinformation-scaling).
 
 #### Moyenne
 
@@ -290,7 +290,7 @@ Où :
 - $\sigma$ est l'écart-type de la série
 - $z$ est la valeur standardisée (aussi appelée z-score)
 
-## Fuite d'Information {#fuite-dinformation}
+## Fuite d'Information {#fuite-dinformation-scaling}
 
 Comme mentionné dans la section d'introduction sur le [prétraitement des données](data-preprocessing.qmd), la mise à l'échelle des variables peut être une source de **fuite d'information** entre l'ensemble d'entraînement et l'ensemble de test.
 
