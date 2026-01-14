@@ -1,0 +1,342 @@
+---
+title: "Mise à l'Échelle des Variables Numériques"
+---
+
+Les listes de nombres existent dans toutes les formes et tailles. Mais pourquoi devrions-nous nous en soucier ?
+
+De nombreux algorithmes de Machine Learning opèrent sur les données comme des **vecteurs** ou des **points dans l'espace**. [KNN](neighbours.qmd) génère des prédictions basées sur la [**distance**](distance.qmd) ou les similarités entre les observations. Les [Arbres de Décision](trees-intuition.qmd) divisent l'espace des variables pour séparer les données de différentes classes ou étiquettes.
+
+En pensant aux voisins les plus proches, la mise à l'échelle des variables est importante. Imaginons que vous construisez un modèle pour prédire les prix immobiliers, en utilisant deux variables :
+
+- Surface en m²
+- Nombre de pièces
+
+Les exemples de propriétés dans les données d'entraînement incluent :
+
+| Propriété  | Surface (m²) | Nombre de pièces | Prix (k €) |
+|:----------:|:-----------:|:----------------:|:----------:|
+| A          | 60          | 2                | 320        |
+| B          | 80          | 3                | 400        |
+| C          | 120         | 5                | 350        |
+| D          | 70          | 2                | 310        |
+| E          | 150         | 6                | 600        |
+| F          | 90          | 4                | 330        |
+
+En traçant ces données dans un espace bidimensionnel sur l'intervalle [0, 200], nous obtenons :
+
+![Données immobilières sans mise à l'échelle](/images/scaling/property_squished.png){width=50%}
+
+Comme vous pouvez le voir, la plupart de la variation est générée par la **surface**. C'est pourquoi les données apparaissent si compressées.
+
+La dominance de la surface sur le nombre de pièces peut également être observée lors du calcul de la distance euclidienne entre les propriétés.
+
+$$
+\begin{aligned}
+&\text{Distance entre propriété A et B :} \\
+&d_{AB} = \sqrt{(80 - 60)^2 + (3 - 2)^2} \\
+&\phantom{d_{AB}} = \sqrt{20^2 + 1^2} \\
+&\phantom{d_{AB}} = \sqrt{400 + 1} \quad \text{la surface domine}\\
+&\phantom{d_{AB}} = \sqrt{401} \\
+&\phantom{d_{AB}} \approx 20.02 \\
+\\
+&\text{Distance entre propriété A et C :} \\
+&d_{AC} = \sqrt{(120 - 60)^2 + (5 - 2)^2} \\
+&\phantom{d_{AC}} = \sqrt{60^2 + 3^2} \\
+&\phantom{d_{AC}} = \sqrt{3600 + 9} \quad \text{ici aussi}\\
+&\phantom{d_{AC}} = \sqrt{3609} \\
+&\phantom{d_{AC}} \approx 60.08
+\end{aligned}
+$$
+
+Comme vous pouvez le voir, dans les deux cas, la distance entre deux propriétés est presque entièrement déterminée par la différence de surface. La distance entre le nombre de pièces est éclipsée par la différence de surface. Nous pourrions obtenir une distribution plus équilibrée en redimensionnant les axes :
+
+![Données immobilières redimensionnées](/images/scaling/property_rescaled.png){width=50%}
+
+Bien que redimensionner les axes soit une meilleure façon de **visualiser** les données, cela ne résout pas le problème du calcul de la distance entre deux observations.
+
+## Les Mécanismes
+
+Pour ce faire, nous devons **mettre à l'échelle** les deux variables afin qu'elles aient (approximativement) la même **étendue, moyenne et variance** :
+
+- L'étendue est la distance entre le minimum et le maximum d'une série.
+- La moyenne est la valeur moyenne d'une série
+- La variance peut avoir plusieurs définitions, pour l'instant, définissons-la comme le degré auquel **les nombres fluctuent**
+
+Par exemple, la colonne de surface a une variance plus élevée que la colonne du nombre de pièces. Les nombres **fluctuent davantage** d'une valeur à l'autre. En conséquence, la surface a un impact plus important que le nombre de pièces sur la fonction de distance.
+
+Et si nous pouvions transformer à la fois le nombre de pièces et la surface en séries de nombres entre 0 et 1 ? Cela résoudrait le problème du calcul de la distance. La section suivante explorera une façon de le faire.
+
+## Min-Max Scaling
+
+Imaginons la série de nombres suivante : $\{0, 30, 40, 60, 90, 100\}$
+
+![Série 0-100](/images/scaling/number_line.png)
+
+Une façon simple d'obtenir ces nombres dans l'intervalle 0-1 serait de tous les diviser par 100 :
+
+| Valeur | Mise à l'échelle |
+|:------:|:----------------:|
+| 0      | 0.00             |
+| 30     | 0.30             |
+| 40     | 0.40             |
+| 60     | 0.60             |
+| 90     | 0.90             |
+| 100    | 1.00             |
+
+![Série mise à l'échelle de 0 à 1](/images/scaling/div100.png)
+
+Si la série originale contient des nombres allant de 0 à 150 : $\{0, 10, 60, 70, 120, 150\}$
+
+![Série 0-150](/images/scaling/max150.png)
+
+Nous pourrions également la ramener à l'intervalle 0-1 en divisant tous les nombres par 150, le **maximum** de la série :
+
+| Valeur | Mise à l'échelle |
+|:------:|:----------------:|
+| 0      | 0.00             |
+| 10     | 0.07             |
+| 60     | 0.40             |
+| 70     | 0.47             |
+| 120    | 0.80             |
+| 150    | 1.00             |
+
+![Série 0-1 (par 150)](/images/scaling/div150.png)
+
+C'est un bon début. Pour les séries allant de 0 à un nombre donné, nous pouvons diviser tous les nombres de la série par leur maximum. Cela met la série à l'échelle dans l'intervalle 0-1.
+
+Maintenant, que se passe-t-il si les nombres de la série vont de 50 à 250 ?
+
+Série : $\{50, 90, 120, 170, 220, 250\}$
+
+![Série 50-250](/images/scaling/max250.png)
+
+Diviser les nombres de la série par le maximum n'utiliserait pas pleinement l'intervalle 0-1 :
+
+| Valeur | Mise à l'échelle (÷250) |
+|:------:|:-----------------------:|
+| 50     | 0.20                    |
+| 90     | 0.36                    |
+| 120    | 0.48                    |
+| 170    | 0.68                    |
+| 220    | 0.88                    |
+| 250    | 1.00                    |
+
+![Série 0.2-1 (par 250)](/images/scaling/div250.png)
+
+Le minimum atteint est $50/250 = 0.2$. Cela signifie que 20% de l'intervalle autorisé restera **vide**, un résultat sous-optimal. Comment résoudre ce problème ?
+
+Au final, nous voulons que le minimum de la série soit mappé à 0, et le maximum à 1. Pour y parvenir, nous pouvons utiliser la formule suivante :
+
+$$
+\text{Valeur mise à l'échelle} = \frac{x - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}}
+$$
+
+Avec :
+
+- $x$ la valeur à mettre à l'échelle
+- $x_{\text{min}}$ et $x_{\text{max}}$ le minimum et le maximum de la série
+
+Prenons cette formule partie par partie :
+
+- Le numérateur : $x - x_{\text{min}}$, calcule la **distance** entre la valeur et le minimum
+- Le dénominateur : $x_{\text{max}} - x_{\text{min}}$, divise cette distance par la **plus grande distance** dans la série, la distance entre les valeurs maximum et minimum
+
+Cette formule sera maximisée lorsque la valeur est le maximum de la série, $\text{valeur originale} = x_{\text{max}}$ :
+
+$$
+\text{Valeur mise à l'échelle du Max} = \frac{x_{\text{max}} - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}} = 1
+$$
+
+Et sera minimisée lorsque la valeur est le minimum de la série, $\text{valeur originale} = x_{\text{min}}$ :
+
+$$
+\text{Valeur mise à l'échelle du Min} = \frac{x_{\text{min}} - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}} = 0
+$$
+
+Avec cette formule, toute série de nombres peut être mappée à l'intervalle $[0,1]$, résolvant les problèmes.
+
+Le tableau suivant montre son application à la série d'exemple ci-dessus :
+
+| Valeur | Mise à l'échelle (÷250) | Min-Max Scaling |
+|:------:|:-----------------------:|:---------------:|
+| 50     | 0.20                    | 0.00            |
+| 90     | 0.36                    | 0.20            |
+| 120    | 0.48                    | 0.35            |
+| 170    | 0.68                    | 0.60            |
+| 220    | 0.88                    | 0.85            |
+| 250    | 1.00                    | 1.00            |
+
+:::{.exercise #exr-min-max}
+Utilisez Min-Max Scaling pour mapper à la fois la surface et le nombre de pièces dans l'intervalle $[0,1]$
+
+| Propriété | Surface (m²) | Nombre de pièces |
+|:---------:|:------------:|:----------------:|
+| A         | 60           | 2                |
+| B         | 80           | 3                |
+| C         | 120          | 5                |
+| D         | 70           | 2                |
+| E         | 150          | 6                |
+| F         | 90           | 4                |
+:::
+
+## Standardisation
+
+La section suivante sera un peu plus mathématique et peut être ignorée ([section suivante](#fuite-dinformation)).
+
+Min-Max Scaling n'est pas la seule façon de prétraiter une série de nombres à différentes échelles. Une autre approche s'appelle la **Standardisation**. L'idée de la standardisation est de rendre les **distributions des séries** similaires. La distribution est une représentation de la fréquence à laquelle les valeurs d'une variable apparaissent.
+
+Rendons cela plus concret avec un exemple :
+
+![Trois séries avec différentes moyennes et variances](/images/scaling/three_series.png)
+
+Ces séries ont des distributions très différentes. La différence d'**échelle** aurait un impact négatif sur les algorithmes de Machine Learning comme [KNN](neighbours.qmd).
+
+Pourquoi pouvons-nous dire que ces deux séries ont des distributions différentes ?
+
+- Elles n'ont pas la même **moyenne** ou **centre**
+- Elles n'ont pas la même **dispersion** ou **variance** autour de leurs moyennes respectives
+
+Ce sont les deux écarts que la Standardisation vise à corriger.
+
+### Décrire une série
+
+Avant de commencer, il est important de définir quelques concepts importants de **statistique descriptive**.
+
+Décomposons ce terme :
+
+- La statistique est une branche des mathématiques axée sur la collecte et l'analyse de **collections de données**
+- La statistique descriptive est une branche de la statistique concernée par le **résumé et la description** d'une collection de données
+
+Le Minimum et le Maximum d'une série sont des statistiques descriptives, représentant le nombre le plus bas et le plus élevé d'une collection de nombres.
+
+Cette section introduira d'autres concepts de statistique descriptive :
+
+- Moyenne
+- Variance
+- Écart-type
+
+Si vous êtes déjà familier avec ceux-ci, n'hésitez pas à passer à la [section suivante](#fuite-dinformation).
+
+#### Moyenne
+
+La moyenne représente le « centre » d'une collection de nombres. Il existe différents types de moyennes en mathématiques. Ce livre se concentrera sur la moyenne arithmétique, également appelée « moyenne ». Elle est notée $\bar{x}$ ou $\mu$.
+
+::: {.callout-note collapse="true"}
+## Autres types de moyenne
+
+Il existe d'autres types de moyennes, utilisées pour moyenner différents types de valeurs. Elles ont toutes des propriétés, avantages et inconvénients différents.
+
+Moyenne géométrique : $\left(\prod_{i=1}^n x_i\right)^{1/n}$. Elle est utile pour moyenner des ratios, des taux de croissance ou des pourcentages. Le $\prod_{i=1}^n$ effrayant est la lettre pi en majuscule, représentant un produit. $\prod_{i=1}^n i = 1 \cdot 2 \cdot \dots \cdot n$
+
+En utilisant les moyennes géométriques, un seul 0 dans la série rendra la moyenne égale à 0. Elle est encore largement utilisée en économie pour moyenner des phénomènes multiplicatifs comme les taux de croissance.
+
+Moyenne harmonique : $\left(\frac{1}{n}\sum_{i=1}^n \frac{1}{x_i}\right)^{-1}$. Elle est utile pour les taux, tels que la Précision ou le Rappel du modèle ([chapitre Évaluation des Modèles](evaluation-classification.qmd)).
+
+La moyenne harmonique de la Précision et du Rappel du modèle s'appelle le score F1. Elle est couramment utilisée pour trouver des modèles qui ont un bon compromis entre les deux métriques.
+
+$$
+F_1 = 2 \cdot \frac{\text{Précision} \cdot \text{Rappel}}{\text{Précision} + \text{Rappel}}
+$$
+
+:::
+
+La moyenne arithmétique d'une série de $n$ observations, $\{x_1, x_2, \dots, x_n\}$ est calculée avec la formule suivante :
+
+$$
+\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n}
+$$
+
+En utilisant l'opérateur de sommation $\Sigma$ :
+$$
+\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+$$
+
+#### Variance
+
+La variance mesure à quel point les nombres d'une série **s'écartent** de leur moyenne. Une variance élevée signifie que les nombres sont très dispersés. Une variance faible signifie qu'ils sont regroupés autour de la moyenne.
+
+La variance est notée $\sigma^2$ ou $s^2$ et est calculée comme suit :
+
+$$
+\sigma^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+Où :
+- $x_i$ est chaque observation
+- $\bar{x}$ est la moyenne de la série
+- $n$ est le nombre d'observations
+
+#### Écart-type
+
+L'écart-type est la racine carrée de la variance. Il est noté $\sigma$ ou $s$.
+
+$$
+\sigma = \sqrt{\sigma^2} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+L'écart-type est plus facile à interpréter que la variance car il est dans les mêmes unités que les données originales.
+
+### La formule de standardisation
+
+La standardisation transforme une série de sorte que sa moyenne soit 0 et son écart-type soit 1. La formule est :
+
+$$
+z = \frac{x - \bar{x}}{\sigma}
+$$
+
+Où :
+- $x$ est la valeur originale
+- $\bar{x}$ est la moyenne de la série
+- $\sigma$ est l'écart-type de la série
+- $z$ est la valeur standardisée (aussi appelée z-score)
+
+## Fuite d'Information {#fuite-dinformation}
+
+Comme mentionné dans la section d'introduction sur le [prétraitement des données](data-preprocessing.qmd), la mise à l'échelle des variables peut être une source de **fuite d'information** entre l'ensemble d'entraînement et l'ensemble de test.
+
+Pour éviter cette fuite, il est essentiel de calculer les statistiques de mise à l'échelle (minimum, maximum, moyenne, écart-type) sur l'**ensemble d'entraînement uniquement**. Ces statistiques sont ensuite appliquées pour transformer à la fois les ensembles d'entraînement et de test.
+
+Pourquoi s'en soucier ? Lors de l'utilisation du modèle pour la prédiction, l'objectif de séparer les données entre ensemble d'entraînement et de test est d'estimer la performance du modèle sur des données non vues. Pour ce faire, il est essentiel de calculer les transformations de prétraitement sur les données d'entraînement. À l'avenir, les données arriveront une ou plusieurs lignes à la fois. Les seules statistiques disponibles seront celles des données d'entraînement.
+
+## Réflexions Finales
+
+Ce chapitre a couvert deux méthodes principales pour mettre à l'échelle les variables numériques :
+
+- **Min-Max Scaling :** mappe les valeurs dans l'intervalle $[0, 1]$
+- **Standardisation :** transforme les valeurs pour avoir une moyenne de 0 et un écart-type de 1
+
+Les deux méthodes aident les algorithmes de Machine Learning à traiter les variables de manière égale, indépendamment de leurs échelles originales.
+
+Rappelez-vous de calculer les statistiques de mise à l'échelle sur les données d'entraînement uniquement pour éviter la fuite d'information.
+
+Le prochain chapitre rassemblera tout ce que nous avons appris dans un projet de Machine Learning de bout en bout.
+
+## Solutions
+
+:::{.solution #sol-min-max}
+@exr-min-max
+
+Pour la surface :
+- Min = 60, Max = 150
+
+| Propriété | Surface (m²) | Surface mise à l'échelle |
+|:---------:|:------------:|:------------------------:|
+| A         | 60           | 0.00                     |
+| B         | 80           | 0.22                     |
+| C         | 120          | 0.67                     |
+| D         | 70           | 0.11                     |
+| E         | 150          | 1.00                     |
+| F         | 90           | 0.33                     |
+
+Pour le nombre de pièces :
+- Min = 2, Max = 6
+
+| Propriété | Nb de pièces | Pièces mises à l'échelle |
+|:---------:|:------------:|:------------------------:|
+| A         | 2            | 0.00                     |
+| B         | 3            | 0.25                     |
+| C         | 5            | 0.75                     |
+| D         | 2            | 0.00                     |
+| E         | 6            | 1.00                     |
+| F         | 4            | 0.50                     |
+:::

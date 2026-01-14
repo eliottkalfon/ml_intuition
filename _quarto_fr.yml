@@ -1,0 +1,64 @@
+project:
+  type: book
+  output-dir: docs_fr
+
+book:
+  title: "Comprendre le Machine Learning"
+  author: "Eliott Kalfon"
+  date: "04/01/2026"
+  chapters:
+    - chapters_fr/index.qmd
+    - part: "Introduction au Machine Learning"
+      chapters:
+      - chapters_fr/intro.qmd
+      - chapters_fr/defining-prediction.qmd
+      - chapters_fr/types-ml.qmd
+      - chapters_fr/ai-ml-ds.qmd
+      - chapters_fr/data-space.qmd
+      - chapters_fr/distance.qmd
+      - chapters_fr/neighbours.qmd
+    - part: "Évaluation des Modèles"
+      chapters: 
+        - chapters_fr/model-evaluation.qmd
+        - chapters_fr/evaluation-classification.qmd
+        - chapters_fr/evaluation-regression.qmd
+    - part: "Arbres de Décision"
+      chapters:
+        - chapters_fr/trees-intuition.qmd
+        - chapters_fr/splitting-maths.qmd
+        - chapters_fr/recursion.qmd
+        - chapters_fr/trees-proba-reg.qmd
+    - part: "Prétraitement des Données"
+      chapters:
+      - chapters_fr/data-preprocessing.qmd
+      - chapters_fr/categorical-variables.qmd
+      - chapters_fr/datetime.qmd
+      - chapters_fr/missing-numerical-values.qmd
+      - chapters_fr/missing-categorical-values.qmd
+      - chapters_fr/scaling.qmd
+    - part: "Synthèse Finale"
+      chapters:
+      - chapters_fr/end-to-end.qmd
+      - chapters_fr/generative-ai.qmd
+    - chapters_fr/references.qmd
+  page-footer:
+    left: "Copyright &copy; Eliott Kalfon 2025. Tous droits réservés."
+
+bibliography: references.bib
+
+format:
+  pdf:
+    documentclass: book
+    number-sections: true
+    exercise:
+      solutions: true
+    classoption: 
+      - oneside
+    geometry:
+      - margin=1in
+      - heightrounded
+    lang: fr
+  epub:
+    toc: true
+    number-sections: true
+    lang: fr

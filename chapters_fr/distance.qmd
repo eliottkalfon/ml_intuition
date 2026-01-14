@@ -1,0 +1,350 @@
+---
+title: "Distance et Similarité"
+---
+
+Maintenant que les points existent dans l'espace, nous pouvons utiliser la distance qui les sépare pour faire des **inférences**. L'inférence consiste à utiliser l'information dont nous disposons pour faire des **suppositions** sur l'information que nous n'avons pas.
+
+Par exemple, nous pourrions déduire que des tumeurs similaires, ou des tumeurs aux caractéristiques similaires, ont le même diagnostic. Mais comment mesurer la **similarité** entre deux observations ?
+
+C'est là qu'intervient la **distance**.
+
+En regardant le graphique ci-dessous, comment classeriez-vous la tumeur marquée d'un point d'interrogation ?
+
+![Étiqueter une nouvelle observation en utilisant la distance](/images/intro/scatter_unknown.png)
+
+Les humains regardant ce graphique compareraient **intuitivement** le diagnostic des observations proches avec l'observation inconnue, et baseraient leur supposition sur les **voisins**.
+
+Ce type d'inférence est quelque chose que nous faisons quotidiennement. Par exemple, j'ai vu de nombreux lapins. Si je vois un petit animal avec de longues oreilles pointant vers le haut, je le classerai comme un lapin, car il est similaire à mes observations précédentes de lapins.
+
+## Commençons par la Soustraction
+
+Pour comprendre le concept de distance, nous pouvons commencer par un **espace unidimensionnel**. Cette notion peut sembler étrange, car nous associons généralement l'espace à deux ou trois dimensions.
+
+Considérons un ensemble de trois appartements à Berlin, étiquetés A, B et C, avec les surfaces suivantes :
+
+| Appartement | Surface (m²) |
+|:-----------:|:------------:|
+|      A      |      22      |
+|      B      |      35      |
+|      C      |      55      |
+
+Dans cet exemple, la surface représente l'unique dimension de cet espace. Nous pouvons représenter les différents appartements sur cette dimension :
+
+![Distance en une dimension](/images/distance/1d_distance.png)
+
+Dans cet espace, quelle est la différence entre A et C ? Comment la calculeriez-vous ?
+
+Une simple soustraction serait un bon début :
+
+$$
+\text{surface}_C - \text{surface}_A = 55 - 22 = 33
+$$
+
+Maintenant, calculez la distance entre B et C. Vous devriez obtenir :
+
+$$
+\text{surface}_C - \text{surface}_B = 55 - 35 = 20
+$$
+
+Conformément à notre intuition, nous voyons que la distance entre B et C est **plus courte** que la distance entre A et C. La différence de surface est **plus petite**.
+
+Par la suite, nous noterons la distance entre A et C (ou n'importe quels deux points) comme $d(A, C)$.
+
+Voyez-vous un **problème** avec l'utilisation de la soustraction comme calcul de distance ?
+
+L'un des principaux problèmes est que $d(A, C) \neq d(C, A)$. D'après ce qui précède, nous savons que $d(A, C) = 33$. En calculant $d(C, A)$, nous obtenons :
+
+$$
+\text{surface}_A - \text{surface}_C = 22 - 55 = -33
+$$
+
+C'est fâcheux, car la distance entre deux points ne devrait pas avoir de direction. Elle devrait être la même quel que soit le point de départ.
+
+Comment pourrions-nous résoudre ce problème ?
+
+## Alternatives à la Soustraction
+
+Il existe deux astuces mathématiques que nous pourrions utiliser pour relever ce défi :
+
+- Valeur Absolue
+- Différence au Carré
+
+### Valeur Absolue
+
+Vous pouvez penser à la **valeur absolue** d'un nombre comme la suppression de tout signe négatif. Plus rigoureusement, la valeur absolue est la **magnitude** d'un nombre, pas son signe. La valeur absolue du nombre $x$ est notée $|x|$.
+
+Par exemple : $|2| = |-2| = 2$
+
+Pour les lecteurs à l'esprit mathématique (les autres peuvent fermer les yeux pendant deux lignes), la **fonction** valeur absolue est définie comme :
+
+$$
+|x| =
+\begin{cases}
+x & \text{si } x \geq 0 \\
+-x & \text{si } x < 0
+\end{cases}
+$$
+
+En traçant la valeur absolue de tous les nombres entre $-5$ et $5$, nous obtenons la forme triangulaire suivante :
+
+![Fonction valeur absolue](/images/distance/asbolute_value.png)
+
+L'un des principaux avantages de la fonction valeur absolue comme métrique de distance est le suivant :
+
+$$
+|x-y| = |y-x|
+$$
+
+La valeur absolue de la différence entre deux nombres est la même quel que soit leur ordre. Pour revenir à notre exemple :
+
+$$\begin{aligned}
+|\text{surface}_C - \text{surface}_A| &= |55 - 22| = |33| = 33 \\
+|\text{surface}_A - \text{surface}_C| &= |22 - 55| = |-33| = 33
+\end{aligned}
+$$
+
+:::{.exercise #exr-abs-val}
+Calculez la distance en valeur absolue entre B et C, et entre C et B. Montrez que les deux sont égales à 20.
+:::
+
+### Différence au Carré
+
+Une autre façon de s'assurer que la distance entre deux points est la même est d'**élever la différence au carré**. Un nombre au carré, noté $x^2$, est un nombre multiplié par lui-même : $x \cdot x$
+
+Cette opération a la même propriété que la valeur absolue :
+
+$$
+(x-y)^2 = (y-x)^2
+$$
+
+En reprenant l'exemple ci-dessus :
+
+$$\begin{aligned}
+(\text{surface}_C - \text{surface}_A)^2 &= (55 - 22)^2 = 33^2 = 1089 \\
+(\text{surface}_A - \text{surface}_C)^2 &= (22 - 55)^2 = (-33)^2 = 1089
+\end{aligned}
+$$
+
+En traçant le carré de tous les nombres dans l'intervalle $-5$ à $5$, nous remarquons qu'il a une forme parabolique :
+
+![Fonction carré](/images/distance/square_function.png)
+
+Cette fonction **croît plus rapidement** à mesure que le nombre en entrée augmente.
+
+Un problème potentiel avec la différence au carré est que ce nombre peut croître très vite, et est parfois difficile à interpréter. Considérant l'exemple ci-dessus, il semble étrange que la distance entre $22$ et $55$ soit $1089$.
+
+Pour rendre les différences au carré plus interprétables, il est courant d'utiliser la racine carrée de la différence au carré. La racine carrée (notée $\sqrt{\phantom{x}}$) est le nombre qui, multiplié par lui-même, donne le nombre original. Par exemple, $\sqrt{9} = 3$ parce que $3 \cdot 3 = 9$
+
+Pour revenir à l'exemple, la différence en racine carrée entre A et C serait :
+
+$$
+\sqrt{(\text{surface}_C - \text{surface}_A)^2} = \sqrt{33^2} = \sqrt{1089} = 33
+$$
+
+:::{.exercise #exr-squ-val}
+Calculez la différence au carré entre B et C, et entre C et B. Montrez que les deux sont égales à 400.
+:::
+
+## Deux Dimensions
+
+Les méthodes ci-dessus peuvent mesurer avec précision la distance entre des points en une dimension. Mais comment mesurer la distance entre **des points en deux dimensions** ?
+
+Quelle serait la distance entre les points A et B montrés sur l'image ci-dessous ?
+
+![Deux points dans l'espace](/images/intro/distance.png)
+
+Indice : Le théorème de Pythagore pourrait être utile.
+
+![Penser la distance comme l'hypoténuse d'un triangle rectangle](/images/intro/distance_triangle.png)
+
+Pour trouver la distance entre le point A $(1,1)$ et le point B $(5,4)$ en utilisant le théorème de Pythagore, nous pouvons considérer ces points comme deux sommets d'un triangle rectangle.
+
+La distance horizontale ($\Delta x$) entre les points est :
+$$
+\Delta x = x_2 - x_1 = 5 - 1 = 4
+$$
+La distance verticale ($\Delta y$) entre les points est :
+$$
+\Delta y = y_2 - y_1 = 4 - 1 = 3
+$$
+Selon le théorème de Pythagore, le carré de l'hypoténuse (qui est la distance $d$ entre les points A et B) est égal à la **somme des carrés** des deux autres côtés ($\Delta x$ et $\Delta y$) :
+$$
+d^2 = (\Delta x)^2 + (\Delta y)^2
+$$
+En substituant les valeurs :
+$$\begin{aligned}
+d^2 &= (4)^2 + (3)^2 \\
+d^2 &= 16 + 9 \\
+d^2 &= 25 \\
+\end{aligned}
+$$
+Pour trouver $d$, nous prenons la racine carrée des deux côtés :
+$$\begin{aligned}
+d &= \sqrt{25} \\
+d &= 5
+\end{aligned}
+$$
+
+Ainsi, la distance entre le point A $(1,1)$ et le point B $(5,4)$ est $5$.
+
+Vous remarquerez peut-être une ressemblance frappante entre le théorème de Pythagore et la **racine carrée de la distance au carré** définie dans la section précédente.
+
+La fonction de distance dérivée du théorème de Pythagore s'appelle la **distance euclidienne**. Comparons la distance euclidienne en une et deux dimensions :
+
+- En une dimension :
+  $$
+  d(A, B) = \sqrt{(x_2 - x_1)^2}
+  $$
+
+- En deux dimensions :
+  $$
+  d(A, B) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+  $$
+
+:::{.exercise #exr-euc-dis}
+Calculez la distance euclidienne entre les points A et B définis dans ce tableau :
+
+| Point | $x_1$ | $x_2$ |
+|:-----:|:-----:|:-----:|
+|   A   |   2   |   4   |
+|   B   |   5   |   1   | 
+
+Indice : Il peut être utile de tracer ces deux points.
+:::
+
+## Vers l'Infini et Au-delà
+
+Comme montré dans le dernier chapitre, les données représentent des **points dans un espace à plusieurs dimensions**. Il n'est pas rare d'avoir des jeux de données avec des centaines de colonnes. Comment mesurer la distance dans un espace de si haute dimension ?
+
+La distance euclidienne peut être utilisée pour deux, trois ou n'importe quel nombre $n$ de dimensions. Elle peut être notée de la façon suivante :
+$$
+d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2 + (b_3 - a_3)^2 + \cdots + (b_n - a_n)^2}
+$$
+
+:::{.exercise #exr-high-dim}
+Calculez la distance euclidienne entre les points A et B en 5 dimensions (vous pouvez utiliser une calculatrice) :
+
+| Point | Dimension 1 | Dimension 2 | Dimension 3 | Dimension 4 | Dimension 5 |
+|:-----:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
+|   A   |      2      |      4      |      1      |      3      |      7      |
+|   B   |      5      |      1      |      6      |      2      |      9      |
+:::
+
+### Le Sigma Effrayant
+
+#### Un Peu de Contexte
+
+Une notation plus concise de la distance euclidienne utilise l'opérateur de sommation $\Sigma$ (prononcé « sigma »). C'est un symbole effrayant, bien que sa signification soit relativement simple.
+
+![Sigma expliqué](/images/distance/sigma.png){width=50%}
+
+Par exemple, $\sum_{i=1}^{n} i$ représente la somme de tous les entiers de $1$ à $n$ :
+
+$$
+\sum_{i=1}^{n} i = 1 + 2 + 3 + \cdots + n
+$$
+
+Dans cette expression :
+
+- $i=1$ (en bas) : Valeur de départ de notre compteur
+- $n$ (en haut) : Valeur finale de notre compteur
+- $i$ (après le sigma) : L'expression à additionner pour chaque valeur du compteur
+
+Pour rendre cela plus concret, la somme de tous les entiers de 1 à 4 peut s'écrire :
+$$
+\sum_{i=1}^{4} i = 1 + 2 + 3 + 4
+$$
+
+L'expression suivante est la somme de tous les entiers de 1 à 3, divisée par 2 :
+
+$$
+\sum_{i=1}^{3} \frac{i}{2} = \frac{1}{2} + \frac{2}{2} + \frac{3}{2}
+$$
+
+:::{.exercise #exr-sig-cal}
+Calculez les sommations suivantes :
+
+1. $\sum_{i=1}^{4} (i+2)$
+
+2. $\sum_{i=1}^{3} \frac{i}{3}$
+
+3. $\sum_{i=1}^{5} \frac{1}{i}$
+:::
+
+L'opérateur $\Sigma$ est très utile lorsqu'on travaille avec des **collections de nombres** et des dimensions ; quelque chose de très courant en Machine Learning.
+
+#### Sigma et la Distance Euclidienne
+
+En utilisant la notation $\Sigma$, comment représenter la distance euclidienne dans un format plus concis ?
+
+En notation par points pour $n$ dimensions :
+
+$$
+d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2 + \cdots + (b_n - a_n)^2}
+$$
+
+En notation sigma, avec $n$ le nombre de dimensions :
+
+$$
+d(A, B) = \sqrt{\sum_{i=1}^{n} (b_i - a_i)^2}
+$$
+
+## Réflexions Finales
+
+Et voilà ! En utilisant la formule ci-dessus, vous pouvez calculer la **distance entre n'importe quels deux points dans un espace à $n$ dimensions**. Cela sera très utile lors de la construction du premier modèle de prédiction de ce livre, les K Plus Proches Voisins.
+
+## Solutions
+:::{.solution #sol-abs-val}
+@exr-abs-val
+
+$$\begin{aligned}
+|\text{surface}_C - \text{surface}_B| &= |55 - 35| = |20| = 20 \\
+|\text{surface}_B - \text{surface}_C| &= |35 - 55| = |-20| = 20
+\end{aligned}
+$$
+:::
+
+:::{.solution #sol-squ-val}
+@exr-squ-val
+$$\begin{aligned}
+(\text{surface}_C - \text{surface}_B)^2 &= (55 - 35)^2 = 20^2 = 400 \\
+(\text{surface}_B - \text{surface}_C)^2 &= (35 - 55)^2 = (-20)^2 = 400
+\end{aligned}
+$$
+:::
+
+:::{.solution #sol-hig-dim}
+@exr-high-dim
+D'abord, calculez la différence au carré pour chacune des cinq dimensions :
+
+$$\begin{aligned}
+(5-2)^2 &= 9 \\
+(1-4)^2 &= 9 \\
+(6-1)^2 &= 25 \\
+(2-3)^2 &= 1 \\
+(9-7)^2 &= 4 \\
+\end{aligned}
+$$
+
+Somme :
+
+$$
+9 + 9 + 25 + 1 + 4 = 48
+$$
+
+Prenez la racine carrée :
+
+$$
+d(A, B) = \sqrt{48} \approx 6.93
+$$
+:::
+
+:::{.solution #sol-sig-cal}
+@exr-sig-cal
+
+1. $\sum_{i=1}^{4} (i+2) = (1+2) + (2+2) + (3+2) + (4+2) = 3 + 4 + 5 + 6 = 18$
+
+2. $\sum_{i=1}^{3} \frac{i}{3} = \frac{1}{3} + \frac{2}{3} + \frac{3}{3} = 2$
+
+3. $\sum_{i=1}^{5} \frac{1}{i} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \approx 1 + 0.5 + 0.333 + 0.25 + 0.2 = 2.283$
+:::

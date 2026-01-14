@@ -1,0 +1,387 @@
+---
+title: Gérer les Valeurs Numériques Manquantes
+---
+
+Les données peuvent parfois être manquantes. Ces points manquants sont souvent représentés comme des valeurs nulles.
+
+| Appartement | Surface (m²) | Distance au Centre (km) | Quartier        | Classe Énergétique | Prix de Vente (K€) |
+|:-----------:|:------------:|:-----------------------:|:---------------:|:------------------:|:------------------:|
+| A           | 85           | 4.2                     | Neukölln        | B                  | 420                |
+| B           | NULL         | 2.5                     | Kreuzberg       | A                  | 610                |
+| C           | 95           | 6.1                     | Charlott.       | C                  | 390                |
+| D           | 70           |                         | Kreuzberg       | D                  | 370                |
+| E           | 110          | 1.2                     | Charlott.       | B                  | 700                |
+| F           | 60           | 5.0                     | Neukölln        | F                  | 310                |
+
+Cela pose problème pour la plupart des modèles de Machine Learning, car ils **ne peuvent pas gérer** les valeurs manquantes.
+
+Note : de nombreuses implémentations modernes de modèles de Machine Learning, comme LightGBM, gèrent nativement les valeurs manquantes en utilisant certaines des méthodes présentées dans ce chapitre. Cela est dû à une implémentation intelligente ; les modèles sous-jacents ne peuvent toujours pas lire les valeurs manquantes.
+
+Comme montré dans les chapitres précédents, ces modèles de Machine Learning apprennent la relation entre les entrées et les sorties :
+
+$$
+\text{Entrée} \longrightarrow \text{Modèle} \longrightarrow \text{Prédiction}
+$$
+
+Ils utilisent des astuces mathématiques (par exemple, distance, séparation des données) pour apprendre la relation entre les caractéristiques de chaque observation (par exemple, surface de la propriété) et la variable cible (par exemple, prix de vente).
+
+Le chapitre suivant explorera différentes stratégies pour traiter les valeurs manquantes dans un projet de Machine Learning.
+
+## Toutes les Valeurs Manquantes Sont-Elles Égales ?
+
+### Commencer par le Pourquoi
+
+**Pourquoi** ce point de données est-il manquant ? Il pourrait y avoir de nombreuses raisons qui peuvent informer notre approche des données manquantes.
+
+Avec les problèmes de données, c'est une bonne idée de commencer par la **source**. Y a-t-il un problème dans le processus de collecte des données ? Pourrait-il y avoir un problème avec la base de données ? Combien d'observations cela affecte-t-il ?
+
+Avant de développer une stratégie, il est essentiel de comprendre s'il y a un problème avec la source de données. Les problèmes de source de données pourraient affecter de nombreuses autres applications, comme les rapports ou les opérations.
+
+Les valeurs manquantes peuvent avoir différentes significations :
+
+- Manquante aléatoirement : l'observation est manquante pour une raison inconnue, sans aucun modèle apparent
+- Aucune : un nombre de transactions manquant pourrait signifier qu'aucune (ou 0) transaction n'a été effectuée
+- Non applicable : une sous-catégorie de produit manquante pourrait signifier que le produit actuel n'a pas de sous-catégorie
+- Mesure manquante : une lecture de température manquante dans certaines données de capteur peut signifier que la mesure a été sautée
+
+Avant de trouver une stratégie, il est essentiel de comprendre pourquoi ces valeurs sont manquantes.
+
+### Exclure les Lignes avec Valeurs Manquantes
+
+Le point de données manquant est-il critique ? Dans le contexte de la tarification immobilière avec seulement deux caractéristiques (un exemple très simplifié), la surface est un point de données critique. Vous pourriez vouloir **exclure** les lignes qui ont une valeur de caractéristique clé manquante.
+
+| Appartement | Surface (m²) | Distance au Centre (km) | Quartier        | Classe Énergétique | Prix de Vente (K€) |
+|:-----------:|:------------:|:-----------------------:|:---------------:|:------------------:|:------------------:|
+| A           | 85           | 4.2                     | Neukölln        | B                  | 420                |
+| B           | NULL         | 2.5                     | Kreuzberg       | A                  | 610                |
+| C           | 95           | 6.1                     | Charlott.       | C                  | 390                |
+
+En regardant l'exemple ci-dessus, vous supprimeriez la propriété B des données d'entraînement.
+
+### Exclure les Variables avec Valeurs Manquantes
+
+| Propriété | Surface (m²) | Distance au Centre (km) | Quartier      | Classe Énergétique | Prix de Vente (K€) | Années depuis Construction |
+|:---------:|:------------:|:-----------------------:|:-------------:|:------------------:|:------------------:|:--------------------------:|
+| A         | 85           | 4.2                     | Neukölln      | B                  | 420                |                            |
+| B         | 120          | 2.5                     | Kreuzberg     | A                  | 610                | 8                          |
+| C         | 95           | 6.1                     | Charlott.     | C                  | 390                |                            |
+| D         | 70           | 3.8                     | Kreuzberg     | D                  | 370                | 22                         |
+| E         | 110          | 1.2                     | Charlott.     | B                  | 700                | 12                         |
+| F         | 60           | 5.0                     | Neukölln      | F                  | 310                |                            |
+
+Dans l'exemple ci-dessus, la colonne **Années depuis Construction** a de nombreuses valeurs manquantes. Il serait logique soit de revoir les données sous-jacentes, soit de la supprimer du jeu de données.
+
+Filtrer à la fois les lignes et les colonnes contenant des valeurs manquantes peut **réduire la quantité de données disponibles** pour le modèle. Pour cette raison, des approches plus sophistiquées sont parfois nécessaires.
+
+### Imputation des Valeurs Numériques Manquantes
+
+Pour les variables numériques, les valeurs manquantes peuvent être traitées avec une méthode appelée **imputation**. Cela remplit les valeurs manquantes par une autre valeur de substitution.
+
+#### Imputation par 0
+
+Lorsque la valeur manquante signifie « Aucun », comme le nombre manquant de transactions, c'est une bonne idée de remplacer les valeurs manquantes par 0.
+
+Imaginez que les données ci-dessus incluaient également la « Surface du Balcon » en mètres carrés. Une valeur manquante pourrait signifier « pas de balcon » et pourrait être remplacée en toute sécurité par 0. Avant de le faire, assurez-vous qu'une « Surface du Balcon » manquante signifie vraiment « pas de balcon ». En général, ces méthodes de traitement des données reposent sur une solide compréhension des données et du problème.
+
+| Propriété | Surface Totale (m²) | Surface Balcon (m²) | Prix de Vente (K€) |
+|:---------:|:-------------------:|:-------------------:|:------------------:|
+| A         | 95                  | 12                  | 450                |
+| B         | 55                  | NULL                | 280                |
+| C         | 110                 | 15                  | 510                |
+
+#### Imputation par la Moyenne
+
+Lorsque les valeurs sont **manquantes aléatoirement**, la moyenne ou la médiane pourraient être de bons candidats pour l'imputation.
+
+Dans un jeu de données contenant les tailles des étudiants :
+
+| Étudiant | Taille (cm) | Genre | Niveau |
+|:--------:|:-----------:|:-----:|:------:|
+| A        | 170         | M     | 10     |
+| B        |             | F     | 10     |
+| C        | 165         | F     | 9      |
+| D        | 180         | M     | 11     |
+| E        | 172         | M     |        |
+| F        | 160         | F     | 9      |
+
+Une bonne stratégie pour traiter les tailles manquantes est d'imputer la taille de l'étudiant en utilisant la **taille moyenne** de tous les étudiants. Avec un jeu de données suffisamment grand, une approche plus fine pourrait être utilisée. Vous pourriez, par exemple, imputer les tailles manquantes en fonction des étudiants du même niveau.
+
+Pour imputer la Taille de l'étudiant B, nous calculons la taille moyenne sur tous les étudiants :
+
+$$
+\text{Moyenne} = \frac{170 + 165 + 180 + 172 + 160}{5} = 169,4
+$$
+
+La Taille de l'étudiant B serait remplacée par $169,4$.
+
+:::{.exercise #exr-mean-imp}
+En utilisant l'imputation par la moyenne pour remplir les valeurs de Niveau manquantes, quel serait le Niveau de l'étudiant E ?
+:::
+
+#### Imputation par la Médiane
+
+La **médiane** pourrait également être un bon choix de valeur de substitution pour l'imputation. La médiane d'une série est le **nombre du milieu** dans une liste triée. En prenant la liste : $[2,3,4,5,7,9,50]$ comme exemple, la médiane est $5$. En d'autres termes, c'est la valeur telle qu'au moins 50% des valeurs sont inférieures ou égales. Un avantage de la médiane est qu'elle n'est pas sensible aux valeurs aberrantes.
+
+::: {.callout-note collapse="true"}
+## Moyenne, médiane et valeurs aberrantes
+
+Une **valeur aberrante** est un point de données très différent des autres
+
+Considérons la série suivante :
+
+$[2,3,4,5,7,9,50]$
+
+![Série avec valeur aberrante](/images/missing-values/series_with_outlier.png)
+
+Le point à $50$ est une valeur aberrante de cette distribution, car il est très éloigné des autres. La moyenne de la série est affectée par ce nombre :
+
+:::{.exercise #exr-outlier}
+Calculez la moyenne et la médiane de cette série. Montrez que la moyenne est $11,43$, et que la médiane est $5$.
+:::
+
+:::{.exercise #exr-outlier-rm}
+Montrez qu'après avoir supprimé l'élément $50$, la moyenne est $5,0$, et la médiane est $4,5$.
+:::
+
+Comme vous l'avez peut-être observé, la moyenne varie considérablement, tandis que la médiane reste stable.
+
+:::
+
+:::{.exercise #exr-odd-median}
+Trouvez la médiane des séries suivantes :
+
+- ${5, 7, 9, 12, 15}$
+- ${1, 2, 2, 4, 8, 10, 13}$
+:::
+
+Que se passe-t-il lorsque la longueur de la série est un nombre pair ?
+
+En regardant la série suivante : $[1,2,3,4]$, quelle serait la valeur du milieu ? Comme la série contient un nombre pair d'éléments, il n'y a pas de valeur du milieu.
+
+Par convention, la médiane de ces séries est la moyenne entre les deux valeurs du milieu. Ici, la médiane serait $\frac{2+3}{2} = 2,5$.
+
+:::{.exercise #exr-even-median}
+Trouvez la médiane des séries suivantes :
+
+- ${2, 3, 5, 8}$
+- ${4, 6, 8, 10, 12, 14}$
+:::
+
+Revenons aux données des étudiants :
+
+| Étudiant | Taille (cm) | Genre | Niveau |
+|:--------:|:-----------:|:-----:|:------:|
+| A        | 170         | M     | 10     |
+| B        |             | F     | 10     |
+| C        | 165         | F     | 9      |
+| D        | 180         | M     | 11     |
+| E        | 172         | M     |        |
+| F        | 160         | F     | 9      |
+
+Pour imputer la Taille de l'étudiant B avec la médiane, nous trouvons la médiane. La médiane des tailles est $170$, car c'est le nombre du milieu dans la série de Tailles triée : ${160, 165, 170, 172, 180}$.
+
+:::{.exercise #exr-median-imp}
+Imputez le Niveau manquant de l'étudiant E en utilisant l'imputation par la médiane
+:::
+
+#### Imputation des Données de Séries Temporelles
+
+Les données de séries temporelles sont des données avec une dimension **temporelle**. Par exemple, les données suivantes pourraient être la température d'une machine dans une usine :
+
+| Temps (s) | Température (°C) |
+|:---------:|:----------------:|
+| 1         | 18.0             |
+| 2         | 18.5             |
+| 3         | 19.1             |
+| 4         | 20.0             |
+| 5         | 20.8             |
+| 6         |                  |
+| 7         | 22.1             |
+| 8         | 22.8             |
+| 9         | 23.5             |
+| 10        |                  |
+| 11        | 26.2             |
+
+Les données de séries temporelles sont aussi souvent représentées sous forme de graphique linéaire :
+
+![Série temporelle de température avec valeurs manquantes](/images/missing-values/time_series_missing_values.png)
+
+::: {.callout-note collapse="true"}
+## Mais qu'est-ce que le temps ?
+
+Le temps peut être défini comme le progrès continu et apparemment irréversible de l'existence. Tout comme « vérité » ou « espace », les définitions des aspects fondamentaux de l'expérience peuvent parfois être décevantes.
+
+:::
+
+##### Utiliser la Moyenne et la Médiane
+
+Imputer les valeurs nulles avec la moyenne et la médiane pourrait conduire à des résultats peu intuitifs.
+
+:::{.exercise #exr-time-imp}
+
+Imputez les valeurs nulles de la série suivante en utilisant la moyenne, puis la médiane. Pour ce faire, montrez que la moyenne de la série est $21,22$ et la médiane est $20,8$.
+
+| Temps (s) | Température (°C) |
+|:---------:|:----------------:|
+| 1         | 18.0             |
+| 2         | 18.5             |
+| 3         | 19.1             |
+| 4         | 20.0             |
+| 5         | 20.8             |
+| 6         |                  |
+| 7         | 22.1             |
+| 8         | 22.8             |
+| 9         | 23.5             |
+| 10        |                  |
+| 11        | 26.2             |
+
+:::
+
+![Imputation des valeurs manquantes par la moyenne](/images/missing-values/time_series_mean.png)
+
+##### Méthodes Alternatives
+
+Quelle serait une meilleure méthode ? Dans ces tâches de séries temporelles, l'imputation par la **valeur précédente** pourrait être une bonne idée. Cette méthode est appelée **forward-fill** (remplissage vers l'avant). Elle suppose que la valeur reste constante jusqu'à ce qu'une nouvelle mesure soit prise.
+
+![Imputation par la valeur précédente](/images/missing-values/time_series_previous.png)
+
+La série semble plus naturelle qu'avec l'imputation par la moyenne. Pourtant, nous pouvons faire mieux.
+
+Une autre approche consiste à imputer les valeurs manquantes en calculant la moyenne des deux valeurs voisines. Cette méthode, souvent appelée **interpolation linéaire**, est particulièrement utile pour les données avec une tendance claire, car elle connecte en douceur les points de données connus.
+
+![Imputation par les voisins](/images/missing-values/time_series_neighbours.png)
+
+Ça ressemble plus à ça !
+
+#### Récapitulatif
+
+Il existe de nombreuses façons d'imputer les valeurs numériques, et pas de solution optimale. Le choix dépend du problème spécifique en question. N'oubliez pas qu'avant de trouver une stratégie d'imputation, il est essentiel de comprendre pourquoi les valeurs sont manquantes.
+
+## Fuite d'Information
+
+Comme mentionné dans l'introduction de ce chapitre, le prétraitement des données est une étape où la fuite d'information se produit couramment. La gestion des valeurs manquantes ne fait pas exception.
+
+Dans le processus de remplissage des valeurs numériques nulles avec la médiane ou la moyenne (ou tout ce qui est calculé à partir des données), il est important de calculer ces nombres à partir de l'**ensemble d'entraînement uniquement**.
+
+Ensuite, les valeurs nulles dans l'ensemble de test seraient imputées avec les métriques calculées avec les données d'entraînement.
+
+Pourquoi est-ce le cas ? Parce que c'est exactement ce qui se passerait lorsque le modèle est utilisé pour prédire de **nouvelles observations**. Lorsque le modèle prédira le prix d'une nouvelle propriété, et que cette propriété a une valeur manquante, comment sera-t-elle imputée ?
+
+À ce moment-là, les seules informations disponibles seront les données d'entraînement. Les valeurs manquantes seront imputées en utilisant **la moyenne ou la médiane des données d'entraînement**.
+
+L'objectif de générer des prédictions sur l'ensemble de test est d'estimer la performance du modèle sur des données inédites. Les valeurs nulles dans l'ensemble de test doivent être traitées de la même manière que les valeurs manquantes dans les données inédites.
+
+Dans la pratique du Machine Learning, ces méthodes de prétraitement sont dites **ajustées** sur l'ensemble d'entraînement et appliquées à l'ensemble de test. Cet ajustement est le calcul de statistiques descriptives.
+
+## Réflexions Finales
+
+Ce chapitre a parcouru la gestion des valeurs numériques manquantes avec les étapes suivantes :
+
+- Comprendre pourquoi les valeurs sont manquantes
+- Développer une stratégie : filtrage ou différents types d'imputation
+- Ajuster la méthode d'imputation aux données d'entraînement
+- Imputer les valeurs nulles dans l'ensemble de test en utilisant les statistiques des données d'entraînement
+
+Il est important de se rappeler d'éviter la fuite d'information dans la gestion des valeurs nulles. Cela peut être fait par une séparation claire de l'ensemble d'entraînement et de test, avant le prétraitement des données.
+
+En regardant l'exemple précédent, que se passerait-il si la colonne « Quartier » était manquante ? La section suivante explorera comment gérer les valeurs **catégorielles** manquantes.
+
+## Solutions
+
+:::{.solution #sol-mean-imp}
+@exr-mean-imp
+
+| Étudiant | Taille (cm) | Genre | Niveau |
+|:--------:|:-----------:|:-----:|:------:|
+| A        | 170         | M     | 10     |
+| B        |             | F     | 10     |
+| C        | 165         | F     | 9      |
+| D        | 180         | M     | 11     |
+| E        | 172         | M     |        |
+| F        | 160         | F     | 9      |
+
+La moyenne du Niveau est :
+$$
+\text{Moyenne} = \frac{10 + 10 + 9 + 11 + 9}{5} = \frac{49}{5} = 9,8
+$$
+
+Le Niveau manquant de l'étudiant E serait remplacé par $9,8$.
+:::
+
+:::{.solution #sol-outlier}
+@exr-outlier
+
+Série : $[2,3,4,5,7,9,50]$
+
+$$
+\text{Moyenne} = \frac{2 + 3 + 4 + 5 + 7 + 9 + 50}{7} = \frac{80}{7} \approx 11,43
+$$
+
+La médiane est le nombre du milieu de la série triée. Ici, $5$.
+:::
+
+:::{.solution #sol-outlier-rm}
+@exr-outlier-rm
+
+Série : $[2,3,4,5,7,9]$
+
+$$
+\text{Moyenne} = \frac{2 + 3 + 4 + 5 + 7 + 9}{6} = \frac{30}{6} = 5
+$$
+
+Comme la série contient maintenant un nombre pair d'observations, la médiane est la moyenne des deux nombres du milieu, ici $\frac{4+5}{2} = 4,5$.
+:::
+
+:::{.solution #sol-odd-median}
+@exr-odd-median
+
+- ${5, 7, 9, 12, 15}, \text{Médiane} = 9$
+- ${1, 2, 2, 4, 8, 10, 13}, \text{Médiane} = 4$
+:::
+
+:::{.solution #sol-even-median}
+@exr-even-median
+
+- ${2, 3, 5, 8}, \text{Médiane} = \frac{3 + 5}{2} = 4$
+- ${4, 6, 8, 10, 12, 14}, \text{Médiane} = \frac{8 + 10}{2} = 9$
+:::
+
+:::{.solution #sol-median-imp}
+@exr-median-imp
+
+La médiane de la série Niveau est le nombre du milieu de la série triée : ${9, 9, 10, 10, 11}$. Ici, c'est $10$. Le niveau de l'étudiant E serait donc rempli avec $10$.
+:::
+
+:::{.solution #sol-time-imp}
+@exr-time-imp
+
+Pour l'imputation, nous devons calculer à la fois la moyenne et la médiane :
+
+$$
+\begin{aligned}
+\text{Moyenne} &= \frac{18 + 18,5 + 19,1 + 20 + 20,8 + 22,1 + 22,8 + 23,5 + 26,2}{9} \\
+&= \frac{191}{9} = 21,22
+\end{aligned}
+$$
+
+La médiane est le nombre du milieu de la série triée :
+
+${18, 18,5, 19,1, 20,0, 20,8, 22,1, 22,8, 23,5, 26,2}$
+
+Ici : $20,8$
+
+| Temps | Température (°C) | Température (Imputation Moyenne) | Température (Imputation Médiane) |
+|:-----:|:----------------:|:--------------------------------:|:--------------------------------:|
+| 1     | 18.0             | 18.0                             | 18.0                             |
+| 2     | 18.5             | 18.5                             | 18.5                             |
+| 3     | 19.1             | 19.1                             | 19.1                             |
+| 4     | 20.0             | 20.0                             | 20.0                             |
+| 5     | 20.8             | 20.8                             | 20.8                             |
+| 6     |                  | 21.22                            | 20.8                             |
+| 7     | 22.1             | 22.1                             | 22.1                             |
+| 8     | 22.8             | 22.8                             | 22.8                             |
+| 9     | 23.5             | 23.5                             | 23.5                             |
+| 10    |                  | 21.22                            | 20.8                             |
+| 11    | 26.2             | 26.2                             | 26.2                             |
+
+:::

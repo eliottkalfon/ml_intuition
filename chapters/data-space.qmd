@@ -10,7 +10,7 @@ From the point of view of the practitioner, data is rarely given, it is earned w
 
 The simplest form of data is tabular data. The first known examples of data tables are 4000 years old (!) dating back to the Old Babylonian period. Then, these clay tablets were used for accounting and trade.
 
-![Ancient Babylonian clay tablet showing a table [@CDLI2025Terms]](/images/data-space/tablet.jpg){width=50%}
+![Gemini-generated image of a Babylonian tablet, the author's drawing skills being insufficient for an original sketch](/images/data-space/tablet.png){width=50%}
 
 ## The Anatomy of a Table
 

@@ -1,0 +1,87 @@
+---
+title: Première Prédiction avec le Machine Learning
+---
+
+Avec le Machine Learning, nous pouvons générer des prédictions basées sur des données historiques. Ces prédictions peuvent résoudre des problèmes dans le monde réel.
+
+Imaginez ce scénario : vous êtes un jeune médecin et vous recevez un rapport de biopsie. Le laboratoire liste **deux mesures** des noyaux cellulaires d'une masse suspecte — un périmètre moyen de **100 µm** et une aire moyenne de **1200 µm²**. À partir de ces deux chiffres seulement : **la masse est-elle plus probablement bénigne (non cancéreuse) ou maligne (cancéreuse) ?**
+
+Si ce vocabulaire vous semble peu familier, ne vous inquiétez pas — la question est simple : **peut-on prédire le diagnostic de cette tumeur à partir de deux mesures ?**
+
+## Une approche visuelle
+
+Au premier abord, cela peut sembler impossible. Mais supposons que nous ayons une base de données de nombreuses tumeurs, chacune étiquetée comme bénigne ou maligne. Une première étape naturelle serait de **tracer ces exemples** en utilisant les deux mesures du rapport : périmètre et aire. Chaque point sur le graphique porterait une étiquette.
+
+![Tracer les observations historiques](images/intro/scatter.png){width=60%}
+
+Nous pourrions ensuite tracer la nouvelle observation sur le même graphique. Nous l'étiquetons avec un point d'interrogation car son diagnostic est encore **inconnu**.
+
+![Observer l'observation inconnue](images/intro/scatter_unknown.png){width=60%}
+
+Vous sentiriez-vous maintenant à l'aise pour faire une estimation éclairée ?
+
+Regardez attentivement : la plupart des voisins les plus proches du point inconnu sont malins. Du point de vue des données, l'estimation la plus raisonnable est que la tumeur est maligne. Ce n'est pas une certitude — c'est un jugement probabiliste basé sur les exemples disponibles.
+
+## De l'intuition aux algorithmes
+
+Comment les **ordinateurs** pourraient-ils faire la même chose ? Les ordinateurs n'ont pas (encore) d'yeux, ni de compréhension de la distance et de la proximité.
+
+Un algorithme de prédiction devrait trouver les **voisins les plus proches** d'une observation. Pour ce faire, il devrait mesurer la distance entre cette observation et les autres, et choisir celles avec la **distance la plus courte**.
+
+Ces calculs de distance seront étudiés plus tard. Comme casse-tête, comment calculeriez-vous la distance entre le point A et B sur cette figure ?
+
+Indice : le théorème de Pythagore devrait être utile
+
+![Calculer la distance entre A et B](images/intro/distance.png){width=60%}
+
+::: {.callout-note collapse="true"}
+## Réponse
+
+![Penser à la distance comme l'hypoténuse d'un triangle rectangle](images/intro/distance_triangle.png){width=60%}
+
+Pour trouver la distance entre le point A $(1,1)$ et le point B $(5,4)$ en utilisant le théorème de Pythagore, nous pouvons considérer ces points comme deux sommets d'un triangle rectangle.
+
+La distance horizontale ($\Delta x$) entre les points est :
+$$
+\Delta x = x_2 - x_1 = 5 - 1 = 4
+$$
+
+La distance verticale ($\Delta y$) entre les points est :
+$$
+\Delta y = y_2 - y_1 = 4 - 1 = 3
+$$
+
+Selon le théorème de Pythagore, le carré de l'hypoténuse (la distance $d$ entre les points A et B) est égal à la somme des carrés des deux autres côtés ($\Delta x$ et $\Delta y$) :
+$$
+d^2 = (\Delta x)^2 + (\Delta y)^2
+$$
+
+En substituant les valeurs :
+$$\begin{aligned}
+d^2 &= (4)^2 + (3)^2 \\
+d^2 &= 16 + 9 \\
+d^2 &= 25
+\end{aligned}
+$$
+
+Pour trouver $d$, nous prenons la racine carrée des deux côtés :
+$$\begin{aligned}
+d &= \sqrt{25} = 5 \\
+\end{aligned}
+$$
+
+La distance entre le point A $(1,1)$ et le point B $(5,4)$ est $5$.
+
+:::
+
+Avec la liste des voisins les plus proches, comment feriez-vous une **prédiction** ? Avant de proposer une réponse, réfléchissez à comment vous classeriez les exemples suivants :
+
+![Différents scénarios de voisins](images/intro/five_neighbours.png)
+
+Comme vous l'avez peut-être compris, un simple **vote à la majorité** devrait suffire. Pour générer des prédictions, comptez le nombre de voisins appartenant à chaque diagnostic, et **attribuez le diagnostic ayant le plus grand nombre de voisins**.
+
+C'est tout ! Nous avons notre premier **modèle** qui peut **générer des prédictions** sur le monde basées sur des **observations historiques**. Cette méthode pourrait générer un diagnostic pour n'importe quelle observation basée sur la valeur des deux mesures de ses noyaux cellulaires : aire moyenne et périmètre moyen.
+
+Ce n'est que notre premier pas dans le monde fascinant du Machine Learning. Les modèles de ML peuvent mapper **n'importe quelle entrée**, comme les mesures ci-dessus, **vers n'importe quelle sortie**, comme le diagnostic de tumeur.
+
+Prêt ? Commençons.

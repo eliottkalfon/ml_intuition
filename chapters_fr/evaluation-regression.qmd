@@ -1,0 +1,311 @@
+---
+title: "Évaluer les Modèles de Régression"
+---
+
+Le chapitre précédent a décrit comment évaluer les modèles de classification. L'approche principale était simple :
+
+- Mettre de côté une fraction du jeu de données d'entraînement comme ensemble de test
+- Entraîner le modèle sur l'ensemble d'entraînement, ne pas utiliser l'ensemble de test
+- Utiliser le modèle entraîné pour générer des prédictions sur l'ensemble de test
+- Calculer la distance entre les prédictions et les étiquettes du test
+
+Exactement la même approche peut être appliquée aux modèles de régression. La seule différence avec le chapitre précédent est le calcul de la distance entre les prédictions et les vraies étiquettes.
+
+Pour rappel, une tâche de régression est la prédiction de **toute quantité continue**, comme la température de demain, le prix d'une propriété ou un rendement agricole.
+
+L'idée générale reste la même :
+$$
+\text{Entrée} \longrightarrow \text{Modèle} \longrightarrow \text{Prédiction}
+$$
+
+## Évaluation des Distances
+
+Commençons par un exemple simple d'un modèle prédisant le prix d'une propriété :
+
+| Propriété | Prix Prédit | Prix Réel |
+|-----------|-------------|-----------|
+| 1         | 140         | 120       |
+| 2         | 110         | 100       |
+| 3         | 100         | 130       |
+
+
+Comment mesureriez-vous l'erreur de ce modèle ? Une façon de le faire est de mesurer la **distance** entre chaque prédiction et la vérité terrain en utilisant les fonctions de distance explorées dans le [chapitre Distance](distance.qmd){target=_blank}.
+
+L'erreur de chaque prédiction peut être calculée avec la formule suivante :
+
+$$
+\text{Erreur de Prédiction} = \text{Prédiction} - \text{Vérité Terrain}
+$$
+
+L'erreur dans la prédiction pour la propriété 1 est :
+
+$$
+\text{Erreur de Prédiction}_1 = 140 - 120 = 20
+$$
+
+Le modèle a sur-prédit le prix de la propriété de 20.
+
+:::{.exercise #exr-pred-err}
+Montrez que les erreurs de prédiction pour les propriétés 2 et 3 sont respectivement $10$ et $-30$.
+:::
+
+:::{.solution #sol-pred-err}
+Vous devriez obtenir le tableau suivant :
+
+| Propriété | Prix Prédit | Prix Réel | Erreur de Prédiction |
+|:---------:|:-----------:|:---------:|:--------------------:|
+| 1         | 140         | 120       | 20                   |
+| 2         | 110         | 100       | 10                   |
+| 3         | 100         | 130       | -30                  |
+:::
+
+Maintenant, comment pouvons-nous **agréger** ces erreurs pour arriver à une évaluation du modèle ? Une idée serait de calculer l'**erreur moyenne** (pour $n$ observations) :
+
+$$
+\text{Erreur Moyenne} = \frac{\text{Erreur}_1 + \text{Erreur}_2 + \cdots + \text{Erreur}_n}{n}
+$$
+
+En calculant l'erreur moyenne du modèle exemple, nous obtenons :
+
+$$
+\text{Erreur Moyenne} = \frac{20 + 10 + (-30)}{3} = \frac{0}{3} = 0
+$$
+
+En utilisant l'opérateur $\Sigma$ décrit dans le [chapitre Distance](distance.qmd){target=_blank}, cette notation peut être rendue plus compacte :
+
+$$
+\text{Erreur Moyenne} = \frac{1}{n} \sum_{i=1}^{n} (\text{Prédiction}_i - \text{Vérité}_i)
+$$
+
+Si vous n'êtes pas familier avec l'opérateur $\Sigma$, veuillez vous référer au [chapitre Distance](distance.qmd){target=_blank} dans lequel ce concept est clairement expliqué.
+
+## Au-delà de la Soustraction
+
+Remarquez-vous quelque chose d'étrange ? L'erreur moyenne du modèle est $0$, ce qui décrirait un *modèle parfait*. Pourtant, nous voyons bien que ce modèle n'est **pas** parfait, il fait des erreurs, il ne prédit pas parfaitement le prix réel d'aucune des propriétés listées ci-dessus.
+
+Le problème avec la moyenne des erreurs est qu'elles s'annulent. Le numérateur de la fraction devient $0$.
+
+En se rappelant le [chapitre Distance](distance.qmd){target=_blank}, pourrions-nous utiliser une autre fonction de distance pour éviter ce problème ?
+
+Il existe deux méthodes principales que nous pourrions utiliser :
+
+- Faire la moyenne des **valeurs absolues** des erreurs
+- Faire la moyenne des **erreurs au carré**
+
+### Erreur Absolue Moyenne
+
+La valeur absolue d'un nombre $x$ est notée $|x|$. C'est la **magnitude** du nombre, indépendamment de son signe. Par exemple $|2| = |-2| = 2$. Lorsque nous faisons la moyenne des valeurs absolues de l'erreur, nous pouvons calculer l'**Erreur Absolue Moyenne (EAM ou MAE en anglais)** :
+
+$$
+\text{Erreur Absolue Moyenne} = \frac{| \text{Erreur}_1 | + | \text{Erreur}_2 | + \cdots + | \text{Erreur}_n |}{n}
+$$
+
+En utilisant la notation $\Sigma$ pour rendre cela plus compact :
+
+$$
+\text{EAM} = \frac{1}{n} \sum_{i=1}^{n} | \text{Prédiction}_i - \text{Vérité}_i |
+$$
+
+En calculant l'Erreur Absolue Moyenne pour les données exemple :
+
+| Propriété | Prix Prédit | Prix Réel | Erreur de Prédiction |
+|:---------:|:-----------:|:---------:|:--------------------:|
+| 1         | 140         | 120       | 20                   |
+| 2         | 110         | 100       | 10                   |
+| 3         | 100         | 130       | -30                  |
+
+Nous obtenons :
+
+$$
+\text{EAM} = \frac{|20| + |10| + |-30|}{3} = \frac{20 + 10 + 30}{3} = \frac{60}{3} = 20
+$$
+
+Cette métrique est bien meilleure que l'erreur moyenne car elle nous donne une idée de la distance moyenne entre les prédictions individuelles et la vérité terrain. En regardant les données exemple, le modèle est en moyenne à $20$ de la vérité terrain.
+
+### Erreur Quadratique Moyenne
+
+Une autre façon de le faire est de calculer la moyenne des **erreurs au carré**. Cette métrique est appelée l'**Erreur Quadratique Moyenne (EQM ou MSE en anglais)** :
+
+$$
+\text{Erreur Quadratique Moyenne} = \frac{\text{Erreur}_1^2 + \text{Erreur}_2^2 + \cdots + \text{Erreur}_n^2}{n}
+$$
+
+Ou, en notation $\Sigma$ :
+
+$$
+\text{EQM} = \frac{1}{n} \sum_{i=1}^{n} (\text{Prédiction}_i - \text{Vérité}_i)^2
+$$
+
+Cette méthode a l'avantage de transformer chaque erreur en un nombre positif avant de faire la moyenne. De cette façon, les erreurs ne s'annulent pas.
+
+En calculant l'Erreur Quadratique Moyenne pour les données exemple, nous obtenons :
+
+$$
+\text{EQM} = \frac{20^2 + 10^2 + (-30)^2}{3} = \frac{400 + 100 + 900}{3} = \frac{1400}{3} \approx 466.67
+$$
+
+Remarquez-vous quelque chose d'étrange ? La métrique résultante est **beaucoup plus grande** que prévu, au-delà de l'échelle des erreurs originales.
+
+Une façon de rendre cette métrique plus interprétable est de prendre la racine carrée de ce nombre :
+
+$$
+\sqrt{466.67} \approx 21.6
+$$
+
+Ceci s'appelle la **Racine de l'Erreur Quadratique Moyenne (REQM ou RMSE en anglais)**, une autre métrique de performance couramment utilisée pour les modèles de régression. Elle se calcule comme suit :
+
+$$
+\text{REQM} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (\text{Prédiction}_i - \text{Vérité}_i)^2 } = \sqrt{\text{EQM}}
+$$
+
+### L'Erreur Moyenne reste utile
+
+Cela signifie-t-il que nous ne devrions jamais utiliser l'Erreur Moyenne ? Pas exactement.
+
+L'Erreur Moyenne est toujours une métrique utile pour voir si un modèle de prédiction a un **biais** ; c'est-à-dire, si un modèle sur-prédit ou sous-prédit de manière systématique. Si l'erreur moyenne du modèle n'est pas proche de $0$, cela signifie qu'il y a une sur-prédiction ou sous-prédiction **systématique**.
+
+Cela peut être illustré avec l'exemple suivant :
+
+| Propriété | Prix Prédit | Prix Réel |
+|:---------:|:-----------:|:---------:|
+| 1         | 150         | 120       |
+| 2         | 130         | 100       |
+| 3         | 140         | 130       |
+
+
+:::{.exercise #exr-avg-err}
+Calculez l'Erreur Moyenne de ce modèle et déterminez si le modèle sur-prédit ou sous-prédit.
+:::
+
+:::{.solution #sol-avg-err}
+$$\begin{aligned}
+\text{Erreur de Prédiction}_1 &= 150 - 120 = 30 \\
+\text{Erreur de Prédiction}_2 &= 130 - 100 = 30 \\
+\text{Erreur de Prédiction}_3 &= 140 - 130 = 10 \\
+\text{Erreur Moyenne} &= \frac{30 + 30 + 10}{3} = \frac{70}{3} \approx 23.33
+\end{aligned}
+$$
+
+Puisque l'erreur moyenne est positive, le modèle **sur-prédit**.
+:::
+
+## Exercice Pratique
+
+En regardant ces deux modèles de tarification, lequel choisiriez-vous ?
+
+| Propriété | Prédiction Modèle A | Prédiction Modèle B | Vérité |
+|:---------:|:-------------------:|:-------------------:|:------:|
+| 1         | 150                 | 140                 | 120    |
+| 2         | 110                 | 100                 | 100    |
+| 3         | 100                 | 140                 | 140    |
+
+:::{.exercise #exr-acc-mod}
+Montrez que le Modèle B génère des prédictions plus proches de la vérité que le Modèle A, en utilisant les métriques d'erreur montrées ci-dessus.
+:::
+
+:::{.solution #sol-acc-mod}
+
+**Modèle A :**
+
+- Erreurs : $150-120=30$, $110-100=10$, $100-140=-40$
+- Erreur Moyenne : $\frac{30 + 10 + (-40)}{3} = 0$
+- EAM : $\frac{|30| + |10| + |-40|}{3} = \frac{30 + 10 + 40}{3} = 26.67$
+- EQM : $\frac{30^2 + 10^2 + (-40)^2}{3} = \frac{900 + 100 + 1600}{3} = \frac{2600}{3} \approx 866.67$
+- REQM : $\sqrt{866.67} \approx 29.43$
+
+**Modèle B :**
+
+- Erreurs : $140-120=20$, $100-100=0$, $140-140=0$
+- Erreur Moyenne : $\frac{20 + 0 + 0}{3} = 6.67$
+- EAM : $\frac{|20| + |0| + |0|}{3} = \frac{20}{3} \approx 6.67$
+- EQM : $\frac{20^2 + 0^2 + 0^2}{3} = \frac{400}{3} \approx 133.33$
+- REQM : $\sqrt{133.33} \approx 11.55$
+
+Toutes les métriques montrent que le Modèle B est **plus proche** de la vérité.
+:::
+
+## Choisir Entre les Métriques
+
+Ce chapitre a introduit quatre métriques de performance :
+
+- Erreur Moyenne
+- Erreur Absolue Moyenne
+- Erreur Quadratique Moyenne
+- Racine de l'Erreur Quadratique Moyenne
+
+Dans l'exemple ci-dessus, toutes les métriques **s'accordaient** ; en d'autres termes, toutes les métriques donnaient un avantage au Modèle B. Ce n'est pas toujours le cas.
+
+:::{.exercise #exr-dis}
+Calculez l'EQM et l'EAM des deux modèles ci-dessous :
+
+| Propriété | Prédiction Modèle A | Prédiction Modèle B | Vérité |
+|:---------:|:-------------------:|:-------------------:|:------:|
+|     1     |        115          |         110         |   100  |
+|     2     |        105          |         110         |   120  |
+|     3     |        125          |         130         |   140  |
+|     4     |        100          |          90         |   150  |
+:::
+
+:::{.solution #sol-dis}
+
+**Modèle A :**
+
+- Erreurs : $115-100=15$, $105-120=-15$, $125-140=-15$, $100-150=-50$
+- EAM : $\frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75$
+- EQM : $\frac{15^2 + (-15)^2 + (-15)^2 + (-50)^2}{4} = \frac{225 + 225 + 225 + 2500}{4} = \frac{3175}{4} = 793.75$
+
+**Modèle B :**
+
+- Erreurs : $110-100=10$, $110-120=-10$, $130-140=-10$, $90-150=-60$
+- EAM : $\frac{|10| + |-10| + |-10| + |-60|}{4} = \frac{10 + 10 + 10 + 60}{4} = \frac{90}{4} = 22.5$
+- EQM : $\frac{10^2 + (-10)^2 + (-10)^2 + (-60)^2}{4} = \frac{100 + 100 + 100 + 3600}{4} = \frac{3900}{4} = 975$
+:::
+
+Comme vous pouvez le voir, le Modèle A a une EAM plus élevée que le Modèle B, et le Modèle B a une EQM plus élevée que le Modèle A. Comment cela est-il possible ? Pour comprendre la raison, nous devons comprendre la différence entre la valeur absolue et la valeur au carré d'un nombre. Ces deux fonctions sont visualisées ci-dessous :
+
+![Fonctions valeur absolue et carré](/images/evaluation/abs_vs_square.png)
+
+Vous pouvez voir que la fonction carré **augmente plus rapidement** à mesure que les nombres deviennent plus grands ou plus négatifs, alors que le taux de croissance de la fonction valeur absolue **reste constant**. Cela signifie que l'Erreur Quadratique Moyenne pénalisera fortement les **erreurs extrêmes**. En se rappelant l'exemple précédent :
+
+| Propriété | Prédiction Modèle A | Prédiction Modèle B | Vérité |
+|:---------:|:-------------------:|:-------------------:|:------:|
+|     1     |        115          |         110         |   100  |
+|     2     |        105          |         110         |   120  |
+|     3     |        125          |         130         |   140  |
+|     4     |        100          |          90         |   150  |
+
+Le Modèle B a une erreur de prédiction très élevée sur la propriété 4 ($-60$), ce qui résulte en une valeur d'EQM plus élevée que le Modèle A, malgré une Erreur Absolue Moyenne plus faible. Que faire dans ces cas ?
+
+Premièrement, cela n'arrive pas souvent. Il a fallu un peu de travail pour construire un exemple qui montrerait ce cas limite.
+
+Considérations pratiques mises à part, il n'y a pas de métrique universelle. La meilleure métrique est celle qui mesure le mieux les **conséquences d'une erreur** dans le monde réel.
+
+En prenant l'exemple de la tarification immobilière, les **grandes erreurs** peuvent avoir un impact négatif fort :
+
+- La sur-tarification peut mener à des **pertes financières** car l'entreprise de tarification peut ne pas être capable de vendre la propriété
+- La sous-tarification peut **réduire** le nombre de transactions qu'une entreprise immobilière peut réaliser
+
+Compte tenu de ces considérations, l'Erreur Quadratique Moyenne est un meilleur choix.
+
+Il existe également des raisons mathématiques pour lesquelles l'Erreur Quadratique Moyenne et la Racine de l'Erreur Quadratique Moyenne sont **parfois préférées** à l'Erreur Absolue Moyenne. L'une d'entre elles est expliquée dans la note ci-dessous.
+
+::: {.callout-note collapse="true"}
+## Erreur Quadratique Moyenne et Différentiabilité
+
+La fonction d'Erreur Absolue Moyenne (EAM) n'est **pas différentiable** en $0$, car la fonction valeur absolue $|x|$ a un "coin pointu" en $x=0$.
+
+C'est un problème pour de nombreux algorithmes d'apprentissage automatique, qui reposent sur la **différentiabilité** pour l'optimisation (comme la descente de gradient). En revanche, l'Erreur Quadratique Moyenne (EQM) est différentiable partout, ce qui la rend plus facile à utiliser pour l'entraînement des modèles.
+
+:::
+
+## Réflexions Finales
+
+Cette section a décrit l'évaluation des modèles de régression. Elle est très similaire à l'approche utilisée pour les modèles de classification décrite dans le chapitre précédent :
+
+- Mettre de côté une part des données d'entraînement comme ensemble de test
+- En utilisant le modèle entraîné, générer des prédictions sur cet ensemble de test
+- Calculer la distance à la vérité des prédictions générées en utilisant des métriques de performance telles que l'Erreur Moyenne, l'EAM, l'EQM ou la REQM
+
+La principale différence est le **calcul de distance** utilisé.
+
+C'est tout pour l'évaluation des modèles. Le prochain chapitre introduira la deuxième architecture de modèle d'Apprentissage Automatique de ce livre : les Arbres de Décision.

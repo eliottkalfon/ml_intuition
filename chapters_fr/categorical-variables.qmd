@@ -1,0 +1,200 @@
+---
+title: Encoder les Variables Catégorielles
+---
+
+Toutes les données ne sont pas numériques. Les variables catégorielles représentent des **regroupements** de données. Par exemple, une propriété à Berlin peut avoir un quartier donné, par exemple « Neukölln », « Kreuzberg » ou « Charlottenburg ».
+
+| Propriété | Surface (m²) | Distance au Centre (km) | Quartier        | Nom de Rue          | Classe Énergétique | Prix de Vente (K€) |
+|:---------:|:------------:|:-----------------------:|:---------------:|:-------------------:|:------------------:|:------------------:|
+| A         | 85           | 4.2                     | Neukölln        | Sonnenallee         | B                  | 420                |
+| B         | 120          | 2.5                     | Kreuzberg       | Bergmannstr.        | A                  | 610                |
+| C         | 95           | 6.1                     | Charlottenburg  | Kantstr.            | C                  | 390                |
+| D         | 70           | 3.8                     | Kreuzberg       | Bergmannstr.        | D                  | 370                |
+| E         | 110          | 1.2                     | Charlottenburg  | Unter Den Linden    | B                  | 700                |
+| F         | 60           | 5.0                     | Neukölln        | Sonnenallee         | F                  | 310                |
+
+
+:::{.exercise #exr-spot-cat}
+Pouvez-vous repérer les autres variables catégorielles dans le tableau ci-dessus ?
+:::
+
+Tous les modèles de Machine Learning étudiés jusqu'à présent traitent les observations comme des **points dans l'espace**. Les variables numériques déterminent naturellement les coordonnées des points dans l'[espace](data-space.qmd). Les propriétés peuvent être tracées selon leur surface et leur distance au centre-ville sans problème :
+
+![Propriétés tracées selon la surface et la distance au centre](/images/categorical-variables/surface_distance.png)
+
+Nous pourrions essayer de construire un modèle qui ignore le quartier et utilise la « Distance au Centre » comme proxy. Ce n'est pas une mauvaise idée, mais beaucoup d'information est **perdue** dans le processus. Et c'est quoi le centre de Berlin de toute façon ?
+
+Comment les modèles géreraient-ils ces variables catégorielles comme les quartiers ? C'est le sujet de ce chapitre.
+
+## Types de Variables Catégorielles
+
+Il existe deux principaux types de variables catégorielles :
+
+- Variables ordinales : ces variables **ont un ordre**. La classe d'efficacité énergétique d'une propriété va de A (plus efficace) à G (moins efficace)
+- Variables nominales : ces variables **n'ont pas d'ordre intrinsèque**. Aucun classement possible ne peut être fait des quartiers (par exemple, « Neukölln » ou « Kreuzberg ») mentionnés dans l'exemple précédent
+
+
+## Variables Ordinales
+
+Les variables ordinales peuvent être converties en nombres relativement facilement. Par exemple, vous pourriez mapper la classe énergétique de A à G aux **nombres 1 à 7**. Cela créerait une autre dimension dans l'espace des caractéristiques des propriétés :
+
+| Propriété | Surface (m²) | Distance au Centre (km) | Classe Énergétique | Classe Énergétique Encodée |
+|:---------:|:------------:|:-----------------------:|:------------------:|:--------------------------:|
+| A         | 85           | 4.2                     | B                  | 2                          |
+| B         | 120          | 2.5                     | A                  | 1                          |
+| C         | 95           | 6.1                     | C                  | 3                          |
+| D         | 70           | 3.8                     | D                  | 4                          |
+| E         | 110          | 1.2                     | B                  | 2                          |
+| F         | 60           | 5.0                     | F                  | 6                          |
+
+Voici un graphique des propriétés en trois dimensions : surface, distance au centre et classe énergétique encodée.
+
+![Propriétés en 3D : Surface, Distance au Centre, Classe Énergétique Encodée](/images/categorical-variables/3d_surface_distance_energy.png)
+
+Si la notion d'espace n'est pas tout à fait claire, référez-vous au [chapitre sur l'espace des données](data-space.qmd){target=_blank}.
+
+## Variables Nominales
+
+La gestion des variables nominales est plus délicate, car une conversion directe en nombres n'aurait pas de sens. Pourquoi « Neukölln » serait 1 et « Kreuzberg » serait 2 ? Ou l'inverse ? Nous avons besoin d'une solution plus intelligente. Les sections suivantes en décriront deux.
+
+### One-Hot Encoding
+
+La meilleure façon de comprendre le One-Hot Encoding est de le visualiser avant de l'expliquer. Imaginez le jeu de données suivant :
+
+| Propriété | Quartier        | Surface (m²) | Prix de Vente (K€) |
+|:---------:|:---------------:|:------------:|:------------------:|
+| A         | Neukölln        | 85           | 420                |
+| B         | Kreuzberg       | 120          | 610                |
+| C         | Charlottenburg  | 95           | 390                |
+| D         | Kreuzberg       | 70           | 370                |
+| E         | Charlottenburg  | 110          | 700                |
+| F         | Neukölln        | 60           | 310                |
+
+Le jeu de données One-Hot Encodé ressemblerait à ceci :
+
+| Propriété | Surface (m²) | Prix de Vente (K€) | Kreuzberg | Charlottenburg | Neukölln |
+|:---------:|:------------:|:------------------:|:---------:|:--------------:|:--------:|
+| A         | 85           | 420                | 0         | 0              | 1        |
+| B         | 120          | 610                | 1         | 0              | 0        |
+| C         | 95           | 390                | 0         | 1              | 0        |
+| D         | 70           | 370                | 1         | 0              | 0        |
+| E         | 110          | 700                | 0         | 1              | 0        |
+| F         | 60           | 310                | 0         | 0              | 1        |
+
+Que s'est-il passé ? La colonne quartier d'origine a disparu et a été remplacée par trois colonnes contenant soit 1, soit 0.
+
+Le One-Hot Encoding convertit une variable catégorielle en une liste de **colonnes binaires**, indiquant si oui ou non la propriété **appartient** à une catégorie. L'avantage de cette méthode est qu'elle n'assume aucun ordre.
+
+Un inconvénient de cette approche est qu'elle peut créer **beaucoup de colonnes**. Imaginez que vous vouliez appliquer la même méthode au nom de rue. Vous pourriez vous retrouver avec **des milliers de colonnes**. Pour des raisons mathématiques que nous n'aborderons pas, cela peut être un problème pour les algorithmes de Machine Learning. Ceci est parfois appelé **la malédiction de la dimensionnalité**. Si vous voulez développer une intuition rapide de pourquoi, souvenez-vous simplement que beaucoup de choses étranges se produisent dans un espace avec de nombreuses dimensions.
+
+::: {.callout-note collapse="true"}
+## One-Hot Encoding en pratique
+
+En pratique, le One-Hot Encoding convertit une variable catégorielle avec $N$ valeurs distinctes en $N-1$ colonnes binaires. Pourquoi en supprimer une ?
+
+En statistiques et en Machine Learning, de nombreux problèmes surviennent lorsque les caractéristiques d'un jeu de données sont **parfaitement corrélées**. Pour éviter cela, le One-Hot Encoding supprime l'une des colonnes binaires.
+
+Revenant à l'exemple avec trois valeurs de quartier (Kreuzberg, Charlottenburg et Neukölln), le jeu de données traité ressemblerait à ceci :
+
+| Propriété | Surface (m²) | Prix de Vente (K€) | Kreuzberg | Charlottenburg |
+|:---------:|:------------:|:------------------:|:---------:|:--------------:|
+| A         | 85           | 420                | 0         | 0              |
+| B         | 120          | 610                | 1         | 0              |
+| C         | 95           | 390                | 0         | 1              |
+| D         | 70           | 370                | 1         | 0              |
+| E         | 110          | 700                | 0         | 1              |
+| F         | 60           | 310                | 0         | 0              |
+
+Avoir à la fois Kreuzberg et Charlottenburg à 0 signifierait que la propriété est à Neukölln.
+
+:::
+
+Le One-Hot Encoding résout le problème des variables catégorielles pour les variables avec **peu de catégories**. Comment pourrions-nous encoder des variables catégorielles comme le nom de rue ? Ignorer ces variables avec de nombreuses valeurs distinctes est une possibilité. Cependant, dans l'exemple de la tarification immobilière, le nom de rue pourrait contenir des informations pertinentes. La section suivante explorera une idée.
+
+## Target Encoding
+
+En pensant à un modèle de tarification immobilière, comment pourrions-nous représenter le nom de rue d'une propriété comme un nombre ?
+
+Nous voulons pouvoir capturer l'**impact du nom de rue sur le prix**. Pour ce faire, nous pourrions encoder chaque valeur de la variable catégorielle (par exemple, « Sonnenallee » ou « Bergmannstr. ») comme la **moyenne** de la variable cible pour les observations de cette catégorie. Dans ce cas, chaque nom de rue serait remplacé par le prix moyen dans cette rue.
+
+C'est une définition abstraite, rendons-la plus concrète avec un exemple :
+
+| Propriété | Surface (m²) | Nom de Rue          | Prix de Vente (K€) |
+|:---------:|:------------:|:-------------------:|:------------------:|
+| A         | 85           | Sonnenallee         | 420                |
+| B         | 120          | Bergmannstr.        | 610                |
+| C         | 95           | Kantstr.            | 390                |
+| D         | 70           | Bergmannstr.        | 370                |
+| E         | 110          | Unter Den Linden    | 700                |
+| F         | 60           | Sonnenallee         | 310                |
+
+Pour encoder le nom de rue avec Target Encoding, calculez la valeur moyenne de la cible pour chaque nom de rue :
+
+- Bergmannstr. : $\frac{610 + 370}{2} = 490$
+- Unter Den Linden : $700$ (une seule propriété)
+
+:::{.exercise #exr-avg-street}
+Montrez que la valeur cible moyenne pour Sonnenallee est 365.
+:::
+
+Le jeu de données avec une variable nom de rue encodée par Target Encoding ressemble maintenant à ceci :
+
+| Propriété | Surface (m²) | Nom de Rue          | Prix de Vente (K€) | Nom de Rue Encodé |
+|:---------:|:------------:|:-------------------:|:------------------:|:-----------------:|
+| A         | 85           | Sonnenallee         | 420                | 365               |
+| B         | 120          | Bergmannstr.        | 610                | 490               |
+| C         | 95           | Kantstr.            | 390                | 390               |
+| D         | 70           | Bergmannstr.        | 370                | 490               |
+| E         | 110          | Unter Den Linden    | 700                | 700               |
+| F         | 60           | Sonnenallee         | 310                | 365               |
+
+De cette façon, une grande partie de l'information pertinente pour le prix du nom de rue est préservée. Le principal avantage de cette méthode est qu'elle peut traiter des variables catégorielles avec de nombreuses valeurs **sans créer trop de dimensions**.
+
+Un inconvénient possible de cette méthode est que s'il y a des noms de rue pour lesquels il n'y a qu'une ou quelques propriétés, la moyenne ne serait que le prix de la **seule propriété de cette rue**. Il existe des moyens intelligents de traiter ces cas, bien qu'ils dépassent le cadre de ce livre.
+
+::: {.callout-note collapse="true"}
+## Si vous êtes curieux
+
+Une façon d'éviter le problème décrit ci-dessus, vous pouvez décider d'un seuil (par exemple, 10), et encoder tout nom de rue avec moins de 10 observations avec la **moyenne globale** au lieu de la moyenne pour ce nom de rue.
+
+:::
+
+Ce processus de calcul de moyenne peut également être utilisé dans le contexte de classification binaire. La moyenne de la variable cible pour une valeur catégorielle donnée pourrait être la moyenne des 0 et des 1 de l'étiquette cible (c'est-à-dire, négatifs et positifs).
+
+## Fuite d'Information
+
+Comme mentionné dans la section d'introduction, l'encodage catégoriel peut être une source de **fuite d'information** entre l'ensemble d'entraînement et de test. Pour éviter cette fuite, il est essentiel de calculer toutes ces transformations sur l'**ensemble d'entraînement uniquement**.
+
+En One-Hot Encoding, créez uniquement des colonnes pour les valeurs catégorielles **vues dans l'ensemble d'entraînement**. Si une nouvelle valeur est trouvée dans l'ensemble de test, elle pourrait être soit exclue, soit signalée comme manquante (avec une autre colonne binaire). Utiliser l'ensemble du jeu de données pour encoder les variables catégorielles **ne simulerait pas** les conditions de prédiction réelles.
+
+Pour le Target Encoding, la valeur cible moyenne pour chaque catégorie doit être calculée uniquement sur les **données d'entraînement**. Ces moyennes peuvent ensuite être appliquées à l'ensemble de test. Si une nouvelle valeur catégorielle est trouvée dans l'ensemble de test, elle peut être exclue ou encodée avec la moyenne globale de la variable cible (sur l'ensemble du jeu de données).
+
+Pourquoi s'en soucier ? Lorsque le modèle est utilisé pour la prédiction, l'objectif de la séparation des données entre l'ensemble d'entraînement et de test est d'estimer la performance du modèle sur des données inédites. Pour ce faire, il est essentiel de calculer les transformations de prétraitement sur les données d'entraînement. À l'avenir, les données arriveront une ou plusieurs lignes à la fois. Les seules moyennes disponibles seront celles des données d'entraînement.
+
+## Réflexions Finales
+
+Sans l'encodage approprié, les variables catégorielles ne peuvent pas être traitées par les modèles de Machine Learning. Les modèles ML apprennent les relations entre les entrées et une variable cible en utilisant des astuces mathématiques applicables aux listes de nombres ([distance](distance.qmd) ou [séparation de l'espace](trees-intuition.qmd)).
+
+L'encodage des variables catégorielles les convertit en nombres qui peuvent ensuite être utilisés dans le processus d'entraînement et de prédiction. Les méthodes d'encodage de ce chapitre incluent :
+
+- **Encodage Ordinal** : mapper les valeurs catégorielles avec un ordre intrinsèque à un nombre
+- **One-Hot Encoding** : représenter les variables catégorielles comme une liste de colonnes binaires
+- **Target Encoding** : mapper les valeurs catégorielles à la valeur cible moyenne pour ce groupe
+
+Le chapitre suivant explorera un autre type de données : les dates et heures.
+
+## Solutions
+
+:::{.solution #sol-spot-cat}
+@exr-spot-cat
+Les deux autres variables catégorielles sont :
+
+- Nom de Rue
+- Classe Énergétique
+:::
+
+:::{.solution #sol-avg-street}
+@exr-avg-street
+
+$\frac{420 + 310}{2} = 365$
+:::

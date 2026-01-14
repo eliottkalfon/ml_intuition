@@ -1,0 +1,29 @@
+---
+title: "Prétraitement des Données"
+---
+
+Maintenant que nous avons une bonne idée de ce à quoi ressemble la prédiction avec le Machine Learning, commençons à appliquer ces méthodes à des exemples concrets.
+
+Pouvez-vous, aujourd'hui, prendre des données sur quelque chose que vous souhaitez prédire et appliquer un algorithme [KNN](neighbours.qmd){target="_blank"} ou un [Decision Tree](trees-intuition.qmd){target="_blank"} ? Probablement pas, car il nous manque encore une étape.
+
+Ce chapitre comblera le fossé entre les grandes idées décrites dans les chapitres précédents et les applications ML concrètes : **le prétraitement des données**.
+
+Vous avez peut-être remarqué que toutes les données utilisées dans ce livre étaient **synthétiques**, c'est-à-dire générées par un script Python rapide. Cela s'explique par plusieurs raisons :
+
+- Garantir que les données ont les propriétés requises
+- Droits d'auteur, questions juridiques et éthiques
+- Commodité
+
+Ces données générées présentaient certaines caractéristiques que vous avez peut-être notées :
+
+- Uniquement des variables numériques, pas de champs catégoriels ou de dates
+- Des variables à la même échelle (la plupart du temps)
+- Pas de données manquantes
+
+En d'autres termes, dans tous les exemples, les données étaient représentées comme un tableau propre de données avec des nombres à la même échelle.
+
+Ce **ne sera pas** le cas pour la plupart des jeux de données que vous rencontrerez. Le monde réel est désordonné. Certaines données seront manquantes, certaines données ne seront même pas des nombres.
+
+Les chapitres suivants exploreront des façons de traiter ces problèmes un par un. Cette dernière partie du livre vous permettra d'appliquer des modèles de Machine Learning à tout problème de régression ou de classification que vous rencontrerez.
+
+Note : Le prétraitement est une source courante de **fuite d'information** entre l'ensemble d'entraînement et l'ensemble de test. Si l'idée de séparation train/test n'est pas claire, je recommanderais de relire le chapitre [Évaluation des Modèles](model-evaluation.qmd){target="_blank"} une fois de plus. Le concept de fuite d'information sera exploré plus en détail dans cette section.

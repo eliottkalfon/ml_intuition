@@ -1,0 +1,165 @@
+---
+title: "Définir la Prédiction"
+---
+
+## La Tâche de Prédiction
+
+Pré-diction, ou « dire avant ». Être capable de décrire le futur, de **rendre l'inconnu connu**.
+
+Les prédictions sont partout autour de nous. Quand vous déverrouillez votre téléphone et regardez les prévisions météo (un autre mot pour « prédiction »). Quand vous ouvrez votre boîte de réception, un algorithme de prédiction a déjà classé vos messages entrants comme « spam » ou « non-spam ». Mais vous n'avez pas besoin de votre téléphone pour être exposé aux prédictions.
+
+À bien des égards, la prédiction est indissociable de la perception. Lorsque nous percevons le monde qui nous entoure, nous prédisons constamment ce que nous allons **percevoir ensuite**. Par exemple, en lisant cette phrase, vous prédisez son prochain ___.
+
+En réfléchissant aux prédictions, il existe deux types principaux de tâches de prédiction :
+
+- **Régression :** prédiction d'une valeur continue, un nombre réel
+  - La température de demain
+  - Le prix d'un bien immobilier
+
+- **Classification :** prédiction d'étiquettes de classe
+  - Emails : « spam » ou « non-spam »
+  - Images : « chien » ou « chat »
+  - Type de tumeur : « maligne » ou « bénigne »
+  - Le mot suivant dans cette ___
+
+::: {.exercise #exr-reg-clas}
+Trouvez d'autres exemples de problèmes pour :
+
+1. La classification
+2. La régression
+:::
+
+Nous n'avons pas nécessairement besoin du Machine Learning pour faire ces prédictions. Historiquement, nous nous sommes appuyés sur (1) des règles artisanales et (2) l'intuition humaine.
+
+### Règles artisanales
+
+Ces règles artisanales sont des modèles simplifiés de la réalité. Par exemple, pour estimer le prix d'un bien immobilier, je pourrais simplement multiplier le **prix moyen au mètre carré** dans le quartier par le nombre de mètres carrés du bien. Des règles comme celle-ci peuvent fonctionner étonnamment bien.
+
+Le nombre de caractères spéciaux dans une adresse email peut être un filtre anti-spam relativement fiable. Par exemple, une adresse comme `!_!urgent$!_deal@secure.offer.xyz` éveille immédiatement les soupçons en raison de sa combinaison chaotique de **ponctuation** et d'un **domaine de premier niveau non standard** suspect. Ces signaux d'alerte pourraient être codés dans le programme de filtre anti-spam pour classer les messages entrants comme « spam ».
+
+### Intuition humaine
+
+Le dictionnaire Merriam-Webster définit l'intuition comme :
+
+> « intuition, nom :
+>
+> a. Le pouvoir ou la faculté d'atteindre une connaissance directe ou une cognition sans pensée rationnelle évidente ni inférence
+> b. appréhension ou cognition immédiate »
+> [@merriamwebster_intuition]
+
+L'intuition est l'accès à la connaissance, rendre l'inconnu connu, **sans effort apparent**. Elle se construit généralement au fil du temps à partir des éléments suivants [@parrish_kahneman_intuition_2016] :
+
+- Un environnement lent et stable
+- Beaucoup de pratique et un grand échantillon
+- Des retours fréquents et précis
+
+Concrètement, après 20 ans d'expérience, un bon oncologue peut repérer une tumeur maligne sur une radiographie sans même avoir à y réfléchir. Il a vu tellement d'exemples qu'il a construit une intuition au fil du temps. Un agent immobilier chevronné (dans un marché évoluant lentement) peut « sentir » le prix d'un bien. Un recruteur expérimenté peut repérer des individus très talentueux après seulement une courte conversation.
+
+En regardant l'exemple de la prévention du spam, si je reçois un email de l'adresse `!_!urgent$!_deal@secure.offer.xyz` me disant que j'ai gagné à la loterie et que je dois juste cliquer sur un lien pour réclamer mon prix, je serai sceptique. Je n'ai pas besoin d'utiliser des règles explicites pour cela, l'expérience humaine suffit. (Cela peut ne pas s'appliquer à mes grands-parents)
+
+### Inconvénients
+
+Le monde est complexe, désordonné et en constante évolution.
+
+- La complexité rend la construction d'un système basé sur des règles presque impossible
+- Le changement constant signifie que les tendances du marché fluctuent, les attaquants apprennent à contourner les algorithmes simples de détection de spam, et de nouveaux types de maladies émergent. Les organisations qui s'appuient sur des règles ou l'intuition humaine doivent constamment mettre à jour leur approche
+- Construire une intuition est un processus coûteux et chronophage lié à des individus spécifiques
+- La performance humaine est inconstante, nous avons tous des mauvais jours
+
+Les systèmes de Machine Learning ne sont pas parfaits non plus, mais ils répondent à beaucoup de ces inconvénients.
+
+## Qu'est-ce que le Machine Learning ?
+
+Maintenant, en quoi le Machine Learning (ML) est-il différent ?
+
+Le Machine Learning peut être défini à partir de ses termes :
+
+- **Machine :** un système informatisé, non humain
+- **Learning (Apprentissage) :** un système qui s'adapte aux données, pas une méthode basée sur des règles
+
+Comme son nom l'indique, les algorithmes de ML **apprennent** à prédire soit des valeurs continues soit des étiquettes de classe à partir de données historiques. Par exemple, un **algorithme** ou **modèle** de Machine Learning apprendrait la relation entre les caractéristiques d'un bien immobilier et son prix, ou les dimensions d'une tumeur et son type (« maligne » ou « bénigne »). Comment exactement cet apprentissage se produit est l'objet de ce livre, mais ne nous emballons pas.
+
+### Modèles de Machine Learning
+
+Tout au long de ce livre, « modèle » et « algorithme » de Machine Learning seront utilisés de manière interchangeable. Un modèle peut être défini par ce qu'il fait. Dans le contexte du Machine Learning prédictif, il prend une **entrée** et produit une **prédiction**.
+
+$$
+\text{Entrée} \longrightarrow \text{Modèle} \longrightarrow \text{Prédiction}
+$$
+
+En adaptant ce cadre à l'exemple du diagnostic de tumeur, le modèle prend les mesures de la tumeur comme caractéristiques et produit un diagnostic :
+
+$$
+\text{Mesures de la tumeur} \longrightarrow \text{Modèle} \longrightarrow \text{Diagnostic}
+$$
+
+Pour l'estimation immobilière, l'entrée est les caractéristiques du bien et la sortie une prédiction de prix.
+
+$$
+\text{Caractéristiques du bien} \longrightarrow \text{Modèle} \longrightarrow \text{Prédiction de prix}
+$$
+
+En français, modèles et algorithmes ont des significations légèrement différentes. Le dictionnaire Cambridge définit un modèle comme :
+
+> « modèle, nom : une représentation simple d'un système ou d'un processus, en particulier une qui peut être utilisée dans des calculs ou des prédictions de ce qui pourrait arriver »
+> [@cambridge_model]
+
+D'autre part, un algorithme est défini comme :
+
+> « algorithme, nom : un ensemble d'[...] instructions ou règles qui, surtout si elles sont données à un ordinateur, aideront à calculer une réponse à un problème »
+> [@cambridge_algorithm]
+
+En combinant ces deux définitions, un modèle de Machine Learning est un système qui s'adapte aux données pour générer des prédictions. Il **apprend** la relation entre une entrée et une sortie.
+
+### Qu'est-ce qui fait un bon modèle ?
+
+Le travail d'un modèle de Machine Learning est de faire les prédictions les plus précises, d'être aussi proche de la réalité que possible.
+$$
+\text{Entrée} \longrightarrow \text{Modèle} \longrightarrow \text{Prédiction}
+$$
+
+Les prédictions doivent être aussi proches que possible de la **vérité terrain**, qui est la vraie étiquette ou sortie. Par exemple, la vérité terrain pour une tumeur est son diagnostic réel. La vérité terrain pour un bien immobilier est son prix de vente final. La vérité terrain pour un email est s'il est réellement du spam ou non.
+
+::: {.callout-note collapse="true"}
+## Définir la Vérité
+
+J'aime les définitions, mais définir la vérité est souvent décevant. Dans ce livre, tout ce qui est vrai est confirmé par la réalité qui nous entoure ; c'est-à-dire l'observation empirique. Ce choix est fait par commodité. Si vous voulez vous amuser, je vous recommande d'ouvrir quelques dictionnaires et de lire les définitions du mot « vérité ».
+
+Dans le dictionnaire Cambridge, « vérité » est défini comme :
+
+> « la qualité d'être vrai »
+> [@cambridge_truth]
+
+Espérant trouver une réponse là, j'ai cherché la définition de « vrai » :
+
+> « correct et non faux ; exact »
+> [@cambridge_true]
+
+Comme vous pouvez le voir, avec un succès limité. Cela renvoie à la circularité des mots et des dictionnaires. Nous ne définissons les mots qu'avec d'autres mots.
+
+:::
+
+Mesurer ce degré de proximité avec la vérité terrain et construire des modèles précis sont des sujets qui seront abordés dans les prochaines sections.
+
+## Réflexions Finales
+
+Les modèles de Machine Learning sont partout. En leur essence, ce sont simplement des **systèmes de prédiction adaptatifs**. Ils apprennent les relations entre entrée et sortie à partir de données historiques.
+
+$$
+\text{Entrée} \longrightarrow \text{Modèle} \longrightarrow \text{Prédiction}
+$$
+
+Comment ces modèles s'adaptent et apprennent est le sujet de ce livre.
+
+Pourtant, ces modèles de prédiction ne sont qu'une partie du domaine du Machine Learning. Le chapitre suivant explorera deux autres types de Machine Learning : l'Apprentissage Non Supervisé et l'Apprentissage par Renforcement.
+
+## Solutions
+
+::: {.solution #sol-reg-clas}
+@exr-reg-clas
+
+Quelques idées :
+
+1. Classification : détection de fraude, détection d'objets, approbation de crédit
+2. Régression : prédiction de la demande énergétique, prédiction des ventes, prédiction du cours des actions
+:::
