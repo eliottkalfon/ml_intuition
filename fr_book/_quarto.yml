@@ -1,13 +1,14 @@
 project:
   type: book
-  output-dir: docs_fr
+  output-dir: docs
+  
 
 book:
   title: "Comprendre le Machine Learning"
   author: "Eliott Kalfon"
   date: "04/01/2026"
   chapters:
-    - chapters_fr/index.qmd
+    - index.qmd
     - part: "Introduction au Machine Learning"
       chapters:
       - chapters_fr/intro.qmd

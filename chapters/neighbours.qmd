@@ -186,12 +186,12 @@ where $(x_1, y_1)$ are the features of the training observation, and $(x_2, y_2)
 
 Let's compute the distance for each observation:
 
-| Transaction Amount | Customer Age | Fraudulent? | Distance to (93,23) |
+| Trans. Amount | Cust. Age | Fraud? | Distance to (93,23) |
 |:--------:|:-------:|:-----------:|:-------------------:|
 | 95 | 22 | Yes | $\sqrt{(95-93)^2 + (22-23)^2} \approx 2.24$ |
-| 90 | 25 | Yes | $\sqrt{(90-93)^2 + (25-23)^2} = \approx 3.61$ |
+| 90 | 25 | Yes | $\sqrt{(90-93)^2 + (25-23)^2} \approx 3.61$ |
 | 92 | 23 | Yes | $\sqrt{(92-93)^2 + (23-23)^2} = 1.00$ |
-| 97 | 21 | Yes | $\sqrt{(97-93)^2 + (21-23)^2} = \approx 4.47$ |
+| 97 | 21 | Yes | $\sqrt{(97-93)^2 + (21-23)^2} \approx 4.47$ |
 | 93 | 24 | Yes | $\sqrt{(93-93)^2 + (24-23)^2} = 1.00$ |
 | 94 | 23 | No | $\sqrt{(94-93)^2 + (23-23)^2} = 1.00$ |
 | 20 | 80 | No | $\sqrt{(20-93)^2 + (80-23)^2} \approx 92.6$ |
