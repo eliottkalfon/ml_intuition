@@ -4,11 +4,11 @@ title: "Defining Prediction"
 
 ## The Prediction Task
 
-Pre-diction, or, “to say before”. To be able to describe the future, to **make the unknown known**.
+Pre-diction, or, “to say before”: to be able to describe the future, to **make the unknown known**.
 
 Predictions are all around us. When you unlock your phone and look at the weather forecast (another word for "prediction"). When you open your email inbox, a prediction algorithm has already classified your incoming messages as “spam” or “non-spam”. But you do not need your phone to be exposed to predictions.
 
-In many regards, prediction is indistinguishable from perception. When we perceive the world around us, we are constantly predicting what we will be **perceiving next**. For example, as you read this sentence, you are predicting its next ___.
+In many ways, prediction is indistinguishable from perception. When we perceive the world around us, we are constantly predicting what we will be **perceiving next**. For example, as you read this sentence, you are predicting its next ___.
 
 Thinking about predictions, there are two main prediction tasks:
 
@@ -53,7 +53,7 @@ Intuition is access to knowledge, making the unknown known, **without apparent e
 - Lots of practice and a large sample size
 - Frequent and accurate feedback
 
-Making this concrete, after 20 years of experience, a good oncologist can spot a malignant tumour on an x-ray without even having to think about it. They have seen so many examples that they have built an intuition over time. A seasoned real estate agent (in a slowly changing market) can “feel” the price of a property. An experienced recruiter can spot highly talented individuals after only a short conversation.
+After 20 years of experience, a good oncologist can spot a malignant tumour on an x-ray without even having to think about it. They have seen so many examples that they have built an intuition over time. A seasoned real estate agent (in a slowly changing market) can “feel” the price of a property. An experienced recruiter can spot highly talented individuals after only a short conversation.
 
 Looking at the example of spam prevention, if I receive an email from the address `!_!urgent$!_deal@secure.offer.xyz` telling me I have won the lottery and just need to click a link to claim my prize, I will be sceptical. I do not need to use explicit rules for this, human experience is enough. (This may not apply to my grandparents)
 
@@ -99,7 +99,7 @@ $$
 \text{Property Characteristics} \longrightarrow \text{Model} \longrightarrow \text{Price Prediction}
 $$
 
-In English, models and algorithms have slightly different meanings. The Cambridge Dictionary defines a model as:
+In English, "models" and "algorithms" have slightly different meanings. The Cambridge Dictionary defines a model as:
 
 > “model, noun: a simple representation of a system or process, especially one that can be used in calculations or predictions of what might happen”  
 > [@cambridge_model]
@@ -118,7 +118,7 @@ $$
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
 $$
 
-Predictions must be as close as possible to the **ground truth**, which is the true label or output. For example, the ground truth for a tumor is its actual diagnosis. The ground truth for a property is its final sale price. The ground truth for an email is whether it is actually spam or not.
+Predictions must be as close as possible to the **ground truth**, which is the true label or output. For example, the ground truth for a tumour is its actual diagnosis. The ground truth for a property is its final sale price. The ground truth for an email is whether it is actually spam or not.
 
 ::: {.callout-note collapse="true"}
 ## Defining Truth

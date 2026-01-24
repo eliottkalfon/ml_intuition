@@ -8,7 +8,7 @@ It is called “supervised” because the algorithm learns from **labelled examp
 
 Supervised learning will be the main focus of this book. This section will briefly explore other types of Machine Learning.
 
-Sometimes, these labels do not exist. Let's imagine an archaeologist who stumbles upon a **pile of bones**. They want to understand if all the bones belong to the same species. One possible approach would be to measure all of these bones. In a simplified case, there are two measurements, length and width.
+Sometimes, these labels do not exist. Let's imagine an archaeologist who stumbles upon a pile of bones. They want to understand if all the bones belong to the same species. One possible approach would be to measure all of these bones. In a simplified case, there are two measurements, length and width.
 
 Plotting all these bone measurements on a chart, two clusters emerge:
 

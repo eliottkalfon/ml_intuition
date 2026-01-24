@@ -12,11 +12,23 @@ If that vocabulary sounds unfamiliar, don’t worry — the question is straight
 
 At first it might feel impossible. But suppose we have a database of many tumours, each labelled benign or malignant. A natural first step is to **plot those examples** using the two measurements from the report: perimeter and area. Each point on the chart would carry a label.
 
+::: {.content-visible unless-format="epub"}
 ![Plotting historical observations](images/intro/scatter.png){width=60%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Plotting historical observations](images/intro/scatter.png){width=100%}
+:::
 
 We could then plot the new observation on the same chart. We label it with a question mark as its diagnosis is still **unknown**.
 
+::: {.content-visible unless-format="epub"}
 ![Looking at the unknown observation](images/intro/scatter_unknown.png){width=60%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Looking at the unknown observation](images/intro/scatter_unknown.png){width=100%}
+:::
 
 Would you now feel comfortable making an educated guess?
 
@@ -24,9 +36,9 @@ Look carefully: most of the unknown point’s nearest neighbours are malignant. 
 
 ## From intuition to algorithms
 
-How could **computers** do the same? Computers do not (yet) have eyes, or an understanding of distance and closeness.
+How could computers do the same? Computers do not (yet) have eyes, or an understanding of distance and closeness.
 
-A prediction algorithm would need to find an observation's **closest neighbours**. To do so, it would need to measure the distance between this observation and others, and pick the ones with the **shortest distance**.
+A prediction algorithm would need to find an observation's **closest neighbours**. To do so, it would need to measure the distance between this observation and others, and pick the ones with the shortest distance.
 
 These distance calculations will be studied later. As a brain teaser, how would you calculate the distance between point A and B on this figure?
 
@@ -39,7 +51,7 @@ Hint: the Pythagorean theorem should be useful
 
 ![Thinking of distance as the hypotenuse of a right-angle triangle](images/intro/distance_triangle.png){width=60%}
 
-To find the distance between point A $(1,1)$ and point B $(5,4)$ using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
+To find the distance between point A (1,1) and point B (5,4) using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
 
 The horizontal distance ($\Delta x$) between the points is:
 $$
@@ -70,7 +82,7 @@ d &= \sqrt{25} = 5 \\
 \end{aligned}
 $$
 
-The distance between point A $(1,1)$ and point B $(5,4)$ is $5$.
+The distance between point A (1,1) and point B (5,4) is 5.
 
 :::
 

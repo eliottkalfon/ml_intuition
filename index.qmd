@@ -25,7 +25,7 @@ I am an Applied Science Manager and Computer Science Lecturer in Berlin. I have 
 - **Intuition first:** the book focuses on intuition and real-world thinking rather than formal proofs. If you would like a more code-heavy or mathematical approach, [please get in touch](https://eliottkalfon.com/contact){target="_blank"}[ (https://eliottkalfon.com/contact)]{.content-visible when-format="pdf"}.
 - **Synthetic data:** all examples use synthetic data for clarity. Nothing in this book is medical, legal or financial advice.
 
-::: {.content-visible when-format="pdf"}
+::: {.content-visible when-format="pdf,epub"}
 \vspace{2cm}
 
 ---
