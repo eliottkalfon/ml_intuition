@@ -16,7 +16,13 @@ The simplest form of data is tabular data. The first known examples of data tabl
 
 Tables are made of columns and rows.
 
+::: {.content-visible unless-format="epub"}
 ![Basic elements of a table](/images/data-space/table.png){width=60%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Basic elements of a table](/images/data-space/table.png){width=100%}
+:::
 
 Rows generally represent a real-world **entity**, with columns describing the **attributes** of this entity. Here, each row is a property, and each column describes an attribute of this property.
 
@@ -27,7 +33,7 @@ As shown in this table, the values stored in tables can have different data type
 - boolean: true or false
 - datetime: representing a point in time
 
-For prediction purposes, the label to predict is generally one of the many columns describing various entities. In the case of the example above, it is the “Sale Price (€)” column.
+In the case of the example above, the label to predict is the “Sale Price (€)” column.
 
 In most organisations today, tabular data is stored in **relational databases**, also called Relational Database Management Systems. It is a mouthful, frequently abbreviated as RDBMS, still a mouthful.
 
@@ -49,7 +55,7 @@ This book will focus on building an intuition for Machine Learning using tabular
 
 ## From Data to Space
 
-Getting back to tabular data, these first sections will focus on **numerical columns only**. Categorical and datetime features will be explored in the later sections. Spoiler alert: they will all be converted to numbers.
+Getting back to tabular data, these first sections will focus on **numerical columns**. Categorical and datetime features will be explored in the later sections. Spoiler alert: they will all be converted to numbers.
 
 Looking at the table below, each tumour can be represented by a list of its characteristics, a list of numbers.
 
@@ -61,7 +67,7 @@ Looking at the table below, each tumour can be represented by a list of its char
 In Mathematics, a list of numbers can represent a **point in space**. In the example above, each tumour is associated with three numbers. We can use these numbers to represent each tumour as a point in a three-dimensional space.
 
 ::: {.callout-note collapse="true"}
-## Note: But what is space?
+## But what is space?
 
 This is a fascinating question. The short answer is: a **set** with a degree of **structure**. A set can be thought of as a collection. But any set is not necessarily a space, as spaces require structure.
 
@@ -71,9 +77,17 @@ As an example, I can see objects on my desk: a glass of water and my notebook. T
 
 Below are two charts plotting suspicious mass observations in two and three dimensions:
 
+::: {.content-visible unless-format="epub"}
 ![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png){width=50%}
 
 ![Plotting observations in three dimensions](/images/data-space/scatter_plot_3d.png){width=50%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png){width=100%}
+
+![Plotting observations in three dimensions](/images/data-space/scatter_plot_3d.png){width=100%}
+:::
 
 This text is printed on a flat surface. And yet, using perspective and transparency, one can create the illusion of a third dimension. If you think that this 3D chart is barely legible, I agree with you.
 

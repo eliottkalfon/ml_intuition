@@ -12,7 +12,7 @@ The reason the new Generative AI models like ChatGPT or Claude feel so “AI” 
 
 ## Machine Learning
 
-Machine Learning (ML) is a subset of Artificial Intelligence focused on designing algorithms that learn from data. These Machine Learning algorithms, also called “models”, can generalise the rules learnt on training data to new, unseen data points. As opposed to rule-based systems, ML algorithms are **not** explicitly programmed; they learn rules from the data. The next chapter will explore Machine Learning in more detail.
+Machine Learning (ML) is a subset of Artificial Intelligence focussed on designing algorithms that learn from data. These Machine Learning algorithms, also called “models”, can generalise the rules learnt on training data to new, unseen data points. As opposed to rule-based systems, ML algorithms are **not** explicitly programmed; they learn rules from the data. The next chapter will explore Machine Learning in more detail.
 
 ## Deep Learning
 
@@ -24,7 +24,7 @@ Machine Learning is closely related to Data Science. For a few years (my first y
 
 Data Science is the extraction of generalisable knowledge from data. This is not knowledge at a given point in time, but **generalisable** knowledge. Knowledge that can be used on unseen data to predict the future. 
 
-Whereas Data Analysis is the study of what happened, Data Science focusses on predicting future trends. Looking at the case of property pricing, Data Analysts would create reports and analyse what happened. On the other hand, Data Scientists would build models to predict the price of new properties.
+Whereas Data Analysis is the study of what happened, Data Science focusses on predicting will happen. Looking at the case of property pricing, Data Analysts would create reports and analyse past transactions. On the other hand, Data Scientists would build models to predict the price of new properties.
 
 Beyond the hype, Data Science is a field concerned with extracting and extrapolating knowledge from data [@dhar_2013].
 
@@ -39,7 +39,7 @@ This chapter defined some important concepts:
 
 - Artificial Intelligence (AI): design of intelligent systems, emulation of human cognition
 - Machine Learning (ML): algorithms that learn from data
-- Deep Learning: branch of ML focused on Neural Network modelling
+- Deep Learning: branch of ML focussed on Neural Network modelling
 - Data Science (DS): extraction of generalisable knowledge from data
 
 Now that these definitions are out of the way, the next chapters will show how Machine Learning models work. The next chapter will explore the role of **data** in Machine Learning.

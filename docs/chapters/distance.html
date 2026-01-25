@@ -393,7 +393,7 @@ window.Quarto = {
 </header>
 
 
-<p>Now that points exist in space, we could use the distance between them to make <strong>inferences</strong>. Inference refers to using information we have, to make <strong>guesses</strong> about the information we do not have.</p>
+<p>Now that points exist in space, we could use the distance between them for inference. Inference refers to using information we have, to make <strong>guesses</strong> about the information we do not have.</p>
 <p>As an example, we could infer that similar tumours, or tumours with similar characteristics, have the same diagnosis. But how could we measure the <strong>similarity</strong> between two observations?</p>
 <p>This is where <strong>distance</strong> comes in.</p>
 <p>Looking at the plot below, how would you classify the tumour labelled by a question mark?</p>
@@ -448,9 +448,9 @@ window.Quarto = {
 \text{surface}_C - \text{surface}_B = 55 - 35 = 20
 \]</span></p>
 <p>In line with our intuition, we see that the distance between B and C is <strong>shorter</strong> than the distance between A and C. The difference in their surface area is <strong>smaller</strong>.</p>
-<p>Moving forward, we will note the distance between A and C (or any other two points) as <span class="math inline">\(d(A, C)\)</span>.</p>
+<p>Moving forward, we will note the distance between A and C (or any other two points) as d(A, C).</p>
 <p>Can you see an <strong>issue</strong> with using subtraction as a distance calculation?</p>
-<p>One of the main issues is that <span class="math inline">\(d(A, C) \neq d(C, A)\)</span>. From the above, we know <span class="math inline">\(d(A, C) = 33\)</span>. Calculating <span class="math inline">\(d(C, A)\)</span>, we get:</p>
+<p>One of the main issues is that d(A, C) ≠ d(C, A). From the above, we know d(A, C) = 33. Calculating d(C, A), we get:</p>
 <p><span class="math display">\[
 \text{surface}_A - \text{surface}_C = 22 - 55 = -33
 \]</span></p>
@@ -466,7 +466,7 @@ window.Quarto = {
 </ul>
 <section id="absolute-value" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="absolute-value"><span class="header-section-number">6.2.1</span> Absolute Value</h3>
-<p>You can think of the <strong>absolute value</strong> of a number as removing any negative sign. More rigorously, the absolute value is the <strong>magnitude</strong> of a number, not its sign. The absolute value of number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>.</p>
+<p>You can think of the <strong>absolute value</strong> of a number as removing any negative sign. More rigorously, the absolute value is the <strong>magnitude</strong> of a number. The absolute value of number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>.</p>
 <p>For example: <span class="math inline">\(|2| = |-2| = 2\)</span></p>
 <p>For mathematically-inclined readers (others can close their eyes for two lines), the absolute value <strong>function</strong> is defined as:</p>
 <p><span class="math display">\[
@@ -476,7 +476,12 @@ x &amp; \text{if } x \geq 0 \\
 -x &amp; \text{if } x &lt; 0
 \end{cases}
 \]</span></p>
-<p>Plotting the absolute value of all numbers between <span class="math inline">\(-5\)</span> and <span class="math inline">\(5\)</span>, we get the following triangular shape:</p>
+<p>You can read this formula as:</p>
+<ul>
+<li>For all non-negative numbers, the absolute value is equal to the number itself <span class="math inline">\(|2| = 2\)</span></li>
+<li>For all negative numbers, the absolute value is the opposite of this number: <span class="math inline">\(|-3| = 3\)</span></li>
+</ul>
+<p>Plotting the absolute value of all numbers between -5 and 5, we get the following triangular shape:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/distance/asbolute_value.png" class="img-fluid figure-img"></p>
@@ -510,7 +515,7 @@ x &amp; \text{if } x \geq 0 \\
 (\text{surface}_A - \text{surface}_C)^2 &amp;= (22 - 55)^2 = (-33)^2 = 1089
 \end{aligned}
 \]</span></p>
-<p>Plotting the square of all numbers in the range <span class="math inline">\(-5\)</span> to <span class="math inline">\(5\)</span>, we notice that it has a parabolic shape:</p>
+<p>Plotting the square of all numbers in the range -5 to 5, we notice that it has a parabolic shape:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/distance/square_function.png" class="img-fluid figure-img"></p>
@@ -518,8 +523,10 @@ x &amp; \text{if } x \geq 0 \\
 </figure>
 </div>
 <p>This function <strong>increases faster</strong> as the input number grows.</p>
-<p>One potential issue with squared difference is that this number can grow very fast, and is sometimes hard to interpret. Considering the example above, it seems strange that the distance between <span class="math inline">\(22\)</span> and <span class="math inline">\(55\)</span> would be <span class="math inline">\(1089\)</span>.</p>
-<p>To make squared differences more interpretable, it is common to use the square root of the squared difference. The square root (noted <span class="math inline">\(\sqrt{\phantom{x}}\)</span>) is the number which, when multiplied by itself, gives the original number. For example, <span class="math inline">\(\sqrt{9} = 3\)</span> because <span class="math inline">\(3 \cdot 3 = 9\)</span></p>
+<p>One potential issue with squared difference is that this number can grow very fast, and is sometimes hard to interpret. Considering the example above, it seems strange that the distance between 22 and 55 would be 1089.</p>
+<p>To make squared differences more interpretable, it is common to use the square root of the squared difference. The square root (noted <span class="math inline">\(\sqrt{\phantom{x}}\)</span>) is the number which, when multiplied by itself, gives the original number.</p>
+<p>For example: <span class="math inline">\(\sqrt{9} = 3\)</span></p>
+<p>Because: <span class="math inline">\(3 \cdot 3 = 9\)</span></p>
 <p>Going back to the example, the square root difference between A and C would be:</p>
 <p><span class="math display">\[
 \sqrt{(\text{surface}_C - \text{surface}_A)^2} = \sqrt{33^2} = \sqrt{1089} = 33
@@ -546,7 +553,7 @@ x &amp; \text{if } x \geq 0 \\
 <figcaption>Thinking of distance as the hypotenuse of a right-angle triangle</figcaption>
 </figure>
 </div>
-<p>To find the distance between point A <span class="math inline">\((1,1)\)</span> and point B <span class="math inline">\((5,4)\)</span> using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.</p>
+<p>To find the distance between point A (1,1) and point B (5,4) using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.</p>
 <p>The horizontal distance (<span class="math inline">\(\Delta x\)</span>) between the points is: <span class="math display">\[
 \Delta x = x_2 - x_1 = 5 - 1 = 4
 \]</span> The vertical distance (<span class="math inline">\(\Delta y\)</span>) between the points is: <span class="math display">\[
@@ -563,15 +570,15 @@ d &amp;= \sqrt{25} \\
 d &amp;= 5
 \end{aligned}
 \]</span></p>
-<p>So, the distance between point A <span class="math inline">\((1,1)\)</span> and point B <span class="math inline">\((5,4)\)</span> is <span class="math inline">\(5\)</span>.</p>
+<p>So, the distance between point A (1,1) and point B (5,4) is 5.</p>
 <p>You may notice a striking similarity between the Pythagorean theorem and the <strong>square root of the squared distance</strong> defined in the previous section.</p>
 <p>The distance function derived from the Pythagorean theorem is called the <strong>Euclidean distance</strong>. Let us compare the Euclidean distance in one and two dimensions:</p>
 <ul>
 <li><p>In one dimension: <span class="math display">\[
-d(A, B) = \sqrt{(x_2 - x_1)^2}
+d(A, B) = \sqrt{(b_1 - a_1)^2}
 \]</span></p></li>
 <li><p>In two dimensions: <span class="math display">\[
-d(A, B) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2}
 \]</span></p></li>
 </ul>
 <div id="exr-euc-dis" class="exercise theorem">
@@ -580,8 +587,8 @@ d(A, B) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
 <thead>
 <tr class="header">
 <th style="text-align: center;">Point</th>
-<th style="text-align: center;"><span class="math inline">\(x_1\)</span></th>
-<th style="text-align: center;"><span class="math inline">\(x_2\)</span></th>
+<th style="text-align: center;">Dim. 1</th>
+<th style="text-align: center;">Dim. 2</th>
 </tr>
 </thead>
 <tbody>
@@ -597,7 +604,7 @@ d(A, B) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
 </tr>
 </tbody>
 </table>
-<p>Hint: It may be helpful to plot these two points.</p>
+<p>Hint: It may be helpful to plot these two points in two dimensions.</p>
 </div>
 </section>
 <section id="to-infinity-and-beyond" class="level2" data-number="6.4">
@@ -620,11 +627,11 @@ d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2 + (b_3 - a_3)^2 + \cdots + (b_n - 
 <thead>
 <tr class="header">
 <th style="text-align: center;">Point</th>
-<th style="text-align: center;">Dimension 1</th>
-<th style="text-align: center;">Dimension 2</th>
-<th style="text-align: center;">Dimension 3</th>
-<th style="text-align: center;">Dimension 4</th>
-<th style="text-align: center;">Dimension 5</th>
+<th style="text-align: center;">Dim. 1</th>
+<th style="text-align: center;">Dim. 2</th>
+<th style="text-align: center;">Dim. 3</th>
+<th style="text-align: center;">Dime. 4</th>
+<th style="text-align: center;">Dim. 5</th>
 </tr>
 </thead>
 <tbody>
@@ -664,8 +671,8 @@ d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2 + (b_3 - a_3)^2 + \cdots + (b_n - 
 \]</span></p>
 <p>In this expression:</p>
 <ul>
-<li><span class="math inline">\(i=1\)</span> (at the bottom): Starting value of our counter</li>
-<li><span class="math inline">\(n\)</span> (at the top): Ending value of our counter</li>
+<li><span class="math inline">\(i=1\)</span> (at the bottom): Starting value of the counter</li>
+<li><span class="math inline">\(n\)</span> (at the top): Ending value of the counter</li>
 <li><span class="math inline">\(i\)</span> (after the sigma): The expression to sum for each value of the counter</li>
 </ul>
 <p>To make this more concrete, the sum of all integers from 1 to 4 can be written: <span class="math display">\[
@@ -741,11 +748,18 @@ d(A, B) = \sqrt{48} \approx 6.93
 </div>
 <div id="sol-sig-cal" class="proof solution">
 <p><span class="proof-title"><em>Solution 6.4</em>. </span><a href="#exr-sig-cal" class="quarto-xref">Exercise&nbsp;<span>6.5</span></a></p>
-<ol type="1">
-<li><p><span class="math inline">\(\sum_{i=1}^{4} (i+2) = (1+2) + (2+2) + (3+2) + (4+2) = 3 + 4 + 5 + 6 = 18\)</span></p></li>
-<li><p><span class="math inline">\(\sum_{i=1}^{3} \frac{i}{3} = \frac{1}{3} + \frac{2}{3} + \frac{3}{3} = 2\)</span></p></li>
-<li><p><span class="math inline">\(\sum_{i=1}^{5} \frac{1}{i} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \approx 1 + 0.5 + 0.333 + 0.25 + 0.2 = 2.283\)</span></p></li>
-</ol>
+<p><span class="math display">\[\begin{aligned}
+1. \quad \sum_{i=1}^{4} (i+2) &amp;= (1+2) + (2+2) + (3+2) + (4+2) \\
+&amp;= 3 + 4 + 5 + 6 \\
+&amp;= 18 \\
+\\
+2. \quad \sum_{i=1}^{3} \frac{i}{3} &amp;= \frac{1}{3} + \frac{2}{3} + \frac{3}{3} \\
+&amp;= 2 \\
+\\
+3. \quad \sum_{i=1}^{5} \frac{1}{i} &amp;= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \\
+&amp;\approx 1 + 0.5 + 0.333 + 0.25 + 0.2 \\
+&amp;= 2.283
+\end{aligned}\]</span></p>
 </div>
 
 

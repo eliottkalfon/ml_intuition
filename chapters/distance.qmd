@@ -2,7 +2,7 @@
 title: "Distance and Similarity"
 ---
 
-Now that points exist in space, we could use the distance between them to make **inferences**. Inference refers to using information we have, to make **guesses** about the information we do not have.
+Now that points exist in space, we could use the distance between them for inference. Inference refers to using information we have, to make **guesses** about the information we do not have.
 
 As an example, we could infer that similar tumours, or tumours with similar characteristics, have the same diagnosis. But how could we measure the **similarity** between two observations?
 
@@ -48,11 +48,11 @@ $$
 
 In line with our intuition, we see that the distance between B and C is **shorter** than the distance between A and C. The difference in their surface area is **smaller**.
 
-Moving forward, we will note the distance between A and C (or any other two points) as $d(A, C)$.
+Moving forward, we will note the distance between A and C (or any other two points) as d(A, C).
 
 Can you see an **issue** with using subtraction as a distance calculation?
 
-One of the main issues is that $d(A, C) \neq d(C, A)$. From the above, we know $d(A, C) = 33$. Calculating $d(C, A)$, we get:
+One of the main issues is that d(A, C)  ≠ d(C, A). From the above, we know d(A, C) = 33. Calculating d(C, A), we get:
 
 $$
 \text{surface}_A - \text{surface}_C = 22 - 55 = -33
@@ -71,7 +71,7 @@ There are two mathematical tricks we could use to tackle this challenge:
 
 ### Absolute Value
 
-You can think of the **absolute value** of a number as removing any negative sign. More rigorously, the absolute value is the **magnitude** of a number, not its sign. The absolute value of number $x$ is noted $|x|$.
+You can think of the **absolute value** of a number as removing any negative sign. More rigorously, the absolute value is the **magnitude** of a number. The absolute value of number $x$ is noted $|x|$.
 
 For example: $|2| = |-2| = 2$
 
@@ -85,7 +85,12 @@ x & \text{if } x \geq 0 \\
 \end{cases}
 $$
 
-Plotting the absolute value of all numbers between $-5$ and $5$, we get the following triangular shape:
+You can read this formula as:
+
+- For all non-negative numbers, the absolute value is equal to the number itself $|2| = 2$
+- For all negative numbers, the absolute value is the opposite of this number: $|-3| = 3$
+
+Plotting the absolute value of all numbers between -5 and 5, we get the following triangular shape:
 
 ![Absolute value function](/images/distance/asbolute_value.png)
 
@@ -125,15 +130,19 @@ $$\begin{aligned}
 \end{aligned}
 $$
 
-Plotting the square of all numbers in the range $-5$ to $5$, we notice that it has a parabolic shape:
+Plotting the square of all numbers in the range -5 to 5, we notice that it has a parabolic shape:
 
 ![Square function](/images/distance/square_function.png)
 
 This function **increases faster** as the input number grows.
 
-One potential issue with squared difference is that this number can grow very fast, and is sometimes hard to interpret. Considering the example above, it seems strange that the distance between $22$ and $55$ would be $1089$.
+One potential issue with squared difference is that this number can grow very fast, and is sometimes hard to interpret. Considering the example above, it seems strange that the distance between 22 and 55 would be 1089.
 
-To make squared differences more interpretable, it is common to use the square root of the squared difference. The square root (noted $\sqrt{\phantom{x}}$) is the number which, when multiplied by itself, gives the original number. For example, $\sqrt{9} = 3$ because $3 \cdot 3 = 9$
+To make squared differences more interpretable, it is common to use the square root of the squared difference. The square root (noted $\sqrt{\phantom{x}}$) is the number which, when multiplied by itself, gives the original number. 
+
+For example: $\sqrt{9} = 3$ 
+
+Because: $3 \cdot 3 = 9$
 
 Going back to the example, the square root difference between A and C would be:
 
@@ -157,7 +166,7 @@ Hint: The Pythagorean theorem may be useful.
 
 ![Thinking of distance as the hypotenuse of a right-angle triangle](/images/intro/distance_triangle.png)
 
-To find the distance between point A $(1,1)$ and point B $(5,4)$ using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
+To find the distance between point A (1,1) and point B (5,4) using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
 
 The horizontal distance ($\Delta x$) between the points is:
 $$
@@ -185,7 +194,7 @@ d &= 5
 \end{aligned}
 $$
 
-So, the distance between point A $(1,1)$ and point B $(5,4)$ is $5$.
+So, the distance between point A (1,1) and point B (5,4) is 5.
 
 You may notice a striking similarity between the Pythagorean theorem and the **square root of the squared distance** defined in the previous section.
 
@@ -193,23 +202,23 @@ The distance function derived from the Pythagorean theorem is called the **Eucli
 
 - In one dimension:
   $$
-  d(A, B) = \sqrt{(x_2 - x_1)^2}
+  d(A, B) = \sqrt{(b_1 - a_1)^2}
   $$
 
 - In two dimensions:
   $$
-  d(A, B) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+  d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2}
   $$
 
 :::{.exercise #exr-euc-dis}
 Calculate the Euclidean Distance between point A and B defined in this table:
 
-| Point | $x_1$ | $x_2$ |
+| Point | Dim. 1 | Dim. 2 |
 |:-----:|:-----:|:-----:|
 |   A   |   2   |   4   |
 |   B   |   5   |   1   | 
 
-Hint: It may be helpful to plot these two points.
+Hint: It may be helpful to plot these two points in two dimensions.
 :::
 
 ## To Infinity and Beyond
@@ -224,7 +233,7 @@ $$
 :::{.exercise #exr-high-dim}
 Compute the Euclidean Distance between the points A and B in 5 dimensions (you can use a calculator):
 
-| Point | Dimension 1 | Dimension 2 | Dimension 3 | Dimension 4 | Dimension 5 |
+| Point | Dim. 1 | Dim. 2 | Dim. 3 | Dime. 4 | Dim. 5 |
 |:-----:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|
 |   A   |      2      |      4      |      1      |      3      |      7      |
 |   B   |      5      |      1      |      6      |      2      |      9      |
@@ -246,8 +255,8 @@ $$
 
 In this expression:
 
-- $i=1$ (at the bottom): Starting value of our counter
-- $n$ (at the top): Ending value of our counter
+- $i=1$ (at the bottom): Starting value of the counter
+- $n$ (at the top): Ending value of the counter
 - $i$ (after the sigma): The expression to sum for each value of the counter
 
 To make this more concrete, the sum of all integers from 1 to 4 can be written:
@@ -342,9 +351,16 @@ $$
 :::{.solution #sol-sig-cal}
 @exr-sig-cal
 
-1. $\sum_{i=1}^{4} (i+2) = (1+2) + (2+2) + (3+2) + (4+2) = 3 + 4 + 5 + 6 = 18$
-
-2. $\sum_{i=1}^{3} \frac{i}{3} = \frac{1}{3} + \frac{2}{3} + \frac{3}{3} = 2$
-
-3. $\sum_{i=1}^{5} \frac{1}{i} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \approx 1 + 0.5 + 0.333 + 0.25 + 0.2 = 2.283$
+$$\begin{aligned}
+1. \quad \sum_{i=1}^{4} (i+2) &= (1+2) + (2+2) + (3+2) + (4+2) \\
+&= 3 + 4 + 5 + 6 \\
+&= 18 \\
+\\
+2. \quad \sum_{i=1}^{3} \frac{i}{3} &= \frac{1}{3} + \frac{2}{3} + \frac{3}{3} \\
+&= 2 \\
+\\
+3. \quad \sum_{i=1}^{5} \frac{1}{i} &= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \\
+&\approx 1 + 0.5 + 0.333 + 0.25 + 0.2 \\
+&= 2.283
+\end{aligned}$$
 :::
