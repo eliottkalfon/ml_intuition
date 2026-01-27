@@ -442,7 +442,7 @@ window.Quarto = {
 \]</span></p>
 <p>The model over-predicted the price of the property by 20.</p>
 <div id="exr-pred-err" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 10.1</strong></span> Show that the prediction errors for property 2 and 3 are <span class="math inline">\(10\)</span> and <span class="math inline">\(-30\)</span> respectively.</p>
+<p><span class="theorem-title"><strong>Exercise 10.1</strong></span> Show that the prediction errors for property 2 and 3 are 10 and -30 respectively.</p>
 </div>
 <div id="sol-pred-err" class="proof solution">
 <p><span class="proof-title"><em>Solution 10.1</em>. </span>You should get the following table:</p>
@@ -493,8 +493,8 @@ window.Quarto = {
 </section>
 <section id="beyond-subtraction" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="beyond-subtraction"><span class="header-section-number">10.2</span> Beyond Subtraction</h2>
-<p>Do you notice something strange? The average model error is <span class="math inline">\(0\)</span>, which would describe a <em>perfect model</em>. Yet, we do see that this model is <strong>not</strong> perfect, it makes errors, it does not perfectly predict the actual price of any property listed above.</p>
-<p>The issue with averaging errors is that they cancel out. The numerator of the fraction becomes <span class="math inline">\(0\)</span>.</p>
+<p>Do you notice something strange? The average model error is 0, which would describe a <em>perfect model</em>. Yet, we do see that this model is <strong>not</strong> perfect, it makes errors, it does not perfectly predict the actual price of any property listed above.</p>
+<p>The issue with averaging errors is that they cancel out. The numerator of the fraction becomes 0.</p>
 <p>Remembering the <a href="../chapters/distance.html" target="_blank">Distance chapter</a>, could we use another distance function to avoid this problem?</p>
 <p>There are two main methods we could use:</p>
 <ul>
@@ -503,7 +503,7 @@ window.Quarto = {
 </ul>
 <section id="mean-absolute-error" class="level3" data-number="10.2.1">
 <h3 data-number="10.2.1" class="anchored" data-anchor-id="mean-absolute-error"><span class="header-section-number">10.2.1</span> Mean Absolute Error</h3>
-<p>The absolute value of a number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>. It is the <strong>magnitude</strong> of the number, regardless of its sign. As an example <span class="math inline">\(|2| = |-2| = 2\)</span>. When we average the absolute values of the error, we can compute the <strong>Mean Absolute Error (MAE)</strong>:</p>
+<p>The absolute value of a number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>. It is the <strong>magnitude</strong> of the number, regardless of its sign. As an example <span class="math inline">\(|2| = |-2| = 2\)</span>. When we average the absolute values of the error, we can compute the <strong>Mean Absolute Error (MAE)</strong> for <span class="math inline">\(n\)</span> observations:</p>
 <p><span class="math display">\[
 \text{Mean Absolute Error} = \frac{| \text{Error}_1 | + | \text{Error}_2 | + \cdots + | \text{Error}_n |}{n}
 \]</span></p>
@@ -546,11 +546,11 @@ window.Quarto = {
 <p><span class="math display">\[
 \text{MAE} = \frac{|20| + |10| + |-30|}{3} = \frac{20 + 10 + 30}{3} = \frac{60}{3} = 20
 \]</span></p>
-<p>This metric is much better than the average error as it gives us an idea of the average distance between individual predictions and the ground truth. Looking at the example data, the model is on average <span class="math inline">\(20\)</span> away from the ground truth.</p>
+<p>This metric is much better than the average error as it gives us an idea of the average distance between individual predictions and the ground truth. Looking at the example data, the model is on average 20 away from the ground truth.</p>
 </section>
 <section id="mean-squared-error" class="level3" data-number="10.2.2">
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">10.2.2</span> Mean Squared Error</h3>
-<p>Another way to do so is to compute the average of the <strong>squared errors</strong>. This metric is called the <strong>Mean Squared Error (MSE)</strong>:</p>
+<p>Another way is to compute the average of the <strong>squared errors</strong>. This metric is called the <strong>Mean Squared Error (MSE)</strong> for <span class="math inline">\(n\)</span> observations:</p>
 <p><span class="math display">\[
 \text{Mean Squared Error} = \frac{\text{Error}_1^2 + \text{Error}_2^2 + \cdots + \text{Error}_n^2}{n}
 \]</span></p>
@@ -658,19 +658,29 @@ window.Quarto = {
 <div id="sol-acc-mod" class="proof solution">
 <p><span class="proof-title"><em>Solution 10.3</em>. </span><strong>Model A:</strong></p>
 <ul>
-<li>Errors: <span class="math inline">\(150-120=30\)</span>, <span class="math inline">\(110-100=10\)</span>, <span class="math inline">\(100-140=-40\)</span></li>
-<li>Average Error: <span class="math inline">\(\frac{30 + 10 + (-40)}{3} = 0\)</span></li>
-<li>MAE: <span class="math inline">\(\frac{|30| + |10| + |-40|}{3} = \frac{30 + 10 + 40}{3} = 26.67\)</span></li>
-<li>MSE: <span class="math inline">\(\frac{30^2 + 10^2 + (-40)^2}{3} = \frac{900 + 100 + 1600}{3} = \frac{2600}{3} \approx 866.67\)</span></li>
-<li>RMSE: <span class="math inline">\(\sqrt{866.67} \approx 29.43\)</span></li>
+<li><span class="math inline">\(\text{Errors}\)</span>:
+<ul>
+<li><span class="math inline">\(150-120=30\)</span></li>
+<li><span class="math inline">\(110-100=10\)</span></li>
+<li><span class="math inline">\(100-140=-40\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{Average Error} = \frac{30 + 10 + (-40)}{3} = 0\)</span></li>
+<li><span class="math inline">\(\text{MAE} = \frac{|30| + |10| + |-40|}{3} = \frac{30 + 10 + 40}{3} = 26.67\)</span></li>
+<li><span class="math inline">\(\text{MSE} = \frac{30^2 + 10^2 + (-40)^2}{3} = \frac{900 + 100 + 1600}{3} = \frac{2600}{3} \approx 866.67\)</span></li>
+<li><span class="math inline">\(\text{RMSE} = \sqrt{866.67} \approx 29.43\)</span></li>
 </ul>
 <p><strong>Model B:</strong></p>
 <ul>
-<li>Errors: <span class="math inline">\(140-120=20\)</span>, <span class="math inline">\(100-100=0\)</span>, <span class="math inline">\(140-140=0\)</span></li>
-<li>Average Error: <span class="math inline">\(\frac{20 + 0 + 0}{3} = 6.67\)</span></li>
-<li>MAE: <span class="math inline">\(\frac{|20| + |0| + |0|}{3} = \frac{20}{3} \approx 6.67\)</span></li>
-<li>MSE: <span class="math inline">\(\frac{20^2 + 0^2 + 0^2}{3} = \frac{400}{3} \approx 133.33\)</span></li>
-<li>RMSE: <span class="math inline">\(\sqrt{133.33} \approx 11.55\)</span></li>
+<li><span class="math inline">\(\text{Errors}\)</span>:
+<ul>
+<li><span class="math inline">\(140-120=20\)</span></li>
+<li><span class="math inline">\(100-100=0\)</span></li>
+<li><span class="math inline">\(140-140=0\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{Average Error} = \frac{20 + 0 + 0}{3} = 6.67\)</span></li>
+<li><span class="math inline">\(\text{MAE} = \frac{|20| + |0| + |0|}{3} = \frac{20}{3} \approx 6.67\)</span></li>
+<li><span class="math inline">\(\text{MSE} = \frac{20^2 + 0^2 + 0^2}{3} = \frac{400}{3} \approx 133.33\)</span></li>
+<li><span class="math inline">\(\text{RMSE} = \sqrt{133.33} \approx 11.55\)</span></li>
 </ul>
 <p>All metrics show that Model B is <strong>closer</strong> to the truth.</p>
 </div>
@@ -727,15 +737,27 @@ window.Quarto = {
 <div id="sol-dis" class="proof solution">
 <p><span class="proof-title"><em>Solution 10.4</em>. </span><strong>Model A:</strong></p>
 <ul>
-<li>Errors: <span class="math inline">\(115-100=15\)</span>, <span class="math inline">\(105-120=-15\)</span>, <span class="math inline">\(125-140=-15\)</span>, <span class="math inline">\(100-150=-50\)</span></li>
-<li>MAE: <span class="math inline">\(\frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75\)</span></li>
-<li>MSE: <span class="math inline">\(\frac{15^2 + (-15)^2 + (-15)^2 + (-50)^2}{4} = \frac{225 + 225 + 225 + 2500}{4} = \frac{3175}{4} = 793.75\)</span></li>
+<li><span class="math inline">\(\text{Errors}\)</span>:
+<ul>
+<li><span class="math inline">\(115-100=15\)</span></li>
+<li><span class="math inline">\(105-120=-15\)</span></li>
+<li><span class="math inline">\(125-140=-15\)</span></li>
+<li><span class="math inline">\(100-150=-50\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{MAE} = \frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75\)</span></li>
+<li><span class="math inline">\(\text{MSE} = \frac{15^2 + (-15)^2 + (-15)^2 + (-50)^2}{4} = \frac{225 + 225 + 225 + 2500}{4} = \frac{3175}{4} = 793.75\)</span></li>
 </ul>
 <p><strong>Model B:</strong></p>
 <ul>
-<li>Errors: <span class="math inline">\(110-100=10\)</span>, <span class="math inline">\(110-120=-10\)</span>, <span class="math inline">\(130-140=-10\)</span>, <span class="math inline">\(90-150=-60\)</span></li>
-<li>MAE: <span class="math inline">\(\frac{|10| + |-10| + |-10| + |-60|}{4} = \frac{10 + 10 + 10 + 60}{4} = \frac{90}{4} = 22.5\)</span></li>
-<li>MSE: <span class="math inline">\(\frac{10^2 + (-10)^2 + (-10)^2 + (-60)^2}{4} = \frac{100 + 100 + 100 + 3600}{4} = \frac{3900}{4} = 975\)</span></li>
+<li><span class="math inline">\(\text{Errors}\)</span>:
+<ul>
+<li><span class="math inline">\(110-100=10\)</span></li>
+<li><span class="math inline">\(110-120=-10\)</span></li>
+<li><span class="math inline">\(130-140=-10\)</span></li>
+<li><span class="math inline">\(90-150=-60\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\text{MAE} = \frac{|10| + |-10| + |-10| + |-60|}{4} = \frac{10 + 10 + 10 + 60}{4} = \frac{90}{4} = 22.5\)</span></li>
+<li><span class="math inline">\(\text{MSE} = \frac{10^2 + (-10)^2 + (-10)^2 + (-60)^2}{4} = \frac{100 + 100 + 100 + 3600}{4} = \frac{3900}{4} = 975\)</span></li>
 </ul>
 </div>
 <p>As you can see, Model A has a higher MAE than Model B, and Model B has a higher MSE than model A. How can that be? To understand the reason why, we need to understand the difference between the absolute value and the squared value of a number. These two functions are visualised below:</p>
@@ -804,7 +826,7 @@ window.Quarto = {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The Mean Absolute Error (MAE) function is <strong>not differentiable</strong> at <span class="math inline">\(0\)</span>, because the absolute value function <span class="math inline">\(|x|\)</span> has a “sharp corner” at <span class="math inline">\(x=0\)</span>.</p>
+<p>The Mean Absolute Error (MAE) function is <strong>not differentiable</strong> at 0, because the absolute value function <span class="math inline">\(|x|\)</span> has a “sharp corner” at <span class="math inline">\(x=0\)</span>.</p>
 <p>This is an issue for many machine learning algorithms, which rely on <strong>differentiability</strong> for optimisation (such as gradient descent). In contrast, the Mean Squared Error (MSE) is differentiable everywhere, making it easier to use for training models.</p>
 </div>
 </div>

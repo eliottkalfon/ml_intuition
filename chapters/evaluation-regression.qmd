@@ -46,7 +46,7 @@ $$
 The model over-predicted the price of the property by 20.
 
 :::{.exercise #exr-pred-err}
-Show that the prediction errors for property 2 and 3 are $10$ and $-30$ respectively.
+Show that the prediction errors for property 2 and 3 are 10 and -30 respectively.
 :::
 
 :::{.solution #sol-pred-err}
@@ -81,9 +81,9 @@ If you are not familiar with the $\Sigma$ operator, please refer to the [Distanc
 
 ## Beyond Subtraction
 
-Do you notice something strange? The average model error is $0$, which would describe a *perfect model*. Yet, we do see that this model is **not** perfect, it makes errors, it does not perfectly predict the actual price of any property listed above.
+Do you notice something strange? The average model error is 0, which would describe a *perfect model*. Yet, we do see that this model is **not** perfect, it makes errors, it does not perfectly predict the actual price of any property listed above.
 
-The issue with averaging errors is that they cancel out. The numerator of the fraction becomes $0$.
+The issue with averaging errors is that they cancel out. The numerator of the fraction becomes 0.
 
 Remembering the [Distance chapter](distance.qmd){target=_blank}, could we use another distance function to avoid this problem?
 
@@ -94,7 +94,7 @@ There are two main methods we could use:
 
 ### Mean Absolute Error
 
-The absolute value of a number $x$ is noted $|x|$. It is the **magnitude** of the number, regardless of its sign. As an example $|2| = |-2| = 2$. When we average the absolute values of the error, we can compute the **Mean Absolute Error (MAE)**:
+The absolute value of a number $x$ is noted $|x|$. It is the **magnitude** of the number, regardless of its sign. As an example $|2| = |-2| = 2$. When we average the absolute values of the error, we can compute the **Mean Absolute Error (MAE)** for $n$ observations:
 
 $$
 \text{Mean Absolute Error} = \frac{| \text{Error}_1 | + | \text{Error}_2 | + \cdots + | \text{Error}_n |}{n}
@@ -120,11 +120,11 @@ $$
 \text{MAE} = \frac{|20| + |10| + |-30|}{3} = \frac{20 + 10 + 30}{3} = \frac{60}{3} = 20
 $$
 
-This metric is much better than the average error as it gives us an idea of the average distance between individual predictions and the ground truth. Looking at the example data, the model is on average $20$ away from the ground truth.
+This metric is much better than the average error as it gives us an idea of the average distance between individual predictions and the ground truth. Looking at the example data, the model is on average 20 away from the ground truth.
 
 ### Mean Squared Error
 
-Another way to do so is to compute the average of the **squared errors**. This metric is called the **Mean Squared Error (MSE)**:
+Another way is to compute the average of the **squared errors**. This metric is called the **Mean Squared Error (MSE)** for $n$ observations:
 
 $$
 \text{Mean Squared Error} = \frac{\text{Error}_1^2 + \text{Error}_2^2 + \cdots + \text{Error}_n^2}{n}
@@ -207,19 +207,25 @@ Show that Model B generates predictions that are closer to the truth than Model 
 
 **Model A:**
 
-- Errors: $150-120=30$, $110-100=10$, $100-140=-40$
-- Average Error: $\frac{30 + 10 + (-40)}{3} = 0$
-- MAE: $\frac{|30| + |10| + |-40|}{3} = \frac{30 + 10 + 40}{3} = 26.67$
-- MSE: $\frac{30^2 + 10^2 + (-40)^2}{3} = \frac{900 + 100 + 1600}{3} = \frac{2600}{3} \approx 866.67$
-- RMSE: $\sqrt{866.67} \approx 29.43$
+- $\text{Errors}$:
+    - $150-120=30$
+    - $110-100=10$
+    - $100-140=-40$
+- $\text{Average Error} = \frac{30 + 10 + (-40)}{3} = 0$
+- $\text{MAE} = \frac{|30| + |10| + |-40|}{3} = \frac{30 + 10 + 40}{3} = 26.67$
+- $\text{MSE} = \frac{30^2 + 10^2 + (-40)^2}{3} = \frac{900 + 100 + 1600}{3} = \frac{2600}{3} \approx 866.67$
+- $\text{RMSE} = \sqrt{866.67} \approx 29.43$
 
 **Model B:**
 
-- Errors: $140-120=20$, $100-100=0$, $140-140=0$
-- Average Error: $\frac{20 + 0 + 0}{3} = 6.67$
-- MAE: $\frac{|20| + |0| + |0|}{3} = \frac{20}{3} \approx 6.67$
-- MSE: $\frac{20^2 + 0^2 + 0^2}{3} = \frac{400}{3} \approx 133.33$
-- RMSE: $\sqrt{133.33} \approx 11.55$
+- $\text{Errors}$:
+    - $140-120=20$
+    - $100-100=0$
+    - $140-140=0$
+- $\text{Average Error} = \frac{20 + 0 + 0}{3} = 6.67$
+- $\text{MAE} = \frac{|20| + |0| + |0|}{3} = \frac{20}{3} \approx 6.67$
+- $\text{MSE} = \frac{20^2 + 0^2 + 0^2}{3} = \frac{400}{3} \approx 133.33$
+- $\text{RMSE} = \sqrt{133.33} \approx 11.55$
 
 All metrics show that Model B is **closer** to the truth.
 :::
@@ -250,15 +256,23 @@ Compute the MSE and MAE of the two models below:
 
 **Model A:**
 
-- Errors: $115-100=15$, $105-120=-15$, $125-140=-15$, $100-150=-50$
-- MAE: $\frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75$
-- MSE: $\frac{15^2 + (-15)^2 + (-15)^2 + (-50)^2}{4} = \frac{225 + 225 + 225 + 2500}{4} = \frac{3175}{4} = 793.75$
+- $\text{Errors}$:
+    - $115-100=15$
+    - $105-120=-15$
+    - $125-140=-15$
+    - $100-150=-50$
+- $\text{MAE} = \frac{|15| + |-15| + |-15| + |-50|}{4} = \frac{15 + 15 + 15 + 50}{4} = \frac{95}{4} = 23.75$
+- $\text{MSE} = \frac{15^2 + (-15)^2 + (-15)^2 + (-50)^2}{4} = \frac{225 + 225 + 225 + 2500}{4} = \frac{3175}{4} = 793.75$
 
 **Model B:**
 
-- Errors: $110-100=10$, $110-120=-10$, $130-140=-10$, $90-150=-60$
-- MAE: $\frac{|10| + |-10| + |-10| + |-60|}{4} = \frac{10 + 10 + 10 + 60}{4} = \frac{90}{4} = 22.5$
-- MSE: $\frac{10^2 + (-10)^2 + (-10)^2 + (-60)^2}{4} = \frac{100 + 100 + 100 + 3600}{4} = \frac{3900}{4} = 975$
+- $\text{Errors}$:
+    - $110-100=10$
+    - $110-120=-10$
+    - $130-140=-10$
+    - $90-150=-60$
+- $\text{MAE} = \frac{|10| + |-10| + |-10| + |-60|}{4} = \frac{10 + 10 + 10 + 60}{4} = \frac{90}{4} = 22.5$
+- $\text{MSE} = \frac{10^2 + (-10)^2 + (-10)^2 + (-60)^2}{4} = \frac{100 + 100 + 100 + 3600}{4} = \frac{3900}{4} = 975$
 :::
 
 As you can see, Model A has a higher MAE than Model B, and Model B has a higher MSE than model A. How can that be? To understand the reason why, we need to understand the difference between the absolute value and the squared value of a number. These two functions are visualised below:
@@ -292,7 +306,7 @@ There are also mathematical reasons why the Mean Squared Error and Root Mean Squ
 ::: {.callout-note collapse="true"}
 ## Mean Square Error and Differentiability
 
-The Mean Absolute Error (MAE) function is **not differentiable** at $0$, because the absolute value function $|x|$ has a "sharp corner" at $x=0$.
+The Mean Absolute Error (MAE) function is **not differentiable** at 0, because the absolute value function $|x|$ has a "sharp corner" at $x=0$.
 
 This is an issue for many machine learning algorithms, which rely on **differentiability** for optimisation (such as gradient descent). In contrast, the Mean Squared Error (MSE) is differentiable everywhere, making it easier to use for training models.
 
