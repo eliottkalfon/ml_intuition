@@ -457,7 +457,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Sample Size
+<span class="screen-reader-only">Note</span>Sample size
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -469,7 +469,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>More than just “three out of five”, we can say that Model A was correct <strong>60% of the time</strong>. This metric is called the <strong>accuracy</strong> of a Machine Learning model.</p>
+<p>More than just “three out of five”, we can say that Model A was correct <strong>60% of the time</strong>. This metric is called the <strong>Accuracy</strong> of a Machine Learning model.</p>
 <p><span class="math display">\[
 \text{Accuracy} = \frac{\text{Number of observations correctly predicted}}{\text{Total observation count}}
 \]</span></p>
@@ -547,17 +547,17 @@ window.Quarto = {
 </div>
 <p>Even though model A has higher accuracy than model B, it misclassified one malignant tumour as <strong>benign</strong> (Observation 5).</p>
 <p>On the other hand, model B classified two benign masses as malignant (Observations 3 and 4) but <strong>caught all the malignant tumours</strong>.</p>
-<p>This goes to show that Accuracy is only a part of the picture. How can we move from the description above to actual metrics?</p>
+<p>This shows that Accuracy is only a part of the picture. How can we move from the description above to actual metrics?</p>
 <section id="useful-vocabulary" class="level4" data-number="9.1.1.1">
 <h4 data-number="9.1.1.1" class="anchored" data-anchor-id="useful-vocabulary"><span class="header-section-number">9.1.1.1</span> Useful Vocabulary</h4>
 <p>Before going into error metrics, it is important to introduce some vocabulary.</p>
 <p>In binary classification, the model learns to assign observations into two categories, such as “benign” and “malignant” in the case of tumour diagnosis, or “spam” and “non-spam” for email filtering.</p>
-<p>Mathematically, these two labels are represented as <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span>. Generally, the class that the model was built to detect is assigned <span class="math inline">\(1\)</span> and the other <span class="math inline">\(0\)</span>. In tumour diagnosis, the malignant label is generally assigned the number <span class="math inline">\(1\)</span> as these are the cases the model was designed for. Similarly, in email filtering, the label “spam” is assigned the number <span class="math inline">\(1\)</span>, as the model aims at identifying spam messages to filter them out of the inbox.</p>
+<p>Mathematically, these two labels are represented as 1 and 0. Generally, the class that the model was built to detect is assigned 1 and the other 0. In tumour diagnosis, the malignant label is generally assigned the number 1 as these are the cases the model was designed for. Similarly, in email filtering, the label “spam” is assigned the number 1, as the model detects spam messages to filter them out of the inbox.</p>
 <div id="exr-fraud" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.3</strong></span> If you were building a fraud detection model for an online payments company, which labels would you predict for? Which one would be assigned to <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span>?</p>
+<p><span class="theorem-title"><strong>Exercise 9.3</strong></span> If you were building a fraud detection model for an online payments company, which labels would you predict for? Which one would be assigned to 1 and 0?</p>
 </div>
 <p>In the example of tumour diagnosis, a malignant tumour correctly classified as “malignant” is called a <strong>True Positive</strong>. On the other hand, a malignant tumour misclassified as a benign mass is a <strong>False Negative</strong>.</p>
-<p>Here, the words “positive” or “negative” are not associated with any value judgement. They are simply another way to say <span class="math inline">\(1\)</span> or <span class="math inline">\(0\)</span>. Thinking about medical examples may make more sense here. When a medical test is positive, it means that the targeted substance is <strong>present</strong>. The same applies to spam detection. A positive spam detection means classifying an email as “spam”.</p>
+<p>Here, the words “positive” or “negative” are not associated with any value judgement. They are simply another way to say 1 or 0. Thinking about medical examples may make more sense here. When a medical test is positive, it means that the targeted substance is <strong>present</strong>. The same applies to spam detection. A positive spam detection means classifying an email as “spam”.</p>
 <p>Going back to jargon, a <strong>True Positive</strong> is when the variable of interest is correctly detected (e.g., “spam” or “malignant”). A <strong>False Negative</strong> is when the variable of interest goes <strong>undetected</strong>. As an example, a malignant tumour is misdiagnosed as “benign”, or a spam email landing into the inbox.</p>
 <p>Based on these, what would be a <strong>False Positive</strong> and a <strong>True Negative</strong>? Think about it in terms of tumours and spam emails before reading on.</p>
 <ul>
@@ -646,33 +646,9 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>To test your understanding, try building a Confusion Matrix for a payment fraud detection model.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 34%">
-<col style="width: 32%">
-<col style="width: 32%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Predicted Fraudulent</th>
-<th>Predicted Legitimate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Actual Fraudulent</td>
-<td>Fraudulent transaction correctly classified as “fraudulent”</td>
-<td>Fraudulent transaction incorrectly classified as “legitimate”</td>
-</tr>
-<tr class="even">
-<td>Actual Legitimate</td>
-<td>Legitimate transaction incorrectly classified as “fraudulent”</td>
-<td>Legitimate transaction correctly classified as “legitimate”</td>
-</tr>
-</tbody>
-</table>
+<div id="exr-conf-fraud" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 9.4</strong></span> To test your understanding, try building a Confusion Matrix for a payment fraud detection model.</p>
+</div>
 <p>Now that we clearly understand the language of True/False Negative/Positive, let’s get back to measuring the performance of a Machine Learning model.</p>
 </section>
 <section id="recall" class="level4" data-number="9.1.1.2">
@@ -742,7 +718,7 @@ window.Quarto = {
 <p>Rephrasing this for the tumour diagnosis example: out of all the malignant tumours, how many did the model catch?</p>
 <p>This is calculated as follows:</p>
 <p><span class="math display">\[
-\text{Recall} = \frac{\text{Positive examples caught by Model}}{\text{All positive examples}}
+\text{Recall} = \frac{\text{Malignant tumours correctly detected by the model}}{\text{All observations predicted as malignant}}
 \]</span></p>
 <p>Rephrasing this in term of True/False Positive, we get:</p>
 <p><span class="math display">\[
@@ -753,7 +729,7 @@ window.Quarto = {
 \text{Recall}_{\text{Model B}} = \frac{4}{4 + 0} = 100\%
 \]</span></p>
 <div id="exr-recall-a" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.4</strong></span> Calculate the recall of Model A, and prove that it is <span class="math inline">\(75\%\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 9.5</strong></span> Calculate the recall of Model A, and prove that it is <span class="math inline">\(75\%\)</span>.</p>
 </div>
 <p>In the case of disease diagnosis, Recall is a critical metric as <strong>missing positive cases</strong> can have dire consequences on a patient’s life.</p>
 </section>
@@ -838,7 +814,7 @@ window.Quarto = {
 \text{Precision}_\text{Model A} = \frac{3}{3 + 0} = 100\%
 \]</span></p>
 <div id="exr-prec-b" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.5</strong></span> Calculate the Precision of Model B.</p>
+<p><span class="theorem-title"><strong>Exercise 9.6</strong></span> Calculate the Precision of Model B, show that it is approximately 67%.</p>
 </div>
 </section>
 <section id="revisiting-accuracy" class="level4" data-number="9.1.1.4">
@@ -903,11 +879,11 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Which model you pick?</p>
-<p>If you picked B, that is correct. Why did you choose it?</p>
+<p>If you picked B, that is correct. Why did you choose it? B seems to make fewer errors and have a higher Accuracy.</p>
 <div id="exr-mod-cho" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.6</strong></span> If you have not done so already, compute the Accuracy, Precision and Recall of both models.</p>
+<p><span class="theorem-title"><strong>Exercise 9.7</strong></span> If you have not done so already, compute the Accuracy, Precision and Recall of both models.</p>
 </div>
-<p>Making this decision more complex, which of the following two models would you pick?</p>
+<p>Making this decision more complex, which of the following two models would you pick for a <strong>tumour diagnosis</strong> system?</p>
 <p><strong>Model A</strong></p>
 <table class="caption-top table">
 <thead>
@@ -952,10 +928,10 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>If you picked B, that is correct again. Why did you choose model B? In this case, model B has the same Accuracy and the <strong>highest Recall</strong>. In the case of tumour diagnosis, this is probably the most important metric to look at.</p>
+<p>If you picked B, that is correct again. Why did you choose model B? In this case, model B has the same Accuracy and the <strong>highest Recall</strong>. In the case of tumour diagnosis, this is probably the most important metric to look at. Model B did not predict a single malignant tumour as “benign”.</p>
 <p>Would you pick a different model for spam detection? Probably, as <strong>Precision</strong> becomes more important then. You do not want legitimate emails to end up in your spam folder.</p>
 <div id="exr-mod-cho-2" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.7</strong></span> Calculate Recall and Precision for model A and B</p>
+<p><span class="theorem-title"><strong>Exercise 9.8</strong></span> Calculate Recall and Precision for model A and B.</p>
 </div>
 </section>
 <section id="probabilities-and-model-evaluation" class="level2" data-number="9.3">
@@ -1112,10 +1088,10 @@ window.Quarto = {
 <p>We see that <strong>decreasing</strong> the prediction threshold to 0.3 has the following effects on the three metrics we analysed:</p>
 <ul>
 <li><strong>Increase</strong> in Recall: with more observations predicted as “malignant”, recall can only increase or stay constant</li>
-<li><strong>Decrease</strong> in Precision: with more observations predicted as “malignant” despite a low predicted probability, the risk of misclassifying observations as “malignant” increases</li>
+<li><strong>Decrease</strong> in Precision: with more observations predicted as “malignant”, the risk of misclassifying observations as “malignant” increases</li>
 </ul>
 <div id="exr-thresh" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.8</strong></span> Describe the effect of increasing the threshold on Precision, Recall and Accuracy.</p>
+<p><span class="theorem-title"><strong>Exercise 9.9</strong></span> Describe the effect of increasing the threshold on Precision, Recall and Accuracy.</p>
 </div>
 <p>For tumour diagnosis, a <strong>lower threshold</strong> may make more sense. Going back to the Nearest Neighbour example, from a patient’s perspective, if the observation has two malignant neighbours and three benign ones, for a predicted probability of <span class="math inline">\(2/5 = 40\%\)</span>, I would still want further checks.</p>
 <p>For spam filtering, a <strong>higher threshold</strong> could be preferred, to reduce the risk of a legitimate email being filtered out. You could filter out results only when they have predicted probability of 0.8 or 0.9.</p>
@@ -1136,14 +1112,14 @@ window.Quarto = {
 <h2 data-number="9.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">9.5</span> Solutions</h2>
 <div id="sol-acc" class="proof solution">
 <p><span class="proof-title"><em>Solution 9.1</em>. </span><a href="#exr-acc" class="quarto-xref">Exercise&nbsp;<span>9.1</span></a></p>
-<p>Accuracy of Model B <span class="math inline">\(= \frac{4}{5} = 80\%\)</span></p>
+<p><span class="math inline">\(\text{Accuracy of Model B} = \frac{4}{5} = 80\%\)</span></p>
 </div>
 <div id="sol-acc-ab" class="proof solution">
 <p><span class="proof-title"><em>Solution 9.2</em>. </span><a href="#exr-acc-ab" class="quarto-xref">Exercise&nbsp;<span>9.2</span></a></p>
 <p>Model A: Correct on observations 1, 2, 3, 4, 6, 7, 8 (7 out of 8). Incorrect on 5.</p>
 <p>Model B: Correct on 1, 2, 5, 6, 7, 8 (6 out of 8). Incorrect on 3 and 4.</p>
-<p>Accuracy of Model A <span class="math inline">\(= \frac{7}{8} = 87.5\%\)</span></p>
-<p>Accuracy of Model B <span class="math inline">\(= \frac{6}{8} = 75\%\)</span></p>
+<p><span class="math inline">\(\text{Accuracy of Model A} = \frac{7}{8} = 87.5\%\)</span></p>
+<p><span class="math inline">\(\text{Accuracy of Model B} = \frac{6}{8} = 75\%\)</span></p>
 </div>
 <div id="sol-fraud" class="proof solution">
 <p><span class="proof-title"><em>Solution 9.3</em>. </span><a href="#exr-fraud" class="quarto-xref">Exercise&nbsp;<span>9.3</span></a> Labels:</p>
@@ -1152,19 +1128,48 @@ window.Quarto = {
 <li>non fraudulent or legitimate transaction <span class="math inline">\(0\)</span></li>
 </ul>
 </div>
+<div id="sol-conf-fraud" class="proof solution">
+<p><span class="proof-title"><em>Solution 9.4</em>. </span><a href="#exr-conf-fraud" class="quarto-xref">Exercise&nbsp;<span>9.4</span></a></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 32%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Predicted Fraudulent</th>
+<th>Predicted Legitimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Actual Fraudulent</td>
+<td>Fraudulent transaction correctly classified as “fraudulent”</td>
+<td>Fraudulent transaction incorrectly classified as “legitimate”</td>
+</tr>
+<tr class="even">
+<td>Actual Legitimate</td>
+<td>Legitimate transaction incorrectly classified as “fraudulent”</td>
+<td>Legitimate transaction correctly classified as “legitimate”</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="sol-recall-a" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.4</em>. </span><a href="#exr-recall-a" class="quarto-xref">Exercise&nbsp;<span>9.4</span></a></p>
+<p><span class="proof-title"><em>Solution 9.5</em>. </span><a href="#exr-recall-a" class="quarto-xref">Exercise&nbsp;<span>9.5</span></a></p>
 <p>Model A: Out of 4 malignant tumours (observations 5, 6, 7, 8), Model A caught 3 (6, 7, 8), True Positives. Missed 5, a False Negative.</p>
 <p><span class="math inline">\(\text{Recall}_{\text{Model A}} = \frac{3}{3 + 1} = 75\%\)</span></p>
 </div>
 <div id="sol-prec-b" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.5</em>. </span><a href="#exr-prec-b" class="quarto-xref">Exercise&nbsp;<span>9.5</span></a></p>
+<p><span class="proof-title"><em>Solution 9.6</em>. </span><a href="#exr-prec-b" class="quarto-xref">Exercise&nbsp;<span>9.6</span></a></p>
 <p><span class="math display">\[
 \text{Precision}_\text{Model B} = \frac{4}{4 + 2} = \frac{4}{6} \approx 67\%
 \]</span></p>
 </div>
 <div id="sol-mod-cho" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.6</em>. </span><a href="#exr-mod-cho" class="quarto-xref">Exercise&nbsp;<span>9.6</span></a></p>
+<p><span class="proof-title"><em>Solution 9.7</em>. </span><a href="#exr-mod-cho" class="quarto-xref">Exercise&nbsp;<span>9.7</span></a></p>
 <p>For Model A:</p>
 <ul>
 <li>TP = 40</li>
@@ -1190,7 +1195,7 @@ window.Quarto = {
 <p><span class="math inline">\(\text{Recall} = \frac{45}{45 + 5} = \frac{45}{50} = 90\%\)</span></p>
 </div>
 <div id="sol-mod-cho-2" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.7</em>. </span><a href="#exr-mod-cho-2" class="quarto-xref">Exercise&nbsp;<span>9.7</span></a></p>
+<p><span class="proof-title"><em>Solution 9.8</em>. </span><a href="#exr-mod-cho-2" class="quarto-xref">Exercise&nbsp;<span>9.8</span></a></p>
 <p>For Model A:</p>
 <ul>
 <li>TP = 48</li>
@@ -1211,7 +1216,7 @@ window.Quarto = {
 <p><span class="math inline">\(\text{Recall} = \frac{50}{50 + 0} = \frac{50}{50} = 100\%\)</span></p>
 </div>
 <div id="sol-thresh" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.8</em>. </span><a href="#exr-thresh" class="quarto-xref">Exercise&nbsp;<span>9.8</span></a></p>
+<p><span class="proof-title"><em>Solution 9.9</em>. </span><a href="#exr-thresh" class="quarto-xref">Exercise&nbsp;<span>9.9</span></a></p>
 <p>Increasing the threshold generally:</p>
 <ul>
 <li><strong>Increases</strong> Precision: fewer observations are classified as positive, so those that are classified as positive are more likely to be true positives</li>

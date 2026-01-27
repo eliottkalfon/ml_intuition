@@ -392,7 +392,7 @@ window.Quarto = {
 <p>It is all starting to come together. It is now time to build the first prediction model in this book. <span class="math display">\[
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Predictions}
 \]</span></p>
-<p>A Machine Learning model learns the <strong>relationship</strong> between input/output pairs to generate predictions on new inputs. For the first time in this book, this chapter will explore <strong>how these models learn</strong>.</p>
+<p>A Machine Learning model learns the <strong>relationship</strong> between inputs and outputs to generate predictions on new inputs. For the first time in this book, this chapter will explore <strong>how these models learn</strong>.</p>
 <p>Using the example of tumour diagnosis:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -400,7 +400,7 @@ window.Quarto = {
 <figcaption>Tumour dataset: Perimeter Mean vs Area Mean</figcaption>
 </figure>
 </div>
-<p>We want to predict the diagnosis of the observation labelled with a question mark (<span class="math inline">\(?\)</span>). How could this be done using distance?</p>
+<p>We want to predict the diagnosis of the observation labelled with a question mark (?). How could this be done using distance?</p>
 <p>A good start would be to get the new observation’s <strong>closest neighbours</strong>. This can be done by calculating the <strong>distance</strong> between the new observation and the existing observations, and picking the ones with shortest distances.</p>
 <p>Using your intuition, how would you classify this new observation?</p>
 <p>What did our intuition rely on to make this judgement? When I came up with a prediction, I looked at the observation’s <strong>neighbours</strong> and applied a <strong>majority vote</strong>.</p>
@@ -412,9 +412,9 @@ window.Quarto = {
 <ul>
 <li>Find the 5 closest neighbours of the observation</li>
 <li>Count the number of neighbours per class</li>
-<li>The new observation is labelled with the class that has the <strong>highest number of neighbours</strong></li>
+<li>The new observation’s predicted label is the class that has the <strong>highest number of neighbours</strong></li>
 </ul>
-<p>In Machine Learning, this model is referred to as K-Nearest Neighbours or KNN. <span class="math inline">\(K\)</span> simply means any positive integer, referring to the number of neighbours considered (here 5).</p>
+<p>In Machine Learning, this model is referred to as K-Nearest Neighbours or KNN. <span class="math inline">\(K\)</span> is the number of neighbours considered (here 5).</p>
 <p>This model acts as a <strong>map from feature values to a prediction</strong>. Using the algorithm described above, <strong>any tumour</strong> observation can be assigned to a diagnosis. This map can be visualised by applying this majority vote to every point and colouring it by its diagnosis:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -433,7 +433,7 @@ window.Quarto = {
 </figure>
 </div>
 <p>There, a simple majority vote would mean that the observation with 2 malignant neighbours could be classified as “benign”. As a patient, I would prefer to have a second opinion there.</p>
-<p>As 2 out of the 5 neighbours of this observation are malignant, we are <strong>less certain</strong> that this tumour is benign. Could the model prediction reflect this uncertainty?</p>
+<p>As 2 out of the 5 neighbours of this observation are malignant, we are <strong>less sure</strong> that this tumour is benign. Could the model prediction reflect this uncertainty?</p>
 <p>One way to do this would be, instead of taking the winner of a majority vote, we could estimate the <strong>probability</strong> of a tumour to be malignant.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -447,7 +447,7 @@ window.Quarto = {
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The probability assigns a degree of belief to an event, between 0 and 1. For example, the probability of rolling a 4 on a fair six-sided die is <span class="math inline">\(1/6 \approx 0.167\)</span>. The probability of getting heads on a fair coin is <span class="math inline">\(1/2 = 0.5\)</span>.</p>
+<p>The probability assigns a degree of belief to an event, between 0 and 1. 1 being the probability of an event that happens in all cases, and 0 the probability of an impossible event. For example, the probability of rolling a 4 on a fair six-sided die is <span class="math inline">\(1/6 \approx 0.167\)</span>. The probability of getting heads on a fair coin is <span class="math inline">\(1/2 = 0.5\)</span>.</p>
 </div>
 </div>
 </div>
@@ -476,7 +476,7 @@ window.Quarto = {
 <p>To do so, let’s turn to the problem of property pricing. When selling a property, customers need to know how much their property is worth. This can be used as a basis to compute the listing price, price for which the property is first listed. It is also in the buyer’s interest to have a very good estimation of the value of a property before agreeing to the transaction.</p>
 <p>As explained in the <a href="../chapters/defining-prediction.html">Defining Prediction chapter</a>, this pricing can be done with:</p>
 <ol type="1">
-<li>Intuition: From experience, real estate have an understanding of the property market in their area of specialisation. They could “know” how much a property would be worth</li>
+<li>Intuition: From experience, real estate agents have an understanding of the property market in their area of specialisation. They could “know” how much a property would be worth</li>
 <li>Rule-based Systems: Property analysts could build models that price properties based on their characteristics. A simple rule working surprisingly well is: average price per square meter * surface area of the property</li>
 </ol>
 <p>Can we use the Nearest Neighbour model to learn from historical data and generate new price predictions for unseen data? Another leading question. Yes.</p>
@@ -537,11 +537,11 @@ window.Quarto = {
 <figcaption>KNN regression map</figcaption>
 </figure>
 </div>
-<p>The map shows that there is a positive <strong>relationship</strong> between number of rooms and price, and the negative relationship between distance to centre and price. The most expensive properties are both central and have a high number of rooms. The (simple) model built allows us to map <strong>any</strong> given combination of number of rooms and distance to centre to a price.</p>
+<p>The map shows that there is a positive <strong>relationship</strong> between number of rooms and price, and a negative relationship between distance to centre and price. The most expensive properties are both central and have a high number of rooms. The (simple) model built allows us to map <strong>any</strong> given combination of number of rooms and distance to centre to a price.</p>
 </section>
 <section id="final-thoughts" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">7.5</span> Final Thoughts</h2>
-<p>KNN is only the first of the Machine Learning models studied in this book. This model learns the relationship between input features and a target, using <strong>distance calculations</strong> and <strong>average over neighbours</strong>. Can you think of a way you could use KNN to predict something in your everyday life?</p>
+<p>KNN is the first of the Machine Learning models studied in this book. It learns the relationship between input features and a target, using <strong>distance calculations</strong> and <strong>average over neighbours</strong>. Can you think of a way you could use KNN to predict something in your everyday life?</p>
 <p>We have our first model, but how good is it? We will explore this in the next chapter.</p>
 </section>
 <section id="practice-exercise" class="level2" data-number="7.6">
@@ -633,9 +633,9 @@ window.Quarto = {
 <p><span class="proof-title"><em>Solution 7.2</em>. </span><a href="#exr-fraud-neighbours" class="quarto-xref">Exercise&nbsp;<span>7.2</span></a></p>
 <p>The distance between two observations is calculated as:</p>
 <p><span class="math display">\[
-\text{Distance} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
+\text{Distance(A,B)} = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2}
 \]</span></p>
-<p>where <span class="math inline">\((x_1, y_1)\)</span> are the features of the training observation, and <span class="math inline">\((x_2, y_2)\)</span> are the features of the new transaction (93, 23).</p>
+<p>where <span class="math inline">\(A (a_1, a_2)\)</span> are the features of the training observation, and <span class="math inline">\(B (b_1, b_2)\)</span> are the features of the new transaction (93, 23).</p>
 <p>Let’s compute the distance for each observation:</p>
 <table class="caption-top table">
 <thead>

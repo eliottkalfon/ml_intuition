@@ -9,13 +9,13 @@ $$
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Predictions}
 $$
 
-A Machine Learning model learns the **relationship** between input/output pairs to generate predictions on new inputs. For the first time in this book, this chapter will explore **how these models learn**.
+A Machine Learning model learns the **relationship** between inputs and outputs to generate predictions on new inputs. For the first time in this book, this chapter will explore **how these models learn**.
 
 Using the example of tumour diagnosis:
 
 ![Tumour dataset: Perimeter Mean vs Area Mean](/images/intro/scatter_unknown.png){width=60%}
 
-We want to predict the diagnosis of the observation labelled with a question mark ($?$). How could this be done using distance?
+We want to predict the diagnosis of the observation labelled with a question mark (?). How could this be done using distance?
 
 A good start would be to get the new observation's **closest neighbours**. This can be done by calculating the **distance** between the new observation and the existing observations, and picking the ones with shortest distances.
 
@@ -31,9 +31,9 @@ The goal is to craft a list of rules that could be executed by a computer. Such 
 
 - Find the 5 closest neighbours of the observation
 - Count the number of neighbours per class
-- The new observation is labelled with the class that has the **highest number of neighbours**
+- The new observation's predicted label is the class that has the **highest number of neighbours**
 
-In Machine Learning, this model is referred to as K-Nearest Neighbours or KNN. $K$ simply means any positive integer, referring to the number of neighbours considered (here 5).
+In Machine Learning, this model is referred to as K-Nearest Neighbours or KNN. $K$ is the number of neighbours considered (here 5).
 
 This model acts as a **map from feature values to a prediction**. Using the algorithm described above, **any tumour** observation can be assigned to a diagnosis. This map can be visualised by applying this majority vote to every point and colouring it by its diagnosis:
 
@@ -47,14 +47,14 @@ This is all very exciting. But let's consider the following example from a **pat
 
 There, a simple majority vote would mean that the observation with 2 malignant neighbours could be classified as "benign". As a patient, I would prefer to have a second opinion there.
 
-As 2 out of the 5 neighbours of this observation are malignant, we are **less certain** that this tumour is benign. Could the model prediction reflect this uncertainty?
+As 2 out of the 5 neighbours of this observation are malignant, we are **less sure** that this tumour is benign. Could the model prediction reflect this uncertainty?
 
 One way to do this would be, instead of taking the winner of a majority vote, we could estimate the **probability** of a tumour to be malignant.
 
 ::: {.callout-note collapse="true"}
 ## Note: Defining Probability
 
-The probability assigns a degree of belief to an event, between 0 and 1. For example, the probability of rolling a 4 on a fair six-sided die is $1/6 \approx 0.167$. The probability of getting heads on a fair coin is $1/2 = 0.5$.
+The probability assigns a degree of belief to an event, between 0 and 1. 1 being the probability of an event that happens in all cases, and 0 the probability of an impossible event. For example, the probability of rolling a 4 on a fair six-sided die is $1/6 \approx 0.167$. The probability of getting heads on a fair coin is $1/2 = 0.5$.
 
 :::
 
@@ -88,7 +88,7 @@ To do so, let's turn to the problem of property pricing. When selling a property
 
 As explained in the [Defining Prediction chapter](/chapters/defining-prediction.qmd), this pricing can be done with:
 
-1. Intuition: From experience, real estate have an understanding of the property market in their area of specialisation. They could "know" how much a property would be worth
+1. Intuition: From experience, real estate agents have an understanding of the property market in their area of specialisation. They could "know" how much a property would be worth
 2. Rule-based Systems: Property analysts could build models that price properties based on their characteristics. A simple rule working surprisingly well is: average price per square meter * surface area of the property
 
 Can we use the Nearest Neighbour model to learn from historical data and generate new price predictions for unseen data? Another leading question. Yes.
@@ -123,11 +123,11 @@ Using this method, we could also compute a **map of property prices** over the t
 
 ![KNN regression map](/images/neighbours/knn_regression_map.png)
 
-The map shows that there is a positive **relationship** between number of rooms and price, and the negative relationship between distance to centre and price. The most expensive properties are both central and have a high number of rooms. The (simple) model built allows us to map **any** given combination of number of rooms and distance to centre to a price.
+The map shows that there is a positive **relationship** between number of rooms and price, and a negative relationship between distance to centre and price. The most expensive properties are both central and have a high number of rooms. The (simple) model built allows us to map **any** given combination of number of rooms and distance to centre to a price.
 
 ## Final Thoughts
 
-KNN is only the first of the Machine Learning models studied in this book. This model learns the relationship between input features and a target, using **distance calculations** and **average over neighbours**. Can you think of a way you could use KNN to predict something in your everyday life?
+KNN is the first of the Machine Learning models studied in this book. It learns the relationship between input features and a target, using **distance calculations** and **average over neighbours**. Can you think of a way you could use KNN to predict something in your everyday life?
 
 We have our first model, but how good is it? We will explore this in the next chapter.
 
@@ -179,10 +179,10 @@ $$
 The distance between two observations is calculated as:
 
 $$
-\text{Distance} = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
+\text{Distance(A,B)} = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2}
 $$
 
-where $(x_1, y_1)$ are the features of the training observation, and $(x_2, y_2)$ are the features of the new transaction (93, 23).
+where $A (a_1, a_2)$ are the features of the training observation, and $B (b_1, b_2)$ are the features of the new transaction (93, 23).
 
 Let's compute the distance for each observation:
 

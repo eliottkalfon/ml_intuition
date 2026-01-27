@@ -45,7 +45,7 @@ You could start by counting the number of errors of each model:
 In other words, Model A was correct three times out of five whereas Model B was correct four times out of five. Model B seems **more correct on average**.
 
 ::: {.callout-note collapse="true"}
-## Sample Size
+## Sample size
 
 A sample of five observations is too low to draw conclusions about the performance of these two models. As a general rule, the **more test samples the better**. This allows us to get a better estimate of the performance of the model. As a rule of thumb, practitioners allocate between **5% and 20%** of the training data as a test set.
 
@@ -55,7 +55,7 @@ The later sections of this book will cover some methods designed to address this
 
 :::
 
-More than just "three out of five", we can say that Model A was correct **60% of the time**. This metric is called the **accuracy** of a Machine Learning model.
+More than just "three out of five", we can say that Model A was correct **60% of the time**. This metric is called the **Accuracy** of a Machine Learning model.
 
 $$
 \text{Accuracy} = \frac{\text{Number of observations correctly predicted}}{\text{Total observation count}}
@@ -96,7 +96,7 @@ Even though model A has higher accuracy than model B, it misclassified one malig
 
 On the other hand, model B classified two benign masses as malignant (Observations 3 and 4) but **caught all the malignant tumours**.
 
-This goes to show that Accuracy is only a part of the picture. How can we move from the description above to actual metrics?
+This shows that Accuracy is only a part of the picture. How can we move from the description above to actual metrics?
 
 #### Useful Vocabulary
 
@@ -104,15 +104,15 @@ Before going into error metrics, it is important to introduce some vocabulary.
 
 In binary classification, the model learns to assign observations into two categories, such as "benign" and "malignant" in the case of tumour diagnosis, or "spam" and "non-spam" for email filtering.
 
-Mathematically, these two labels are represented as $1$ and $0$. Generally, the class that the model was built to detect is assigned $1$ and the other $0$. In tumour diagnosis, the malignant label is generally assigned the number $1$ as these are the cases the model was designed for. Similarly, in email filtering, the label "spam" is assigned the number $1$, as the model aims at identifying spam messages to filter them out of the inbox.
+Mathematically, these two labels are represented as 1 and 0. Generally, the class that the model was built to detect is assigned 1 and the other 0. In tumour diagnosis, the malignant label is generally assigned the number 1 as these are the cases the model was designed for. Similarly, in email filtering, the label "spam" is assigned the number 1, as the model detects spam messages to filter them out of the inbox.
 
 :::{.exercise #exr-fraud}
-If you were building a fraud detection model for an online payments company, which labels would you predict for? Which one would be assigned to $1$ and $0$?
+If you were building a fraud detection model for an online payments company, which labels would you predict for? Which one would be assigned to 1 and 0?
 :::
 
 In the example of tumour diagnosis, a malignant tumour correctly classified as "malignant" is called a **True Positive**. On the other hand, a malignant tumour misclassified as a benign mass is a **False Negative**.
 
-Here, the words "positive" or "negative" are not associated with any value judgement. They are simply another way to say $1$ or $0$. Thinking about medical examples may make more sense here. When a medical test is positive, it means that the targeted substance is **present**. The same applies to spam detection. A positive spam detection means classifying an email as "spam".
+Here, the words "positive" or "negative" are not associated with any value judgement. They are simply another way to say 1 or 0. Thinking about medical examples may make more sense here. When a medical test is positive, it means that the targeted substance is **present**. The same applies to spam detection. A positive spam detection means classifying an email as "spam".
 
 Going back to jargon, a **True Positive** is when the variable of interest is correctly detected (e.g., "spam" or "malignant"). A **False Negative** is when the variable of interest goes **undetected**. As an example, a malignant tumour is misdiagnosed as "benign", or a spam email landing into the inbox.
 
@@ -144,12 +144,10 @@ Or for spam filtering:
 | Actual Spam    | Spam correctly classified as "spam" | Spam incorrectly classified as "not spam" |
 | Actual Not Spam| Legitimate email incorrectly classified as "spam" | Legitimate email correctly classified as "not spam" |
 
-To test your understanding, try building a Confusion Matrix for a payment fraud detection model.
 
-|                      | Predicted Fraudulent | Predicted Legitimate |
-|----------------------|---------------------|---------------------|
-| Actual Fraudulent    | Fraudulent transaction correctly classified as "fraudulent" | Fraudulent transaction incorrectly classified as "legitimate" |
-| Actual Legitimate    | Legitimate transaction incorrectly classified as "fraudulent" | Legitimate transaction correctly classified as "legitimate"   |
+:::{.exercise #exr-conf-fraud}
+To test your understanding, try building a Confusion Matrix for a payment fraud detection model.
+:::
 
 Now that we clearly understand the language of True/False Negative/Positive, let's get back to measuring the performance of a Machine Learning model.
 
@@ -175,7 +173,7 @@ Rephrasing this for the tumour diagnosis example: out of all the malignant tumou
 This is calculated as follows:
 
 $$
-\text{Recall} = \frac{\text{Positive examples caught by Model}}{\text{All positive examples}}
+\text{Recall} = \frac{\text{Malignant tumours correctly detected by the model}}{\text{All observations predicted as malignant}}
 $$
 
 Rephrasing this in term of True/False Positive, we get:
@@ -240,7 +238,7 @@ $$
 $$
 
 :::{.exercise #exr-prec-b}
-Calculate the Precision of Model B.
+Calculate the Precision of Model B, show that it is approximately 67%.
 :::
 
 #### Revisiting Accuracy
@@ -280,13 +278,13 @@ After having built two different Machine Learning tumour diagnosis models (A and
 
 Which model you pick?
 
-If you picked B, that is correct. Why did you choose it? 
+If you picked B, that is correct. Why did you choose it? B seems to make fewer errors and have a higher Accuracy.
 
 :::{.exercise #exr-mod-cho}
 If you have not done so already, compute the Accuracy, Precision and Recall of both models.
 :::
 
-Making this decision more complex, which of the following two models would you pick?
+Making this decision more complex, which of the following two models would you pick for a **tumour diagnosis** system?
 
 **Model A**
 
@@ -302,12 +300,12 @@ Making this decision more complex, which of the following two models would you p
 | Actual Malignant| 50                 | 0               |
 | Actual Benign   | 20                 | 30              |
 
-If you picked B, that is correct again. Why did you choose model B? In this case, model B has the same Accuracy and the **highest Recall**. In the case of tumour diagnosis, this is probably the most important metric to look at.
+If you picked B, that is correct again. Why did you choose model B? In this case, model B has the same Accuracy and the **highest Recall**. In the case of tumour diagnosis, this is probably the most important metric to look at. Model B did not predict a single malignant tumour as "benign".
 
 Would you pick a different model for spam detection? Probably, as **Precision** becomes more important then. You do not want legitimate emails to end up in your spam folder.
 
 :::{.exercise #exr-mod-cho-2}
-Calculate Recall and Precision for model A and B
+Calculate Recall and Precision for model A and B.
 :::
 
 ## Probabilities and Model Evaluation
@@ -362,7 +360,7 @@ The following line chart shows the evolution of the different metrics described 
 We see that **decreasing** the prediction threshold to 0.3 has the following effects on the three metrics we analysed:
 
 - **Increase** in Recall: with more observations predicted as "malignant", recall can only increase or stay constant
-- **Decrease** in Precision: with more observations predicted as "malignant" despite a low predicted probability, the risk of misclassifying observations as "malignant" increases
+- **Decrease** in Precision: with more observations predicted as "malignant", the risk of misclassifying observations as "malignant" increases
 
 :::{.exercise #exr-thresh}
 Describe the effect of increasing the threshold on Precision, Recall and Accuracy.
@@ -391,7 +389,7 @@ After this description of **classification** model evaluation, the next section 
 :::{.solution #sol-acc}
 @exr-acc
 
-Accuracy of Model B $= \frac{4}{5} = 80\%$
+$\text{Accuracy of Model B} = \frac{4}{5} = 80\%$
 :::
 
 :::{.solution #sol-acc-ab}
@@ -401,9 +399,9 @@ Model A: Correct on observations 1, 2, 3, 4, 6, 7, 8 (7 out of 8). Incorrect on 
 
 Model B: Correct on 1, 2, 5, 6, 7, 8 (6 out of 8). Incorrect on 3 and 4.
 
-Accuracy of Model A $= \frac{7}{8} = 87.5\%$
+$\text{Accuracy of Model A} = \frac{7}{8} = 87.5\%$
 
-Accuracy of Model B $= \frac{6}{8} = 75\%$
+$\text{Accuracy of Model B} = \frac{6}{8} = 75\%$
 :::
 
 :::{.solution #sol-fraud}
@@ -413,6 +411,16 @@ Labels:
 - fraudulent transaction $1$
 - non fraudulent or legitimate transaction $0$
 :::
+
+:::{.solution #sol-conf-fraud}
+@exr-conf-fraud
+
+|                      | Predicted Fraudulent | Predicted Legitimate |
+|----------------------|---------------------|---------------------|
+| Actual Fraudulent    | Fraudulent transaction correctly classified as "fraudulent" | Fraudulent transaction incorrectly classified as "legitimate" |
+| Actual Legitimate    | Legitimate transaction incorrectly classified as "fraudulent" | Legitimate transaction correctly classified as "legitimate"   |
+:::
+
 
 :::{.solution #sol-recall-a}
 @exr-recall-a

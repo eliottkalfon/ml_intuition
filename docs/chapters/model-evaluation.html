@@ -406,7 +406,7 @@ window.Quarto = {
 <section id="train-test-split" class="level3" data-number="8.1.1">
 <h3 data-number="8.1.1" class="anchored" data-anchor-id="train-test-split"><span class="header-section-number">8.1.1</span> Train-Test Split</h3>
 <p>One way to estimate a model’s performance on new data is to set aside a <strong>portion of the training data</strong> for testing. This will remain unseen to the model, and will <strong>not</strong> be used for training.</p>
-<p>At the end of the training process, the trained model (like <a href="../chapters/neighbours.html" target="_blank">K-Nearest Neighbours</a>) can be used to generate predictions on the test data. For this portion of unseen data, we have both model predictions and the true label.</p>
+<p>At the end of the training process, the trained model (like <a href="../chapters/neighbours.html" target="_blank">K-Nearest Neighbours</a>) can be used to generate predictions on the test data. For this portion of unseen data, we have both model predictions and the true labels.</p>
 <p>A good model will have predictions <strong>as close as possible</strong> to the true labels.</p>
 </section>
 <section id="representativeness" class="level3" data-number="8.1.2">
@@ -420,12 +420,11 @@ window.Quarto = {
 <p><span class="math display">\[
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
 \]</span></p>
-<p>If the training data is not representative of the data that the model will generate predictions for, it cannot properly learn the relationship between input and output.</p>
 <p>If the test data is not representative of the unseen data the model will be used to generate predictions on, the model performance on this dataset will not be a good estimation of future performance.</p>
 </section>
 <section id="ensuring-representativeness" class="level4" data-number="8.1.2.2">
 <h4 data-number="8.1.2.2" class="anchored" data-anchor-id="ensuring-representativeness"><span class="header-section-number">8.1.2.2</span> Ensuring Representativeness</h4>
-<p>But how do we make sure that the training and test sets are <strong>consistent</strong>? A single dataset can contain a lot of variations. In the property pricing example, there can be many types of properties with very different characteristics (e.g., surface area or number of rooms). Some of them are easier to price than others. How do we make sure that the train and test set look alike?</p>
+<p>But how to make sure that the training and test sets are <strong>consistent</strong>? A single dataset can contain a lot of variations. In the property pricing example, there can be many types of properties with very different characteristics (e.g., surface area or number of rooms). Some of them are easier to price than others. How to make sure that the train and test set look alike?</p>
 <p>Here, the <strong>law of large numbers</strong> comes to the rescue. The law of large numbers states that if we <strong>randomly sample</strong> a large enough number of observations from a population (here, training data), the randomly selected sample will be representative of the original population.</p>
 <p>This is the statistical foundation of <strong>polling</strong>. Before elections, polling agencies <strong>randomly sample</strong> a large group of people to get a representative sample of the population.</p>
 <div class="callout callout-style-default callout-note callout-titled">

@@ -25,7 +25,7 @@ Unseen data is, by definition, **unseen**. We cannot have access to it, as the m
 
 One way to estimate a model's performance on new data is to set aside a **portion of the training data** for testing. This will remain unseen to the model, and will **not** be used for training.
 
-At the end of the training process, the trained model (like [K-Nearest Neighbours](neighbours.qmd){target=_blank}) can be used to generate predictions on the test data. For this portion of unseen data, we have both model predictions and the true label.
+At the end of the training process, the trained model (like [K-Nearest Neighbours](neighbours.qmd){target=_blank}) can be used to generate predictions on the test data. For this portion of unseen data, we have both model predictions and the true labels.
 
 A good model will have predictions **as close as possible** to the true labels.
 
@@ -45,13 +45,11 @@ $$
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
 $$
 
-If the training data is not representative of the data that the model will generate predictions for, it cannot properly learn the relationship between input and output.
-
 If the test data is not representative of the unseen data the model will be used to generate predictions on, the model performance on this dataset will not be a good estimation of future performance.
 
 #### Ensuring Representativeness
 
-But how do we make sure that the training and test sets are **consistent**? A single dataset can contain a lot of variations. In the property pricing example, there can be many types of properties with very different characteristics (e.g., surface area or number of rooms). Some of them are easier to price than others. How do we make sure that the train and test set look alike?
+But how to make sure that the training and test sets are **consistent**? A single dataset can contain a lot of variations. In the property pricing example, there can be many types of properties with very different characteristics (e.g., surface area or number of rooms). Some of them are easier to price than others. How to make sure that the train and test set look alike?
 
 Here, the **law of large numbers** comes to the rescue. The law of large numbers states that if we **randomly sample** a large enough number of observations from a population (here, training data), the randomly selected sample will be representative of the original population.
 
