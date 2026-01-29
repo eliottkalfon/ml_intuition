@@ -2,9 +2,9 @@
 title: Numerical Feature Scaling
 ---
 
-Lists of numbers come in all shapes and sizes. But why should we care?
+Lists of numbers come in all shapes and sizes. Why should we care?
 
-Many Machine Learning algorithms operate on data as **vectors** or **points in space**. [KNN](neighbours.qmd) generates predictions based on the [**distance**](distance.qmd) or similarities between observations. [Decision Trees](trees-intuition.qmd) split the feature space to separate data from different classes or labels.
+Many Machine Learning algorithms operate on data as **points in space**. [KNN](neighbours.qmd) generates predictions based on the [distance](distance.qmd) or similarities between observations. [Decision Trees](trees-intuition.qmd) split the feature space to separate data from different classes or labels.
 
 Thinking of nearest neighbours, feature scaling does matter. Let’s imagine you are building a model to predict property prices, using two features:
 
@@ -60,11 +60,11 @@ To do so, we need to **scale** both features so that they (roughly) have the sam
 
 - Range is the distance between the minimum and the maximum of a series.
 - Mean is the average of a series
-- Variance can have many definitions, for now, let’s define it as the degree to which **numbers fluctuate**
+- Variance can have many definitions, for now, let’s define it as the degree to which the **series fluctuates**
 
 As an example, the surface area column has a higher variance than the number of rooms column. The numbers **fluctuate more** from one to the other. As a consequence, surface area has a larger impact than the number of rooms on the distance function.
 
-What if we could transform both the number of rooms and the surface area to series of number between 0 and 1? This would solve the issue of distance calculation. The following section will explore a way to do this.
+What if we could transform both the number of rooms and the surface area to series of numbers between 0 and 1? This would solve the issue of distance calculation. The following section will explore a way to do this.
 
 ## Min-Max Scaling
 

@@ -15,7 +15,13 @@ The Decision Tree algorithm shown above only outputs class labels as prediction 
 
 Let's think about this problem using a modified version of the example data:
 
+::: {.content-visible unless-format="epub"}
 ![Non separable example data](/images/trees/non_separable_data.png){width=60%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Non separable example data](/images/trees/non_separable_data.png){width=100%}
+:::
 
 In this example, leaf number 3 and 4 both contain observations from the two classes. Now, imagine that a new observation has $x_1=2.1$ and $x_2=0.5$, what prediction would we output?
 
@@ -23,21 +29,21 @@ Based on the values of this observation's feature, it will land in leaf number 3
 
 Using a similar approach to what was used in KNN, instead of applying a majority vote within a leaf, we could use the **frequency** of the class as a predicted probability.
 
-In this example, the new observation will have a probability of $\times$ of:
+In this example, the new observation will have a the following predicted probability of $\times$:
 
 $$
 \frac{10}{11} \approx 0.909
 $$
 
 :::{.exercise #exr-proba}
-Compute the probability of $\times$ for an observation with features: $x_1 = 3$ and $x_2 = 2$. Show that it is approximately 0.17
+Compute the probability of $\times$ for an observation with features: $x_1 = 3$ and $x_2 = 2$. Show that it is approximately 0.17.
 :::
 
 That is it, nothing more complex.
 
 ## From classification to regression
 
-So far, we have focussed on classification problems, in which the objective is to assign a label (such as the malignancy of a tumour) to new observations. How can the same model be applied to a regression problem, i.e., to the prediction of a continuous variable, like the price of a property.
+So far, we have focussed on classification problems, in which the objective is to assign a label (e.g., the malignancy of a tumour) to new observations. How can the same model be applied to the prediction of a continuous variable (e.g. the price of a property)?
 
 The core idea would remain the same: split the data recursively into subgroups to make them as "pure" as possible. This concept of "purity" or "homogeneity" is easy to define in a classification problem. A group that is "pure" is a group that contains a large majority of one class.
 
@@ -57,9 +63,9 @@ Imagine we are building a model predicting property prices based on Property Siz
 
 ![Properties by Size and Distance coloured by Property Price](/images/trees/property_prices.png)
 
-We could take a subset of this data (prices now in **k €**):
+We could take a subset of this data (prices now in **K€**):
 
-| Size (m²) | Distance (km) | Price (k €) |
+| Size (m²) | Distance (km) | Price (K€) |
 |:---------:|:-------------:|:-----------:|
 | 60        | 2.0           | 320         |
 | 80        | 1.5           | 400         |
@@ -110,11 +116,12 @@ $$
 
 This is a good start, but leaves us with two MSE numbers. How could we summarise these into one?
 
-One idea is to compute the **average MSE**. It is a weighted average of the MSEs of the two groups (weighted by the number of observations in each group):
+One idea is to compute the **average MSE**. It is a weighted average of the MSEs of the two groups (weighted by the number of observations in each group $n_a$ and $n_b$):
 
 $$ \begin{aligned}
 \text{Weighted MSE} &= \frac{n_a}{n_a + n_b} \cdot \text{MSE}_a + \frac{n_b}{n_a + n_b} \cdot \text{MSE}_b \\
-&=\frac{4}{6} \cdot 1250 + \frac{2}{6} \cdot 15625 = 833.33 + 5208.33 = 6041.67
+&=\frac{4}{6} \cdot 1250 + \frac{2}{6} \cdot 15625 \\
+&= 833.33 + 5208.33 = 6041.67
 \end{aligned}
 $$
 
@@ -140,7 +147,7 @@ This chapter concludes our exploration of Decision Trees. Summarising once more 
 
 - Evaluate splits using a homogeneity criterion: Gini or MSE
 - Split groups recursively
-- Output either class labels or probabilities using averaging
+- Output predictions with averaging
 
 To test your knowledge, you can try the practice exercise below.
 

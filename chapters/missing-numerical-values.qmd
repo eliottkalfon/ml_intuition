@@ -48,7 +48,7 @@ Before coming up with a strategy, it is critical to understand why these values 
 
 ### Excluding Rows with Missing Values
 
-Is the missing data point critical? In the context of property pricing with only two features (a very simplified example), the surface area is a critical data point. You may want to **exclude** the rows that have a key feature value missing.
+Is the missing data point critical? In the context of property pricing, the surface area is a critical data point. You may want to **exclude** the rows that have a key feature value missing.
 
 | Flat | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood   | Energy Rating | Sell Price (K€) |
 |:----:|:------------------:|:----------------------:|:---------------:|:-------------:|:---------------:|
@@ -104,7 +104,7 @@ In a dataset containing student heights:
 | E       | 172         | M      |       |
 | F       | 160         | F      | 9     |
 
-A good strategy to deal with missing heights is to impute student height using the **average height** of all students. With a large enough dataset, a more fine-grained approach could be used. You could, for example, impute the missing heights based on students with the same grade.
+A good strategy to deal with missing heights is to impute student height using the **average height** of all students. With a large enough dataset, a more fine-grained approach could be used. You could, for example, impute the missing heights based on students within the same grade.
 
 To impute the Height of student B, we calculate the average height over all students:
 
@@ -114,13 +114,9 @@ $$
 
 The Height of student B would be replaced by $169.4$.
 
-:::{.exercise #exr-mean-imp}
-Using mean imputation to fill missing Grade values, what would be the Grade of student E?
-:::
-
 #### Imputation by the Median
 
-The **median** could also be a good choice of substitute value for imputation. The median of a series is the **middle number** in a sorted list. Taking the list: $[2,3,4,5,7,9,50]$ as example, the median is $5$. In other words, it is the value such that at least 50% of the values are inferior or equal to. One advantage of the median is that it is not sensitive to outliers.
+The **median** could also be a good choice of substitute value for imputation. The median of a series is the **middle number** in a sorted list. Taking the list: $[2,3,4,5,7,9,50]$ as example, the median is $5$. In other words, it is the value such that at least 50% of the values are less than or equal to it. One advantage of the median is that it is not sensitive to outliers.
 
 ::: {.callout-note collapse="true"}
 ## Mean, median and outliers
@@ -179,10 +175,6 @@ Going back to the student data:
 | F       | 160         | F      | 9     |
 
 To impute the Height of student B with the median, we find the median. The median of the heights is $170$, as it is the middle number in the sorted Height series: ${160, 165, 170, 172, 180}$.
-
-:::{.exercise #exr-median-imp}
-Impute the missing Grade of student E using median imputation
-:::
 
 #### Imputation of Time-Series Data
 
@@ -288,26 +280,6 @@ Looking at the previous example, what if the "Neighbourhood" column was missing?
 
 ## Solutions
 
-:::{.solution #sol-mean-imp}
-@exr-mean-imp
-
-| Student | Height (cm) | Gender | Grade |
-|:-------:|:-----------:|:------:|:-----:|
-| A       | 170         | M      | 10    |
-| B       |             | F      | 10    |
-| C       | 165         | F      | 9     |
-| D       | 180         | M      | 11    |
-| E       | 172         | M      |       |
-| F       | 160         | F      | 9     |
-
-The average Grade is:
-$$
-\text{Mean} = \frac{10 + 10 + 9 + 11 + 9}{5} = \frac{49}{50} = 9.8
-$$
-
-The missing Grade of student E would be replaced by $9.8$.
-:::
-
 :::{.solution #sol-outlier}
 @exr-outlier
 
@@ -344,12 +316,6 @@ As the series now contains an even number of observations, the median is the ave
 
 - ${2, 3, 5, 8}, \text{Median} = \frac{3 + 5}{2} = 4$
 - ${4, 6, 8, 10, 12, 14}, \text{Median} = \frac{8 + 10}{2} = 9$
-:::
-
-:::{.solution #sol-median-imp}
-@exr-median-imp
-
-The median of the Grade series is the middle number of the sorted series: ${9, 9, 10, 10, 11}$. Here, it is $10$. The grade of student E would therefore be filled with $10$. 
 :::
 
 :::{.solution #sol-time-imp}

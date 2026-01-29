@@ -25,7 +25,7 @@ Pseudocode is a language in between natural language and code.
 
 Natural languages are languages like English, French or Chinese that we use to communicate with one another. It is both:
 
-- ambiguous: the same word can mean two or more meanings
+- ambiguous: the same word can mean two or more things
 - context-dependent: the meaning of a word depends on its context
 
 Code is an unambiguous and context-free language. We use it to define programs to be run by computers.
@@ -50,7 +50,7 @@ def adder(a,b):
 
 Once defined, this function can be called over and over again, without having to copy-paste any code. Functions are a core building block of programming.
 
-To call this function in python, you could write `adder(2,3)` and `5` would be the result.
+You could call the function with `adder(2,3)` and get `5` as result.
 
 ## Recursion
 
@@ -62,7 +62,7 @@ Let's take the Fibonacci sequence as an example:
 
 0, 1, 1, 2, 3, 5, 8, ...
 
-In the Fibonacci sequence, the $n^{th}$ term is the sum of the previous two, with the first two terms of the series being 0 and 1.
+In the Fibonacci sequence, the next term is the sum of the previous two, with the first two terms of the series being 0 and 1.
 
 To calculate the 3rd term, we add the first two numbers together: 0 + 1 = 1
 To calculate the 4th, we add the second and the third number: 1 + 1 = 2
@@ -149,7 +149,13 @@ Splits Dataset into Groups A and B
 Calls Split(Group A) and Split(Group B)
 ```
 
+::: {.content-visible unless-format="epub"}
 ![Splitting the dataset](/images/trees/split1_AB.png){width=40%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Splitting the dataset](/images/trees/split1_AB.png){width=80%}
+:::
 
 ```plaintext
     Split(Group B)  
@@ -160,8 +166,13 @@ Calls Split(Group A) and Split(Group B)
     :::
 ```
 
+::: {.content-visible unless-format="epub"}
 ![Splitting Group B](/images/trees/split2_ACD.png){width=40%}
+:::
 
+::: {.content-visible when-format="epub"}
+![Splitting Group B](/images/trees/split2_ACD.png){width=80%}
+:::
 
 ```plaintext
         Split(Group C)
@@ -175,7 +186,13 @@ Calls Split(Group A) and Split(Group B)
     Calls Split(Group E) and Split(Group F)
 ```
 
+::: {.content-visible unless-format="epub"}
 ![Splitting Group A](/images/trees/split3_EFCD.png){width=40%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Splitting Group A](/images/trees/split3_EFCD.png){width=80%}
+:::
 
 ```plaintext
         Split(Group E)
@@ -218,6 +235,6 @@ The next chapter will add some nuance and bring the entire Decision Tree algorit
 :::{.solution #sol-fib}
 @exr-fib
 
-- 7th: $3 + 5 = 8$
-- 8th: $5 + 8 = 13$
+- 7th: 3 + 5 = 8
+- 8th: 5 + 8 = 13
 :::

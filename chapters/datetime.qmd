@@ -12,7 +12,7 @@ Time indications like dates can contain information that can improve the quality
 
 ### Overall Trend
 
-Keeping the property pricing example, in which a Machine Learning model is trained to predict property prices from its characteristics like their surface area or number of rooms. Let’s use the following training data as an example:
+In the property pricing example, in which a Machine Learning model is trained to predict property prices from its characteristics like their surface area or number of rooms. Let’s use the following training data as an example:
 
 | Property | Surface (m²) | Rooms | Pricing date | Sale date | Sale price (K€) |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -60,7 +60,7 @@ Hour: 8
 Minute: 31  
 Second: 00
 
-This date could then be represented as the following **list of numbers**: ${2025, 8, 33, 15, 5, 8, 31, 00}$. These values could be used as normal numeric features.
+This date could then be represented as the following **list of numbers**: 2025, 8, 33, 15, 5, 8, 31, 00. These values could be used as normal numeric features.
 
 Encoding the pricing date of the example data using this method, we get:
 

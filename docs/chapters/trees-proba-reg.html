@@ -407,18 +407,18 @@ window.Quarto = {
 <p>In this example, leaf number 3 and 4 both contain observations from the two classes. Now, imagine that a new observation has <span class="math inline">\(x_1=2.1\)</span> and <span class="math inline">\(x_2=0.5\)</span>, what prediction would we output?</p>
 <p>Based on the values of this observation’s feature, it will land in leaf number 3. In this leaf, the large majority of training observations are of class <span class="math inline">\(\times\)</span> (10 out of 11) with a single <span class="math inline">\(\circ\)</span> observation.</p>
 <p>Using a similar approach to what was used in KNN, instead of applying a majority vote within a leaf, we could use the <strong>frequency</strong> of the class as a predicted probability.</p>
-<p>In this example, the new observation will have a probability of <span class="math inline">\(\times\)</span> of:</p>
+<p>In this example, the new observation will have a the following predicted probability of <span class="math inline">\(\times\)</span>:</p>
 <p><span class="math display">\[
 \frac{10}{11} \approx 0.909
 \]</span></p>
 <div id="exr-proba" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 14.1</strong></span> Compute the probability of <span class="math inline">\(\times\)</span> for an observation with features: <span class="math inline">\(x_1 = 3\)</span> and <span class="math inline">\(x_2 = 2\)</span>. Show that it is approximately 0.17</p>
+<p><span class="theorem-title"><strong>Exercise 14.1</strong></span> Compute the probability of <span class="math inline">\(\times\)</span> for an observation with features: <span class="math inline">\(x_1 = 3\)</span> and <span class="math inline">\(x_2 = 2\)</span>. Show that it is approximately 0.17.</p>
 </div>
 <p>That is it, nothing more complex.</p>
 </section>
 <section id="from-classification-to-regression" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="from-classification-to-regression"><span class="header-section-number">14.2</span> From classification to regression</h2>
-<p>So far, we have focussed on classification problems, in which the objective is to assign a label (such as the malignancy of a tumour) to new observations. How can the same model be applied to a regression problem, i.e., to the prediction of a continuous variable, like the price of a property.</p>
+<p>So far, we have focussed on classification problems, in which the objective is to assign a label (e.g., the malignancy of a tumour) to new observations. How can the same model be applied to the prediction of a continuous variable (e.g.&nbsp;the price of a property)?</p>
 <p>The core idea would remain the same: split the data recursively into subgroups to make them as “pure” as possible. This concept of “purity” or “homogeneity” is easy to define in a classification problem. A group that is “pure” is a group that contains a large majority of one class.</p>
 <p>In regression problems, how could we define this concept of homogeneity? Think about it in terms of property prices. A homogeneous group would be a group that contains properties with <strong>similar prices</strong>. In such a group, each item would have little difference with the average price.</p>
 <p>Now, how to generate predictions of <strong>continuous values</strong> from these subgroups? In the classification case, we could just use majority vote or average for probability predictions. In line with what was shown with KNN, the same principle of average can be used for regression problems.</p>
@@ -434,13 +434,13 @@ window.Quarto = {
 <figcaption>Properties by Size and Distance coloured by Property Price</figcaption>
 </figure>
 </div>
-<p>We could take a subset of this data (prices now in <strong>k €</strong>):</p>
+<p>We could take a subset of this data (prices now in <strong>K€</strong>):</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: center;">Size (m²)</th>
 <th style="text-align: center;">Distance (km)</th>
-<th style="text-align: center;">Price (k €)</th>
+<th style="text-align: center;">Price (K€)</th>
 </tr>
 </thead>
 <tbody>
@@ -507,10 +507,11 @@ window.Quarto = {
 \]</span></p></li>
 </ul>
 <p>This is a good start, but leaves us with two MSE numbers. How could we summarise these into one?</p>
-<p>One idea is to compute the <strong>average MSE</strong>. It is a weighted average of the MSEs of the two groups (weighted by the number of observations in each group):</p>
+<p>One idea is to compute the <strong>average MSE</strong>. It is a weighted average of the MSEs of the two groups (weighted by the number of observations in each group <span class="math inline">\(n_a\)</span> and <span class="math inline">\(n_b\)</span>):</p>
 <p><span class="math display">\[ \begin{aligned}
 \text{Weighted MSE} &amp;= \frac{n_a}{n_a + n_b} \cdot \text{MSE}_a + \frac{n_b}{n_a + n_b} \cdot \text{MSE}_b \\
-&amp;=\frac{4}{6} \cdot 1250 + \frac{2}{6} \cdot 15625 = 833.33 + 5208.33 = 6041.67
+&amp;=\frac{4}{6} \cdot 1250 + \frac{2}{6} \cdot 15625 \\
+&amp;= 833.33 + 5208.33 = 6041.67
 \end{aligned}
 \]</span></p>
 </section>
@@ -541,7 +542,7 @@ window.Quarto = {
 <ul>
 <li>Evaluate splits using a homogeneity criterion: Gini or MSE</li>
 <li>Split groups recursively</li>
-<li>Output either class labels or probabilities using averaging</li>
+<li>Output predictions with averaging</li>
 </ul>
 <p>To test your knowledge, you can try the practice exercise below.</p>
 <p>Looking back, we now know how to train and evaluate two different Machine Learning models. This is already a lot. The next section will explore the last missing piece of the puzzle: Data Preprocessing, making data ready for modelling.</p>

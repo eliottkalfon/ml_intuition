@@ -782,10 +782,11 @@ window.Quarto = {
 <p>This is an abstract definition, let’s make it more concrete with an example:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 29%">
-<col style="width: 30%">
-<col style="width: 25%">
+<col style="width: 11%">
+<col style="width: 22%">
+<col style="width: 23%">
+<col style="width: 19%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -793,6 +794,7 @@ window.Quarto = {
 <th style="text-align: center;">Surface Area (sq m)</th>
 <th style="text-align: center;">Street Name</th>
 <th style="text-align: center;">Sell Price (K€)</th>
+<th style="text-align: center;">Encoded Street Name</th>
 </tr>
 </thead>
 <tbody>
@@ -801,36 +803,42 @@ window.Quarto = {
 <td style="text-align: center;">85</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">420</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">B</td>
 <td style="text-align: center;">120</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">610</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">C</td>
 <td style="text-align: center;">95</td>
 <td style="text-align: center;">Kantstr.</td>
 <td style="text-align: center;">390</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">D</td>
 <td style="text-align: center;">70</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">370</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">110</td>
 <td style="text-align: center;">Unter Den Linden</td>
 <td style="text-align: center;">700</td>
+<td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">F</td>
 <td style="text-align: center;">60</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">310</td>
+<td style="text-align: center;">?</td>
 </tr>
 </tbody>
 </table>
@@ -919,7 +927,7 @@ window.Quarto = {
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the <strong>global average</strong> instead of the average for this street name.</p>
+<p>One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the <strong>global average</strong> (for all of the training data) instead of the average for this street name.</p>
 </div>
 </div>
 </div>

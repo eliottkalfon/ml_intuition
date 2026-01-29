@@ -27,24 +27,24 @@ Likewise, if the missing categorical value is critical to the prediction task, e
 
 ## Creating a new Null Category
 
-In other cases, all missing values could be replaced by a "missing" category and treated as another value for that categorical variable. Let's make this more concrete with this example:
+In other cases, missing values could be replaced by a "missing" category and treated as another value for that categorical variable. Let's make this more concrete with this example:
 
 | Property | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood | Energy Rating | Outdoor Space | Sell Price (K€) | Years since Build |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | A | 85 | 4.2 | Neukölln | B | Balcony | 420 |  |
 | B | 120 | 2.5 | Kreuzberg | A | Terrace | 610 | 8 |
-| C | 95 | 6.1 | Charlott. | C |   | 390 |  |
+| C | 95 | 6.1 | Charlott. | C | None | 390 |  |
 | D | 70 | 3.8 | Kreuzberg | D | Garden | 370 | 22 |
 | E | 110 | 1.2 | Charlott. | B | Balcony | 700 | 12 |
 | F | 60 | 5.0 | Neukölln | F |  | 310 |  |
 
-Here, some of the "Outdoor Space" values are missing. As mentioned above, the missing values can be replaced by an "Unknown" value.
+Here, one of the "Outdoor Space" values is missing. As mentioned above, the missing value can be replaced by an "Unknown" value.
 
 | Property | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood | Energy Rating | Outdoor Space | Sell Price (K€) | Years since Build |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | A | 85 | 4.2 | Neukölln | B | Balcony | 420 |  |
 | B | 120 | 2.5 | Kreuzberg | A | Terrace | 610 | 8 |
-| C | 95 | 6.1 | Charlott. | C | **Unknown** | 390 |  |
+| C | 95 | 6.1 | Charlott. | C | None | 390 |  |
 | D | 70 | 3.8 | Kreuzberg | D | Garden | 370 | 22 |
 | E | 110 | 1.2 | Charlott. | B | Balcony | 700 | 12 |
 | F | 60 | 5.0 | Neukölln | F | **Unknown** | 310 |  |

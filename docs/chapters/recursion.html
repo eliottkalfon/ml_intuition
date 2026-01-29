@@ -447,7 +447,7 @@ window.Quarto = {
 <p>Pseudocode is a language in between natural language and code.</p>
 <p>Natural languages are languages like English, French or Chinese that we use to communicate with one another. It is both:</p>
 <ul>
-<li>ambiguous: the same word can mean two or more meanings</li>
+<li>ambiguous: the same word can mean two or more things</li>
 <li>context-dependent: the meaning of a word depends on its context</li>
 </ul>
 <p>Code is an unambiguous and context-free language. We use it to define programs to be run by computers.</p>
@@ -466,7 +466,7 @@ window.Quarto = {
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> a <span class="op">+</span> b</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Once defined, this function can be called over and over again, without having to copy-paste any code. Functions are a core building block of programming.</p>
-<p>To call this function in python, you could write <code>adder(2,3)</code> and <code>5</code> would be the result.</p>
+<p>You could call the function with <code>adder(2,3)</code> and get <code>5</code> as result.</p>
 </section>
 <section id="recursion" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="recursion"><span class="header-section-number">13.2</span> Recursion</h2>
@@ -474,7 +474,7 @@ window.Quarto = {
 <p>This is the technical definition, this chapter will make this concept more concrete.</p>
 <p>Let’s take the Fibonacci sequence as an example:</p>
 <p>0, 1, 1, 2, 3, 5, 8, …</p>
-<p>In the Fibonacci sequence, the <span class="math inline">\(n^{th}\)</span> term is the sum of the previous two, with the first two terms of the series being 0 and 1.</p>
+<p>In the Fibonacci sequence, the next term is the sum of the previous two, with the first two terms of the series being 0 and 1.</p>
 <p>To calculate the 3rd term, we add the first two numbers together: 0 + 1 = 1 To calculate the 4th, we add the second and the third number: 1 + 1 = 2</p>
 <p>We can continue this process:</p>
 <ul>
@@ -601,8 +601,8 @@ Algorithm terminates</code></pre>
 <div id="sol-fib" class="proof solution">
 <p><span class="proof-title"><em>Solution 13.1</em>. </span><a href="#exr-fib" class="quarto-xref">Exercise&nbsp;<span>13.1</span></a></p>
 <ul>
-<li>7th: <span class="math inline">\(3 + 5 = 8\)</span></li>
-<li>8th: <span class="math inline">\(5 + 8 = 13\)</span></li>
+<li>7th: 3 + 5 = 8</li>
+<li>8th: 5 + 8 = 13</li>
 </ul>
 </div>
 

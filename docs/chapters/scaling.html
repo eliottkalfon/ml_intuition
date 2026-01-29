@@ -390,8 +390,8 @@ window.Quarto = {
 </header>
 
 
-<p>Lists of numbers come in all shapes and sizes. But why should we care?</p>
-<p>Many Machine Learning algorithms operate on data as <strong>vectors</strong> or <strong>points in space</strong>. <a href="../chapters/neighbours.html">KNN</a> generates predictions based on the <a href="../chapters/distance.html"><strong>distance</strong></a> or similarities between observations. <a href="../chapters/trees-intuition.html">Decision Trees</a> split the feature space to separate data from different classes or labels.</p>
+<p>Lists of numbers come in all shapes and sizes. Why should we care?</p>
+<p>Many Machine Learning algorithms operate on data as <strong>points in space</strong>. <a href="../chapters/neighbours.html">KNN</a> generates predictions based on the <a href="../chapters/distance.html">distance</a> or similarities between observations. <a href="../chapters/trees-intuition.html">Decision Trees</a> split the feature space to separate data from different classes or labels.</p>
 <p>Thinking of nearest neighbours, feature scaling does matter. Let’s imagine you are building a model to predict property prices, using two features:</p>
 <ul>
 <li>Surface Area in m²</li>
@@ -486,10 +486,10 @@ window.Quarto = {
 <ul>
 <li>Range is the distance between the minimum and the maximum of a series.</li>
 <li>Mean is the average of a series</li>
-<li>Variance can have many definitions, for now, let’s define it as the degree to which <strong>numbers fluctuate</strong></li>
+<li>Variance can have many definitions, for now, let’s define it as the degree to which the <strong>series fluctuates</strong></li>
 </ul>
 <p>As an example, the surface area column has a higher variance than the number of rooms column. The numbers <strong>fluctuate more</strong> from one to the other. As a consequence, surface area has a larger impact than the number of rooms on the distance function.</p>
-<p>What if we could transform both the number of rooms and the surface area to series of number between 0 and 1? This would solve the issue of distance calculation. The following section will explore a way to do this.</p>
+<p>What if we could transform both the number of rooms and the surface area to series of numbers between 0 and 1? This would solve the issue of distance calculation. The following section will explore a way to do this.</p>
 </section>
 <section id="min-max-scaling" class="level2" data-number="20.2">
 <h2 data-number="20.2" class="anchored" data-anchor-id="min-max-scaling"><span class="header-section-number">20.2</span> Min-Max Scaling</h2>

@@ -119,14 +119,14 @@ We want to be able to capture the **impact of the street name on the price**. To
 
 This is an abstract definition, let’s make it more concrete with an example:
 
-| Property | Surface Area (sq m) | Street Name         | Sell Price (K€) |
-|:--------:|:------------------:|:-------------------:|:---------------:|
-| A        | 85                 | Sonnenallee         | 420             |
-| B        | 120                | Bergmannstr.        | 610             |
-| C        | 95                 | Kantstr.            | 390             |
-| D        | 70                 | Bergmannstr.        | 370             |
-| E        | 110                | Unter Den Linden    | 700             |
-| F        | 60                 | Sonnenallee         | 310             |
+| Property | Surface Area (sq m) | Street Name         | Sell Price (K€) | Encoded Street Name |
+|:--------:|:------------------:|:-------------------:|:---------------:|:-------------------:|
+| A        | 85                 | Sonnenallee         | 420             | ?                   |
+| B        | 120                | Bergmannstr.        | 610             | ?                   |
+| C        | 95                 | Kantstr.            | 390             | ?                   |
+| D        | 70                 | Bergmannstr.        | 370             | ?                   |
+| E        | 110                | Unter Den Linden    | 700             | ?                   |
+| F        | 60                 | Sonnenallee         | 310             | ?                   |
 
 To encode the street name with Target Encoding, compute the average value of the target for each street name:
 
@@ -155,7 +155,7 @@ A possible drawback of this method is that if there are street names for which t
 ::: {.callout-note collapse="true"}
 ## If you are curious
 
-One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the **global average** instead of the average for this street name.
+One way to avoid the problem described above, you can decide on a threshold (e.g., 10), and encode any street name with fewer observations than 10 with the **global average** (for all of the training data) instead of the average for this street name.
 
 :::
 
