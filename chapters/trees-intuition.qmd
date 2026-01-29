@@ -113,23 +113,11 @@ Each split or comparison creates a **linear separation** in the feature space, r
 
 In Computer Science, trees are a type of graph. Graphs are collections of **nodes and edges**.
 
-::: {.content-visible unless-format="epub"}
 ![Graphs are collections of nodes and edges connecting them](/images/trees/basic_graph.png){width=40%}
-:::
-
-::: {.content-visible when-format="epub"}
-![Graphs are collections of nodes and edges connecting them](/images/trees/basic_graph.png){width=100%}
-:::
 
 Edges can be **directed** or **undirected**. Directed edges can only be traversed in one direction, usually represented as arrows. Edges, i.e., connections between nodes, can form **cycles**. These cycles are paths that start and end with the same node.
 
-::: {.content-visible unless-format="epub"}
 ![Edges can be directed](/images/trees/cycles_direction.png){width=40%}
-:::
-
-::: {.content-visible when-format="epub"}
-![Edges can be directed](/images/trees/cycles_direction.png){width=100%}
-:::
 
 :::{.exercise #exr-cycle}
 The diagram above highlights the cycle A→B→D→A. Can you find another cycle?
@@ -142,13 +130,7 @@ Trees are **Directed Acyclic Graphs** (DAGs). This is a bit of a mouthful, let's
 
 Below is an example of a tree with seven nodes:
 
-::: {.content-visible unless-format="epub"}
 ![A simple tree with seven nodes](/images/trees/tree_concepts.png){width=60%}
-:::
-
-::: {.content-visible when-format="epub"}
-![A simple tree with seven nodes](/images/trees/tree_concepts.png){width=100%}
-:::
 
 Trees, like all graphs, are composed of nodes and edges. In addition to the usual graph jargon, there are a few tree-specific concepts. To understand them, consider the example above:
 

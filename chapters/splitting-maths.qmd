@@ -10,7 +10,7 @@ How could we build a tree from there?
 
 ## Best Split First
 
-We could start by finding the **best split**, the split that separates the data best. The split will create two groups:
+We could start by finding the **best split**, the split that separates the data best (even if it is not perfect). The split will create two groups:
 
 ![First split](/images/trees/example_first_split.png)
 
@@ -86,12 +86,20 @@ $$
 As the two picks are random and with replacement, the probability of picking one, then the other is:
 
 $$
-P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.9 \cdot 0.1 = 0.09
+\begin{aligned}
+P(\text{malignant then benign}) &= P(\text{malignant}) \cdot P(\text{benign}) \\
+&= 0.9 \cdot 0.1 \\
+&= 0.09
+\end{aligned}
 $$
 
 Now, what would be the probability of picking a benign observation then a malignant one (reversing the order)? We have already computed the probabilities above, we just need to reverse the order:
 $$
-P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.1 \cdot 0.9 = 0.09
+\begin{aligned}
+P(\text{benign then malignant}) &= P(\text{benign}) \cdot P(\text{malignant}) \\
+&= 0.1 \cdot 0.9 \\
+&= 0.09
+\end{aligned}
 $$
 
 Which, **by symmetry**, gives the same results. As this sampling is independent, the probability of picking malignant then benign is the same as benign then malignant. To get the probability of these two events we just have to sum them:
@@ -142,6 +150,8 @@ $$
 \frac{n_a}{n_a + n_b} \cdot \text{Gini}_{a} + \frac{n_b}{n_a + n_b} \cdot \text{Gini}_{b}
 $$
 
+Here, $n_a$ and $n_b$ represent the number of observations in each group.
+
 $$
 \frac{10}{10+10} \cdot 0.18 + \frac{10}{10+10} \cdot 0.32 = 0.25
 $$
@@ -191,13 +201,13 @@ We first try splitting the data using the Perimeter Mean of the cell nuclei. The
 
 ![Trying different split values for Perimeter Mean](/images/trees/scatter_and_gini_vs_perimeter.png)
 
-This Gini Impurity Coefficient reaches a minimum of approximately 15.2 at a split value of about 96.6.
+This Gini Impurity Coefficient reaches a minimum of approximately 0.17 at a split value of about 96.6.
 
 The same could be done with the Mean Area of the cell nuclei:
 
 ![Trying different split values for Perimeter Mean](/images/trees/gini_vs_area_and_scatter.png)
 
-The Gini Impurity Coefficient reaches a minimum of approximately 16.5 at a split value of about 885.7.
+The Gini Impurity Coefficient reaches a minimum of approximately 0.18 at a split value of about 885.7.
 
 The best split is obtained by splitting the data based on Perimeter Mean at 96.6. This process is repeated every time a group is split.
 
@@ -226,13 +236,21 @@ $$
 Now, the probability of picking first a malignant tumour, then a benign tumour:
 
 $$
-P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.2 \cdot 0.8 = 0.16
+\begin{aligned}
+P(\text{malignant then benign}) &= P(\text{malignant}) \cdot P(\text{benign}) \\
+&= 0.2 \cdot 0.8 \\
+&= 0.16
+\end{aligned}
 $$
 
 The probability of picking first a benign tumour, then a malignant tumour:
 
 $$
-P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.8 \cdot 0.2 = 0.16
+\begin{aligned}
+P(\text{benign then malignant}) &= P(\text{benign}) \cdot P(\text{malignant}) \\
+&= 0.8 \cdot 0.2 \\
+&= 0.16
+\end{aligned}
 $$
 
 Sum the two to get the probability of picking items of different classes:
@@ -265,13 +283,21 @@ $$
 Now, the probability of picking first a malignant tumour, then a benign tumour:
 
 $$
-P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.6 \cdot 0.4 = 0.24
+\begin{aligned}
+P(\text{malignant then benign}) &= P(\text{malignant}) \cdot P(\text{benign}) \\
+&= 0.6 \cdot 0.4 \\
+&= 0.24
+\end{aligned}
 $$
 
 The probability of picking first a benign tumour, then a malignant tumour:
 
 $$
-P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.4 \cdot 0.6 = 0.24
+\begin{aligned}
+P(\text{benign then malignant}) &= P(\text{benign}) \cdot P(\text{malignant}) \\
+&= 0.4 \cdot 0.6 \\
+&= 0.24
+\end{aligned}
 $$
 
 Sum the two to get the probability of picking items of different classes:
@@ -283,7 +309,7 @@ $$
 \end{aligned}
 $$
 
-The Gini Impurity Coefficient for Group C is therefore $0.48$.
+The Gini Impurity Coefficient for Group C is therefore 0.48.
 
 **Group D**
 
@@ -301,13 +327,21 @@ $$
 Now, the probability of picking first a malignant tumour, then a benign tumour:
 
 $$
-P(\text{malignant then benign}) = P(\text{malignant}) \cdot P(\text{benign}) = 0.5 \cdot 0.5 = 0.25
+\begin{aligned}
+P(\text{malignant then benign}) &= P(\text{malignant}) \cdot P(\text{benign}) \\
+&= 0.5 \cdot 0.5 \\
+&= 0.25
+\end{aligned}
 $$
 
 The probability of picking first a benign tumour, then a malignant tumour:
 
 $$
-P(\text{benign then malignant}) = P(\text{benign}) \cdot P(\text{malignant}) = 0.5 \cdot 0.5 = 0.25
+\begin{aligned}
+P(\text{benign then malignant}) &= P(\text{benign}) \cdot P(\text{malignant}) \\
+&= 0.5 \cdot 0.5 \\
+&= 0.25
+\end{aligned}
 $$
 
 Sum the two to get the probability of picking items of different classes:
@@ -319,5 +353,5 @@ $$
 \end{aligned}
 $$
 
-The Gini Impurity Coefficient for Group D is therefore $0.5$.
+The Gini Impurity Coefficient for Group D is therefore 0.5.
 :::

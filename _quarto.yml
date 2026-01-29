@@ -63,13 +63,17 @@ format:
     exercise:
       solutions: true
     classoption: 
-      - oneside              # Makes margins equal and removes forced blank pages
+      - oneside              
     geometry:
-      - margin=1in           # Ensures margins are consistent on all sides
-      - heightrounded        # Better for LaTeX layout stability
+      - margin=1in
+      - heightrounded        
   epub:
     toc: true
-    number-sections: true       
+    number-sections: true
+    code-line-numbers: false
+    highlight-style: none
+    code-block-bg: false
+    code-block-border-left: false       
 
 
 

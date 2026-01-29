@@ -6,7 +6,7 @@ The Decision Tree learning algorithm is a **recursive** algorithm.
 
 ## Functions
 
-Recursion is a fascinating idea that builds on the concept of **function**. In programming, functions are reusable pieces of code that execute a piece of code
+Recursion is a fascinating idea that builds on the concept of **function**. In programming, functions are reusable pieces of code that execute a piece of code.
 
 As an example, the following function adds two numbers and returns the result:
 
