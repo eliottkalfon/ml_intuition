@@ -11,7 +11,7 @@ The most important step is to **define** the problem you want to solve as a supe
   - What is the diagnosis of this suspicious mass?
   - What is the price of this property?
 
-There are many other examples. The important part is to follow the supervised learning paradigm:
+There are many other examples. The important part is to follow the supervised learning process:
 
 $$
 \text{Input Features} \rightarrow \text{Model} \rightarrow \text{Prediction}
@@ -21,7 +21,7 @@ What would you like to predict to solve an everyday problem?
 
 :::{.exercise #exr-probs}
 
-How would you solve these problems with a Machine Learning model? What would you predict?
+How would you solve the following problems with a Machine Learning model? What would you predict?
 
   1. How many bartenders do I need to hire for that date?
   2. Should I increase the stock of a particular item at my shop?

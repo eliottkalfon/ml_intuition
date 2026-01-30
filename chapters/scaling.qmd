@@ -68,7 +68,7 @@ What if we could transform both the number of rooms and the surface area to seri
 
 ## Min-Max Scaling
 
-Let’s imagine the following series of numbers: $\{0, 30, 40, 60, 90, 100\}$
+Let’s imagine the following series of numbers: 0, 30, 40, 60, 90, 100
 
 ![Series 0-100](/images/scaling/number_line.png)
 
@@ -106,7 +106,7 @@ This is a good start. For series ranging from 0 to a given number, we can divide
 
 Now, what if the numbers in the series range from 50 to 250? 
 
-Series: $\{50, 90, 120, 170, 220, 250\}$
+Series: 50, 90, 120, 170, 220, 250
 
 ![Series 50-250](/images/scaling/max250.png)
 
@@ -121,7 +121,7 @@ Dividing the numbers of the series by the maximum would not make the full use of
 | 220   | 0.88          |
 | 250   | 1.00          |
 
-![Series 0.2-1 (by 250)](/images/scaling/div250.png)
+![Series 0.2-1](/images/scaling/div250.png)
 
 The minimum achieved there is $50/250 = 0.2$. This means that 20% of the allowed range will be left **empty**, a suboptimal outcome. How could this problem be solved?
 
@@ -144,7 +144,7 @@ Let’s take this formula part by part:
 This formula will be maximised when the value is the maximum of the series, $\text{original value} = x_{\text{max}}$:
 
 $$
-\text{Scaled Value of Max} = \frac{x_{\text{max}} - x_{\text{min}}}{x_{\text{max}}} - x_{\text{min}} = 1
+\text{Scaled Value of Max} = \frac{x_{\text{max}} - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}} = 1
 $$
 
 And be minimised when the value is the minimum of the series, $\text{original value} = x_{\text{min}}$:
@@ -153,7 +153,7 @@ $$
 \text{Scaled Value of Min} = \frac{x_{\text{min}} - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}} = 0
 $$
 
-With this formula, any series of numbers can be mapped to the range $[0,1]$, solving the problems.
+With this formula, any series of numbers can be mapped to the range [0,1], solving the problems.
 
 The following table shows its application to the example series above:
 
@@ -167,7 +167,7 @@ The following table shows its application to the example series above:
 | 250   | 1.00          | 1.00            |
 
 :::{.exercise #exr-min-max}
-Use Min-Max Scaling to map both surface area and number of rooms to the range $[0,1]$
+Use Min-Max Scaling to map both surface area and number of rooms to the range [0,1].
 
 | Property   | Size (m²) | Number of rooms |
 |:----------:|:---------:|:---------------:|
@@ -220,25 +220,6 @@ If you are already familiar with these, feel free to skip to the [next section](
 #### Mean
 
 The mean represents the “centre” of a collection of numbers. There are different types of means in mathematics. This book will focus on the arithmetic mean, also referred to as the “average”. It is noted $\bar{x}$ or $\mu$.
-
-::: {.callout-note collapse="true"}
-## Other kinds of mean
-
-There are other types of means, used to average different types of values. They all have different properties, advantages and drawbacks
-
-Geometric mean: $\left(\prod_{i=1}^n x_i\right)^{1/n}$. It is useful for averaging ratios, growth rates, or percentages. The scary $\prod_{i=1}^n$ is the letter pi in capital letter, representing a product. $\prod_{i=1}^n i = 1 \cdot 2 \cdot \dots \cdot n$ 
-
-Using geometric means, a single 0 in the series will make the mean 0. It is still widely used in economics to average multiplicative phenomena like rates of growth.
-
-Harmonic mean: $\left(\frac{1}{n}\sum_{i=1}^n \frac{1}{x_i}\right)^{-1}$. It is useful for rates, such as model Precision or Recall (Model Evaluation [chapter](evaluation-classification.qmd)).
-
-The harmonic mean of model Precision and Recall is called the F1-score. It is commonly used to find models that have a good trade-off of both metrics.
-
-$$
-F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
-$$
-
-:::
 
 The arithmetic mean of a series of $n$ observations, $\{x_1, x_2, \dots, x_n\}$ is computed with the following formula:
 
@@ -352,7 +333,13 @@ This standard deviation measures the **average spread** from the mean in a serie
 
 As surprising as it may seem, all the datasets have the same mean, variance and standard deviation for both $x$ and $y$. This is the famous Ascombe Quartet.
 
+::: {.content-visible unless-format="epub"}
 ![Anscombe's quartet](/images/scaling/anscombe_quartet.png){width=50%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Anscombe's quartet](/images/scaling/anscombe_quartet.png){width=100%}
+:::
 
 Descriptive statistics for Anscombe's quartet:
 
@@ -385,7 +372,13 @@ $$
 
 A good first step:
 
+::: {.content-visible unless-format="epub"}
 ![Three series, mean centred](/images/scaling/three_series_mean_centred.png){width=50%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Three series, mean centred](/images/scaling/three_series_mean_centred.png){width=100%}
+:::
 
 But the three series still have widely different spreads.
 
@@ -397,7 +390,13 @@ $$
 x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 $$
 
+::: {.content-visible unless-format="epub"}
 ![Three series, standardised](/images/scaling/three_series_standardised.png){width=50%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Three series, standardised](/images/scaling/three_series_standardised.png){width=100%}
+:::
 
 Standardising series in this way, we preserve the information they contain while aligning their mean and variance.
 

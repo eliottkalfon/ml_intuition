@@ -493,7 +493,7 @@ window.Quarto = {
 </section>
 <section id="min-max-scaling" class="level2" data-number="20.2">
 <h2 data-number="20.2" class="anchored" data-anchor-id="min-max-scaling"><span class="header-section-number">20.2</span> Min-Max Scaling</h2>
-<p>Let’s imagine the following series of numbers: <span class="math inline">\(\{0, 30, 40, 60, 90, 100\}\)</span></p>
+<p>Let’s imagine the following series of numbers: 0, 30, 40, 60, 90, 100</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/scaling/number_line.png" class="img-fluid figure-img"></p>
@@ -591,7 +591,7 @@ window.Quarto = {
 </div>
 <p>This is a good start. For series ranging from 0 to a given number, we can divide all numbers in the series by their maximum. This scales the series to the range 0-1.</p>
 <p>Now, what if the numbers in the series range from 50 to 250?</p>
-<p>Series: <span class="math inline">\(\{50, 90, 120, 170, 220, 250\}\)</span></p>
+<p>Series: 50, 90, 120, 170, 220, 250</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/scaling/max250.png" class="img-fluid figure-img"></p>
@@ -636,7 +636,7 @@ window.Quarto = {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/scaling/div250.png" class="img-fluid figure-img"></p>
-<figcaption>Series 0.2-1 (by 250)</figcaption>
+<figcaption>Series 0.2-1</figcaption>
 </figure>
 </div>
 <p>The minimum achieved there is <span class="math inline">\(50/250 = 0.2\)</span>. This means that 20% of the allowed range will be left <strong>empty</strong>, a suboptimal outcome. How could this problem be solved?</p>
@@ -656,13 +656,13 @@ window.Quarto = {
 </ul>
 <p>This formula will be maximised when the value is the maximum of the series, <span class="math inline">\(\text{original value} = x_{\text{max}}\)</span>:</p>
 <p><span class="math display">\[
-\text{Scaled Value of Max} = \frac{x_{\text{max}} - x_{\text{min}}}{x_{\text{max}}} - x_{\text{min}} = 1
+\text{Scaled Value of Max} = \frac{x_{\text{max}} - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}} = 1
 \]</span></p>
 <p>And be minimised when the value is the minimum of the series, <span class="math inline">\(\text{original value} = x_{\text{min}}\)</span>:</p>
 <p><span class="math display">\[
 \text{Scaled Value of Min} = \frac{x_{\text{min}} - x_{\text{min}}}{x_{\text{max}} - x_{\text{min}}} = 0
 \]</span></p>
-<p>With this formula, any series of numbers can be mapped to the range <span class="math inline">\([0,1]\)</span>, solving the problems.</p>
+<p>With this formula, any series of numbers can be mapped to the range [0,1], solving the problems.</p>
 <p>The following table shows its application to the example series above:</p>
 <table class="caption-top table">
 <thead>
@@ -706,7 +706,7 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-min-max" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 20.1</strong></span> Use Min-Max Scaling to map both surface area and number of rooms to the range <span class="math inline">\([0,1]\)</span></p>
+<p><span class="theorem-title"><strong>Exercise 20.1</strong></span> Use Min-Max Scaling to map both surface area and number of rooms to the range [0,1].</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -787,29 +787,6 @@ window.Quarto = {
 <section id="mean" class="level4" data-number="20.3.1.1">
 <h4 data-number="20.3.1.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">20.3.1.1</span> Mean</h4>
 <p>The mean represents the “centre” of a collection of numbers. There are different types of means in mathematics. This book will focus on the arithmetic mean, also referred to as the “average”. It is noted <span class="math inline">\(\bar{x}\)</span> or <span class="math inline">\(\mu\)</span>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Other kinds of mean
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>There are other types of means, used to average different types of values. They all have different properties, advantages and drawbacks</p>
-<p>Geometric mean: <span class="math inline">\(\left(\prod_{i=1}^n x_i\right)^{1/n}\)</span>. It is useful for averaging ratios, growth rates, or percentages. The scary <span class="math inline">\(\prod_{i=1}^n\)</span> is the letter pi in capital letter, representing a product. <span class="math inline">\(\prod_{i=1}^n i = 1 \cdot 2 \cdot \dots \cdot n\)</span></p>
-<p>Using geometric means, a single 0 in the series will make the mean 0. It is still widely used in economics to average multiplicative phenomena like rates of growth.</p>
-<p>Harmonic mean: <span class="math inline">\(\left(\frac{1}{n}\sum_{i=1}^n \frac{1}{x_i}\right)^{-1}\)</span>. It is useful for rates, such as model Precision or Recall (Model Evaluation <a href="../chapters/evaluation-classification.html">chapter</a>).</p>
-<p>The harmonic mean of model Precision and Recall is called the F1-score. It is commonly used to find models that have a good trade-off of both metrics.</p>
-<p><span class="math display">\[
-F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
-\]</span></p>
-</div>
-</div>
-</div>
 <p>The arithmetic mean of a series of <span class="math inline">\(n\)</span> observations, <span class="math inline">\(\{x_1, x_2, \dots, x_n\}\)</span> is computed with the following formula:</p>
 <p><span class="math display">\[
 \bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n}
@@ -940,7 +917,7 @@ x - \bar{x}
 \]</span></p>
 <p>This standard deviation measures the <strong>average spread</strong> from the mean in a series.</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -949,7 +926,7 @@ x - \bar{x}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>As surprising as it may seem, all the datasets have the same mean, variance and standard deviation for both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. This is the famous Ascombe Quartet.</p>
 <div class="quarto-figure quarto-figure-center">
