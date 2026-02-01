@@ -18,7 +18,7 @@ The [last chapter](chapters/generative-ai.qmd) reflects on how modern generative
 
 ## About Me
 
-I am an Applied Science Manager and Computer Science Lecturer in Berlin. I have a blog and newsletter, subscribe [here](https://eliottkalfon.com/?utm_source=online_book&utm_medium=ebook&utm_campaign=book_to_blog) to read my latest work.
+I am an Applied Science Manager and Computer Science Lecturer in Berlin. I have a blog and newsletter, subscribe [here](https://eliottkalfon.com/?utm_source=online_book&utm_medium=ebook&utm_campaign=book_to_blog): https://eliottkalfon.com to read my latest work.
 
 ## Notes
 
