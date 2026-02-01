@@ -383,8 +383,7 @@ window.Quarto = {
   <li><a href="#model-evaluation-and-selection" id="toc-model-evaluation-and-selection" class="nav-link" data-scroll-target="#model-evaluation-and-selection"><span class="header-section-number">21.6</span> Model Evaluation and Selection</a></li>
   <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">21.7</span> Final Thoughts</a></li>
   <li><a href="#appendix-some-nuances" id="toc-appendix-some-nuances" class="nav-link" data-scroll-target="#appendix-some-nuances"><span class="header-section-number">21.8</span> Appendix: Some Nuances</a></li>
-  <li><a href="#final-thoughts-1" id="toc-final-thoughts-1" class="nav-link" data-scroll-target="#final-thoughts-1"><span class="header-section-number">21.9</span> Final Thoughts</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">21.10</span> Solutions</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">21.9</span> Solutions</a></li>
   </ul>
 </nav>
     </div>
@@ -499,28 +498,22 @@ window.Quarto = {
 <li>Model Evaluation and Selection</li>
 </ul>
 <p>That’s it! The purpose of this book was to give an idea of what building Machine Learning solutions can look like. Interested readers can explore how to put this knowledge in practice with further resources like: <em>Hands-On Machine Learning with Scikit-Learn, Keras &amp; TensorFlow</em> <span class="citation" data-cites="hands_on_ml_2022">(<a href="../references.html#ref-hands_on_ml_2022" role="doc-biblioref">Géron 2022</a>)</span>.</p>
-<p>The Appendix below explores some of the differences between the description made above and Machine Learning in practice.</p>
-<p>The following chapter links Generative AI models to traditional Machine Learning; showing how the models we use every day were built upon everything studied in this book.</p>
+<p>The Appendix below explores some of the differences between the description made above and applied Machine Learning.</p>
+<p>But what about Generative AI? I thought you would never ask. If you want to understand the many parallels between traditional Machine Learning and LLMs, read the next chapter. Otherwise, I wish you all the best on your Machine Learning journey.</p>
 </section>
 <section id="appendix-some-nuances" class="level2" data-number="21.8">
 <h2 data-number="21.8" class="anchored" data-anchor-id="appendix-some-nuances"><span class="header-section-number">21.8</span> Appendix: Some Nuances</h2>
-<p>This chapter presents a simplified view of Machine Learning practice. If you are not interested in the details, you can skip directly to the <a href="#final-thoughts">conclusion</a>.</p>
-<p>First, a lot of time would be spent on “<strong>Feature Engineering</strong>”, the task of computing features from raw data to make models more accurate.</p>
-<p>Then, model selection would involve more than just two models. The book compared two model families: KNN and Decision Trees. There are many more. Model selection would also involve “<strong>Hyperparameter Tuning</strong>”. These hyperparameters are the settings or configuration of the models. They determine how the models work. Some examples of hyperparameters include:</p>
+<p>This chapter presents a simplified view of Machine Learning practice.</p>
+<p>First, a lot of time would be spent on Feature Engineering, the task of computing features from raw data to make models more accurate.</p>
+<p>Then, model selection would involve more than just two models. The book compared two model families: KNN and Decision Trees. There are many more. Model selection would also involve Hyperparameter Tuning. These hyperparameters are the settings or configuration of the models. They determine how the models work. Some examples of hyperparameters include:</p>
 <ul>
-<li><strong>KNN</strong>: The number of neighbours used to generate predictions. The text used 5, but 3, 10 or 15 can also be viable choices</li>
-<li><strong>Decision Tree</strong>: the maximum depth of a tree, to avoid making too many data splits</li>
+<li>KNN: The number of neighbours used to generate predictions. The text used 5, but 3, 10 or 15 can also be viable choices</li>
+<li>Decision Tree: the maximum depth of a tree, to avoid making too many data splits</li>
 </ul>
-<p>To choose between all of these model families and hyperparameter combinations, a single test set is not enough. ML practitioners generally use <strong>cross-validation</strong> over the training set. The interested reader can find more on this at <span class="citation" data-cites="sklearn_cross_validation_2025">(<a href="../references.html#ref-sklearn_cross_validation_2025" role="doc-biblioref">scikit-learn contributors 2025</a>)</span>.</p>
+<p>To choose between all of these model families and hyperparameter combinations, a single test set is not enough. ML practitioners generally use <strong>cross-validation</strong> over the training set. The interested reader can find more on this online <span class="citation" data-cites="sklearn_cross_validation_2025">(<a href="../references.html#ref-sklearn_cross_validation_2025" role="doc-biblioref">scikit-learn 2025</a>)</span>.</p>
 </section>
-<section id="final-thoughts-1" class="level2" data-number="21.9">
-<h2 data-number="21.9" class="anchored" data-anchor-id="final-thoughts-1"><span class="header-section-number">21.9</span> Final Thoughts</h2>
-<p>This is it. You now have an intuition for the Machine Learning workflow. This was the core purpose of this book.</p>
-<p>But what about Generative AI and LLMs? I thought you would never ask. If you are interested in understanding the many parallels between traditional Machine Learning and LLMs, read the next chapters.</p>
-<p>Otherwise, I wish you all the best on your Machine Learning journey.</p>
-</section>
-<section id="solutions" class="level2" data-number="21.10">
-<h2 data-number="21.10" class="anchored" data-anchor-id="solutions"><span class="header-section-number">21.10</span> Solutions</h2>
+<section id="solutions" class="level2" data-number="21.9">
+<h2 data-number="21.9" class="anchored" data-anchor-id="solutions"><span class="header-section-number">21.9</span> Solutions</h2>
 <div id="sol-probs" class="proof solution">
 <p><span class="proof-title"><em>Solution 21.1</em>. </span><a href="#exr-probs" class="quarto-xref">Exercise&nbsp;<span>21.1</span></a></p>
 <ol type="1">
@@ -555,7 +548,7 @@ window.Quarto = {
 Géron, Aurélien. 2022. <em>Hands-on Machine Learning with Scikit-Learn, Keras, &amp; TensorFlow</em>. O’Reilly Media. <a href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/">https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/</a>.
 </div>
 <div id="ref-sklearn_cross_validation_2025" class="csl-entry" role="listitem">
-scikit-learn contributors. 2025. <span>“Cross-Validation: Evaluating Estimator Performance.”</span> <span>scikit-learn</span>. 2025. <a href="https://scikit-learn.org/stable/modules/cross_validation.html">https://scikit-learn.org/stable/modules/cross_validation.html</a>.
+scikit-learn. 2025. <span>“Cross-Validation: Evaluating Estimator Performance.”</span> <span>scikit-learn</span>. 2025. <a href="https://scikit-learn.org/stable/modules/cross_validation.html">https://scikit-learn.org/stable/modules/cross_validation.html</a>.
 </div>
 </div>
 </section>

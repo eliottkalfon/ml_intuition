@@ -107,31 +107,22 @@ This chapter reviewed the main steps of solving a problem with Machine Learning 
 
 That's it! The purpose of this book was to give an idea of what building Machine Learning solutions can look like. Interested readers can explore how to put this knowledge in practice with further resources like: *Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow* [@hands_on_ml_2022].
 
-The Appendix below explores some of the differences between the description made above and Machine Learning in practice.
+The Appendix below explores some of the differences between the description made above and applied Machine Learning.
 
-The following chapter links Generative AI models to traditional Machine Learning; showing how the models we use every day were built upon everything studied in this book.
+But what about Generative AI? I thought you would never ask. If you want to understand the many parallels between traditional Machine Learning and LLMs, read the next chapter. Otherwise, I wish you all the best on your Machine Learning journey.
 
 ## Appendix: Some Nuances
 
-This chapter presents a simplified view of Machine Learning practice. If you are not interested in the details, you can skip directly to the [conclusion](#final-thoughts).
+This chapter presents a simplified view of Machine Learning practice. 
 
+First, a lot of time would be spent on Feature Engineering, the task of computing features from raw data to make models more accurate. 
 
-First, a lot of time would be spent on "**Feature Engineering**", the task of computing features from raw data to make models more accurate. 
+Then, model selection would involve more than just two models. The book compared two model families: KNN and Decision Trees. There are many more. Model selection would also involve Hyperparameter Tuning. These hyperparameters are the settings or configuration of the models. They determine how the models work. Some examples of hyperparameters include:
 
-Then, model selection would involve more than just two models. The book compared two model families: KNN and Decision Trees. There are many more. Model selection would also involve "**Hyperparameter Tuning**". These hyperparameters are the settings or configuration of the models. They determine how the models work. Some examples of hyperparameters include:
+  - KNN: The number of neighbours used to generate predictions. The text used 5, but 3, 10 or 15 can also be viable choices
+  - Decision Tree: the maximum depth of a tree, to avoid making too many data splits
 
-  - **KNN**: The number of neighbours used to generate predictions. The text used 5, but 3, 10 or 15 can also be viable choices
-  - **Decision Tree**: the maximum depth of a tree, to avoid making too many data splits
-
-To choose between all of these model families and hyperparameter combinations, a single test set is not enough. ML practitioners generally use **cross-validation** over the training set. The interested reader can find more on this at [@sklearn_cross_validation_2025].
-
-## Final Thoughts
-
-This is it. You now have an intuition for the Machine Learning workflow. This was the core purpose of this book.
-
-But what about Generative AI and LLMs? I thought you would never ask. If you are interested in understanding the many parallels between traditional Machine Learning and LLMs, read the next chapters.
-
-Otherwise, I wish you all the best on your Machine Learning journey.
+To choose between all of these model families and hyperparameter combinations, a single test set is not enough. ML practitioners generally use **cross-validation** over the training set. The interested reader can find more on this online [@sklearn_cross_validation_2025].
 
 ## Solutions
 

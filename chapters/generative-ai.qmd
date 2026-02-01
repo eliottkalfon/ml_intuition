@@ -7,7 +7,7 @@ These days, it is hard to write anything about Machine Learning without mentioni
 Breaking down this term:
 
 - **Generative:** producing content such as texts, images, audio or video
-- **Artificial:** not human
+- **Artificial:** built
 - **Intelligence:** “the ability to learn, understand, and make judgments or have opinions that are based on reason”[@cambridge_intelligence]
 
 More generally, artificial intelligence can be thought of as the emulation of human intelligence, defined above. Further developments may invalidate this definition as the algorithms developed acquire capabilities going beyond human understanding.
@@ -134,7 +134,7 @@ $$
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
 $$
 
-The input here would be the two candidate suggestions, and the prediction would be the winning prediction ($0$ for the first and $1$ for the second). The training data is all the candidate suggestions and human assessments collected in the process described above.
+The input here would be the two candidate suggestions, and the prediction would be the winning prediction (0 for the first and 1 for the second). The training data is all the candidate suggestions and human assessments collected in the process described above.
 
 However, this is not a **tabular** Machine Learning problem. The candidate suggestions are two variable-length sequences of text. This is part of Natural Language Processing, a fascinating area of research.
 
