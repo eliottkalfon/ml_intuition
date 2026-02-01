@@ -6,7 +6,7 @@ title: "Defining Prediction"
 
 Pre-diction, or, “to say before”: to be able to describe the future, to **make the unknown known**.
 
-Predictions are all around us. When you unlock your phone and look at the weather forecast (another word for "prediction"). When you open your email inbox, a prediction algorithm has already classified your incoming messages as “spam” or “non-spam”. But you do not need your phone to be exposed to predictions.
+Predictions are all around us. When you unlock your phone, you can see the weather forecast (another word for "prediction"). When you open your email inbox, a prediction algorithm has already classified your incoming messages as “spam” or “non-spam”. But you do not need your phone to be exposed to predictions.
 
 In many ways, prediction is indistinguishable from perception. When we perceive the world around us, we are constantly predicting what we will be **perceiving next**. For example, as you read this sentence, you are predicting its next ___.
 

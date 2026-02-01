@@ -32,7 +32,7 @@ We could then plot the new observation on the same chart. We label it with a que
 
 Would you now feel comfortable making an educated guess?
 
-Look carefully: most of the unknown point’s nearest neighbours are malignant. From the data’s perspective, the most reasonable guess is that the tumour is malignant. That is not a certainty — it’s a probabilistic judgement based on the available examples.
+Look carefully: most of the unknown point’s nearest neighbours are malignant. From the data’s perspective, the most reasonable guess is that the tumour is malignant. That is not a certainty, it is a probabilistic judgement based on the available examples.
 
 ## From intuition to algorithms
 
