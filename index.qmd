@@ -26,9 +26,8 @@ I am an Applied Science Manager and Computer Science Lecturer in Berlin. I have 
 - **Synthetic data:** all examples use synthetic data for clarity. Nothing in this book is medical, legal or financial advice.
 
 ::: {.content-visible when-format="pdf,epub"}
-\vspace{2cm}
 
----
+{{< pagebreak >}}
 
 Copyright © 2025 Eliott Kalfon. All rights reserved.
 
