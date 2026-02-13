@@ -1,0 +1,36 @@
+/* EPUB-only table pagination helpers.
+   Goal: reduce cases where a table row is split across “pages” in reflowable readers.
+   Scope: tables only (no global typography).
+*/
+
+table {
+  /* Some readers honor this for keeping the table block together.
+     Others will ignore it for long tables (which is OK).
+  */
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+thead,
+tfoot {
+  /* Encourage repeating header/footer groups where supported */
+  display: table-header-group;
+}
+
+tbody {
+  display: table-row-group;
+}
+
+tr,
+td,
+th {
+  /* The main one: try to keep a row together */
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Avoid aggressive hyphenation inside dense table cells */
+td,
+th {
+  hyphens: manual;
+}

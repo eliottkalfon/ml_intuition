@@ -74,6 +74,10 @@ format:
     highlight-style: none
     code-block-bg: false
     code-block-border-left: false       
+    css:
+      - epub-base.css
+      - epub-tables.css
+
 
 
 
