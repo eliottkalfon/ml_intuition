@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>20&nbsp; Numerical Feature Scaling – Machine Learning Intuition</title>
+<title>21&nbsp; Numerical Feature Scaling – Machine Learning Intuition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/scaling.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/scaling.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,6 +148,12 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
@@ -164,43 +170,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
   </div>
 </li>
       </ul>
@@ -217,19 +223,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -246,25 +252,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,37 +287,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,13 +334,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,6 +349,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
   </div>
 </li>
     </ul>
@@ -355,25 +367,25 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-mechanics" id="toc-the-mechanics" class="nav-link active" data-scroll-target="#the-mechanics"><span class="header-section-number">20.1</span> The Mechanics</a></li>
-  <li><a href="#min-max-scaling" id="toc-min-max-scaling" class="nav-link" data-scroll-target="#min-max-scaling"><span class="header-section-number">20.2</span> Min-Max Scaling</a></li>
-  <li><a href="#standardisation" id="toc-standardisation" class="nav-link" data-scroll-target="#standardisation"><span class="header-section-number">20.3</span> Standardisation</a>
+  <li><a href="#the-mechanics" id="toc-the-mechanics" class="nav-link active" data-scroll-target="#the-mechanics"><span class="header-section-number">21.1</span> The Mechanics</a></li>
+  <li><a href="#min-max-scaling" id="toc-min-max-scaling" class="nav-link" data-scroll-target="#min-max-scaling"><span class="header-section-number">21.2</span> Min-Max Scaling</a></li>
+  <li><a href="#standardisation" id="toc-standardisation" class="nav-link" data-scroll-target="#standardisation"><span class="header-section-number">21.3</span> Standardisation</a>
   <ul class="collapse">
-  <li><a href="#describing-a-series" id="toc-describing-a-series" class="nav-link" data-scroll-target="#describing-a-series"><span class="header-section-number">20.3.1</span> Describing a series</a></li>
-  <li><a href="#standardising-series-with-mean-and-standard-deviation" id="toc-standardising-series-with-mean-and-standard-deviation" class="nav-link" data-scroll-target="#standardising-series-with-mean-and-standard-deviation"><span class="header-section-number">20.3.2</span> Standardising series with Mean and Standard Deviation</a></li>
+  <li><a href="#describing-a-series" id="toc-describing-a-series" class="nav-link" data-scroll-target="#describing-a-series"><span class="header-section-number">21.3.1</span> Describing a series</a></li>
+  <li><a href="#standardising-series-with-mean-and-standard-deviation" id="toc-standardising-series-with-mean-and-standard-deviation" class="nav-link" data-scroll-target="#standardising-series-with-mean-and-standard-deviation"><span class="header-section-number">21.3.2</span> Standardising series with Mean and Standard Deviation</a></li>
   </ul></li>
-  <li><a href="#information-leakage" id="toc-information-leakage" class="nav-link" data-scroll-target="#information-leakage"><span class="header-section-number">20.4</span> Information Leakage</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">20.5</span> Final Thoughts</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">20.6</span> Solutions</a></li>
+  <li><a href="#information-leakage" id="toc-information-leakage" class="nav-link" data-scroll-target="#information-leakage"><span class="header-section-number">21.4</span> Information Leakage</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">21.5</span> Final Thoughts</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">21.6</span> Solutions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/scaling.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/scaling.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></h1>
+<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></h1>
 </div>
 
 
@@ -480,8 +492,8 @@ window.Quarto = {
 </figure>
 </div>
 <p>While rescaling the axes is a better way to <strong>visualise</strong> the data, it does not solve the problem in calculating the distance between two observations.</p>
-<section id="the-mechanics" class="level2" data-number="20.1">
-<h2 data-number="20.1" class="anchored" data-anchor-id="the-mechanics"><span class="header-section-number">20.1</span> The Mechanics</h2>
+<section id="the-mechanics" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="the-mechanics"><span class="header-section-number">21.1</span> The Mechanics</h2>
 <p>To do so, we need to <strong>scale</strong> both features so that they (roughly) have the same <strong>range, mean and variance</strong>:</p>
 <ul>
 <li>Range is the distance between the minimum and the maximum of a series.</li>
@@ -491,8 +503,8 @@ window.Quarto = {
 <p>As an example, the surface area column has a higher variance than the number of rooms column. The numbers <strong>fluctuate more</strong> from one to the other. As a consequence, surface area has a larger impact than the number of rooms on the distance function.</p>
 <p>What if we could transform both the number of rooms and the surface area to series of numbers between 0 and 1? This would solve the issue of distance calculation. The following section will explore a way to do this.</p>
 </section>
-<section id="min-max-scaling" class="level2" data-number="20.2">
-<h2 data-number="20.2" class="anchored" data-anchor-id="min-max-scaling"><span class="header-section-number">20.2</span> Min-Max Scaling</h2>
+<section id="min-max-scaling" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="min-max-scaling"><span class="header-section-number">21.2</span> Min-Max Scaling</h2>
 <p>Let’s imagine the following series of numbers: 0, 30, 40, 60, 90, 100</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -706,7 +718,7 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-min-max" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 20.1</strong></span> Use Min-Max Scaling to map both surface area and number of rooms to the range [0,1].</p>
+<p><span class="theorem-title"><strong>Exercise 21.1</strong></span> Use Min-Max Scaling to map both surface area and number of rooms to the range [0,1].</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -750,8 +762,8 @@ window.Quarto = {
 </table>
 </div>
 </section>
-<section id="standardisation" class="level2" data-number="20.3">
-<h2 data-number="20.3" class="anchored" data-anchor-id="standardisation"><span class="header-section-number">20.3</span> Standardisation</h2>
+<section id="standardisation" class="level2" data-number="21.3">
+<h2 data-number="21.3" class="anchored" data-anchor-id="standardisation"><span class="header-section-number">21.3</span> Standardisation</h2>
 <p>The following section will get a bit more mathematical and can be skipped (<a href="#information-leakage">next section</a>).</p>
 <p>Min-Max Scaling is not the only way to preprocess a series of numbers in different scales. Another approach is called <strong>Standardisation</strong>. The idea of standardisation is to make the <strong>distributions of the series</strong> similar. The distribution is a representation of how frequently the values of a variable occur.</p>
 <p>Let’s make this more concrete with an example:</p>
@@ -768,8 +780,8 @@ window.Quarto = {
 <li>They do not have the same <strong>spread</strong> or <strong>variance</strong> around their respective means</li>
 </ul>
 <p>These are the two discrepancies that Standardisation aims to correct.</p>
-<section id="describing-a-series" class="level3" data-number="20.3.1">
-<h3 data-number="20.3.1" class="anchored" data-anchor-id="describing-a-series"><span class="header-section-number">20.3.1</span> Describing a series</h3>
+<section id="describing-a-series" class="level3" data-number="21.3.1">
+<h3 data-number="21.3.1" class="anchored" data-anchor-id="describing-a-series"><span class="header-section-number">21.3.1</span> Describing a series</h3>
 <p>Before we start, it is important to define some important concepts of <strong>descriptive statistics</strong>.</p>
 <p>Breaking this term down:</p>
 <ul>
@@ -784,8 +796,8 @@ window.Quarto = {
 <li>Standard Deviation</li>
 </ul>
 <p>If you are already familiar with these, feel free to skip to the <a href="#information-leakage">next section</a>.</p>
-<section id="mean" class="level4" data-number="20.3.1.1">
-<h4 data-number="20.3.1.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">20.3.1.1</span> Mean</h4>
+<section id="mean" class="level4" data-number="21.3.1.1">
+<h4 data-number="21.3.1.1" class="anchored" data-anchor-id="mean"><span class="header-section-number">21.3.1.1</span> Mean</h4>
 <p>The mean represents the “centre” of a collection of numbers. There are different types of means in mathematics. This book will focus on the arithmetic mean, also referred to as the “average”. It is noted <span class="math inline">\(\bar{x}\)</span> or <span class="math inline">\(\mu\)</span>.</p>
 <p>The arithmetic mean of a series of <span class="math inline">\(n\)</span> observations, <span class="math inline">\(\{x_1, x_2, \dots, x_n\}\)</span> is computed with the following formula:</p>
 <p><span class="math display">\[
@@ -838,11 +850,11 @@ window.Quarto = {
 \text{Mean}_{x_1} = \frac{1 + 2 + 4 + 5 + 8}{5} = 4
 \]</span></p>
 <div id="exr-mean-series" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 20.2</strong></span> Show that the mean of the second series is equal to <span class="math inline">\(10\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 21.2</strong></span> Show that the mean of the second series is equal to <span class="math inline">\(10\)</span>.</p>
 </div>
 </section>
-<section id="variance-and-standard-deviation" class="level4" data-number="20.3.1.2">
-<h4 data-number="20.3.1.2" class="anchored" data-anchor-id="variance-and-standard-deviation"><span class="header-section-number">20.3.1.2</span> Variance and Standard Deviation</h4>
+<section id="variance-and-standard-deviation" class="level4" data-number="21.3.1.2">
+<h4 data-number="21.3.1.2" class="anchored" data-anchor-id="variance-and-standard-deviation"><span class="header-section-number">21.3.1.2</span> Variance and Standard Deviation</h4>
 <p>The following two series have the same mean, and yet, they look very different:</p>
 <table class="caption-top table">
 <thead>
@@ -907,7 +919,7 @@ x - \bar{x}
 \end{aligned}
 \]</span></p>
 <div id="exr-variance" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 20.3</strong></span> Compute the variance of the second series. Prove that it is <span class="math inline">\(16\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 21.3</strong></span> Compute the variance of the second series. Prove that it is <span class="math inline">\(16\)</span>.</p>
 </div>
 <p>Is there something strange with these variance numbers? Similar to the Mean Squared Errors, they are much larger than the scale of the original series.</p>
 <p>How would you solve this problem? Here again, the <a href="../chapters/evaluation-regression.html">Regression Model Evaluation</a> chapter could be helpful. Just like the Mean Squared Error and the Root Mean Squared Error, you could simply take the <strong>square root</strong> of the variance.</p>
@@ -1002,10 +1014,10 @@ x - \bar{x}
 </div>
 </section>
 </section>
-<section id="standardising-series-with-mean-and-standard-deviation" class="level3" data-number="20.3.2">
-<h3 data-number="20.3.2" class="anchored" data-anchor-id="standardising-series-with-mean-and-standard-deviation"><span class="header-section-number">20.3.2</span> Standardising series with Mean and Standard Deviation</h3>
-<section id="mean-centre" class="level4" data-number="20.3.2.1">
-<h4 data-number="20.3.2.1" class="anchored" data-anchor-id="mean-centre"><span class="header-section-number">20.3.2.1</span> Mean Centre</h4>
+<section id="standardising-series-with-mean-and-standard-deviation" class="level3" data-number="21.3.2">
+<h3 data-number="21.3.2" class="anchored" data-anchor-id="standardising-series-with-mean-and-standard-deviation"><span class="header-section-number">21.3.2</span> Standardising series with Mean and Standard Deviation</h3>
+<section id="mean-centre" class="level4" data-number="21.3.2.1">
+<h4 data-number="21.3.2.1" class="anchored" data-anchor-id="mean-centre"><span class="header-section-number">21.3.2.1</span> Mean Centre</h4>
 <p>Going back to the three example series:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1027,8 +1039,8 @@ x_{\text{mean centred}} = x - \bar{x}
 </div>
 <p>But the three series still have widely different spreads.</p>
 </section>
-<section id="variance-scaling" class="level4" data-number="20.3.2.2">
-<h4 data-number="20.3.2.2" class="anchored" data-anchor-id="variance-scaling"><span class="header-section-number">20.3.2.2</span> Variance Scaling</h4>
+<section id="variance-scaling" class="level4" data-number="21.3.2.2">
+<h4 data-number="21.3.2.2" class="anchored" data-anchor-id="variance-scaling"><span class="header-section-number">21.3.2.2</span> Variance Scaling</h4>
 <p>To make sure both series have the same <strong>variance</strong>, or spread around the mean, you could simply <strong>divide</strong> all numbers of the resulting series by the standard deviation:</p>
 <p><span class="math display">\[
 x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
@@ -1041,8 +1053,8 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 </div>
 <p>Standardising series in this way, we preserve the information they contain while aligning their mean and variance.</p>
 </section>
-<section id="example" class="level4" data-number="20.3.2.3">
-<h4 data-number="20.3.2.3" class="anchored" data-anchor-id="example"><span class="header-section-number">20.3.2.3</span> Example</h4>
+<section id="example" class="level4" data-number="21.3.2.3">
+<h4 data-number="21.3.2.3" class="anchored" data-anchor-id="example"><span class="header-section-number">21.3.2.3</span> Example</h4>
 <p>Let’s go back to the example data and scale the Size (m²) series:</p>
 <table class="caption-top table">
 <thead>
@@ -1144,7 +1156,7 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 </tbody>
 </table>
 <div id="exr-stand-data" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 20.4</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Exercise 21.4</strong></span> &nbsp;</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1199,8 +1211,8 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 </section>
 </section>
 </section>
-<section id="information-leakage" class="level2" data-number="20.4">
-<h2 data-number="20.4" class="anchored" data-anchor-id="information-leakage"><span class="header-section-number">20.4</span> Information Leakage</h2>
+<section id="information-leakage" class="level2" data-number="21.4">
+<h2 data-number="21.4" class="anchored" data-anchor-id="information-leakage"><span class="header-section-number">21.4</span> Information Leakage</h2>
 <p>Data preprocessing is a common source of information leakage. Descriptive statistics like the minimum, maximum, mean and standard deviation of a series are a source of information.</p>
 <p>When applying Min-Max Scaling or Standardisation, use descriptive statistics (like min and max) computed from the <strong>training set only</strong>. When generating predictions on the test set, preprocess the data using the descriptive statistics of the training set.</p>
 <p>As an example, for Min-Max Scaling, you would use the minimum and maximum of the training set to preprocess the test data. This sounds counter-intuitive and a lot of work, why should we bother?</p>
@@ -1209,8 +1221,8 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 <p>The descriptive statistics of this property are irrelevant as you only have a single observation. You would use the min and max of the <strong>training data</strong>, the only data you have. Because the purpose of the test set is to simulate what would happen at prediction time, it makes sense to treat it in the same way.</p>
 <p>In Machine Learning jargon, these scaling methods are <strong>fitted</strong> to the training data, and applied to the test set. The transformation is based on metrics calculated on the training set and applied to the test set.</p>
 </section>
-<section id="final-thoughts" class="level2" data-number="20.5">
-<h2 data-number="20.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">20.5</span> Final Thoughts</h2>
+<section id="final-thoughts" class="level2" data-number="21.5">
+<h2 data-number="21.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">21.5</span> Final Thoughts</h2>
 <p>Some models like KNN require numerical features to be on the same scale. Otherwise, features with the largest variance (here surface area) will dominate distance calculations. This chapter reviewed two ways to scale numerical features:</p>
 <ul>
 <li>Min-Max Scaling</li>
@@ -1219,10 +1231,10 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 <p>Both of these need to be applied with care to avoid information leakage between the train and test sets. The way to do so is to use the descriptive statistics of the training set to preprocess the test data. This is what happens at inference.</p>
 <p>This is it, you made it! This was the last chapter of the Data Preprocessing section. The next section will put everything together - applying the book’s content to an end-to-end Machine Learning project.</p>
 </section>
-<section id="solutions" class="level2" data-number="20.6">
-<h2 data-number="20.6" class="anchored" data-anchor-id="solutions"><span class="header-section-number">20.6</span> Solutions</h2>
+<section id="solutions" class="level2" data-number="21.6">
+<h2 data-number="21.6" class="anchored" data-anchor-id="solutions"><span class="header-section-number">21.6</span> Solutions</h2>
 <div id="sol-min-max" class="proof solution">
-<p><span class="proof-title"><em>Solution 20.1</em>. </span><a href="#exr-min-max" class="quarto-xref">Exercise&nbsp;<span>20.1</span></a></p>
+<p><span class="proof-title"><em>Solution 21.1</em>. </span><a href="#exr-min-max" class="quarto-xref">Exercise&nbsp;<span>21.1</span></a></p>
 <p>Given the data:</p>
 <table class="caption-top table">
 <thead>
@@ -1414,7 +1426,7 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 </table>
 </div>
 <div id="sol-mean-series" class="proof solution">
-<p><span class="proof-title"><em>Solution 20.2</em>. </span><a href="#exr-mean-series" class="quarto-xref">Exercise&nbsp;<span>20.2</span></a></p>
+<p><span class="proof-title"><em>Solution 21.2</em>. </span><a href="#exr-mean-series" class="quarto-xref">Exercise&nbsp;<span>21.2</span></a></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1450,7 +1462,7 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 \]</span></p>
 </div>
 <div id="sol-variance" class="proof solution">
-<p><span class="proof-title"><em>Solution 20.3</em>. </span><a href="#exr-variance" class="quarto-xref">Exercise&nbsp;<span>20.3</span></a></p>
+<p><span class="proof-title"><em>Solution 21.3</em>. </span><a href="#exr-variance" class="quarto-xref">Exercise&nbsp;<span>21.3</span></a></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1492,7 +1504,7 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 \]</span></p>
 </div>
 <div id="sol-stand-data" class="proof solution">
-<p><span class="proof-title"><em>Solution 20.4</em>. </span><a href="#exr-stand-data" class="quarto-xref">Exercise&nbsp;<span>20.4</span></a></p>
+<p><span class="proof-title"><em>Solution 21.4</em>. </span><a href="#exr-stand-data" class="quarto-xref">Exercise&nbsp;<span>21.4</span></a></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -2028,12 +2040,12 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/missing-categorical-values.html" class="pagination-link" aria-label="Dealing with Missing Categorical Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/end-to-end.html" class="pagination-link" aria-label="End-to-End Machine Learning Project">
-        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

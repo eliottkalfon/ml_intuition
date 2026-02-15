@@ -1,0 +1,16 @@
+---
+title: ""
+toc: false
+---
+
+# {.unnumbered .unlisted}
+
+::: {.text-center}
+
+> “Whatever the quality of my works may be, read them as if I were still seeking, and were not aware of the truth, and were seeking it obstinately, too.”
+>
+> — Seneca, *Letters from a Stoic*, XLV *On Sophistical Argumentation*
+
+:::
+
+{{< pagebreak >}}

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>10&nbsp; Evaluating Regression Models – Machine Learning Intuition</title>
+<title>11&nbsp; Evaluating Regression Models – Machine Learning Intuition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,6 +148,12 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
@@ -164,43 +170,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
   </div>
 </li>
       </ul>
@@ -217,19 +223,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -246,25 +252,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,37 +287,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,13 +334,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,6 +349,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
   </div>
 </li>
     </ul>
@@ -355,25 +367,25 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#evaluating-distances" id="toc-evaluating-distances" class="nav-link active" data-scroll-target="#evaluating-distances"><span class="header-section-number">10.1</span> Evaluating Distances</a></li>
-  <li><a href="#beyond-subtraction" id="toc-beyond-subtraction" class="nav-link" data-scroll-target="#beyond-subtraction"><span class="header-section-number">10.2</span> Beyond Subtraction</a>
+  <li><a href="#evaluating-distances" id="toc-evaluating-distances" class="nav-link active" data-scroll-target="#evaluating-distances"><span class="header-section-number">11.1</span> Evaluating Distances</a></li>
+  <li><a href="#beyond-subtraction" id="toc-beyond-subtraction" class="nav-link" data-scroll-target="#beyond-subtraction"><span class="header-section-number">11.2</span> Beyond Subtraction</a>
   <ul class="collapse">
-  <li><a href="#mean-absolute-error" id="toc-mean-absolute-error" class="nav-link" data-scroll-target="#mean-absolute-error"><span class="header-section-number">10.2.1</span> Mean Absolute Error</a></li>
-  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">10.2.2</span> Mean Squared Error</a></li>
-  <li><a href="#average-error-is-still-useful" id="toc-average-error-is-still-useful" class="nav-link" data-scroll-target="#average-error-is-still-useful"><span class="header-section-number">10.2.3</span> Average Error is still useful</a></li>
+  <li><a href="#mean-absolute-error" id="toc-mean-absolute-error" class="nav-link" data-scroll-target="#mean-absolute-error"><span class="header-section-number">11.2.1</span> Mean Absolute Error</a></li>
+  <li><a href="#mean-squared-error" id="toc-mean-squared-error" class="nav-link" data-scroll-target="#mean-squared-error"><span class="header-section-number">11.2.2</span> Mean Squared Error</a></li>
+  <li><a href="#average-error-is-still-useful" id="toc-average-error-is-still-useful" class="nav-link" data-scroll-target="#average-error-is-still-useful"><span class="header-section-number">11.2.3</span> Average Error is still useful</a></li>
   </ul></li>
-  <li><a href="#practice-exercise" id="toc-practice-exercise" class="nav-link" data-scroll-target="#practice-exercise"><span class="header-section-number">10.3</span> Practice Exercise</a></li>
-  <li><a href="#choosing-between-metrics" id="toc-choosing-between-metrics" class="nav-link" data-scroll-target="#choosing-between-metrics"><span class="header-section-number">10.4</span> Choosing Between Metrics</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">10.5</span> Final Thoughts</a></li>
+  <li><a href="#practice-exercise" id="toc-practice-exercise" class="nav-link" data-scroll-target="#practice-exercise"><span class="header-section-number">11.3</span> Practice Exercise</a></li>
+  <li><a href="#choosing-between-metrics" id="toc-choosing-between-metrics" class="nav-link" data-scroll-target="#choosing-between-metrics"><span class="header-section-number">11.4</span> Choosing Between Metrics</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">11.5</span> Final Thoughts</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></h1>
 </div>
 
 
@@ -402,8 +414,8 @@ window.Quarto = {
 <p>The general idea is still the same: <span class="math display">\[
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
 \]</span></p>
-<section id="evaluating-distances" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="evaluating-distances"><span class="header-section-number">10.1</span> Evaluating Distances</h2>
+<section id="evaluating-distances" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="evaluating-distances"><span class="header-section-number">11.1</span> Evaluating Distances</h2>
 <p>Let’s start with a simple example of a model predicting the price of a property:</p>
 <table class="caption-top table">
 <thead>
@@ -442,10 +454,10 @@ window.Quarto = {
 \]</span></p>
 <p>The model over-predicted the price of the property by 20.</p>
 <div id="exr-pred-err" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 10.1</strong></span> Show that the prediction errors for property 2 and 3 are 10 and -30 respectively.</p>
+<p><span class="theorem-title"><strong>Exercise 11.1</strong></span> Show that the prediction errors for property 2 and 3 are 10 and -30 respectively.</p>
 </div>
 <div id="sol-pred-err" class="proof solution">
-<p><span class="proof-title"><em>Solution 10.1</em>. </span>You should get the following table:</p>
+<p><span class="proof-title"><em>Solution 11.1</em>. </span>You should get the following table:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -491,8 +503,8 @@ window.Quarto = {
 \]</span></p>
 <p>If you are not familiar with the <span class="math inline">\(\Sigma\)</span> operator, please refer to the <a href="../chapters/distance.html" target="_blank">Distance chapter</a> in which this concept is clearly explained.</p>
 </section>
-<section id="beyond-subtraction" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="beyond-subtraction"><span class="header-section-number">10.2</span> Beyond Subtraction</h2>
+<section id="beyond-subtraction" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="beyond-subtraction"><span class="header-section-number">11.2</span> Beyond Subtraction</h2>
 <p>Do you notice something strange? The average model error is 0, which would describe a <em>perfect model</em>. Yet, we do see that this model is <strong>not</strong> perfect, it makes errors, it does not perfectly predict the actual price of any property listed above.</p>
 <p>The issue with averaging errors is that they cancel out. The numerator of the fraction becomes 0.</p>
 <p>Remembering the <a href="../chapters/distance.html" target="_blank">Distance chapter</a>, could we use another distance function to avoid this problem?</p>
@@ -501,8 +513,8 @@ window.Quarto = {
 <li>Averaging the <strong>absolute values</strong> of the errors</li>
 <li>Averaging the <strong>squared errors</strong></li>
 </ul>
-<section id="mean-absolute-error" class="level3" data-number="10.2.1">
-<h3 data-number="10.2.1" class="anchored" data-anchor-id="mean-absolute-error"><span class="header-section-number">10.2.1</span> Mean Absolute Error</h3>
+<section id="mean-absolute-error" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="mean-absolute-error"><span class="header-section-number">11.2.1</span> Mean Absolute Error</h3>
 <p>The absolute value of a number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>. It is the <strong>magnitude</strong> of the number, regardless of its sign. As an example <span class="math inline">\(|2| = |-2| = 2\)</span>. When we average the absolute values of the error, we can compute the <strong>Mean Absolute Error (MAE)</strong> for <span class="math inline">\(n\)</span> observations:</p>
 <p><span class="math display">\[
 \text{Mean Absolute Error} = \frac{| \text{Error}_1 | + | \text{Error}_2 | + \cdots + | \text{Error}_n |}{n}
@@ -548,8 +560,8 @@ window.Quarto = {
 \]</span></p>
 <p>This metric is much better than the average error as it gives us an idea of the average distance between individual predictions and the ground truth. Looking at the example data, the model is on average 20 away from the ground truth.</p>
 </section>
-<section id="mean-squared-error" class="level3" data-number="10.2.2">
-<h3 data-number="10.2.2" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">10.2.2</span> Mean Squared Error</h3>
+<section id="mean-squared-error" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="mean-squared-error"><span class="header-section-number">11.2.2</span> Mean Squared Error</h3>
 <p>Another way is to compute the average of the <strong>squared errors</strong>. This metric is called the <strong>Mean Squared Error (MSE)</strong> for <span class="math inline">\(n\)</span> observations:</p>
 <p><span class="math display">\[
 \text{Mean Squared Error} = \frac{\text{Error}_1^2 + \text{Error}_2^2 + \cdots + \text{Error}_n^2}{n}
@@ -573,8 +585,8 @@ window.Quarto = {
 \text{RMSE} = \sqrt{ \frac{1}{n} \sum_{i=1}^{n} (\text{Prediction}_i - \text{Truth}_i)^2 } = \sqrt{\text{MSE}}
 \]</span></p>
 </section>
-<section id="average-error-is-still-useful" class="level3" data-number="10.2.3">
-<h3 data-number="10.2.3" class="anchored" data-anchor-id="average-error-is-still-useful"><span class="header-section-number">10.2.3</span> Average Error is still useful</h3>
+<section id="average-error-is-still-useful" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="average-error-is-still-useful"><span class="header-section-number">11.2.3</span> Average Error is still useful</h3>
 <p>Does that mean that we should never use average Error? Not exactly.</p>
 <p>The Average Error is still a useful metric to see if a prediction model has a <strong>bias</strong>; i.e., if a model consistently over- or under-predicts. If the average error of the model is not close to <span class="math inline">\(0\)</span>, it means that there is <strong>systematic</strong> over- or under-prediction.</p>
 <p>This can be illustrated with the following example:</p>
@@ -605,10 +617,10 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-avg-err" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 10.2</strong></span> Calculate the Average Error of this model and determine whether the model over- or under-predicts.</p>
+<p><span class="theorem-title"><strong>Exercise 11.2</strong></span> Calculate the Average Error of this model and determine whether the model over- or under-predicts.</p>
 </div>
 <div id="sol-avg-err" class="proof solution">
-<p><span class="proof-title"><em>Solution 10.2</em>. </span><span class="math display">\[\begin{aligned}
+<p><span class="proof-title"><em>Solution 11.2</em>. </span><span class="math display">\[\begin{aligned}
 \text{Prediction Error}_1 &amp;= 150 - 120 = 30 \\
 \text{Prediction Error}_2 &amp;= 130 - 100 = 30 \\
 \text{Prediction Error}_3 &amp;= 140 - 130 = 10 \\
@@ -619,8 +631,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="practice-exercise" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="practice-exercise"><span class="header-section-number">10.3</span> Practice Exercise</h2>
+<section id="practice-exercise" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="practice-exercise"><span class="header-section-number">11.3</span> Practice Exercise</h2>
 <p>Looking at these two pricing models, which one would you pick?</p>
 <table class="caption-top table">
 <thead>
@@ -653,10 +665,10 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-acc-mod" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 10.3</strong></span> Show that Model B generates predictions that are closer to the truth than Model A, using the error metrics shown above.</p>
+<p><span class="theorem-title"><strong>Exercise 11.3</strong></span> Show that Model B generates predictions that are closer to the truth than Model A, using the error metrics shown above.</p>
 </div>
 <div id="sol-acc-mod" class="proof solution">
-<p><span class="proof-title"><em>Solution 10.3</em>. </span><strong>Model A:</strong></p>
+<p><span class="proof-title"><em>Solution 11.3</em>. </span><strong>Model A:</strong></p>
 <ul>
 <li><span class="math inline">\(\text{Errors}\)</span>:
 <ul>
@@ -685,8 +697,8 @@ window.Quarto = {
 <p>All metrics show that Model B is <strong>closer</strong> to the truth.</p>
 </div>
 </section>
-<section id="choosing-between-metrics" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="choosing-between-metrics"><span class="header-section-number">10.4</span> Choosing Between Metrics</h2>
+<section id="choosing-between-metrics" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="choosing-between-metrics"><span class="header-section-number">11.4</span> Choosing Between Metrics</h2>
 <p>This chapter has introduced four performance metrics:</p>
 <ul>
 <li>Average Error</li>
@@ -696,7 +708,7 @@ window.Quarto = {
 </ul>
 <p>In the example above, all metrics <strong>agreed</strong>; in other words, all metrics gave an advantage to Model B. This is not always the case.</p>
 <div id="exr-dis" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 10.4</strong></span> Compute the MSE and MAE of the two models below:</p>
+<p><span class="theorem-title"><strong>Exercise 11.4</strong></span> Compute the MSE and MAE of the two models below:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -735,7 +747,7 @@ window.Quarto = {
 </table>
 </div>
 <div id="sol-dis" class="proof solution">
-<p><span class="proof-title"><em>Solution 10.4</em>. </span><strong>Model A:</strong></p>
+<p><span class="proof-title"><em>Solution 11.4</em>. </span><strong>Model A:</strong></p>
 <ul>
 <li><span class="math inline">\(\text{Errors}\)</span>:
 <ul>
@@ -832,8 +844,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="final-thoughts" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">10.5</span> Final Thoughts</h2>
+<section id="final-thoughts" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">11.5</span> Final Thoughts</h2>
 <p>This section described regression model evaluation. It is very similar to the approach used for classification models described in the previous chapter:</p>
 <ul>
 <li>Set aside a share of the training data as a test set</li>
@@ -1277,12 +1289,12 @@ window.Quarto = {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/evaluation-classification.html" class="pagination-link" aria-label="Evaluating Classification Models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/trees-intuition.html" class="pagination-link" aria-label="Decision Trees">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

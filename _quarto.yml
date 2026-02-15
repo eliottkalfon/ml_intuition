@@ -7,6 +7,7 @@ book:
   author: "Eliott Kalfon"
   date: "1/04/2026"
   chapters:
+    - epigraph.qmd
     - index.qmd
     - part: "Introduction to Machine Learning"
       chapters:
@@ -41,6 +42,7 @@ book:
       - chapters/end-to-end.qmd
       - chapters/generative-ai.qmd
     - references.qmd
+    - acknowledgments.qmd
   page-footer:
     left: "Copyright &copy; Eliott Kalfon 2025. All rights reserved."
 

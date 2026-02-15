@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>16&nbsp; Encoding Categorical Features – Machine Learning Intuition</title>
+<title>17&nbsp; Encoding Categorical Features – Machine Learning Intuition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/categorical-variables.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/categorical-variables.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,6 +148,12 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
@@ -164,43 +170,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
   </div>
 </li>
       </ul>
@@ -217,19 +223,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -246,25 +252,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,37 +287,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,13 +334,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,6 +349,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
   </div>
 </li>
     </ul>
@@ -355,25 +367,25 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#types-of-categorical" id="toc-types-of-categorical" class="nav-link active" data-scroll-target="#types-of-categorical"><span class="header-section-number">16.1</span> Types of Categorical</a></li>
-  <li><a href="#ordinal-variables" id="toc-ordinal-variables" class="nav-link" data-scroll-target="#ordinal-variables"><span class="header-section-number">16.2</span> Ordinal Variables</a></li>
-  <li><a href="#nominal-variables" id="toc-nominal-variables" class="nav-link" data-scroll-target="#nominal-variables"><span class="header-section-number">16.3</span> Nominal Variables</a>
+  <li><a href="#types-of-categorical" id="toc-types-of-categorical" class="nav-link active" data-scroll-target="#types-of-categorical"><span class="header-section-number">17.1</span> Types of Categorical</a></li>
+  <li><a href="#ordinal-variables" id="toc-ordinal-variables" class="nav-link" data-scroll-target="#ordinal-variables"><span class="header-section-number">17.2</span> Ordinal Variables</a></li>
+  <li><a href="#nominal-variables" id="toc-nominal-variables" class="nav-link" data-scroll-target="#nominal-variables"><span class="header-section-number">17.3</span> Nominal Variables</a>
   <ul class="collapse">
-  <li><a href="#one-hot-encoding" id="toc-one-hot-encoding" class="nav-link" data-scroll-target="#one-hot-encoding"><span class="header-section-number">16.3.1</span> One-Hot Encoding</a></li>
+  <li><a href="#one-hot-encoding" id="toc-one-hot-encoding" class="nav-link" data-scroll-target="#one-hot-encoding"><span class="header-section-number">17.3.1</span> One-Hot Encoding</a></li>
   </ul></li>
-  <li><a href="#target-encoding" id="toc-target-encoding" class="nav-link" data-scroll-target="#target-encoding"><span class="header-section-number">16.4</span> Target Encoding</a></li>
-  <li><a href="#information-leakage" id="toc-information-leakage" class="nav-link" data-scroll-target="#information-leakage"><span class="header-section-number">16.5</span> Information Leakage</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">16.6</span> Final Thoughts</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">16.7</span> Solutions</a></li>
+  <li><a href="#target-encoding" id="toc-target-encoding" class="nav-link" data-scroll-target="#target-encoding"><span class="header-section-number">17.4</span> Target Encoding</a></li>
+  <li><a href="#information-leakage" id="toc-information-leakage" class="nav-link" data-scroll-target="#information-leakage"><span class="header-section-number">17.5</span> Information Leakage</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">17.6</span> Final Thoughts</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">17.7</span> Solutions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/categorical-variables.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/data-preprocessing.html">Data Preprocessing</a></li><li class="breadcrumb-item"><a href="../chapters/categorical-variables.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></h1>
 </div>
 
 
@@ -470,7 +482,7 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-spot-cat" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 16.1</strong></span> Can you spot the other categorical variables in the above table?</p>
+<p><span class="theorem-title"><strong>Exercise 17.1</strong></span> Can you spot the other categorical variables in the above table?</p>
 </div>
 <p>All of the Machine Learning models studied so far deal with observations as <strong>points in space</strong>. Numerical features naturally determine coordinates of points in <a href="../chapters/data-space.html">space</a>. Properties can be plotted by their surface area and distance to the centre of town without problems:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -481,16 +493,16 @@ window.Quarto = {
 </div>
 <p>We could try building a model that ignores neighbourhood, and uses “Distance to the Centre” as a proxy. This is not a bad idea, but a lot of information is <strong>lost</strong> in the process. And what is the centre of Berlin anyway?</p>
 <p>How would models handle these categorical variables like neighbourhoods? This is what this chapter is about.</p>
-<section id="types-of-categorical" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="types-of-categorical"><span class="header-section-number">16.1</span> Types of Categorical</h2>
+<section id="types-of-categorical" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="types-of-categorical"><span class="header-section-number">17.1</span> Types of Categorical</h2>
 <p>There are two main types of categorical features:</p>
 <ul>
 <li>Ordinal variables: these variables <strong>have an order</strong>. The energy efficiency rating of a property ranges from A (most efficient) to G (least efficient)</li>
 <li>Nominal variables: these variables <strong>have no intrinsic order</strong>. No possible ranking can be made of the neighbourhoods (e.g., “Neukölln” or “Kreuzberg”) mentioned in the previous example</li>
 </ul>
 </section>
-<section id="ordinal-variables" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="ordinal-variables"><span class="header-section-number">16.2</span> Ordinal Variables</h2>
+<section id="ordinal-variables" class="level2" data-number="17.2">
+<h2 data-number="17.2" class="anchored" data-anchor-id="ordinal-variables"><span class="header-section-number">17.2</span> Ordinal Variables</h2>
 <p>Ordinal variables can be converted to numbers relatively easily. As an example, you could map the energy rating from A to G to the <strong>numbers 1 to 7</strong>. This would create another dimension in the feature space of properties:</p>
 <table class="caption-top table">
 <colgroup>
@@ -563,11 +575,11 @@ window.Quarto = {
 </div>
 <p>If the notion of space is not fully clear, refer to the <a href="../chapters/data-space.html" target="_blank">chapter on data space</a>.</p>
 </section>
-<section id="nominal-variables" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="nominal-variables"><span class="header-section-number">16.3</span> Nominal Variables</h2>
+<section id="nominal-variables" class="level2" data-number="17.3">
+<h2 data-number="17.3" class="anchored" data-anchor-id="nominal-variables"><span class="header-section-number">17.3</span> Nominal Variables</h2>
 <p>Handling nominal variables is trickier, as a direct conversion to numbers would not make sense. Why would “Neukölln” be 1 and “Kreuzberg” be 2? Or the other way around? We need a smarter solution. The following sections will describe two of them.</p>
-<section id="one-hot-encoding" class="level3" data-number="16.3.1">
-<h3 data-number="16.3.1" class="anchored" data-anchor-id="one-hot-encoding"><span class="header-section-number">16.3.1</span> One-Hot Encoding</h3>
+<section id="one-hot-encoding" class="level3" data-number="17.3.1">
+<h3 data-number="17.3.1" class="anchored" data-anchor-id="one-hot-encoding"><span class="header-section-number">17.3.1</span> One-Hot Encoding</h3>
 <p>The best way to understand One-Hot Encoding is to visualise it before explaining it. Imagine the following dataset:</p>
 <table class="caption-top table">
 <thead>
@@ -775,8 +787,8 @@ window.Quarto = {
 <p>One-Hot Encoding solves the categorical variable problem for variables with <strong>few categories</strong>. How could we encode categorical variables like street name? Ignoring these variables with many distinct values is one possibility. However, in the example of property pricing, the street name could carry some relevant information. The next section will explore one idea.</p>
 </section>
 </section>
-<section id="target-encoding" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="target-encoding"><span class="header-section-number">16.4</span> Target Encoding</h2>
+<section id="target-encoding" class="level2" data-number="17.4">
+<h2 data-number="17.4" class="anchored" data-anchor-id="target-encoding"><span class="header-section-number">17.4</span> Target Encoding</h2>
 <p>Thinking about a property pricing model, how could we represent the street name of a property as a number?</p>
 <p>We want to be able to capture the <strong>impact of the street name on the price</strong>. To do so, we could encode each value of the categorical variable (e.g., “Sonnenallee” or “Bergmannstr.”) as the <strong>average</strong> of the target variable for the observations in this category. In this case, each street name would be replaced by the average price on that street.</p>
 <p>This is an abstract definition, let’s make it more concrete with an example:</p>
@@ -848,7 +860,7 @@ window.Quarto = {
 <li>Unter Den Linden: <span class="math inline">\(700\)</span> (only one property)</li>
 </ul>
 <div id="exr-avg-street" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 16.2</strong></span> Show that the average target value for Sonnenallee is 365.</p>
+<p><span class="theorem-title"><strong>Exercise 17.2</strong></span> Show that the average target value for Sonnenallee is 365.</p>
 </div>
 <p>The dataset with a target encoded street name feature now looks like this:</p>
 <table class="caption-top table">
@@ -933,15 +945,15 @@ window.Quarto = {
 </div>
 <p>This averaging process can also be used in the binary classification context. The average of the target variable for a given categorical value could be the average of 0’s and 1’s of the target label (i.e., negatives and positives).</p>
 </section>
-<section id="information-leakage" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="information-leakage"><span class="header-section-number">16.5</span> Information Leakage</h2>
+<section id="information-leakage" class="level2" data-number="17.5">
+<h2 data-number="17.5" class="anchored" data-anchor-id="information-leakage"><span class="header-section-number">17.5</span> Information Leakage</h2>
 <p>As mentioned in the introductory section, categorical encoding can be a source of <strong>information leakage</strong> between the training and test set. To avoid this leakage, it is critical to compute all these transformations on the <strong>training set only</strong>.</p>
 <p>In One-Hot Encoding, only create columns for the categorical values <strong>seen in the training set</strong>. If a new value is found in the test set, it could be either excluded or flagged as missing (with another binary column). Using the entire dataset to encode categorical features would <strong>not</strong> simulate real prediction conditions.</p>
 <p>For Target Encoding, the average target value for each category should only be computed on the <strong>training data</strong>. These averages can then be applied to the test set. If a new categorical value is found in the test set, it can be excluded or encoded with the global average of the target variable (over the entire dataset).</p>
 <p>Why worry about this? When the model is used for prediction, the goal of splitting the data between train and test set is to estimate the performance of the model on unseen data. To do so, it is critical to compute preprocessing transformations on the training data. In the future, data will come one or more row at a time. The only averages available will be from the training data.</p>
 </section>
-<section id="final-thoughts" class="level2" data-number="16.6">
-<h2 data-number="16.6" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">16.6</span> Final Thoughts</h2>
+<section id="final-thoughts" class="level2" data-number="17.6">
+<h2 data-number="17.6" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">17.6</span> Final Thoughts</h2>
 <p>Without the appropriate encoding, categorical variables cannot be handled by Machine Learning models. ML models learn the relationships between inputs and a target variable using mathematical tricks applicable to lists of numbers (<a href="../chapters/distance.html">distance</a> or <a href="../chapters/trees-intuition.html">splitting of space</a>).</p>
 <p>Encoding categorical variables converts them to numbers that can then be used in the training and prediction process. The encoding methods in this chapter include:</p>
 <ul>
@@ -951,17 +963,17 @@ window.Quarto = {
 </ul>
 <p>The next chapter will explore another data type: dates and times.</p>
 </section>
-<section id="solutions" class="level2" data-number="16.7">
-<h2 data-number="16.7" class="anchored" data-anchor-id="solutions"><span class="header-section-number">16.7</span> Solutions</h2>
+<section id="solutions" class="level2" data-number="17.7">
+<h2 data-number="17.7" class="anchored" data-anchor-id="solutions"><span class="header-section-number">17.7</span> Solutions</h2>
 <div id="sol-spot-cat" class="proof solution">
-<p><span class="proof-title"><em>Solution 16.1</em>. </span><a href="#exr-spot-cat" class="quarto-xref">Exercise&nbsp;<span>16.1</span></a> The other two categorical variables are:</p>
+<p><span class="proof-title"><em>Solution 17.1</em>. </span><a href="#exr-spot-cat" class="quarto-xref">Exercise&nbsp;<span>17.1</span></a> The other two categorical variables are:</p>
 <ul>
 <li>Street Name</li>
 <li>Energy Rating</li>
 </ul>
 </div>
 <div id="sol-avg-street" class="proof solution">
-<p><span class="proof-title"><em>Solution 16.2</em>. </span><a href="#exr-avg-street" class="quarto-xref">Exercise&nbsp;<span>16.2</span></a></p>
+<p><span class="proof-title"><em>Solution 17.2</em>. </span><a href="#exr-avg-street" class="quarto-xref">Exercise&nbsp;<span>17.2</span></a></p>
 <p><span class="math inline">\(\frac{420 + 310}{2} = 365\)</span></p>
 </div>
 
@@ -1399,12 +1411,12 @@ window.Quarto = {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/data-preprocessing.html" class="pagination-link" aria-label="Data Preprocessing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/datetime.html" class="pagination-link" aria-label="Representing Dates">
-        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

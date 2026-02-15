@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Splitting Recursively – Machine Learning Intuition</title>
+<title>14&nbsp; Splitting Recursively – Machine Learning Intuition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,7 +156,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/recursion.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/recursion.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -183,6 +183,12 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
@@ -199,43 +205,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
   </div>
 </li>
       </ul>
@@ -252,19 +258,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,25 +287,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -316,37 +322,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
   </div>
 </li>
       </ul>
@@ -363,13 +369,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -378,6 +384,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
   </div>
 </li>
     </ul>
@@ -390,23 +402,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#functions" id="toc-functions" class="nav-link active" data-scroll-target="#functions"><span class="header-section-number">13.1</span> Functions</a></li>
-  <li><a href="#recursion" id="toc-recursion" class="nav-link" data-scroll-target="#recursion"><span class="header-section-number">13.2</span> Recursion</a>
+  <li><a href="#functions" id="toc-functions" class="nav-link active" data-scroll-target="#functions"><span class="header-section-number">14.1</span> Functions</a></li>
+  <li><a href="#recursion" id="toc-recursion" class="nav-link" data-scroll-target="#recursion"><span class="header-section-number">14.2</span> Recursion</a>
   <ul class="collapse">
-  <li><a href="#recursive-splitting" id="toc-recursive-splitting" class="nav-link" data-scroll-target="#recursive-splitting"><span class="header-section-number">13.2.1</span> Recursive Splitting</a></li>
+  <li><a href="#recursive-splitting" id="toc-recursive-splitting" class="nav-link" data-scroll-target="#recursive-splitting"><span class="header-section-number">14.2.1</span> Recursive Splitting</a></li>
   </ul></li>
-  <li><a href="#reviewing-the-decision-tree-learning-algorithm" id="toc-reviewing-the-decision-tree-learning-algorithm" class="nav-link" data-scroll-target="#reviewing-the-decision-tree-learning-algorithm"><span class="header-section-number">13.3</span> Reviewing the Decision Tree Learning Algorithm</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">13.4</span> Final Thoughts</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">13.5</span> Solutions</a></li>
+  <li><a href="#reviewing-the-decision-tree-learning-algorithm" id="toc-reviewing-the-decision-tree-learning-algorithm" class="nav-link" data-scroll-target="#reviewing-the-decision-tree-learning-algorithm"><span class="header-section-number">14.3</span> Reviewing the Decision Tree Learning Algorithm</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">14.4</span> Final Thoughts</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">14.5</span> Solutions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/recursion.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/recursion.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></h1>
 </div>
 
 
@@ -424,8 +436,8 @@ window.Quarto = {
 
 
 <p>The Decision Tree learning algorithm is a <strong>recursive</strong> algorithm.</p>
-<section id="functions" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="functions"><span class="header-section-number">13.1</span> Functions</h2>
+<section id="functions" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="functions"><span class="header-section-number">14.1</span> Functions</h2>
 <p>Recursion is a fascinating idea that builds on the concept of <strong>function</strong>. In programming, functions are reusable pieces of code that execute a piece of code.</p>
 <p>As an example, the following function adds two numbers and returns the result:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource plaintext number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>Adder(a, b):</span>
@@ -468,8 +480,8 @@ window.Quarto = {
 <p>Once defined, this function can be called over and over again, without having to copy-paste any code. Functions are a core building block of programming.</p>
 <p>You could call the function with <code>adder(2,3)</code> and get <code>5</code> as result.</p>
 </section>
-<section id="recursion" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="recursion"><span class="header-section-number">13.2</span> Recursion</h2>
+<section id="recursion" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="recursion"><span class="header-section-number">14.2</span> Recursion</h2>
 <p>In Computer Science, recursion is when a <strong>function calls itself</strong>, directly or indirectly, to solve a problem by breaking it down into smaller subproblems.</p>
 <p>This is the technical definition, this chapter will make this concept more concrete.</p>
 <p>Let’s take the Fibonacci sequence as an example:</p>
@@ -482,7 +494,7 @@ window.Quarto = {
 <li>6th: 2 + 3 = 5</li>
 </ul>
 <div id="exr-fib" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 13.1</strong></span> Compute the 7th and 8th term of the Fibonacci sequence.</p>
+<p><span class="theorem-title"><strong>Exercise 14.1</strong></span> Compute the 7th and 8th term of the Fibonacci sequence.</p>
 </div>
 <p>To make this process more general, we can compute the <span class="math inline">\(n^{th}\)</span> Fibonacci term, <span class="math inline">\(Fibonacci(n)\)</span>, with the following expression:</p>
 <p><span class="math display">\[
@@ -519,8 +531,8 @@ Fibonacci(n) = Fibonacci(n-1) + Fibonacci(n-2)
 <span id="cb4-13"><a href="#cb4-13"></a>    Return 1</span>
 <span id="cb4-14"><a href="#cb4-14"></a>Return 1 + 1 = 2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In the above example, each indentation represents a level of recursion.</p>
-<section id="recursive-splitting" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="recursive-splitting"><span class="header-section-number">13.2.1</span> Recursive Splitting</h3>
+<section id="recursive-splitting" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="recursive-splitting"><span class="header-section-number">14.2.1</span> Recursive Splitting</h3>
 <p>The splitting logic of a Decision Tree works in a similar way. It keeps splitting subgroups until the stopping condition is met. It could be defined in pseudocode as follows:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource plaintext number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>Split(Group):</span>
 <span id="cb5-2"><a href="#cb5-2"></a>    If the group is “pure” do nothing</span>
@@ -575,8 +587,8 @@ Algorithm terminates</code></pre>
 <p>In Computer Science, it is not recursion if your head does not hurt thinking about it.</p>
 </section>
 </section>
-<section id="reviewing-the-decision-tree-learning-algorithm" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="reviewing-the-decision-tree-learning-algorithm"><span class="header-section-number">13.3</span> Reviewing the Decision Tree Learning Algorithm</h2>
+<section id="reviewing-the-decision-tree-learning-algorithm" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="reviewing-the-decision-tree-learning-algorithm"><span class="header-section-number">14.3</span> Reviewing the Decision Tree Learning Algorithm</h2>
 <p>The previous chapter has reviewed two foundational concepts of Decision Tree learning:</p>
 <ol type="1">
 <li><strong>Recursion</strong>: process calling itself</li>
@@ -591,15 +603,15 @@ Algorithm terminates</code></pre>
 <p>This function will build a tree, i.e., a collection of splits and leaf nodes, until there is no further way to split the data. That is it!</p>
 <p>To predict for a new observation, they can be passed down the tree. The resulting prediction will be the label that constitutes the majority of the observations in the leaf.</p>
 </section>
-<section id="final-thoughts" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">13.4</span> Final Thoughts</h2>
+<section id="final-thoughts" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">14.4</span> Final Thoughts</h2>
 <p>This chapter introduced the foundational concept of <strong>recursion</strong>. Recursion happens when a function calls itself. In the case of Decision Trees the splitting function first splits the dataset into two groups (see <a href="../chapters/splitting-maths.html">previous chapter</a>), and then <strong>calls itself</strong> on each of the subgroups. This is done until no further groups can be split.</p>
 <p>The next chapter will add some nuance and bring the entire Decision Tree algorithm together.</p>
 </section>
-<section id="solutions" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">13.5</span> Solutions</h2>
+<section id="solutions" class="level2" data-number="14.5">
+<h2 data-number="14.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">14.5</span> Solutions</h2>
 <div id="sol-fib" class="proof solution">
-<p><span class="proof-title"><em>Solution 13.1</em>. </span><a href="#exr-fib" class="quarto-xref">Exercise&nbsp;<span>13.1</span></a></p>
+<p><span class="proof-title"><em>Solution 14.1</em>. </span><a href="#exr-fib" class="quarto-xref">Exercise&nbsp;<span>14.1</span></a></p>
 <ul>
 <li>7th: 3 + 5 = 8</li>
 <li>8th: 5 + 8 = 13</li>
@@ -1040,12 +1052,12 @@ Algorithm terminates</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/splitting-maths.html" class="pagination-link" aria-label="Evaluating Splits">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/trees-proba-reg.html" class="pagination-link" aria-label="Probabilities and Regression with Decision Trees">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

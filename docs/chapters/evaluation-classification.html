@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Evaluating Classification Models – Machine Learning Intuition</title>
+<title>10&nbsp; Evaluating Classification Models – Machine Learning Intuition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-classification.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-classification.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,6 +148,12 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
@@ -164,43 +170,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
   </div>
 </li>
       </ul>
@@ -217,19 +223,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -246,25 +252,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,37 +287,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,13 +334,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,6 +349,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
   </div>
 </li>
     </ul>
@@ -355,23 +367,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#evaluating-distances" id="toc-evaluating-distances" class="nav-link active" data-scroll-target="#evaluating-distances"><span class="header-section-number">9.1</span> Evaluating Distances</a>
+  <li><a href="#evaluating-distances" id="toc-evaluating-distances" class="nav-link active" data-scroll-target="#evaluating-distances"><span class="header-section-number">10.1</span> Evaluating Distances</a>
   <ul class="collapse">
-  <li><a href="#beyond-accuracy-recall-and-precision" id="toc-beyond-accuracy-recall-and-precision" class="nav-link" data-scroll-target="#beyond-accuracy-recall-and-precision"><span class="header-section-number">9.1.1</span> Beyond Accuracy: Recall and Precision</a></li>
+  <li><a href="#beyond-accuracy-recall-and-precision" id="toc-beyond-accuracy-recall-and-precision" class="nav-link" data-scroll-target="#beyond-accuracy-recall-and-precision"><span class="header-section-number">10.1.1</span> Beyond Accuracy: Recall and Precision</a></li>
   </ul></li>
-  <li><a href="#practical-model-selection" id="toc-practical-model-selection" class="nav-link" data-scroll-target="#practical-model-selection"><span class="header-section-number">9.2</span> Practical Model Selection</a></li>
-  <li><a href="#probabilities-and-model-evaluation" id="toc-probabilities-and-model-evaluation" class="nav-link" data-scroll-target="#probabilities-and-model-evaluation"><span class="header-section-number">9.3</span> Probabilities and Model Evaluation</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">9.4</span> Final Thoughts</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">9.5</span> Solutions</a></li>
+  <li><a href="#practical-model-selection" id="toc-practical-model-selection" class="nav-link" data-scroll-target="#practical-model-selection"><span class="header-section-number">10.2</span> Practical Model Selection</a></li>
+  <li><a href="#probabilities-and-model-evaluation" id="toc-probabilities-and-model-evaluation" class="nav-link" data-scroll-target="#probabilities-and-model-evaluation"><span class="header-section-number">10.3</span> Probabilities and Model Evaluation</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">10.4</span> Final Thoughts</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">10.5</span> Solutions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-classification.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/model-evaluation.html">Model Evaluation</a></li><li class="breadcrumb-item"><a href="../chapters/evaluation-classification.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></h1>
 </div>
 
 
@@ -397,8 +409,8 @@ window.Quarto = {
 </ul>
 <p>The previous chapter left this last point open: how to determine whether the predictions of a model are <strong>close to the truth</strong>? This chapter will tackle this problem for classification models. The following chapter will explore regression models.</p>
 <p>As a reminder, classification tasks are concerned with predicting category labels such as “spam” or “malignant”.</p>
-<section id="evaluating-distances" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="evaluating-distances"><span class="header-section-number">9.1</span> Evaluating Distances</h2>
+<section id="evaluating-distances" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="evaluating-distances"><span class="header-section-number">10.1</span> Evaluating Distances</h2>
 <p>Imagine that we trained two models, Model A and Model B. We now want to determine which of the two is best.</p>
 <p>To do so, we remove a test set from the training data, and generate predictions using both models. For these observations, we also have the ground truth, the true label of each.</p>
 <p>We get the following results by generating predictions for the test set:</p>
@@ -474,11 +486,11 @@ window.Quarto = {
 \text{Accuracy} = \frac{\text{Number of observations correctly predicted}}{\text{Total observation count}}
 \]</span></p>
 <div id="exr-acc" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.1</strong></span> Calculate the accuracy of Model B.</p>
+<p><span class="theorem-title"><strong>Exercise 10.1</strong></span> Calculate the accuracy of Model B.</p>
 </div>
 <p>When you hear the words “Model Accuracy” in the media, this is it.</p>
-<section id="beyond-accuracy-recall-and-precision" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="beyond-accuracy-recall-and-precision"><span class="header-section-number">9.1.1</span> Beyond Accuracy: Recall and Precision</h3>
+<section id="beyond-accuracy-recall-and-precision" class="level3" data-number="10.1.1">
+<h3 data-number="10.1.1" class="anchored" data-anchor-id="beyond-accuracy-recall-and-precision"><span class="header-section-number">10.1.1</span> Beyond Accuracy: Recall and Precision</h3>
 <p>But is accuracy sufficient? To answer this question, we need to ask another question: Are all errors the same? Do they have the same <strong>consequences on the world</strong>?</p>
 <p>To do so, let us move beyond simple <span class="math inline">\(\times\)</span> and <span class="math inline">\(\circ\)</span> and into the world of tumour diagnosis. There, a benign mass misdiagnosed as a malignant tumour would generate stress and inconvenience. A malignant tumour misdiagnosed as benign could have <strong>fatal consequences</strong>.</p>
 <p>Let us now consider the two following models, with <span class="math inline">\(\circ\)</span> representing a <strong>benign mass</strong> and <span class="math inline">\(\times\)</span> representing a <strong>malignant tumour</strong>:</p>
@@ -543,18 +555,18 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-acc-ab" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.2</strong></span> Show that model A has a higher accuracy than model B.</p>
+<p><span class="theorem-title"><strong>Exercise 10.2</strong></span> Show that model A has a higher accuracy than model B.</p>
 </div>
 <p>Even though model A has higher accuracy than model B, it misclassified one malignant tumour as <strong>benign</strong> (Observation 5).</p>
 <p>On the other hand, model B classified two benign masses as malignant (Observations 3 and 4) but <strong>caught all the malignant tumours</strong>.</p>
 <p>This shows that Accuracy is only a part of the picture. How can we move from the description above to actual metrics?</p>
-<section id="useful-vocabulary" class="level4" data-number="9.1.1.1">
-<h4 data-number="9.1.1.1" class="anchored" data-anchor-id="useful-vocabulary"><span class="header-section-number">9.1.1.1</span> Useful Vocabulary</h4>
+<section id="useful-vocabulary" class="level4" data-number="10.1.1.1">
+<h4 data-number="10.1.1.1" class="anchored" data-anchor-id="useful-vocabulary"><span class="header-section-number">10.1.1.1</span> Useful Vocabulary</h4>
 <p>Before going into error metrics, it is important to introduce some vocabulary.</p>
 <p>In binary classification, the model learns to assign observations into two categories, such as “benign” and “malignant” in the case of tumour diagnosis, or “spam” and “non-spam” for email filtering.</p>
 <p>Mathematically, these two labels are represented as 1 and 0. Generally, the class that the model was built to detect is assigned 1 and the other 0. In tumour diagnosis, the malignant label is generally assigned the number 1 as these are the cases the model was designed for. Similarly, in email filtering, the label “spam” is assigned the number 1, as the model detects spam messages to filter them out of the inbox.</p>
 <div id="exr-fraud" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.3</strong></span> If you were building a fraud detection model for an online payments company, which labels would you predict for? Which one would be assigned to 1 and 0?</p>
+<p><span class="theorem-title"><strong>Exercise 10.3</strong></span> If you were building a fraud detection model for an online payments company, which labels would you predict for? Which one would be assigned to 1 and 0?</p>
 </div>
 <p>In the example of tumour diagnosis, a malignant tumour correctly classified as “malignant” is called a <strong>True Positive</strong>. On the other hand, a malignant tumour misclassified as a benign mass is a <strong>False Negative</strong>.</p>
 <p>Here, the words “positive” or “negative” are not associated with any value judgement. They are simply another way to say 1 or 0. Thinking about medical examples may make more sense here. When a medical test is positive, it means that the targeted substance is <strong>present</strong>. The same applies to spam detection. A positive spam detection means classifying an email as “spam”.</p>
@@ -647,12 +659,12 @@ window.Quarto = {
 </tbody>
 </table>
 <div id="exr-conf-fraud" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.4</strong></span> To test your understanding, try building a Confusion Matrix for a payment fraud detection model.</p>
+<p><span class="theorem-title"><strong>Exercise 10.4</strong></span> To test your understanding, try building a Confusion Matrix for a payment fraud detection model.</p>
 </div>
 <p>Now that we clearly understand the language of True/False Negative/Positive, let’s get back to measuring the performance of a Machine Learning model.</p>
 </section>
-<section id="recall" class="level4" data-number="9.1.1.2">
-<h4 data-number="9.1.1.2" class="anchored" data-anchor-id="recall"><span class="header-section-number">9.1.1.2</span> Recall</h4>
+<section id="recall" class="level4" data-number="10.1.1.2">
+<h4 data-number="10.1.1.2" class="anchored" data-anchor-id="recall"><span class="header-section-number">10.1.1.2</span> Recall</h4>
 <p>In the example of tumour diagnosis, we would like a model that would catch all malignant tumours. This is because False Negatives, i.e.&nbsp;misdiagnosing a malignant tumour as benign, can have <strong>fatal</strong> consequences. We want to compare the performances of Model A and B:</p>
 <table class="caption-top table">
 <thead>
@@ -729,12 +741,12 @@ window.Quarto = {
 \text{Recall}_{\text{Model B}} = \frac{4}{4 + 0} = 100\%
 \]</span></p>
 <div id="exr-recall-a" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.5</strong></span> Calculate the recall of Model A, and prove that it is <span class="math inline">\(75\%\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 10.5</strong></span> Calculate the recall of Model A, and prove that it is <span class="math inline">\(75\%\)</span>.</p>
 </div>
 <p>In the case of disease diagnosis, Recall is a critical metric as <strong>missing positive cases</strong> can have dire consequences on a patient’s life.</p>
 </section>
-<section id="precision" class="level4" data-number="9.1.1.3">
-<h4 data-number="9.1.1.3" class="anchored" data-anchor-id="precision"><span class="header-section-number">9.1.1.3</span> Precision</h4>
+<section id="precision" class="level4" data-number="10.1.1.3">
+<h4 data-number="10.1.1.3" class="anchored" data-anchor-id="precision"><span class="header-section-number">10.1.1.3</span> Precision</h4>
 <p>In other scenarios, when the cost of a False Positive is high, we care for the <strong>Precision</strong> of the model. In other words, we want to <strong>avoid False Positives</strong>.</p>
 <p>Precision answers the question: Out of all the observations predicted as positive, how many were True Positives, i.e., actually positive?</p>
 <p>Building a spam detection algorithm, the objective is to classify incoming emails as either “spam” or “non-spam”. Every email classified as “spam” would be <strong>filtered out of the inbox</strong>. In line with the previous section, the positive case would be “spam”, as it is the case that would require action; filtering email out of the inbox.</p>
@@ -814,11 +826,11 @@ window.Quarto = {
 \text{Precision}_\text{Model A} = \frac{3}{3 + 0} = 100\%
 \]</span></p>
 <div id="exr-prec-b" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.6</strong></span> Calculate the Precision of Model B, show that it is approximately 67%.</p>
+<p><span class="theorem-title"><strong>Exercise 10.6</strong></span> Calculate the Precision of Model B, show that it is approximately 67%.</p>
 </div>
 </section>
-<section id="revisiting-accuracy" class="level4" data-number="9.1.1.4">
-<h4 data-number="9.1.1.4" class="anchored" data-anchor-id="revisiting-accuracy"><span class="header-section-number">9.1.1.4</span> Revisiting Accuracy</h4>
+<section id="revisiting-accuracy" class="level4" data-number="10.1.1.4">
+<h4 data-number="10.1.1.4" class="anchored" data-anchor-id="revisiting-accuracy"><span class="header-section-number">10.1.1.4</span> Revisiting Accuracy</h4>
 <p>Accuracy, the first error metric explored in this chapter, can also be calculated with Confusion Matrix terms.</p>
 <p>As a reminder, accuracy is calculated as follows: <span class="math display">\[
 \text{Accuracy} = \frac{\text{Number of observations correctly predicted}}{\text{Total observation count}}
@@ -831,8 +843,8 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="practical-model-selection" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="practical-model-selection"><span class="header-section-number">9.2</span> Practical Model Selection</h2>
+<section id="practical-model-selection" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="practical-model-selection"><span class="header-section-number">10.2</span> Practical Model Selection</h2>
 <p>After having built two different Machine Learning tumour diagnosis models (A and B), you get the following Confusion Matrices:</p>
 <p><strong>Model A</strong></p>
 <table class="caption-top table">
@@ -881,7 +893,7 @@ window.Quarto = {
 <p>Which model you pick?</p>
 <p>If you picked B, that is correct. Why did you choose it? B seems to make fewer errors and have a higher Accuracy.</p>
 <div id="exr-mod-cho" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.7</strong></span> If you have not done so already, compute the Accuracy, Precision and Recall of both models.</p>
+<p><span class="theorem-title"><strong>Exercise 10.7</strong></span> If you have not done so already, compute the Accuracy, Precision and Recall of both models.</p>
 </div>
 <p>Making this decision more complex, which of the following two models would you pick for a <strong>tumour diagnosis</strong> system?</p>
 <p><strong>Model A</strong></p>
@@ -931,11 +943,11 @@ window.Quarto = {
 <p>If you picked B, that is correct again. Why did you choose model B? In this case, model B has the same Accuracy and the <strong>highest Recall</strong>. In the case of tumour diagnosis, this is probably the most important metric to look at. Model B did not predict a single malignant tumour as “benign”.</p>
 <p>Would you pick a different model for spam detection? Probably, as <strong>Precision</strong> becomes more important then. You do not want legitimate emails to end up in your spam folder.</p>
 <div id="exr-mod-cho-2" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.8</strong></span> Calculate Recall and Precision for model A and B.</p>
+<p><span class="theorem-title"><strong>Exercise 10.8</strong></span> Calculate Recall and Precision for model A and B.</p>
 </div>
 </section>
-<section id="probabilities-and-model-evaluation" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="probabilities-and-model-evaluation"><span class="header-section-number">9.3</span> Probabilities and Model Evaluation</h2>
+<section id="probabilities-and-model-evaluation" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="probabilities-and-model-evaluation"><span class="header-section-number">10.3</span> Probabilities and Model Evaluation</h2>
 <p>For the sake of simplicity, this chapter has only considered <strong>binary predictions</strong>: either malignant or benign, either spam or non-spam.</p>
 <p>As we have seen in the <a href="../chapters/neighbours.html" target="_blank">KNN chapter</a>, classification models can also output <strong>predicted probabilities</strong>. Instead of simply predicting an observation as “malignant” or “benign”, the model can output a predicted probability of malignancy.</p>
 <p>To convert these probabilities to a binary label, a <strong>threshold</strong> of 0.5 is generally used. Any predicted probability beyond this threshold (here 0.5) would be classified as “malignant”, otherwise, it would be classified as “benign”. For example, a predicted probability of 48% would be classified as “benign”, while a predicted probability of 51% as “malignant”.</p>
@@ -1091,14 +1103,14 @@ window.Quarto = {
 <li><strong>Decrease</strong> in Precision: with more observations predicted as “malignant”, the risk of misclassifying observations as “malignant” increases</li>
 </ul>
 <div id="exr-thresh" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 9.9</strong></span> Describe the effect of increasing the threshold on Precision, Recall and Accuracy.</p>
+<p><span class="theorem-title"><strong>Exercise 10.9</strong></span> Describe the effect of increasing the threshold on Precision, Recall and Accuracy.</p>
 </div>
 <p>For tumour diagnosis, a <strong>lower threshold</strong> may make more sense. Going back to the Nearest Neighbour example, from a patient’s perspective, if the observation has two malignant neighbours and three benign ones, for a predicted probability of <span class="math inline">\(2/5 = 40\%\)</span>, I would still want further checks.</p>
 <p>For spam filtering, a <strong>higher threshold</strong> could be preferred, to reduce the risk of a legitimate email being filtered out. You could filter out results only when they have predicted probability of 0.8 or 0.9.</p>
 <p>This example illustrates the <strong>Precision/Recall trade-off</strong>. Setting a higher threshold will increase Precision and reduce Recall. Setting a lower threshold will reduce Precision and increase Recall.</p>
 </section>
-<section id="final-thoughts" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">9.4</span> Final Thoughts</h2>
+<section id="final-thoughts" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">10.4</span> Final Thoughts</h2>
 <p>This section has shown how to evaluate a binary classification model. There are three steps to this process:</p>
 <ul>
 <li>Set aside a share of the training data as test set</li>
@@ -1108,28 +1120,28 @@ window.Quarto = {
 <p>It is important to remember that there is no optimal performance metric. The best metric for a problem depends on <strong>the consequences of model error</strong> on the real world.</p>
 <p>After this description of <strong>classification</strong> model evaluation, the next section will explore the evaluation of <strong>regression models</strong>.</p>
 </section>
-<section id="solutions" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">9.5</span> Solutions</h2>
+<section id="solutions" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">10.5</span> Solutions</h2>
 <div id="sol-acc" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.1</em>. </span><a href="#exr-acc" class="quarto-xref">Exercise&nbsp;<span>9.1</span></a></p>
+<p><span class="proof-title"><em>Solution 10.1</em>. </span><a href="#exr-acc" class="quarto-xref">Exercise&nbsp;<span>10.1</span></a></p>
 <p><span class="math inline">\(\text{Accuracy of Model B} = \frac{4}{5} = 80\%\)</span></p>
 </div>
 <div id="sol-acc-ab" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.2</em>. </span><a href="#exr-acc-ab" class="quarto-xref">Exercise&nbsp;<span>9.2</span></a></p>
+<p><span class="proof-title"><em>Solution 10.2</em>. </span><a href="#exr-acc-ab" class="quarto-xref">Exercise&nbsp;<span>10.2</span></a></p>
 <p>Model A: Correct on observations 1, 2, 3, 4, 6, 7, 8 (7 out of 8). Incorrect on 5.</p>
 <p>Model B: Correct on 1, 2, 5, 6, 7, 8 (6 out of 8). Incorrect on 3 and 4.</p>
 <p><span class="math inline">\(\text{Accuracy of Model A} = \frac{7}{8} = 87.5\%\)</span></p>
 <p><span class="math inline">\(\text{Accuracy of Model B} = \frac{6}{8} = 75\%\)</span></p>
 </div>
 <div id="sol-fraud" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.3</em>. </span><a href="#exr-fraud" class="quarto-xref">Exercise&nbsp;<span>9.3</span></a> Labels:</p>
+<p><span class="proof-title"><em>Solution 10.3</em>. </span><a href="#exr-fraud" class="quarto-xref">Exercise&nbsp;<span>10.3</span></a> Labels:</p>
 <ul>
 <li>fraudulent transaction <span class="math inline">\(1\)</span></li>
 <li>non fraudulent or legitimate transaction <span class="math inline">\(0\)</span></li>
 </ul>
 </div>
 <div id="sol-conf-fraud" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.4</em>. </span><a href="#exr-conf-fraud" class="quarto-xref">Exercise&nbsp;<span>9.4</span></a></p>
+<p><span class="proof-title"><em>Solution 10.4</em>. </span><a href="#exr-conf-fraud" class="quarto-xref">Exercise&nbsp;<span>10.4</span></a></p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 34%">
@@ -1158,18 +1170,18 @@ window.Quarto = {
 </table>
 </div>
 <div id="sol-recall-a" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.5</em>. </span><a href="#exr-recall-a" class="quarto-xref">Exercise&nbsp;<span>9.5</span></a></p>
+<p><span class="proof-title"><em>Solution 10.5</em>. </span><a href="#exr-recall-a" class="quarto-xref">Exercise&nbsp;<span>10.5</span></a></p>
 <p>Model A: Out of 4 malignant tumours (observations 5, 6, 7, 8), Model A caught 3 (6, 7, 8), True Positives. Missed 5, a False Negative.</p>
 <p><span class="math inline">\(\text{Recall}_{\text{Model A}} = \frac{3}{3 + 1} = 75\%\)</span></p>
 </div>
 <div id="sol-prec-b" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.6</em>. </span><a href="#exr-prec-b" class="quarto-xref">Exercise&nbsp;<span>9.6</span></a></p>
+<p><span class="proof-title"><em>Solution 10.6</em>. </span><a href="#exr-prec-b" class="quarto-xref">Exercise&nbsp;<span>10.6</span></a></p>
 <p><span class="math display">\[
 \text{Precision}_\text{Model B} = \frac{4}{4 + 2} = \frac{4}{6} \approx 67\%
 \]</span></p>
 </div>
 <div id="sol-mod-cho" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.7</em>. </span><a href="#exr-mod-cho" class="quarto-xref">Exercise&nbsp;<span>9.7</span></a></p>
+<p><span class="proof-title"><em>Solution 10.7</em>. </span><a href="#exr-mod-cho" class="quarto-xref">Exercise&nbsp;<span>10.7</span></a></p>
 <p>For Model A:</p>
 <ul>
 <li>TP = 40</li>
@@ -1195,7 +1207,7 @@ window.Quarto = {
 <p><span class="math inline">\(\text{Recall} = \frac{45}{45 + 5} = \frac{45}{50} = 90\%\)</span></p>
 </div>
 <div id="sol-mod-cho-2" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.8</em>. </span><a href="#exr-mod-cho-2" class="quarto-xref">Exercise&nbsp;<span>9.8</span></a></p>
+<p><span class="proof-title"><em>Solution 10.8</em>. </span><a href="#exr-mod-cho-2" class="quarto-xref">Exercise&nbsp;<span>10.8</span></a></p>
 <p>For Model A:</p>
 <ul>
 <li>TP = 48</li>
@@ -1216,7 +1228,7 @@ window.Quarto = {
 <p><span class="math inline">\(\text{Recall} = \frac{50}{50 + 0} = \frac{50}{50} = 100\%\)</span></p>
 </div>
 <div id="sol-thresh" class="proof solution">
-<p><span class="proof-title"><em>Solution 9.9</em>. </span><a href="#exr-thresh" class="quarto-xref">Exercise&nbsp;<span>9.9</span></a></p>
+<p><span class="proof-title"><em>Solution 10.9</em>. </span><a href="#exr-thresh" class="quarto-xref">Exercise&nbsp;<span>10.9</span></a></p>
 <p>Increasing the threshold generally:</p>
 <ul>
 <li><strong>Increases</strong> Precision: fewer observations are classified as positive, so those that are classified as positive are more likely to be true positives</li>
@@ -1658,12 +1670,12 @@ window.Quarto = {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/model-evaluation.html" class="pagination-link" aria-label="Model Evaluation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/evaluation-regression.html" class="pagination-link" aria-label="Evaluating Regression Models">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

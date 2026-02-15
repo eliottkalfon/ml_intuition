@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; Evaluating Splits – Machine Learning Intuition</title>
+<title>13&nbsp; Evaluating Splits – Machine Learning Intuition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/splitting-maths.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/splitting-maths.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,6 +148,12 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
@@ -164,43 +170,43 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
   </div>
 </li>
       </ul>
@@ -217,19 +223,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
   </div>
 </li>
       </ul>
@@ -246,25 +252,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
   </div>
 </li>
       </ul>
@@ -281,37 +287,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,13 +334,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
   </div>
 </li>
       </ul>
@@ -343,6 +349,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
   </div>
 </li>
     </ul>
@@ -355,23 +367,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#best-split-first" id="toc-best-split-first" class="nav-link active" data-scroll-target="#best-split-first"><span class="header-section-number">12.1</span> Best Split First</a></li>
-  <li><a href="#gini-impurity-coefficient" id="toc-gini-impurity-coefficient" class="nav-link" data-scroll-target="#gini-impurity-coefficient"><span class="header-section-number">12.2</span> Gini Impurity Coefficient</a>
+  <li><a href="#best-split-first" id="toc-best-split-first" class="nav-link active" data-scroll-target="#best-split-first"><span class="header-section-number">13.1</span> Best Split First</a></li>
+  <li><a href="#gini-impurity-coefficient" id="toc-gini-impurity-coefficient" class="nav-link" data-scroll-target="#gini-impurity-coefficient"><span class="header-section-number">13.2</span> Gini Impurity Coefficient</a>
   <ul class="collapse">
-  <li><a href="#evaluating-splits" id="toc-evaluating-splits" class="nav-link" data-scroll-target="#evaluating-splits"><span class="header-section-number">12.2.1</span> Evaluating Splits</a></li>
+  <li><a href="#evaluating-splits" id="toc-evaluating-splits" class="nav-link" data-scroll-target="#evaluating-splits"><span class="header-section-number">13.2.1</span> Evaluating Splits</a></li>
   </ul></li>
-  <li><a href="#trying-different-splits" id="toc-trying-different-splits" class="nav-link" data-scroll-target="#trying-different-splits"><span class="header-section-number">12.3</span> Trying Different Splits</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">12.4</span> Final Thoughts</a></li>
-  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">12.5</span> Solutions</a></li>
+  <li><a href="#trying-different-splits" id="toc-trying-different-splits" class="nav-link" data-scroll-target="#trying-different-splits"><span class="header-section-number">13.3</span> Trying Different Splits</a></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">13.4</span> Final Thoughts</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">13.5</span> Solutions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/splitting-maths.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/trees-intuition.html">Decision Trees</a></li><li class="breadcrumb-item"><a href="../chapters/splitting-maths.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></h1>
 </div>
 
 
@@ -396,8 +408,8 @@ window.Quarto = {
 </figure>
 </div>
 <p>How could we build a tree from there?</p>
-<section id="best-split-first" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="best-split-first"><span class="header-section-number">12.1</span> Best Split First</h2>
+<section id="best-split-first" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="best-split-first"><span class="header-section-number">13.1</span> Best Split First</h2>
 <p>We could start by finding the <strong>best split</strong>, the split that separates the data best (even if it is not perfect). The split will create two groups:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -439,8 +451,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="gini-impurity-coefficient" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="gini-impurity-coefficient"><span class="header-section-number">12.2</span> Gini Impurity Coefficient</h2>
+<section id="gini-impurity-coefficient" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="gini-impurity-coefficient"><span class="header-section-number">13.2</span> Gini Impurity Coefficient</h2>
 <p>How would you measure the <strong>quality of a split</strong>? Or the purity of the resulting groups?</p>
 <p>Imagine that Split 1 creates the following two groups:</p>
 <table class="caption-top table">
@@ -541,7 +553,7 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 \]</span></p>
 <p>That is it, we have calculated the Gini Impurity Coefficient for Group A.</p>
 <div id="exr-gini" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 12.1</strong></span> Compute the Gini Impurity Coefficient for Group B and show that it is 0.32.</p>
+<p><span class="theorem-title"><strong>Exercise 13.1</strong></span> Compute the Gini Impurity Coefficient for Group B and show that it is 0.32.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -560,8 +572,8 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 </table>
 </div>
 <p>The Gini Impurity Coefficient of Group B is slightly higher than Group A, as it is slightly more mixed.</p>
-<section id="evaluating-splits" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="evaluating-splits"><span class="header-section-number">12.2.1</span> Evaluating Splits</h3>
+<section id="evaluating-splits" class="level3" data-number="13.2.1">
+<h3 data-number="13.2.1" class="anchored" data-anchor-id="evaluating-splits"><span class="header-section-number">13.2.1</span> Evaluating Splits</h3>
 <p>Now, let’s get back to quantifying the quality of a split. To do so, we will compute the average Gini Coefficient of each split.</p>
 <p>Split 1:</p>
 <table class="caption-top table">
@@ -617,7 +629,7 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 \frac{10}{10+10} \cdot 0.18 + \frac{10}{10+10} \cdot 0.32 = 0.25
 \]</span></p>
 <div id="exr-gini-split" class="exercise theorem">
-<p><span class="theorem-title"><strong>Exercise 12.2</strong></span> Compute the Gini Coefficients for both groups (C and D) in Split 2, and prove that they are equal to: 0.48 and 0.5 respectively.</p>
+<p><span class="theorem-title"><strong>Exercise 13.2</strong></span> Compute the Gini Coefficients for both groups (C and D) in Split 2, and prove that they are equal to: 0.48 and 0.5 respectively.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -652,8 +664,8 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 <p>Now that we have a way to measure the quality of a split, we can simply try splitting the data at <strong>all feature values</strong> for <strong>all features</strong>, and pick the best one.</p>
 </section>
 </section>
-<section id="trying-different-splits" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="trying-different-splits"><span class="header-section-number">12.3</span> Trying Different Splits</h2>
+<section id="trying-different-splits" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="trying-different-splits"><span class="header-section-number">13.3</span> Trying Different Splits</h2>
 <p>To find the best data split, the Decision Tree learning algorithm evaluates <strong>each possible splitting feature and value</strong>, and picks the one that has the lowest Gini Impurity Coefficient.</p>
 <p>The example above only shows two different splits. This process can be repeated for all features and all splitting values. At each trial, the Gini Impurity Coefficient is recorded. The algorithm then selects the split achieving the lowest Gini Impurity Coefficient. This can be represented visually:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -684,16 +696,16 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 <p>The Gini Impurity Coefficient reaches a minimum of approximately 0.18 at a split value of about 885.7.</p>
 <p>The best split is obtained by splitting the data based on Perimeter Mean at 96.6. This process is repeated every time a group is split.</p>
 </section>
-<section id="final-thoughts" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">12.4</span> Final Thoughts</h2>
+<section id="final-thoughts" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">13.4</span> Final Thoughts</h2>
 <p>The Gini Impurity Coefficient is the measure used to evaluate the quality of a split in Decision Tree learning. A good split partitions the data into two homogeneous groups.</p>
 <p>To train a Decision Tree model, the algorithm finds the best data splits, using the Gini Impurity Coefficient as evaluation criterion.</p>
 <p>The next chapter will explore how this splitting process is applied <strong>recursively</strong>.</p>
 </section>
-<section id="solutions" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">12.5</span> Solutions</h2>
+<section id="solutions" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="solutions"><span class="header-section-number">13.5</span> Solutions</h2>
 <div id="sol-gini" class="proof solution">
-<p><span class="proof-title"><em>Solution 12.1</em>. </span><a href="#exr-gini" class="quarto-xref">Exercise&nbsp;<span>12.1</span></a></p>
+<p><span class="proof-title"><em>Solution 13.1</em>. </span><a href="#exr-gini" class="quarto-xref">Exercise&nbsp;<span>13.1</span></a></p>
 <p>First, compute the probabilities:</p>
 <p><span class="math display">\[
 P(\text{malignant}) = \frac{2}{2+8} = 0.2
@@ -725,7 +737,7 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 <p>The Gini Impurity Coefficient is therefore <span class="math inline">\(0.32\)</span>. This is in line with our intuition as this number should be higher than for Group A, as Group B is more mixed.</p>
 </div>
 <div id="sol-gini-split" class="proof solution">
-<p><span class="proof-title"><em>Solution 12.2</em>. </span><a href="#exr-gini-split" class="quarto-xref">Exercise&nbsp;<span>12.2</span></a></p>
+<p><span class="proof-title"><em>Solution 13.2</em>. </span><a href="#exr-gini-split" class="quarto-xref">Exercise&nbsp;<span>13.2</span></a></p>
 <p><strong>Group C</strong></p>
 <table class="caption-top table">
 <thead>
@@ -1254,12 +1266,12 @@ P(\text{benign then malignant}) &amp;= P(\text{benign}) \cdot P(\text{malignant}
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/trees-intuition.html" class="pagination-link" aria-label="Decision Trees">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Decision Trees</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../chapters/recursion.html" class="pagination-link" aria-label="Splitting Recursively">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
