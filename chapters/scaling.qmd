@@ -360,7 +360,13 @@ This statistical paradox is good reminder that descriptive statistics are remain
 
 Going back to the three example series:
 
+::: {.content-visible unless-format="epub"}
 ![Three series with different means and variances](/images/scaling/three_series.png){width=50%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Three series with different means and variances](/images/scaling/three_series.png){width=100%}
+:::
 
 How could these be standardised so that they have the same mean and spread?
 
