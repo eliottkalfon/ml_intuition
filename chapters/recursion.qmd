@@ -149,13 +149,7 @@ Splits Dataset into Groups A and B
 Calls Split(Group A) and Split(Group B)
 ```
 
-::: {.content-visible unless-format="epub"}
-![Splitting the dataset](/images/trees/split1_AB.png){width=40%}
-:::
-
-::: {.content-visible when-format="epub"}
 ![Splitting the dataset](/images/trees/split1_AB.png){width=80%}
-:::
 
 ```plaintext
     Split(Group B)  
@@ -166,13 +160,7 @@ Calls Split(Group A) and Split(Group B)
     :::
 ```
 
-::: {.content-visible unless-format="epub"}
-![Splitting Group B](/images/trees/split2_ACD.png){width=40%}
-:::
-
-::: {.content-visible when-format="epub"}
 ![Splitting Group B](/images/trees/split2_ACD.png){width=80%}
-:::
 
 ```plaintext
         Split(Group C)
@@ -186,13 +174,7 @@ Calls Split(Group A) and Split(Group B)
     Calls Split(Group E) and Split(Group F)
 ```
 
-::: {.content-visible unless-format="epub"}
-![Splitting Group A](/images/trees/split3_EFCD.png){width=40%}
-:::
-
-::: {.content-visible when-format="epub"}
 ![Splitting Group A](/images/trees/split3_EFCD.png){width=80%}
-:::
 
 ```plaintext
         Split(Group E)

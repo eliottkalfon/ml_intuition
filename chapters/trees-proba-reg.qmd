@@ -15,13 +15,7 @@ The Decision Tree algorithm shown above only outputs class labels as prediction 
 
 Let's think about this problem using a modified version of the example data:
 
-::: {.content-visible unless-format="epub"}
-![Non separable example data](/images/trees/non_separable_data.png){width=60%}
-:::
-
-::: {.content-visible when-format="epub"}
 ![Non separable example data](/images/trees/non_separable_data.png){width=100%}
-:::
 
 In this example, leaf number 3 and 4 both contain observations from the two classes. Now, imagine that a new observation has $x_1=2.1$ and $x_2=0.5$, what prediction would we output?
 

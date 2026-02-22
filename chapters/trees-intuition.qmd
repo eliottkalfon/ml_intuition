@@ -4,35 +4,17 @@ title: "Decision Trees"
 
 It is now time to introduce a second model architecture. How would you predict the class of the unknown observation **without** using distance functions or nearest neighbours?
 
-::: {.content-visible unless-format="epub"}
-![New observation and example data](/images/trees/example_data.png){width=50%}
-:::
-
-::: {.content-visible when-format="epub"}
-![New observation and example data](/images/trees/example_data.png){width=100%}
-:::
+![New observation and example data](/images/trees/example_data.png)
 
 One possibility would be to **split the data at $x_1 = 2$**. Any observation with $x_1$ greater than $2$ would be classified as $\circ$; the rest would be classified as $\times$.
 
-::: {.content-visible unless-format="epub"}
-![Example data with a single split](/images/trees/split.png){width=50%}
-:::
-
-::: {.content-visible when-format="epub"}
-![Example data with a single split](/images/trees/split.png){width=100%}
-:::
+![Example data with a single split](/images/trees/split.png)
 
 ## Multiple Splits
 
 For a more complex case, how would you predict the class of the unknown observation with this training data? How would you split the $\times$ from the $\circ$?
 
-::: {.content-visible unless-format="epub"}
-![A more complex example problem](/images/trees/complex_problem.png){width=50%}
-:::
-
-::: {.content-visible when-format="epub"}
 ![A more complex example problem](/images/trees/complex_problem.png){width=100%}
-:::
 
 In this example, there is **no single line** that can perfectly split the two groups. In Computer Science, this is also called the **XOR problem**.
 
@@ -41,13 +23,7 @@ In this example, there is **no single line** that can perfectly split the two gr
 
 The XOR (Exclusive Or) Problem refers to a foundational Machine Learning and Computer Science problem in which two classes cannot be separated by any single straight line. It demonstrates **the weaknesses of simple linear models**.
 
-::: {.content-visible unless-format="epub"}
-![XOR Problem: Can you find a single line separating the x from the o?](/images/trees/xor_problem.png){width=40%}
-:::
-
-::: {.content-visible when-format="epub"}
-![XOR Problem: Can you find a single line separating the x from the o?](/images/trees/xor_problem.png){width=100%}
-:::
+![XOR Problem: Can you find a single line separating the x from the o?](/images/trees/xor_problem.png)
 
 The XOR is a logical operation that takes two Boolean (`True`/`False` or 1/0) values as inputs and returns 1 (or `True`) if they are different and 0 or `False` otherwise. You can see the truth table for this operation below.
 
@@ -149,13 +125,7 @@ Find another example of:
 
 Just like the KNN model, Decision Trees build a **map** from the input features to the target variable. Using a Decision Tree to generate predictions for all possible feature values, we get the following map:
 
-::: {.content-visible unless-format="epub"}
-![Building a map with Decision Trees](/images/trees/decision_tree_partition_map.png){width=60%}
-:::
-
-::: {.content-visible when-format="epub"}
-![Building a map with Decision Trees](/images/trees/decision_tree_partition_map.png){width=100%}
-:::
+![Building a map with Decision Trees](/images/trees/decision_tree_partition_map.png)
 
 ## Final Thoughts
 
