@@ -5,6 +5,7 @@ format:
   pdf:
     output-file: "Machine-Learning-Intuition-PRINT"
     pdf-engine: xelatex        # Highly recommended for KDP to handle fonts better
+    fontsize: 12pt
     documentclass: scrbook
     classoption: 
       - paper=6in:9in          # Native KOMA-Script size
