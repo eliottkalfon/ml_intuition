@@ -405,79 +405,63 @@ window.Quarto = {
 <p>Not all data is numerical. Categorical features represent data <strong>groupings</strong>. As an example, a property in Berlin can have a given neighbourhood, e.g., “Neukölln”, “Kreuzberg” or “Charlottenburg”.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 8%">
-<col style="width: 16%">
-<col style="width: 19%">
-<col style="width: 13%">
-<col style="width: 16%">
 <col style="width: 12%">
-<col style="width: 13%">
+<col style="width: 24%">
+<col style="width: 20%">
+<col style="width: 25%">
+<col style="width: 18%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Property</th>
 <th style="text-align: center;">Surface Area (sq m)</th>
-<th style="text-align: center;">Distance to Centre (km)</th>
 <th style="text-align: center;">Neighbourhood</th>
 <th style="text-align: center;">Street Name</th>
 <th style="text-align: center;">Energy Rating</th>
-<th style="text-align: center;">Sell Price (K€)</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">A</td>
 <td style="text-align: center;">85</td>
-<td style="text-align: center;">4.2</td>
 <td style="text-align: center;">Neukölln</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">B</td>
-<td style="text-align: center;">420</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">B</td>
 <td style="text-align: center;">120</td>
-<td style="text-align: center;">2.5</td>
 <td style="text-align: center;">Kreuzberg</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">A</td>
-<td style="text-align: center;">610</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">C</td>
 <td style="text-align: center;">95</td>
-<td style="text-align: center;">6.1</td>
 <td style="text-align: center;">Charlottenburg</td>
 <td style="text-align: center;">Kantstr.</td>
 <td style="text-align: center;">C</td>
-<td style="text-align: center;">390</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">D</td>
 <td style="text-align: center;">70</td>
-<td style="text-align: center;">3.8</td>
 <td style="text-align: center;">Kreuzberg</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">D</td>
-<td style="text-align: center;">370</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">110</td>
-<td style="text-align: center;">1.2</td>
 <td style="text-align: center;">Charlottenburg</td>
 <td style="text-align: center;">Unter Den Linden</td>
 <td style="text-align: center;">B</td>
-<td style="text-align: center;">700</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">F</td>
 <td style="text-align: center;">60</td>
-<td style="text-align: center;">5.0</td>
 <td style="text-align: center;">Neukölln</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">F</td>
-<td style="text-align: center;">310</td>
 </tr>
 </tbody>
 </table>
@@ -644,9 +628,9 @@ window.Quarto = {
 <th style="text-align: center;">Property</th>
 <th style="text-align: center;">Surface Area (sq m)</th>
 <th style="text-align: center;">Sell Price (K€)</th>
-<th style="text-align: center;">Kreuzberg</th>
-<th style="text-align: center;">Charlottenburg</th>
-<th style="text-align: center;">Neukölln</th>
+<th style="text-align: center;">Kreuzb.</th>
+<th style="text-align: center;">Charlott.</th>
+<th style="text-align: center;">Neuk.</th>
 </tr>
 </thead>
 <tbody>
@@ -731,8 +715,8 @@ window.Quarto = {
 <th style="text-align: center;">Property</th>
 <th style="text-align: center;">Surface Area (sq m)</th>
 <th style="text-align: center;">Sell Price (K€)</th>
-<th style="text-align: center;">Kreuzberg</th>
-<th style="text-align: center;">Charlottenburg</th>
+<th style="text-align: center;">Kreuzb.</th>
+<th style="text-align: center;">Charlott.</th>
 </tr>
 </thead>
 <tbody>
@@ -794,16 +778,14 @@ window.Quarto = {
 <p>This is an abstract definition, let’s make it more concrete with an example:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 22%">
-<col style="width: 23%">
-<col style="width: 19%">
-<col style="width: 23%">
+<col style="width: 14%">
+<col style="width: 30%">
+<col style="width: 24%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Property</th>
-<th style="text-align: center;">Surface Area (sq m)</th>
 <th style="text-align: center;">Street Name</th>
 <th style="text-align: center;">Sell Price (K€)</th>
 <th style="text-align: center;">Encoded Street Name</th>
@@ -812,42 +794,36 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">A</td>
-<td style="text-align: center;">85</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">420</td>
 <td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">B</td>
-<td style="text-align: center;">120</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">610</td>
 <td style="text-align: center;">?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">C</td>
-<td style="text-align: center;">95</td>
 <td style="text-align: center;">Kantstr.</td>
 <td style="text-align: center;">390</td>
 <td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">D</td>
-<td style="text-align: center;">70</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">370</td>
 <td style="text-align: center;">?</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">E</td>
-<td style="text-align: center;">110</td>
 <td style="text-align: center;">Unter Den Linden</td>
 <td style="text-align: center;">700</td>
 <td style="text-align: center;">?</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">F</td>
-<td style="text-align: center;">60</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">310</td>
 <td style="text-align: center;">?</td>
@@ -865,16 +841,14 @@ window.Quarto = {
 <p>The dataset with a target encoded street name feature now looks like this:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 22%">
-<col style="width: 23%">
-<col style="width: 19%">
-<col style="width: 23%">
+<col style="width: 14%">
+<col style="width: 30%">
+<col style="width: 24%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: center;">Property</th>
-<th style="text-align: center;">Surface Area (sq m)</th>
 <th style="text-align: center;">Street Name</th>
 <th style="text-align: center;">Sell Price (K€)</th>
 <th style="text-align: center;">Encoded Street Name</th>
@@ -883,42 +857,36 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">A</td>
-<td style="text-align: center;">85</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">420</td>
 <td style="text-align: center;">365</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">B</td>
-<td style="text-align: center;">120</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">610</td>
 <td style="text-align: center;">490</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">C</td>
-<td style="text-align: center;">95</td>
 <td style="text-align: center;">Kantstr.</td>
 <td style="text-align: center;">390</td>
 <td style="text-align: center;">390</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">D</td>
-<td style="text-align: center;">70</td>
 <td style="text-align: center;">Bergmannstr.</td>
 <td style="text-align: center;">370</td>
 <td style="text-align: center;">490</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">E</td>
-<td style="text-align: center;">110</td>
 <td style="text-align: center;">Unter Den Linden</td>
 <td style="text-align: center;">700</td>
 <td style="text-align: center;">700</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">F</td>
-<td style="text-align: center;">60</td>
 <td style="text-align: center;">Sonnenallee</td>
 <td style="text-align: center;">310</td>
 <td style="text-align: center;">365</td>

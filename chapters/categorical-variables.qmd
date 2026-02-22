@@ -4,14 +4,14 @@ title: Encoding Categorical Features
 
 Not all data is numerical. Categorical features represent data **groupings**. As an example, a property in Berlin can have a given neighbourhood, e.g., “Neukölln”, “Kreuzberg” or “Charlottenburg”.
 
-| Property | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood   | Street Name         | Energy Rating | Sell Price (K€) |
-|:--------:|:------------------:|:----------------------:|:---------------:|:-------------------:|:-------------:|:---------------:|
-| A        | 85                 | 4.2                    | Neukölln        | Sonnenallee         | B             | 420             |
-| B        | 120                | 2.5                    | Kreuzberg       | Bergmannstr.        | A             | 610             |
-| C        | 95                 | 6.1                    | Charlottenburg  | Kantstr.            | C             | 390             |
-| D        | 70                 | 3.8                    | Kreuzberg       | Bergmannstr.        | D             | 370             |
-| E        | 110                | 1.2                    | Charlottenburg  | Unter Den Linden    | B             | 700             |
-| F        | 60                 | 5.0                    | Neukölln        | Sonnenallee         | F             | 310             |
+| Property | Surface Area (sq m) | Neighbourhood   | Street Name         | Energy Rating |
+|:--------:|:------------------:|:---------------:|:-------------------:|:-------------:|
+| A        | 85                 | Neukölln        | Sonnenallee         | B             |
+| B        | 120                | Kreuzberg       | Bergmannstr.        | A             |
+| C        | 95                 | Charlottenburg  | Kantstr.            | C             |
+| D        | 70                 | Kreuzberg       | Bergmannstr.        | D             |
+| E        | 110                | Charlottenburg  | Unter Den Linden    | B             |
+| F        | 60                 | Neukölln        | Sonnenallee         | F             |
 
 
 :::{.exercise #exr-spot-cat}
@@ -72,7 +72,7 @@ The best way to understand One-Hot Encoding is to visualise it before explaining
 
 The One-Hot Encoded dataset would look like this:
 
-| Property | Surface Area (sq m) | Sell Price (K€) | Kreuzberg | Charlottenburg | Neukölln |
+| Property | Surface Area (sq m) | Sell Price (K€) | Kreuzb. | Charlott. | Neuk. |
 |:--------:|:------------------:|:---------------:|:---------:|:--------------:|:--------:|
 | A        | 85                 | 420             | 0         | 0              | 1        |
 | B        | 120                | 610             | 1         | 0              | 0        |
@@ -96,7 +96,7 @@ In statistics and Machine Learning, many issues arise when the features of a dat
 
 Going back to the example with three neighbourhood values (Kreuzberg, Charlottenburg and Neukölln), the processed dataset would look like this:
 
-| Property | Surface Area (sq m) | Sell Price (K€) | Kreuzberg | Charlottenburg |
+| Property | Surface Area (sq m) | Sell Price (K€) | Kreuzb. | Charlott. |
 |:--------:|:------------------:|:---------------:|:---------:|:--------------:|
 | A        | 85                 | 420             | 0         | 0              |
 | B        | 120                | 610             | 1         | 0              |
@@ -119,14 +119,14 @@ We want to be able to capture the **impact of the street name on the price**. To
 
 This is an abstract definition, let’s make it more concrete with an example:
 
-| Property | Surface Area (sq m) | Street Name         | Sell Price (K€) | Encoded Street Name |
-|:--------:|:------------------:|:-------------------:|:---------------:|:-------------------:|
-| A        | 85                 | Sonnenallee         | 420             | ?                   |
-| B        | 120                | Bergmannstr.        | 610             | ?                   |
-| C        | 95                 | Kantstr.            | 390             | ?                   |
-| D        | 70                 | Bergmannstr.        | 370             | ?                   |
-| E        | 110                | Unter Den Linden    | 700             | ?                   |
-| F        | 60                 | Sonnenallee         | 310             | ?                   |
+| Property | Street Name         | Sell Price (K€) | Encoded Street Name |
+|:--------:|:-------------------:|:---------------:|:-------------------:|
+| A        | Sonnenallee         | 420             | ?                   |
+| B        | Bergmannstr.        | 610             | ?                   |
+| C        | Kantstr.            | 390             | ?                   |
+| D        | Bergmannstr.        | 370             | ?                   |
+| E        | Unter Den Linden    | 700             | ?                   |
+| F        | Sonnenallee         | 310             | ?                   |
 
 To encode the street name with Target Encoding, compute the average value of the target for each street name:
 
@@ -139,14 +139,14 @@ Show that the average target value for Sonnenallee is 365.
 
 The dataset with a target encoded street name feature now looks like this:
 
-| Property | Surface Area (sq m) | Street Name         | Sell Price (K€) | Encoded Street Name |
-|:--------:|:------------------:|:-------------------:|:---------------:|:-------------------:|
-| A        | 85                 | Sonnenallee         | 420             | 365                 |
-| B        | 120                | Bergmannstr.        | 610             | 490                 |
-| C        | 95                 | Kantstr.            | 390             | 390                 |
-| D        | 70                 | Bergmannstr.        | 370             | 490                 |
-| E        | 110                | Unter Den Linden    | 700             | 700                 |
-| F        | 60                 | Sonnenallee         | 310             | 365                 |
+| Property | Street Name         | Sell Price (K€) | Encoded Street Name |
+|:--------:|:-------------------:|:---------------:|:-------------------:|
+| A        | Sonnenallee         | 420             | 365                 |
+| B        | Bergmannstr.        | 610             | 490                 |
+| C        | Kantstr.            | 390             | 390                 |
+| D        | Bergmannstr.        | 370             | 490                 |
+| E        | Unter Den Linden    | 700             | 700                 |
+| F        | Sonnenallee         | 310             | 365                 |
 
 This way, a lot of the price relevant information of the street name is preserved. The main advantage of this method is that it can deal with categorical variables with many values **without creating too many dimensions**.
 

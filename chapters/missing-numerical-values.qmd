@@ -2,12 +2,12 @@
 title: Dealing with Missing Numeric Data
 ---
 
-Data can sometimes be missing. These missing points are often represented as null values.
+Data can sometimes be missing. These missing points are often represented as null or blank values.
 
-| Flat | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood   | Energy Rating | Sell Price (K€) |
+| Flat | Surface Area (sq m) | Distance to Centre (km) | Neighb.   | Energy Rating | Sell Price (K€) |
 |:----:|:------------------:|:----------------------:|:---------------:|:-------------:|:---------------:|
 | A    | 85                 | 4.2                    | Neukölln        | B             | 420             |
-| B    | NULL          | 2.5                    | Kreuzberg       | A             | 610             |
+| B    |          | 2.5                    | Kreuzberg       | A             | 610             |
 | C    | 95                 | 6.1                    | Charlott.       | C             | 390             |
 | D    | 70                 |                        | Kreuzberg       | D             | 370             |
 | E    | 110                | 1.2                    | Charlott.       | B             | 700             |
@@ -50,17 +50,17 @@ Before coming up with a strategy, it is critical to understand why these values 
 
 Is the missing data point critical? In the context of property pricing, the surface area is a critical data point. You may want to **exclude** the rows that have a key feature value missing.
 
-| Flat | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood   | Energy Rating | Sell Price (K€) |
+| Flat | Surface Area (sq m) | Distance to Centre (km) | Neighb.   | Energy Rating | Sell Price (K€) |
 |:----:|:------------------:|:----------------------:|:---------------:|:-------------:|:---------------:|
 | A    | 85                 | 4.2                    | Neukölln        | B             | 420             |
-| B    | NULL          | 2.5                    | Kreuzberg       | A             | 610             |
+| B    |          | 2.5                    | Kreuzberg       | A             | 610             |
 | C    | 95                 | 6.1                    | Charlott.       | C             | 390             |
 
 Looking at the example above, you would remove property B from the training data.
 
 ### Excluding Features with Missing Values
 
-| Property | Surface Area (sq m) | Distance to Centre (km) | Neighbourhood | Energy Rating | Sell Price (K€) | Years since Build |
+| Property | Surface Area (sq m) | Distance to Centre (km) | Neighb. | Energy Rating | Sell Price (K€) | Years since Build |
 |:--------:|:-------------------:|:-----------------------:|:-------------:|:-------------:|:---------------:|:------------:|
 | A | 85 | 4.2 | Neukölln | B | 420 |  |
 | B | 120 | 2.5 | Kreuzberg | A | 610 | 8 |
@@ -86,7 +86,7 @@ Imagine the data above also included "Balcony Area" in square meters. A missing 
 | Property | Total Area (sq m) | Balcony Area (sq m) | Sell Price (K€) |
 |:---:|:---:|:---:|:---:|
 | A | 95 | 12 | 450 |
-| B | 55 | NULL | 280 |
+| B | 55 |  | 280 |
 | C | 110 | 15 | 510 |
 
 #### Imputation by the Mean

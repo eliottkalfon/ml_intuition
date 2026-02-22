@@ -334,7 +334,7 @@ This standard deviation measures the **average spread** from the mean in a serie
 As surprising as it may seem, all the datasets have the same mean, variance and standard deviation for both $x$ and $y$. This is the famous Ascombe Quartet.
 
 ::: {.content-visible unless-format="epub"}
-![Anscombe's quartet](/images/scaling/anscombe_quartet.png){width=50%}
+![Anscombe's quartet](/images/scaling/anscombe_quartet.png){width=100%}
 :::
 
 ::: {.content-visible when-format="epub"}
@@ -361,7 +361,7 @@ This statistical paradox is good reminder that descriptive statistics are remain
 Going back to the three example series:
 
 ::: {.content-visible unless-format="epub"}
-![Three series with different means and variances](/images/scaling/three_series.png){width=50%}
+![Three series with different means and variances](/images/scaling/three_series.png){width=100%}
 :::
 
 ::: {.content-visible when-format="epub"}
@@ -379,7 +379,7 @@ $$
 A good first step:
 
 ::: {.content-visible unless-format="epub"}
-![Three series, mean centred](/images/scaling/three_series_mean_centred.png){width=50%}
+![Three series, mean centred](/images/scaling/three_series_mean_centred.png){width=100%}
 :::
 
 ::: {.content-visible when-format="epub"}
@@ -397,7 +397,7 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 $$
 
 ::: {.content-visible unless-format="epub"}
-![Three series, standardised](/images/scaling/three_series_standardised.png){width=50%}
+![Three series, standardised](/images/scaling/three_series_standardised.png){width=100%}
 :::
 
 ::: {.content-visible when-format="epub"}
