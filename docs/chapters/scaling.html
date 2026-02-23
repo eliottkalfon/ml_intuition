@@ -553,7 +553,7 @@ window.Quarto = {
 <figcaption>Series scaled to 0-1</figcaption>
 </figure>
 </div>
-<p>If the original series has numbers going from 0-150: <span class="math inline">\(\{0, 10, 60, 70, 120, 150\}\)</span></p>
+<p>If the original series has numbers going from 0-150: 0, 10, 60, 70, 120, 150</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../images/scaling/max150.png" class="img-fluid figure-img"></p>
@@ -1497,8 +1497,10 @@ x_{\text{standardised}} = \frac{x - \bar{x}}{\sigma}
 \bar{x}_2 = \frac{4 + 8 + 10 + 12 + 16}{5} = 10
 \]</span></p>
 <p>Variance: <span class="math display">\[\begin{aligned}
-\mathrm{Var}(x_2) &amp;= \frac{(4-10)^2 + (8-10)^2 + (10-10)^2 + (12-10)^2 + (16-10)^2}{5} \\
-&amp;= \frac{36 + 4 + 0 + 4 + 36}{5} = \frac{80}{5} = 16
+\mathrm{Var}(x_2) &amp;= \frac{(4-10)^2 + (8-10)^2 + (10-10)^2}{5} \\
+&amp;\quad + \frac{(12-10)^2 + (16-10)^2}{5} \\
+&amp;= \frac{36 + 4 + 0 + 4 + 36}{5} \\
+&amp;= \frac{80}{5} = 16
 \end{aligned}
 \]</span></p>
 </div>

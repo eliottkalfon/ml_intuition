@@ -53,7 +53,7 @@ Getting back to tabular data, these first sections will focus on **numerical col
 
 Looking at the table below, each tumour can be represented by a list of its characteristics, a list of numbers.
 
-| Diagnosis | Perimeter Mean (µm) | Area Mean (µm²) | Texture Mean |
+| Diagnosis | Perimeter Mean | Area Mean | Texture Mean |
 |:-----------:|:-------------------:|:---------------:|:-----------:|
 | Benign      | 80                  | 700             | 17.5        |
 | Malignant   | 110                 | 1200            | 23.0        |

@@ -14,16 +14,16 @@ Time indications like dates can contain information that can improve the quality
 
 In the property pricing example, in which a Machine Learning model is trained to predict property prices from its characteristics like their surface area or number of rooms. Let’s use the following training data as an example:
 
-| Property | Surface (m²) | Pricing date | Sale date | Sale price (K€) |
-|:---:|:---:|:---:|:---:|:---:|
-| A | 85 | 2024-12-15 | 2025-02-13 | 302 |
-| B | 86 | 2025-01-15 | 2025-03-16 | 305 |
-| C | 84 | 2025-02-15 | 2025-04-16 | 303 |
-| D | 87 | 2025-03-15 | 2025-05-14 | 311 |
-| E | 85 | 2025-04-15 | 2025-06-14 | 309 |
-| F | 86 | 2025-05-15 | 2025-07-14 | 316 |
-| G | 84 | 2025-06-15 | 2025-08-14 | 314 |
-| H | 87 | 2025-07-15 | 2025-09-13 | 322 |
+| Surface (m²) | Pricing date | Sale date | Sale price (K€) |
+|:---:|:---:|:---:|:---:|
+| 85 | 2024-12-15 | 2025-02-13 | 302 |
+| 86 | 2025-01-15 | 2025-03-16 | 305 |
+| 84 | 2025-02-15 | 2025-04-16 | 303 |
+| 87 | 2025-03-15 | 2025-05-14 | 311 |
+| 85 | 2025-04-15 | 2025-06-14 | 309 |
+| 86 | 2025-05-15 | 2025-07-14 | 316 |
+| 84 | 2025-06-15 | 2025-08-14 | 314 |
+| 87 | 2025-07-15 | 2025-09-13 | 322 |
 
 Which date column would you use to predict the sale price and why? The selling date could seem like a good idea. However, when pricing properties that have not been sold yet, this information is **not available** to the model. We do not yet know the sale date. The only date available to the pricing model would be the **pricing date**, date at which the property is put on the market.
 
@@ -64,16 +64,16 @@ This date could then be represented as the following **list of numbers**: 2025, 
 
 Encoding the pricing date of the example data using this method, we get:
 
-| Pricing date | Year | Month | ISO week | Day | ... | Minute | Second |
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| 2024-12-15 09:00:00 | 2024 | 12 | 50 | 15 | ... | 0 | 0 |
-| 2025-01-15 09:00:00 | 2025 | 1 | 3 | 15 | ... | 0 | 0 |
-| 2025-02-15 09:00:00 | 2025 | 2 | 7 | 15 | ... | 0 | 0 |
-| 2025-03-15 09:00:00 | 2025 | 3 | 11 | 15 | ... | 0 | 0 |
-| 2025-04-15 09:00:00 | 2025 | 4 | 16 | 15 | ... | 0 | 0 |
-| 2025-05-15 09:00:00 | 2025 | 5 | 20 | 15 | ... | 0 | 0 |
-| 2025-06-15 09:00:00 | 2025 | 6 | 24 | 15 | ... | 0 | 0 |
-| 2025-07-15 09:00:00 | 2025 | 7 | 29 | 15 | ... | 0 | 0 |
+| Year | Month | ISO week | Day | ... | Minute | Second |
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| 2024 | 12 | 50 | 15 | ... | 0 | 0 |
+| 2025 | 1 | 3 | 15 | ... | 0 | 0 |
+| 2025 | 2 | 7 | 15 | ... | 0 | 0 |
+| 2025 | 3 | 11 | 15 | ... | 0 | 0 |
+| 2025 | 4 | 16 | 15 | ... | 0 | 0 |
+| 2025 | 5 | 20 | 15 | ... | 0 | 0 |
+| 2025 | 6 | 24 | 15 | ... | 0 | 0 |
+| 2025 | 7 | 29 | 15 | ... | 0 | 0 |
 
 That should already achieve good performance. You may notice that some date features may be more relevant than others depending on the task.
 

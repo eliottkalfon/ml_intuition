@@ -85,7 +85,7 @@ A simple way to get these numbers in the 0-1 interval would be to divide all of 
 
 ![Series scaled to 0-1](/images/scaling/div100.png)
 
-If the original series has numbers going from 0-150: $\{0, 10, 60, 70, 120, 150\}$
+If the original series has numbers going from 0-150: 0, 10, 60, 70, 120, 150
 
 ![Series 0-150](/images/scaling/max150.png)
 
@@ -578,8 +578,10 @@ $$
 
 Variance:
 $$\begin{aligned}
-\mathrm{Var}(x_2) &= \frac{(4-10)^2 + (8-10)^2 + (10-10)^2 + (12-10)^2 + (16-10)^2}{5} \\
-&= \frac{36 + 4 + 0 + 4 + 36}{5} = \frac{80}{5} = 16
+\mathrm{Var}(x_2) &= \frac{(4-10)^2 + (8-10)^2 + (10-10)^2}{5} \\
+&\quad + \frac{(12-10)^2 + (16-10)^2}{5} \\
+&= \frac{36 + 4 + 0 + 4 + 36}{5} \\
+&= \frac{80}{5} = 16
 \end{aligned}
 $$
 
