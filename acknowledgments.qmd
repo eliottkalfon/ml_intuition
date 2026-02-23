@@ -9,4 +9,4 @@ A special mention goes to my lovely girlfriend for telling me that one of the ea
 
 I also want to thank the online Machine Learning community who encouraged me to make this book available in print.
 
-And of course, thank you reader, for making this project possible. I hope that you enjoyed engaging with the ideas in this book.
+Thank you reader, for making this project possible. I hope that you enjoyed engaging with the ideas in this book.
