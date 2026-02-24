@@ -20,7 +20,13 @@ Can you spot the other categorical variables in the above table?
 
 All of the Machine Learning models studied so far deal with observations as **points in space**. Numerical features naturally determine coordinates of points in [space](data-space.qmd). Properties can be plotted by their surface area and distance to the centre of town without problems:
 
+::: {.content-visible when-format="epub"}
+![Properties plotted by surface area and distance to centre](/epub_images/categorical-variables/surface_distance.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Properties plotted by surface area and distance to centre](/images/categorical-variables/surface_distance.png)
+:::
 
 We could try building a model that ignores neighbourhood, and uses “Distance to the Centre” as a proxy. This is not a bad idea, but a lot of information is **lost** in the process. And what is the centre of Berlin anyway?
 
@@ -49,7 +55,13 @@ Ordinal variables can be converted to numbers relatively easily. As an example, 
 
 Below is a plot of the properties in three dimensions: surface area, distance to centre, and encoded energy class.
 
+::: {.content-visible when-format="epub"}
+![Properties in 3D: Surface Area, Distance to Centre, Encoded Energy Class](/epub_images/categorical-variables/3d_surface_distance_energy.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Properties in 3D: Surface Area, Distance to Centre, Encoded Energy Class](/images/categorical-variables/3d_surface_distance_energy.png)
+:::
 
 If the notion of space is not fully clear, refer to the [chapter on data space](data-space.qmd){target=_blank}.
 

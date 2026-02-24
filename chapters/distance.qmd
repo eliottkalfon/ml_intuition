@@ -10,7 +10,13 @@ This is where **distance** comes in.
 
 Looking at the plot below, how would you classify the tumour labelled by a question mark?
 
+::: {.content-visible when-format="epub"}
+![Labelling a new observation using distance](/epub_images/intro/scatter_unknown.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Labelling a new observation using distance](/images/intro/scatter_unknown.png)
+:::
 
 Humans looking at this chart would **intuitively** compare the diagnosis of nearby observations with the unknown observation, and base their guess on **neighbours**.
 
@@ -30,7 +36,13 @@ Let's consider a set of three flats in Berlin, labelled A, B and C, with the fol
 
 In this example, the surface area represents the single dimension of this space. We can plot the different flats on this dimension:
 
+::: {.content-visible when-format="epub"}
+![Distance in one dimension](/epub_images/distance/1d_distance.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Distance in one dimension](/images/distance/1d_distance.png)
+:::
 
 In this space, what is the difference between A and C? How would you compute it?
 
@@ -92,7 +104,13 @@ You can read this formula as:
 
 Plotting the absolute value of all numbers between -5 and 5, we get the following triangular shape:
 
+::: {.content-visible when-format="epub"}
+![Absolute value function](/epub_images/distance/asbolute_value.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Absolute value function](/images/distance/asbolute_value.png)
+:::
 
 One of the main advantages of the absolute value function as a distance metric is the following:
 
@@ -132,7 +150,13 @@ $$
 
 Plotting the square of all numbers in the range -5 to 5, we notice that it has a parabolic shape:
 
+::: {.content-visible when-format="epub"}
+![Square function](/epub_images/distance/square_function.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Square function](/images/distance/square_function.png)
+:::
 
 This function **increases faster** as the input number grows.
 
@@ -160,11 +184,23 @@ The methods above can accurately measure the distance between points in one dime
 
 What would be the distance between the points A and B shown on the picture below?
 
+::: {.content-visible when-format="epub"}
+![Two points in space](/epub_images/intro/distance.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Two points in space](/images/intro/distance.png)
+:::
 
 Hint: The Pythagorean theorem may be useful.
 
+::: {.content-visible when-format="epub"}
+![Thinking of distance as the hypotenuse of a right-angle triangle](/epub_images/intro/distance_triangle.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Thinking of distance as the hypotenuse of a right-angle triangle](/images/intro/distance_triangle.png)
+:::
 
 To find the distance between point A (1,1) and point B (5,4) using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
 
@@ -245,7 +281,13 @@ Compute the Euclidean Distance between the points A and B in 5 dimensions (you c
 
 A more concise notation of the Euclidean distance uses the $\Sigma$ (pronounced "sigma") summation operator. This is a scary symbol, though its meaning is relatively simple.
 
+::: {.content-visible when-format="epub"}
+![Sigma explained](/epub_images/distance/sigma.jpg){width=50%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Sigma explained](/images/distance/sigma.png){width=50%}
+:::
 
 As an example, $\sum_{i=1}^{n} i$ represents the sum of all integers from $1$ to $n$:
 

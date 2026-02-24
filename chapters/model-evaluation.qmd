@@ -68,11 +68,23 @@ Going back to Machine Learning, by randomly selecting a large number of observat
 
 This can be visualised with a simple example. Let's imagine that the training data contains both flats and single houses. These types of properties generally have different surface areas. The following chart shows the distribution of surface areas of both flats and houses for the entire data:
 
+::: {.content-visible when-format="epub"}
+![Surface area distribution for both Flats and Houses](/epub_images/model-evaluation/whole_dataset.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Surface area distribution for both Flats and Houses](/images/model-evaluation/whole_dataset.png)
+:::
 
 By randomly sampling 200 of the observations to create a test set, both the training and test sets have roughly similar distributions:
 
+::: {.content-visible when-format="epub"}
+![Surface area distributions in the training and test sets](/epub_images/model-evaluation/two_sets.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Surface area distributions in the training and test sets](/images/model-evaluation/two_sets.png)
+:::
 
 This is the law of large numbers in action! The larger the dataset and test set, the more similar the two distributions will look like.
 
@@ -90,7 +102,13 @@ One way to do so is to use a **time-based** train/test split. If the training da
 
 This way, you estimate model performance on future price prediction. This is exactly how the model will be used once released. After training from Jan 2023 to Jan 2025, the model will be used to predict prices for Feb 2025 and beyond.
 
+::: {.content-visible when-format="epub"}
+![Random split vs time-based split](/epub_images/model-evaluation/time_based_split.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Random split vs time-based split](/images/model-evaluation/time_based_split.png)
+:::
 
 ### Wrapping up
 

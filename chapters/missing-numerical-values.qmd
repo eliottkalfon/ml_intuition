@@ -127,7 +127,13 @@ Considering the following series:
 
 $[2,3,4,5,7,9,50]$
 
+::: {.content-visible when-format="epub"}
+![Series with outlier](/epub_images/missing-values/series_with_outlier.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Series with outlier](/images/missing-values/series_with_outlier.png)
+:::
 
 The point at $50$ is an outlier of this distribution, as it is very far from the others. The mean of the series is affected by this number:
 
@@ -196,7 +202,13 @@ Time-series data is data with a **time** dimension. As an example, the following
 
 Time-series data is also often represented as a line chart:
 
+::: {.content-visible when-format="epub"}
+![Temperature time series with missing values](/epub_images/missing-values/time_series_missing_values.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Temperature time series with missing values](/images/missing-values/time_series_missing_values.png)
+:::
 
 ::: {.callout-note collapse="true"}
 ## But what is time?
@@ -229,19 +241,37 @@ Impute the null values of the following series using mean, then the median. To d
 
 :::
 
+::: {.content-visible when-format="epub"}
+![Imputation of missing values by mean](/epub_images/missing-values/time_series_mean.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Imputation of missing values by mean](/images/missing-values/time_series_mean.png)
+:::
 
 ##### Alternative Methods
 
 What would be a better method? In these time-series tasks, imputation by the **previous value** could be a good idea. This method is called **forward-fill**. It assumes that the value remains constant until a new measurement is taken.
 
+::: {.content-visible when-format="epub"}
+![Imputation by previous value](/epub_images/missing-values/time_series_previous.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Imputation by previous value](/images/missing-values/time_series_previous.png)
+:::
 
 The series looks more natural than with mean-imputation. Still, we can do better.
 
 Another approach is to impute the missing values by computing the average of the two neighboring values. This method, often called **linear interpolation**, is particularly useful for data with a clear trend, as it smoothly connects the known data points.
 
+::: {.content-visible when-format="epub"}
+![Imputation by neighbours](/epub_images/missing-values/time_series_neighbours.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Imputation by neighbours](/images/missing-values/time_series_neighbours.png)
+:::
 
 That looks more like it!
 

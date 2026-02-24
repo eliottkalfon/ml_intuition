@@ -10,13 +10,25 @@ From the point of view of the practitioner, data is rarely given, it is earned w
 
 The simplest form of data is tabular data. The first known examples of data tables are 4000 years old (!) dating back to the Old Babylonian period. Then, these clay tablets were used for accounting and trade.
 
+::: {.content-visible when-format="epub"}
+![Gemini-generated image of a Babylonian tablet, the author's drawing skills being insufficient for an original sketch](/epub_images/data-space/tablet.jpg){width=50%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Gemini-generated image of a Babylonian tablet, the author's drawing skills being insufficient for an original sketch](/images/data-space/tablet.png){width=50%}
+:::
 
 ## The Anatomy of a Table
 
 Tables are made of columns and rows.
 
+::: {.content-visible when-format="epub"}
+![Basic elements of a table](/epub_images/data-space/table.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Basic elements of a table](/images/data-space/table.png)
+:::
 
 Rows generally represent a real-world **entity**, with columns describing the **attributes** of this entity. Here, each row is a property, and each column describes an attribute of this property.
 
@@ -71,9 +83,21 @@ As an example, I can see objects on my desk: a glass of water and my notebook. T
 
 Below are two charts plotting suspicious mass observations in two and three dimensions:
 
-![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png){width=100%}
+::: {.content-visible when-format="epub"}
+![Plotting observations in two dimension](/epub_images/data-space/scatter_plot_2d.jpg){width=100%}
+:::
 
+::: {.content-hidden when-format="epub"}
+![Plotting observations in two dimension](/images/data-space/scatter_plot_2d.png){width=100%}
+:::
+
+::: {.content-visible when-format="epub"}
+![Plotting observations in three dimensions](/epub_images/data-space/scatter_plot_3d.jpg){width=100%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Plotting observations in three dimensions](/images/data-space/scatter_plot_3d.png){width=100%}
+:::
 
 This text is printed on a flat surface. And yet, using perspective and transparency, one can create the illusion of a third dimension. If you think that this 3D chart is barely legible, I agree with you.
 

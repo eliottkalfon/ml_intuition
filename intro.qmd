@@ -12,11 +12,23 @@ If that vocabulary sounds unfamiliar, don’t worry — the question is straight
 
 At first it might feel impossible. But suppose we have a database of many tumours, each labelled benign or malignant. A natural first step is to **plot those examples** using the two measurements from the report: perimeter and area. Each point on the chart would carry a label.
 
+::: {.content-visible when-format="epub"}
+![Plotting historical observations](epub_images/intro/scatter.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Plotting historical observations](images/intro/scatter.png)
+:::
 
 We could then plot the new observation on the same chart. We label it with a question mark as its diagnosis is still **unknown**.
 
+::: {.content-visible when-format="epub"}
+![Looking at the unknown observation](epub_images/intro/scatter_unknown.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Looking at the unknown observation](images/intro/scatter_unknown.png)
+:::
 
 Would you now feel comfortable making an educated guess?
 
@@ -32,12 +44,24 @@ These distance calculations will be studied later. As a brain teaser, how would 
 
 Hint: the Pythagorean theorem should be useful
 
+::: {.content-visible when-format="epub"}
+![Calculating the distance between A and B](epub_images/intro/distance.jpg){width=80%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Calculating the distance between A and B](images/intro/distance.png){width=80%}
+:::
 
 ::: {.callout-note collapse="true"}
 ## Answer
 
+::: {.content-visible when-format="epub"}
+![Thinking of distance as the hypotenuse of a right-angle triangle](epub_images/intro/distance_triangle.jpg){width=80%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Thinking of distance as the hypotenuse of a right-angle triangle](images/intro/distance_triangle.png){width=80%}
+:::
 
 To find the distance between point A (1,1) and point B (5,4) using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.
 
@@ -76,7 +100,13 @@ The distance between point A (1,1) and point B (5,4) is 5.
 
 With the list of closest neighbours, how would you make a **prediction**? Before coming up with an answer, think of how you would classify the following examples:
 
+::: {.content-visible when-format="epub"}
+![Different neighbour scenarios](epub_images/intro/five_neighbours.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Different neighbour scenarios](images/intro/five_neighbours.png)
+:::
 
 As you may have figured out, a **simple majority vote** should do. To generate predictions, count the number of neighbours belonging to each diagnosis, and **assign the diagnosis with the highest number of neighbours**.
 

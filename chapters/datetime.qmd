@@ -29,7 +29,13 @@ Which date column would you use to predict the sale price and why? The selling d
 
 For this reason, the sale date cannot be used in the model. The pricing date can still contain useful price information. Plotting the average sale price by pricing date (from the example data), we see the following trend:
 
+::: {.content-visible when-format="epub"}
+![Sale price by pricing date](/epub_images/datetime/prices_by_date.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Sale price by pricing date](/images/datetime/prices_by_date.png)
+:::
 
 ### Seasonality
 
@@ -37,7 +43,13 @@ Changing example, let’s say that as the manager of a pub, you are trying to pr
 
 Beer sales over the last two years look like this:
 
+::: {.content-visible when-format="epub"}
+![Beer sales over the last two years with seasonality and trend](/epub_images/datetime/beer_sales.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Beer sales over the last two years with seasonality and trend](/images/datetime/beer_sales.png)
+:::
 
 From this chart, we could see both an **upward trend** and **seasonality effects**. The next section will investigate how to encode this information into numbers.
 
@@ -91,7 +103,13 @@ Why go through the trouble of learning about this alternative representation? It
 
 Going back to the example of property prices over time, imagine that the average price evolves in the following way:
 
+::: {.content-visible when-format="epub"}
+![Upward linear trend](/epub_images/datetime/property_trend.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Upward linear trend](/images/datetime/property_trend.png)
+:::
 
 Having a feature that represents a **point in time**, can help determine the price of a property taking this upward trend into account. For example, a model could learn that the average price of property increases by 1% every 130 days.
 

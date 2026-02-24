@@ -277,7 +277,13 @@ Compute the MSE and MAE of the two models below:
 
 As you can see, Model A has a higher MAE than Model B, and Model B has a higher MSE than model A. How can that be? To understand the reason why, we need to understand the difference between the absolute value and the squared value of a number. These two functions are visualised below:
 
+::: {.content-visible when-format="epub"}
+![Absolute value and square functions](/epub_images/evaluation/abs_vs_square.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Absolute value and square functions](/images/evaluation/abs_vs_square.png)
+:::
 
 You may see that the square function **increases faster** as numbers grow larger or more negative, whereas the growth rate of the absolute value function **stays constant**. This means that the Mean Squared Error will strongly penalise **extreme errors**. Remembering the previous example:
 

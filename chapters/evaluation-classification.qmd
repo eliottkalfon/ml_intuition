@@ -355,7 +355,13 @@ Which translates to the following Confusion Matrices:
 
 The following line chart shows the evolution of the different metrics described in this chapter as the prediction **threshold increases**:
 
+::: {.content-visible when-format="epub"}
+![Visualising recall and precision as the threshold increases](/epub_images/evaluation/metrics.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Visualising recall and precision as the threshold increases](/images/evaluation/metrics.png)
+:::
 
 We see that **decreasing** the prediction threshold to 0.3 has the following effects on the three metrics we analysed:
 

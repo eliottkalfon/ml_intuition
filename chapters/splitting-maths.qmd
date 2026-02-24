@@ -4,7 +4,13 @@ title: "Evaluating Splits"
 
 In most problems, the different groups cannot be **separated**. Going back to the tumour diagnosis example, the training data looks messy:
 
+::: {.content-visible when-format="epub"}
+![Tumour diagnosis classification problem](/epub_images/intro/scatter.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Tumour diagnosis classification problem](/images/intro/scatter.png)
+:::
 
 How could we build a tree from there?
 
@@ -12,11 +18,23 @@ How could we build a tree from there?
 
 We could start by finding the **best split**, the split that separates the data best (even if it is not perfect). The split will create two groups:
 
+::: {.content-visible when-format="epub"}
+![First split](/epub_images/trees/example_first_split.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![First split](/images/trees/example_first_split.png)
+:::
 
 For each of the new groups, we can find the **best splits**, apply them, and **create two new groups**:
 
+::: {.content-visible when-format="epub"}
+![All splits](/epub_images/trees/example_three_splits.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![All splits](/images/trees/example_three_splits.png)
+:::
 
 We can keep splitting until the subgroups are “pure”; i.e., there are only observations belonging to the same class.
 
@@ -29,7 +47,13 @@ The depth of a tree is the **distance** from the root node, here the first split
 
 What is the depth of the tree built in the previous examples?
 
+::: {.content-visible when-format="epub"}
+![Example tree](/epub_images/trees/tree_example.jpg){width=50%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Example tree](/images/trees/tree_example.png){width=50%}
+:::
 
 It is two, as there are two edges (connections) on the path from the root node (top) to the leaf node (bottom).
 
@@ -187,7 +211,13 @@ To find the best data split, the Decision Tree learning algorithm evaluates **ea
 
 The example above only shows two different splits. This process can be repeated for all features and all splitting values. At each trial, the Gini Impurity Coefficient is recorded. The algorithm then selects the split achieving the lowest Gini Impurity Coefficient. This can be represented visually:
 
+::: {.content-visible when-format="epub"}
+![Trying all combinations and picking the first split achieving the minimum Gini Impurity Coefficient](/epub_images/trees/split_and_gini_vs_x1.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Trying all combinations and picking the first split achieving the minimum Gini Impurity Coefficient](/images/trees/split_and_gini_vs_x1.png)
+:::
 
 From the value 1.76, the split **perfectly separates** the two data classes, achieving a Gini Impurity Coefficient of 0.
 
@@ -195,17 +225,35 @@ But what happens when data is **not** fully separable? For these cases, the Gini
 
 This splitting trial and error can be visualised with the tumour diagnosis dataset:
 
-![Splitting this initial dataset](/images/intro/scatter.png).
+::: {.content-visible when-format="epub"}
+![Splitting this initial dataset](/epub_images/intro/scatter.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
+![Splitting this initial dataset](/images/intro/scatter.png)
+:::
 
 We first try splitting the data using the Perimeter Mean of the cell nuclei. The following line chart plots the Gini Impurity criterion for **different splitting values** over this feature.
 
+::: {.content-visible when-format="epub"}
+![Trying different split values for Perimeter Mean](/epub_images/trees/scatter_and_gini_vs_perimeter.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Trying different split values for Perimeter Mean](/images/trees/scatter_and_gini_vs_perimeter.png)
+:::
 
 This Gini Impurity Coefficient reaches a minimum of approximately 0.17 at a split value of about 96.6.
 
 The same could be done with the Mean Area of the cell nuclei:
 
+::: {.content-visible when-format="epub"}
+![Trying different split values for Perimeter Mean](/epub_images/trees/gini_vs_area_and_scatter.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Trying different split values for Perimeter Mean](/images/trees/gini_vs_area_and_scatter.png)
+:::
 
 The Gini Impurity Coefficient reaches a minimum of approximately 0.18 at a split value of about 885.7.
 

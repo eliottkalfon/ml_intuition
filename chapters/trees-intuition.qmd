@@ -4,17 +4,35 @@ title: "Decision Trees"
 
 It is now time to introduce a second model architecture. How would you predict the class of the unknown observation **without** using distance functions or nearest neighbours?
 
+::: {.content-visible when-format="epub"}
+![New observation and example data](/epub_images/trees/example_data.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![New observation and example data](/images/trees/example_data.png)
+:::
 
 One possibility would be to **split the data at $x_1 = 2$**. Any observation with $x_1$ greater than $2$ would be classified as $\circ$; the rest would be classified as $\times$.
 
+::: {.content-visible when-format="epub"}
+![Example data with a single split](/epub_images/trees/split.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Example data with a single split](/images/trees/split.png)
+:::
 
 ## Multiple Splits
 
 For a more complex case, how would you predict the class of the unknown observation with this training data? How would you split the $\times$ from the $\circ$?
 
+::: {.content-visible when-format="epub"}
+![A more complex example problem](/epub_images/trees/complex_problem.jpg){width=100%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![A more complex example problem](/images/trees/complex_problem.png){width=100%}
+:::
 
 In this example, there is **no single line** that can perfectly split the two groups. In Computer Science, this is also called the **XOR problem**.
 
@@ -23,7 +41,13 @@ In this example, there is **no single line** that can perfectly split the two gr
 
 The XOR (Exclusive Or) Problem refers to a foundational Machine Learning and Computer Science problem in which two classes cannot be separated by any single straight line. It demonstrates **the weaknesses of simple linear models**.
 
+::: {.content-visible when-format="epub"}
+![XOR Problem: Can you find a single line separating the x from the o?](/epub_images/trees/xor_problem.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![XOR Problem: Can you find a single line separating the x from the o?](/images/trees/xor_problem.png)
+:::
 
 The XOR is a logical operation that takes two Boolean (`True`/`False` or 1/0) values as inputs and returns 1 (or `True`) if they are different and 0 or `False` otherwise. You can see the truth table for this operation below.
 
@@ -42,7 +66,13 @@ More information on the XOR problem at [@xorwiki]
 
 Instead of splitting the data once, what if you could split the data **multiple times**? An example is shown below:
 
+::: {.content-visible when-format="epub"}
+![Splitting the data multiple times](/epub_images/trees/three_splits.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Splitting the data multiple times](/images/trees/three_splits.png)
+:::
 
 ## From Splits to Predictions
 
@@ -71,7 +101,13 @@ Using the above list, generate predictions for the following observations:
 
 The above list may be difficult to follow. This type of logic could be more elegantly represented as a **tree** (also called a **decision tree**):
 
+::: {.content-visible when-format="epub"}
+![Visualising splits as a Decision Tree](/epub_images/trees/tree_example.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Visualising splits as a Decision Tree](/images/trees/tree_example.png)
+:::
 
 :::{.exercise #exr-tree-pred}
 Generate predictions for the following observations by going down the Decision Tree above:
@@ -83,17 +119,35 @@ Generate predictions for the following observations by going down the Decision T
 
 To better understand the relationship between trees and data splits, the tree and the partition can be visualised next to one another:
 
+::: {.content-visible when-format="epub"}
+![Decision Tree as a partition of space](/epub_images/trees/tree_numbered_partition.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Decision Tree as a partition of space](/images/trees/tree_numbered_partition.png)
+:::
 
 Each split or comparison creates a **linear separation** in the feature space, represented by a black line in the chart above.
 
 In Computer Science, trees are a type of graph. Graphs are collections of **nodes and edges**.
 
+::: {.content-visible when-format="epub"}
+![Graphs are collections of nodes and edges connecting them](/epub_images/trees/basic_graph.jpg){width=40%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Graphs are collections of nodes and edges connecting them](/images/trees/basic_graph.png){width=40%}
+:::
 
 Edges can be **directed** or **undirected**. Directed edges can only be traversed in one direction, usually represented as arrows. Edges, i.e., connections between nodes, can form **cycles**. These cycles are paths that start and end with the same node.
 
+::: {.content-visible when-format="epub"}
+![Edges can be directed](/epub_images/trees/cycles_direction.jpg){width=40%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Edges can be directed](/images/trees/cycles_direction.png){width=40%}
+:::
 
 :::{.exercise #exr-cycle}
 The diagram above highlights the cycle A→B→D→A. Can you find another cycle?
@@ -106,7 +160,13 @@ Trees are **Directed Acyclic Graphs** (DAGs). This is a bit of a mouthful, let's
 
 Below is an example of a tree with seven nodes:
 
+::: {.content-visible when-format="epub"}
+![A simple tree with seven nodes](/epub_images/trees/tree_concepts.jpg){width=60%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![A simple tree with seven nodes](/images/trees/tree_concepts.png){width=60%}
+:::
 
 Trees, like all graphs, are composed of nodes and edges. In addition to the usual graph jargon, there are a few tree-specific concepts. To understand them, consider the example above:
 
@@ -125,7 +185,13 @@ Find another example of:
 
 Just like the KNN model, Decision Trees build a **map** from the input features to the target variable. Using a Decision Tree to generate predictions for all possible feature values, we get the following map:
 
+::: {.content-visible when-format="epub"}
+![Building a map with Decision Trees](/epub_images/trees/decision_tree_partition_map.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Building a map with Decision Trees](/images/trees/decision_tree_partition_map.png)
+:::
 
 ## Final Thoughts
 

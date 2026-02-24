@@ -15,7 +15,13 @@ The Decision Tree algorithm shown above only outputs class labels as prediction 
 
 Let's think about this problem using a modified version of the example data:
 
+::: {.content-visible when-format="epub"}
+![Non separable example data](/epub_images/trees/non_separable_data.jpg){width=100%}
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Non separable example data](/images/trees/non_separable_data.png){width=100%}
+:::
 
 In this example, leaf number 3 and 4 both contain observations from the two classes. Now, imagine that a new observation has $x_1=2.1$ and $x_2=0.5$, what prediction would we output?
 
@@ -55,7 +61,13 @@ Let's illustrate this with a simple example.
 
 Imagine we are building a model predicting property prices based on Property Size ($m^2$) and Distance to Centre ($km$):
 
+::: {.content-visible when-format="epub"}
+![Properties by Size and Distance coloured by Property Price](/epub_images/trees/property_prices.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Properties by Size and Distance coloured by Property Price](/images/trees/property_prices.png)
+:::
 
 We could take a subset of this data (prices now in **K€**):
 
@@ -126,13 +138,25 @@ At each splitting step, the algorithm would try different splitting features and
 
 This process can be visualised by showing the average MSE for each splitting value of the **size** feature:
 
+::: {.content-visible when-format="epub"}
+![Trying different splitting values of the size feature](/epub_images/trees/property_mse_vs_size.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Trying different splitting values of the size feature](/images/trees/property_mse_vs_size.png)
+:::
 
 Following the same **recursive process** as the one shown in the classification case, we can build a Decision Tree that partitions the overall space into subgroups.
 
 This stepwise learning process is shown below:
 
+::: {.content-visible when-format="epub"}
+![The Decision Tree learning algorithm selects the best split at each step](/epub_images/trees/property_regression_splits_stepwise.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![The Decision Tree learning algorithm selects the best split at each step](/images/trees/property_regression_splits_stepwise.png)
+:::
 
 As described in this section, Decision Trees can be easily applied to regression tasks. The only significant change is the evaluation of split quality with the **Mean Squared Error** instead of the Gini Impurity Coefficient.
 
@@ -228,7 +252,13 @@ Both Transaction Amount of 57.5 and Customer Age of 51 achieve a Gini Coefficien
 
 The resulting tree is:
 
+::: {.content-visible when-format="epub"}
+![Resulting tree splitting on Customer Age ≤ 51](/epub_images/trees/fraud_tree_example.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Resulting tree splitting on Customer Age ≤ 51](/images/trees/fraud_tree_example.png)
+:::
 
 1. Generating the prediction for observation: Customer Age: 23 and Transaction Amount: 93, the observation will fall into the left leaf, as $23 \leq 51$.
 

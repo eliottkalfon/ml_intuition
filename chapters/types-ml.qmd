@@ -12,7 +12,13 @@ Sometimes, these labels do not exist. Let's imagine an archaeologist who stumble
 
 Plotting all these bone measurements on a chart, two clusters emerge:
 
+::: {.content-visible when-format="epub"}
+![Plotting bones by measurements](/epub_images/defining-prediction/clusters.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Plotting bones by measurements](/images/defining-prediction/clusters.png)
+:::
 
 The exact species are still unknown, but the bones seem to belong to two different clusters. You have gained this information through the use of **unsupervised learning**, learning patterns or underlying structures of the data.
 
@@ -28,7 +34,13 @@ Another type of Machine Learning is **reinforcement learning** (RL), in which th
 - based on its environment: the current state of the board
 - to maximise a reward/objective: probability of winning the game
 
+::: {.content-visible when-format="epub"}
+![Autonomous vacuum cleaner, an example RL problem](/epub_images/defining-prediction/vacuum_grid.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Autonomous vacuum cleaner, an example RL problem](/images/defining-prediction/vacuum_grid.png)
+:::
 
 ::: {.exercise #exr-vac-cle}
 Autonomous vacuum cleaners can be powered by reinforcement learning systems. Give examples of their:

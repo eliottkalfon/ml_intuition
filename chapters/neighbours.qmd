@@ -13,7 +13,13 @@ A Machine Learning model learns the **relationship** between inputs and outputs 
 
 Using the example of tumour diagnosis:
 
+::: {.content-visible when-format="epub"}
+![Tumour dataset: Perimeter Mean vs Area Mean](/epub_images/intro/scatter_unknown.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Tumour dataset: Perimeter Mean vs Area Mean](/images/intro/scatter_unknown.png)
+:::
 
 We want to predict the diagnosis of the observation labelled with a question mark (?). How could this be done using distance?
 
@@ -37,13 +43,25 @@ In Machine Learning, this model is referred to as K-Nearest Neighbours or KNN. $
 
 This model acts as a **map from feature values to a prediction**. Using the algorithm described above, **any tumour** observation can be assigned to a diagnosis. This map can be visualised by applying this majority vote to every point and colouring it by its diagnosis:
 
+::: {.content-visible when-format="epub"}
+![KNN prediction map](/epub_images/neighbours/classification_boundary.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![KNN prediction map](/images/neighbours/classification_boundary.png)
+:::
 
 ## Adding some nuance
 
 This is all very exciting. But let's consider the following example from a **patient's perspective**. Let's imagine we have to predict the diagnosis of the following tumours:
 
+::: {.content-visible when-format="epub"}
+![Neighbours with different class ratios](/epub_images/intro/five_neighbours.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Neighbours with different class ratios](/images/intro/five_neighbours.png)
+:::
 
 There, a simple majority vote would mean that the observation with 2 malignant neighbours could be classified as "benign". As a patient, I would prefer to have a second opinion there.
 
@@ -76,7 +94,13 @@ By using this approach, the model can output more nuanced predictions that refle
 
 This approach can be used to revise the map visualised in the previous section. Instead of being coloured by the predicted label, it is coloured by the **predicted probability** of malignancy ($1$ malignant, $0$ benign).
 
+::: {.content-visible when-format="epub"}
+![KNN probability map](/epub_images/neighbours/classification_boundary_proba.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![KNN probability map](/images/neighbours/classification_boundary_proba.png)
+:::
 
 ## From classification to regression
 
@@ -97,7 +121,13 @@ For simplicity, let's use the following features: number of rooms and distance f
 
 The training data looks like this:
 
+::: {.content-visible when-format="epub"}
+![Property pricing training data](/epub_images/neighbours/property_price_data.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![Property pricing training data](/images/neighbours/property_price_data.png)
+:::
 
 Each dot represents a property, coloured by its price. The question mark ($?$) is the new property we want to price.
 
@@ -121,7 +151,13 @@ That is it, we have our predictions! This process should remind you of probabili
 
 Using this method, we could also compute a **map of property prices** over the two features: number of rooms and distance from centre.
 
+::: {.content-visible when-format="epub"}
+![KNN regression map](/epub_images/neighbours/knn_regression_map.jpg)
+:::
+
+::: {.content-hidden when-format="epub"}
 ![KNN regression map](/images/neighbours/knn_regression_map.png)
+:::
 
 The map shows that there is a positive **relationship** between number of rooms and price, and a negative relationship between distance to centre and price. The most expensive properties are both central and have a high number of rooms. The (simple) model built allows us to map **any** given combination of number of rooms and distance to centre to a price.
 
