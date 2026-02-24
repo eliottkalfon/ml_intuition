@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Distance and Similarity – Machine Learning Intuition</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/neighbours.html" rel="next">
+<link href="../chapters/data-space.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-27c261d06b905028a18691de25d09dde.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-CRT8LCGF89"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CRT8LCGF89');
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../intro.html">Introduction to Machine Learning</a></li><li class="breadcrumb-item"><a href="../chapters/distance.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Machine Learning Intuition</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../epigraph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">epigraph.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Introduction to Machine Learning</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">First Prediction with Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/defining-prediction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Defining Prediction</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/types-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Other Types of Machine Learning</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ai-ml-ds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Machine Learning, Artificial Intelligence and Data Science</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data-space.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/distance.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/neighbours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Model Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/model-evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Model Evaluation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/evaluation-classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Evaluating Classification Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/evaluation-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Evaluating Regression Models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Decision Trees</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/trees-intuition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/splitting-maths.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Evaluating Splits</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/recursion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Splitting Recursively</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/trees-proba-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Probabilities and Regression with Decision Trees</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data Preprocessing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/data-preprocessing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Data Preprocessing</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/categorical-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Encoding Categorical Features</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/datetime.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Representing Dates</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/missing-numerical-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Dealing with Missing Numeric Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/missing-categorical-values.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Dealing with Missing Categorical Data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/scaling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Numerical Feature Scaling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bringing it all Together</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/end-to-end.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">End-to-End Machine Learning Project</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/generative-ai.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Machine Learning and Generative AI</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../acknowledgments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Acknowledgments</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#starting-with-subtraction" id="toc-starting-with-subtraction" class="nav-link active" data-scroll-target="#starting-with-subtraction"><span class="header-section-number">7.1</span> Starting with Subtraction</a></li>
+  <li><a href="#alternatives-to-subtraction" id="toc-alternatives-to-subtraction" class="nav-link" data-scroll-target="#alternatives-to-subtraction"><span class="header-section-number">7.2</span> Alternatives to Subtraction</a>
+  <ul class="collapse">
+  <li><a href="#absolute-value" id="toc-absolute-value" class="nav-link" data-scroll-target="#absolute-value"><span class="header-section-number">7.2.1</span> Absolute Value</a></li>
+  <li><a href="#squared-difference" id="toc-squared-difference" class="nav-link" data-scroll-target="#squared-difference"><span class="header-section-number">7.2.2</span> Squared Difference</a></li>
+  </ul></li>
+  <li><a href="#two-dimensions" id="toc-two-dimensions" class="nav-link" data-scroll-target="#two-dimensions"><span class="header-section-number">7.3</span> Two Dimensions</a></li>
+  <li><a href="#to-infinity-and-beyond" id="toc-to-infinity-and-beyond" class="nav-link" data-scroll-target="#to-infinity-and-beyond"><span class="header-section-number">7.4</span> To Infinity and Beyond</a>
+  <ul class="collapse">
+  <li><a href="#scary-sigma" id="toc-scary-sigma" class="nav-link" data-scroll-target="#scary-sigma"><span class="header-section-number">7.4.1</span> Scary Sigma</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">7.5</span> Final Thoughts</a></li>
+  <li><a href="#solutions" id="toc-solutions" class="nav-link" data-scroll-target="#solutions"><span class="header-section-number">7.6</span> Solutions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../intro.html">Introduction to Machine Learning</a></li><li class="breadcrumb-item"><a href="../chapters/distance.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Distance and Similarity</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Now that points exist in space, we could use the distance between them for inference. Inference refers to using information we have, to make <strong>guesses</strong> about the information we do not have.</p>
+<p>As an example, we could infer that similar tumours, or tumours with similar characteristics, have the same diagnosis. But how could we measure the <strong>similarity</strong> between two observations?</p>
+<p>This is where <strong>distance</strong> comes in.</p>
+<p>Looking at the plot below, how would you classify the tumour labelled by a question mark?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/intro/scatter_unknown.png" class="img-fluid figure-img"></p>
+<figcaption>Labelling a new observation using distance</figcaption>
+</figure>
+</div>
+<p>Humans looking at this chart would <strong>intuitively</strong> compare the diagnosis of nearby observations with the unknown observation, and base their guess on <strong>neighbours</strong>.</p>
+<p>This type of inference is something we do every day. As an example, I have seen many rabbits. If I see a small animal with long ears pointing up, I will classify this as a rabbit, as it is similar to my previous observations of rabbits.</p>
+<section id="starting-with-subtraction" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="starting-with-subtraction"><span class="header-section-number">7.1</span> Starting with Subtraction</h2>
+<p>To understand the concept of distance, we can start with <strong>one-dimensional space</strong>. This notion may seem strange, as we generally associate space with either two or three dimensions.</p>
+<p>Let’s consider a set of three flats in Berlin, labelled A, B and C, with the following surface areas:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Flat</th>
+<th style="text-align: center;">Surface Area (m²)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">22</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">55</td>
+</tr>
+</tbody>
+</table>
+<p>In this example, the surface area represents the single dimension of this space. We can plot the different flats on this dimension:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/distance/1d_distance.png" class="img-fluid figure-img"></p>
+<figcaption>Distance in one dimension</figcaption>
+</figure>
+</div>
+<p>In this space, what is the difference between A and C? How would you compute it?</p>
+<p>A simple subtraction would be a good start:</p>
+<p><span class="math display">\[
+\text{surface}_C - \text{surface}_A = 55 - 22 = 33
+\]</span></p>
+<p>Now, calculate the distance between B and C. You should get:</p>
+<p><span class="math display">\[
+\text{surface}_C - \text{surface}_B = 55 - 35 = 20
+\]</span></p>
+<p>In line with our intuition, we see that the distance between B and C is <strong>shorter</strong> than the distance between A and C. The difference in their surface area is <strong>smaller</strong>.</p>
+<p>Moving forward, we will note the distance between A and C (or any other two points) as d(A, C).</p>
+<p>Can you see an <strong>issue</strong> with using subtraction as a distance calculation?</p>
+<p>One of the main issues is that d(A, C) ≠ d(C, A). From the above, we know d(A, C) = 33. Calculating d(C, A), we get:</p>
+<p><span class="math display">\[
+\text{surface}_A - \text{surface}_C = 22 - 55 = -33
+\]</span></p>
+<p>This is unfortunate, as the distance between two points should not have a direction. It should be the same regardless of the starting point.</p>
+<p>How could we solve this?</p>
+</section>
+<section id="alternatives-to-subtraction" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="alternatives-to-subtraction"><span class="header-section-number">7.2</span> Alternatives to Subtraction</h2>
+<p>There are two mathematical tricks we could use to tackle this challenge:</p>
+<ul>
+<li>Absolute Value</li>
+<li>Squared Difference</li>
+</ul>
+<section id="absolute-value" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="absolute-value"><span class="header-section-number">7.2.1</span> Absolute Value</h3>
+<p>You can think of the <strong>absolute value</strong> of a number as removing any negative sign. More rigorously, the absolute value is the <strong>magnitude</strong> of a number. The absolute value of number <span class="math inline">\(x\)</span> is noted <span class="math inline">\(|x|\)</span>.</p>
+<p>For example: <span class="math inline">\(|2| = |-2| = 2\)</span></p>
+<p>For mathematically-inclined readers (others can close their eyes for two lines), the absolute value <strong>function</strong> is defined as:</p>
+<p><span class="math display">\[
+|x| =
+\begin{cases}
+x &amp; \text{if } x \geq 0 \\
+-x &amp; \text{if } x &lt; 0
+\end{cases}
+\]</span></p>
+<p>You can read this formula as:</p>
+<ul>
+<li>For all non-negative numbers, the absolute value is equal to the number itself <span class="math inline">\(|2| = 2\)</span></li>
+<li>For all negative numbers, the absolute value is the opposite of this number: <span class="math inline">\(|-3| = 3\)</span></li>
+</ul>
+<p>Plotting the absolute value of all numbers between -5 and 5, we get the following triangular shape:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/distance/asbolute_value.png" class="img-fluid figure-img"></p>
+<figcaption>Absolute value function</figcaption>
+</figure>
+</div>
+<p>One of the main advantages of the absolute value function as a distance metric is the following:</p>
+<p><span class="math display">\[
+|x-y| = |y-x|
+\]</span></p>
+<p>The absolute value of the difference between two numbers is the same regardless of their order. Going back to our example:</p>
+<p><span class="math display">\[\begin{aligned}
+|\text{surface}_C - \text{surface}_A| &amp;= |55 - 22| = |33| = 33 \\
+|\text{surface}_A - \text{surface}_C| &amp;= |22 - 55| = |-33| = 33
+\end{aligned}
+\]</span></p>
+<div id="exr-abs-val" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 7.1</strong></span> Compute the absolute value distance between B and C, and between C and B. Show that both are equal to 20.</p>
+</div>
+</section>
+<section id="squared-difference" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="squared-difference"><span class="header-section-number">7.2.2</span> Squared Difference</h3>
+<p>Another way to make sure the distance between two points is the same is to <strong>square the difference</strong>. A number squared, noted <span class="math inline">\(x^2\)</span>, is a number multiplied by itself: <span class="math inline">\(x \cdot x\)</span></p>
+<p>This operation has the same property as the absolute value:</p>
+<p><span class="math display">\[
+(x-y)^2 = (y-x)^2
+\]</span></p>
+<p>Revisiting the example above:</p>
+<p><span class="math display">\[\begin{aligned}
+(\text{surface}_C - \text{surface}_A)^2 &amp;= (55 - 22)^2 = 33^2 = 1089 \\
+(\text{surface}_A - \text{surface}_C)^2 &amp;= (22 - 55)^2 = (-33)^2 = 1089
+\end{aligned}
+\]</span></p>
+<p>Plotting the square of all numbers in the range -5 to 5, we notice that it has a parabolic shape:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/distance/square_function.png" class="img-fluid figure-img"></p>
+<figcaption>Square function</figcaption>
+</figure>
+</div>
+<p>This function <strong>increases faster</strong> as the input number grows.</p>
+<p>One potential issue with squared difference is that this number can grow very fast, and is sometimes hard to interpret. Considering the example above, it seems strange that the distance between 22 and 55 would be 1089.</p>
+<p>To make squared differences more interpretable, it is common to use the square root of the squared difference. The square root (noted <span class="math inline">\(\sqrt{\phantom{x}}\)</span>) is the number which, when multiplied by itself, gives the original number.</p>
+<p>For example: <span class="math inline">\(\sqrt{9} = 3\)</span></p>
+<p>Because: <span class="math inline">\(3 \cdot 3 = 9\)</span></p>
+<p>Going back to the example, the square root difference between A and C would be:</p>
+<p><span class="math display">\[
+\sqrt{(\text{surface}_C - \text{surface}_A)^2} = \sqrt{33^2} = \sqrt{1089} = 33
+\]</span></p>
+<div id="exr-squ-val" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 7.2</strong></span> Compute the squared difference between B and C, and between C and B. Show that both are equal to 400.</p>
+</div>
+</section>
+</section>
+<section id="two-dimensions" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="two-dimensions"><span class="header-section-number">7.3</span> Two Dimensions</h2>
+<p>The methods above can accurately measure the distance between points in one dimension. But how to measure the distance between <strong>points in two dimensions</strong>?</p>
+<p>What would be the distance between the points A and B shown on the picture below?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/intro/distance.png" class="img-fluid figure-img"></p>
+<figcaption>Two points in space</figcaption>
+</figure>
+</div>
+<p>Hint: The Pythagorean theorem may be useful.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/intro/distance_triangle.png" class="img-fluid figure-img"></p>
+<figcaption>Thinking of distance as the hypotenuse of a right-angle triangle</figcaption>
+</figure>
+</div>
+<p>To find the distance between point A (1,1) and point B (5,4) using the Pythagorean theorem, we can consider these points as two vertices of a right-angled triangle.</p>
+<p>The horizontal distance (<span class="math inline">\(\Delta x\)</span>) between the points is: <span class="math display">\[
+\Delta x = x_2 - x_1 = 5 - 1 = 4
+\]</span> The vertical distance (<span class="math inline">\(\Delta y\)</span>) between the points is: <span class="math display">\[
+\Delta y = y_2 - y_1 = 4 - 1 = 3
+\]</span> According to the Pythagorean theorem, the square of the hypotenuse (which is the distance <span class="math inline">\(d\)</span> between points A and B) is equal to the <strong>sum of the squares</strong> of the other two sides (<span class="math inline">\(\Delta x\)</span> and <span class="math inline">\(\Delta y\)</span>): <span class="math display">\[
+d^2 = (\Delta x)^2 + (\Delta y)^2
+\]</span> Substituting the values: <span class="math display">\[\begin{aligned}
+d^2 &amp;= (4)^2 + (3)^2 \\
+d^2 &amp;= 16 + 9 \\
+d^2 &amp;= 25 \\
+\end{aligned}
+\]</span> To find <span class="math inline">\(d\)</span>, we take the square root of both sides: <span class="math display">\[\begin{aligned}
+d &amp;= \sqrt{25} \\
+d &amp;= 5
+\end{aligned}
+\]</span></p>
+<p>So, the distance between point A (1,1) and point B (5,4) is 5.</p>
+<p>You may notice a striking similarity between the Pythagorean theorem and the <strong>square root of the squared distance</strong> defined in the previous section.</p>
+<p>The distance function derived from the Pythagorean theorem is called the <strong>Euclidean distance</strong>. Let us compare the Euclidean distance in one and two dimensions:</p>
+<ul>
+<li><p>In one dimension: <span class="math display">\[
+d(A, B) = \sqrt{(b_1 - a_1)^2}
+\]</span></p></li>
+<li><p>In two dimensions: <span class="math display">\[
+d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2}
+\]</span></p></li>
+</ul>
+<div id="exr-euc-dis" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 7.3</strong></span> Calculate the Euclidean Distance between point A and B defined in this table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Point</th>
+<th style="text-align: center;">Dim. 1</th>
+<th style="text-align: center;">Dim. 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p>Hint: It may be helpful to plot these two points in two dimensions.</p>
+</div>
+</section>
+<section id="to-infinity-and-beyond" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="to-infinity-and-beyond"><span class="header-section-number">7.4</span> To Infinity and Beyond</h2>
+<p>As shown in the last chapter, data represents <strong>points in space in many dimensions</strong>. It is not uncommon to have datasets with hundreds of columns. How to measure distance in such a high-dimensional space?</p>
+<p>The Euclidean Distance could be used for two, three or any <span class="math inline">\(n\)</span> number of dimensions. It can be noted in the following way: <span class="math display">\[
+d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2 + (b_3 - a_3)^2 + \cdots + (b_n - a_n)^2}
+\]</span></p>
+<div id="exr-high-dim" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 7.4</strong></span> Compute the Euclidean Distance between the points A and B in 5 dimensions (you can use a calculator):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Point</th>
+<th style="text-align: center;">Dim. 1</th>
+<th style="text-align: center;">Dim. 2</th>
+<th style="text-align: center;">Dim. 3</th>
+<th style="text-align: center;">Dime. 4</th>
+<th style="text-align: center;">Dim. 5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="scary-sigma" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="scary-sigma"><span class="header-section-number">7.4.1</span> Scary Sigma</h3>
+<section id="some-context" class="level4" data-number="7.4.1.1">
+<h4 data-number="7.4.1.1" class="anchored" data-anchor-id="some-context"><span class="header-section-number">7.4.1.1</span> Some Context</h4>
+<p>A more concise notation of the Euclidean distance uses the <span class="math inline">\(\Sigma\)</span> (pronounced “sigma”) summation operator. This is a scary symbol, though its meaning is relatively simple.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/distance/sigma.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Sigma explained</figcaption>
+</figure>
+</div>
+<p>As an example, <span class="math inline">\(\sum_{i=1}^{n} i\)</span> represents the sum of all integers from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n} i = 1 + 2 + 3 + \cdots + n
+\]</span></p>
+<p>In this expression:</p>
+<ul>
+<li><span class="math inline">\(i=1\)</span> (at the bottom): Starting value of the counter</li>
+<li><span class="math inline">\(n\)</span> (at the top): Ending value of the counter</li>
+<li><span class="math inline">\(i\)</span> (after the sigma): The expression to sum for each value of the counter</li>
+</ul>
+<p>To make this more concrete, the sum of all integers from 1 to 4 can be written: <span class="math display">\[
+\sum_{i=1}^{4} i = 1 + 2 + 3 + 4
+\]</span></p>
+<p>The following expression is the sum of all integers from 1 to 3, divided by 2:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{3} \frac{i}{2} = \frac{1}{2} + \frac{2}{2} + \frac{3}{2}
+\]</span></p>
+<div id="exr-sig-cal" class="exercise theorem">
+<p><span class="theorem-title"><strong>Exercise 7.5</strong></span> Calculate the following summations:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\sum_{i=1}^{4} (i+2)\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{i=1}^{3} \frac{i}{3}\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{i=1}^{5} \frac{1}{i}\)</span></p></li>
+</ol>
+</div>
+<p>The <span class="math inline">\(\Sigma\)</span> operator is very useful when dealing with <strong>collections of numbers</strong> and dimensions; something that is very common in Machine Learning.</p>
+</section>
+<section id="sigma-and-the-euclidean-distance" class="level4" data-number="7.4.1.2">
+<h4 data-number="7.4.1.2" class="anchored" data-anchor-id="sigma-and-the-euclidean-distance"><span class="header-section-number">7.4.1.2</span> Sigma and the Euclidean Distance</h4>
+<p>Using the <span class="math inline">\(\Sigma\)</span> notation, how to represent the Euclidean Distance in a more concise format?</p>
+<p>In dot notation for <span class="math inline">\(n\)</span> dimensions:</p>
+<p><span class="math display">\[
+d(A, B) = \sqrt{(b_1 - a_1)^2 + (b_2 - a_2)^2 + \cdots + (b_n - a_n)^2}
+\]</span></p>
+<p>In sigma notation, with <span class="math inline">\(n\)</span> the number of dimensions:</p>
+<p><span class="math display">\[
+d(A, B) = \sqrt{\sum_{i=1}^{n} (b_i - a_i)^2}
+\]</span></p>
+</section>
+</section>
+</section>
+<section id="final-thoughts" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">7.5</span> Final Thoughts</h2>
+<p>That is it! Using the above formula, you can compute the <strong>distance between any two points in a space of <span class="math inline">\(n\)</span> dimensions</strong>. This will be very useful when building the first prediction model of this book, K-Nearest Neighbours.</p>
+</section>
+<section id="solutions" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="solutions"><span class="header-section-number">7.6</span> Solutions</h2>
+<div id="sol-abs-val" class="proof solution">
+<p><span class="proof-title"><em>Solution 7.1</em>. </span><a href="#exr-abs-val" class="quarto-xref">Exercise&nbsp;<span>7.1</span></a></p>
+<p><span class="math display">\[\begin{aligned}
+|\text{surface}_C - \text{surface}_B| &amp;= |55 - 35| = |20| = 20 \\
+|\text{surface}_B - \text{surface}_C| &amp;= |35 - 55| = |-20| = 20
+\end{aligned}
+\]</span></p>
+</div>
+<div id="sol-squ-val" class="proof solution">
+<p><span class="proof-title"><em>Solution 7.2</em>. </span><a href="#exr-squ-val" class="quarto-xref">Exercise&nbsp;<span>7.2</span></a> <span class="math display">\[\begin{aligned}
+(\text{surface}_C - \text{surface}_B)^2 &amp;= (55 - 35)^2 = 20^2 = 400 \\
+(\text{surface}_B - \text{surface}_C)^2 &amp;= (35 - 55)^2 = (-20)^2 = 400
+\end{aligned}
+\]</span></p>
+</div>
+<div id="sol-hig-dim" class="proof solution">
+<p><span class="proof-title"><em>Solution 7.3</em>. </span><a href="#exr-high-dim" class="quarto-xref">Exercise&nbsp;<span>7.4</span></a> First, compute the squared difference for each of the five dimensions:</p>
+<p><span class="math display">\[\begin{aligned}
+(5-2)^2 &amp;= 9 \\
+(1-4)^2 &amp;= 9 \\
+(6-1)^2 &amp;= 25 \\
+(2-3)^2 &amp;= 1 \\
+(9-7)^2 &amp;= 4 \\
+\end{aligned}
+\]</span></p>
+<p>Sum:</p>
+<p><span class="math display">\[
+9 + 9 + 25 + 1 + 4 = 48
+\]</span></p>
+<p>Take the square root:</p>
+<p><span class="math display">\[
+d(A, B) = \sqrt{48} \approx 6.93
+\]</span></p>
+</div>
+<div id="sol-sig-cal" class="proof solution">
+<p><span class="proof-title"><em>Solution 7.4</em>. </span><a href="#exr-sig-cal" class="quarto-xref">Exercise&nbsp;<span>7.5</span></a></p>
+<p><span class="math display">\[\begin{aligned}
+1. \quad \sum_{i=1}^{4} (i+2) &amp;= (1+2) + (2+2) + (3+2) + (4+2) \\
+&amp;= 3 + 4 + 5 + 6 \\
+&amp;= 18 \\
+\\
+2. \quad \sum_{i=1}^{3} \frac{i}{3} &amp;= \frac{1}{3} + \frac{2}{3} + \frac{3}{3} \\
+&amp;= 2 \\
+\\
+3. \quad \sum_{i=1}^{5} \frac{1}{i} &amp;= 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} \\
+&amp;\approx 1 + 0.5 + 0.333 + 0.25 + 0.2 \\
+&amp;= 2.283
+\end{aligned}\]</span></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: #f9f9f9; padding: 10px; text-align: center; border-top: 1px solid #ccc; z-index: 1000; font-size: 14px;">
+  <p style="margin: 0; display: flex; justify-content: center; align-items: center; gap: 10px;">
+    As a data guy, I collect data. 🍪 By using this site, you agree to the use of cookies.
+    <button id="accept-cookies" style="padding: 10px 20px; background-color: #517699; border: none; border-radius: 6px; font-size: 14px; color: #fff; font-weight: bold; cursor: pointer; transition: background-color 0.3s;">
+      Got it!
+    </button>
+  </p>
+</div>
+<script>
+  document.getElementById('accept-cookies').addEventListener('click', function() {
+    document.getElementById('cookie-banner').style.display = 'none';
+    localStorage.setItem('cookiesAccepted', 'true');
+  });
+
+  if (localStorage.getItem('cookiesAccepted') === 'true') {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+</script>
+<div class="reciprocity-container">
+    <p class="reciprocity-text">
+        If this book helped you today, consider supporting the project 
+        by buying the ebook, including notebooks and video walkthroughs.
+    </p>
+    <a href="https://kalfonel.gumroad.com/l/cnyuez" class="reciprocity-button" target="_blank" onclick="gtag('event', 'click', {'event_category': 'engagement', 'event_label': 'footer_ebook_link'});">
+       Buy the Ebook
+    </a>
+</div>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/data-space.html" class="pagination-link" aria-label="Data and Space">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data and Space</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/neighbours.html" class="pagination-link" aria-label="Neighbours">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Neighbours</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Copyright © Eliott Kalfon 2025. All rights reserved.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
