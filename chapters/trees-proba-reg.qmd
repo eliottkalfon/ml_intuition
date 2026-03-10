@@ -200,8 +200,6 @@ A new transaction occurs with an amount of **93** and customer age **23**.
 1. Build a Decision Tree with a **single split** (for simplicity) using the training data and finding the splits that minimise the Gini Impurity Coefficient?
 2. Using the tree generated, what is the predicted probability of fraud of the new observation?
 
-@sol-tree-fraud-proba
-
 :::
 
 ## Solutions

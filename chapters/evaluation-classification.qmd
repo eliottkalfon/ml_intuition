@@ -320,7 +320,7 @@ The threshold can be any number between 0 and 1. The lower the threshold, the **
 
 Let us show this with an example:
 
-| Observation | Predicted Probability | Threshold 0.3 | Threshold 0.5 | Threshold 0.7 | Ground Truth |
+| Obs. | Predicted Probability | Threshold 0.3 | Threshold 0.5 | Threshold 0.7 | Ground Truth |
 |:-----------:|:--------------------:|:-------------:|:-------------:|:-------------:|:------------:|
 |      1      |        0.6           |   $\times$    |   $\times$    |   $\circ$     |   $\times$   |
 |      2      |        0.75          |   $\times$    |   $\times$    |   $\times$    |   $\times$   |

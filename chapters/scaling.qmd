@@ -428,7 +428,7 @@ Descriptive statistics for Anscombe's quartet:
 | III       |        9 |      7.5 |      10 |    3.75 |    3.16 |    1.94 |
 | IV        |        9 |      7.5 |      10 |    3.75 |    3.16 |    1.94 |
 
-This statistical paradox is good reminder that descriptive statistics are remain a **reduction of reality**.
+This statistical paradox is good reminder that descriptive statistics remain a **reduction of reality**.
 
 :::
 
