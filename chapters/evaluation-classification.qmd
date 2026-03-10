@@ -124,7 +124,7 @@ Based on these, what would be a **False Positive** and a **True Negative**? Thin
 These can be summarised in the following table:
 
 |                | Predicted Positive | Predicted Negative |
-|----------------|-------------------|-------------------|
+|:----------------:|:-------------------:|:-------------------:|
 | Actual Positive| True Positive                | False Negative                |
 | Actual Negative| False Positive                | True Negative                |
 
@@ -133,14 +133,14 @@ This is also called the **Confusion Matrix**.
 To make this more concrete, this table could be adapted to the tumour diagnosis example:
 
 |                | Predicted Malignant | Predicted Benign      |
-|----------------|--------------------|----------------------|
+|:----------------:|:--------------------:|:----------------------:|
 | Actual Malignant| Malignant tumour correctly classified as "malignant" | Malignant tumour incorrectly classified as "benign" |
 | Actual Benign   | Benign mass incorrectly classified as "malignant"    | Benign mass correctly classified as "benign"        |
 
 Or for spam filtering:
 
 |                | Predicted Spam     | Predicted Not Spam    |
-|----------------|-------------------|-----------------------|
+|:----------------:|:-------------------:|:-----------------------:|
 | Actual Spam    | Spam correctly classified as "spam" | Spam incorrectly classified as "not spam" |
 | Actual Not Spam| Legitimate email incorrectly classified as "spam" | Legitimate email correctly classified as "not spam" |
 
@@ -265,14 +265,14 @@ After having built two different Machine Learning tumour diagnosis models (A and
 **Model A**
 
 |                | Predicted Malignant | Predicted Benign |
-|----------------|--------------------|-----------------|
+|:----------------:|:--------------------:|:-----------------:|
 | Actual Malignant| 40                 | 10              |
 | Actual Benign   | 10                 | 40              |
 
 **Model B**
 
 |                | Predicted Malignant | Predicted Benign |
-|----------------|--------------------|-----------------|
+|:----------------:|:--------------------:|:-----------------:|
 | Actual Malignant| 45                 | 5               |
 | Actual Benign   | 5                  | 45              |
 
@@ -289,14 +289,14 @@ Making this decision more complex, which of the following two models would you p
 **Model A**
 
 |                | Predicted Malignant | Predicted Benign |
-|----------------|--------------------|-----------------|
+|:----------------:|:--------------------:|:-----------------:|
 | Actual Malignant| 48                 | 2               |
 | Actual Benign   | 18                 | 32              |
 
 **Model B**
 
 |                | Predicted Malignant | Predicted Benign |
-|----------------|--------------------|-----------------|
+|:----------------:|:--------------------:|:-----------------:|
 | Actual Malignant| 50                 | 0               |
 | Actual Benign   | 20                 | 30              |
 
@@ -335,21 +335,21 @@ Which translates to the following Confusion Matrices:
 **Threshold 0.3**
 
 |                | Predicted $\times$ | Predicted $\circ$ |
-|----------------|-------------------|-------------------|
+|:----------------:|:-------------------:|:-------------------:|
 | Actual $\times$| 3                 | 0                 |
 | Actual $\circ$ | 1                 | 2                 |
 
 **Threshold 0.5**
 
 |                | Predicted $\times$ | Predicted $\circ$ |
-|----------------|-------------------|-------------------|
+|:----------------:|:-------------------:|:-------------------:|
 | Actual $\times$| 3                 | 0                 |
 | Actual $\circ$ | 0                 | 3                 |
 
 **Threshold 0.7**
 
 |                | Predicted $\times$ | Predicted $\circ$ |
-|----------------|-------------------|-------------------|
+|:----------------:|:-------------------:|:-------------------:|
 | Actual $\times$| 2                 | 1                 |
 | Actual $\circ$ | 0                 | 3                 |
 
@@ -422,7 +422,7 @@ Labels:
 @exr-conf-fraud
 
 |                      | Predicted Fraudulent | Predicted Legitimate |
-|----------------------|---------------------|---------------------|
+|:----------------------:|:---------------------:|:---------------------:|
 | Actual Fraudulent    | Fraudulent transaction correctly classified as "fraudulent" | Fraudulent transaction incorrectly classified as "legitimate" |
 | Actual Legitimate    | Legitimate transaction incorrectly classified as "fraudulent" | Legitimate transaction correctly classified as "legitimate"   |
 :::
