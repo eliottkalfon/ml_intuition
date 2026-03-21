@@ -19,7 +19,7 @@ There are two important elements to consider:
 
 ## Unseen Data
 
-Unseen data is, by definition, **unseen**. We cannot have access to it, as the moment we see it it becomes **seen**. Does that mean that we cannot evaluate a model on unseen data? Do we just wait for new observations to come?
+Unseen data is, by definition, **unseen**. We cannot have access to it, as the moment we see it, it becomes **seen**. Does that mean that we cannot evaluate a model on unseen data? Do we just wait for new observations to come?
 
 ### Train-Test Split
 

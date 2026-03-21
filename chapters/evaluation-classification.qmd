@@ -173,7 +173,7 @@ Rephrasing this for the tumour diagnosis example: out of all the malignant tumou
 This is calculated as follows:
 
 $$
-\text{Recall} = \frac{\text{Malignant tumours correctly detected by the model}}{\text{All observations predicted as malignant}}
+\text{Recall} = \frac{\text{Malignant tumours correctly detected by the model}}{\text{All malignant observations}}
 $$
 
 Rephrasing this in term of True/False Positive, we get:
