@@ -8,7 +8,7 @@ $$
 \text{Input} \longrightarrow \text{Model} \longrightarrow \text{Prediction}
 $$
 
-A good model makes predictions with **low distance** to the truth.
+A good model makes predictions with a **short distance** to the truth.
 
 Taking this into account, how can we determine which model best performs its function?
 
