@@ -32,7 +32,7 @@ We could try building a model that ignores neighbourhood, and uses “Distance t
 
 How would models handle these categorical variables like neighbourhoods? This is what this chapter is about.
 
-## Types of Categorical
+## Types of Categorical Features
 
 There are two main types of categorical features:
 

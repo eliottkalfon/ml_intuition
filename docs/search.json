@@ -769,7 +769,7 @@
     "href": "chapters/recursion.html",
     "title": "14  Splitting Recursively",
     "section": "",
-    "text": "14.1 Functions\nThe Decision Tree learning algorithm is a recursive algorithm.\nRecursion is a fascinating idea that builds on the concept of function. In programming, functions are reusable pieces of code that execute a piece of code.\nAs an example, the following function adds two numbers and returns the result:\nThis is a simple program represented in pseudocode, a language between natural language (like English) and code.\nGoing through this function line by line:\nIn python code, this function definition would look like this:\nOnce defined, this function can be called over and over again, without having to copy-paste any code. Functions are a core building block of programming.\nYou could call the function with adder(2,3) and get 5 as result.",
+    "text": "14.1 Functions\nThe Decision Tree learning algorithm is a recursive algorithm.\nRecursion is a fascinating idea that builds on the concept of function. In programming, functions are reusable pieces of code that execute a given task.\nAs an example, the following function adds two numbers and returns the result:\nThis is a simple program represented in pseudocode, a language between natural language (like English) and code.\nGoing through this function line by line:\nIn python code, this function definition would look like this:\nOnce defined, this function can be called over and over again, without having to copy-paste any code. Functions are a core building block of programming.\nYou could call the function with adder(2,3) and get 5 as result.",
     "crumbs": [
       "Decision Trees",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Splitting Recursively</span>"
@@ -912,15 +912,15 @@
     "href": "chapters/categorical-variables.html",
     "title": "17  Encoding Categorical Features",
     "section": "",
-    "text": "17.1 Types of Categorical\nNot all data is numerical. Categorical features represent data groupings. As an example, a property in Berlin can have a given neighbourhood, e.g., “Neukölln”, “Kreuzberg” or “Charlottenburg”.\nAll of the Machine Learning models studied so far deal with observations as points in space. Numerical features naturally determine coordinates of points in space. Properties can be plotted by their surface area and distance to the centre of town without problems:\nWe could try building a model that ignores neighbourhood, and uses “Distance to the Centre” as a proxy. This is not a bad idea, but a lot of information is lost in the process. And what is the centre of Berlin anyway?\nHow would models handle these categorical variables like neighbourhoods? This is what this chapter is about.\nThere are two main types of categorical features:",
+    "text": "17.1 Types of Categorical Features\nNot all data is numerical. Categorical features represent data groupings. As an example, a property in Berlin can have a given neighbourhood, e.g., “Neukölln”, “Kreuzberg” or “Charlottenburg”.\nAll of the Machine Learning models studied so far deal with observations as points in space. Numerical features naturally determine coordinates of points in space. Properties can be plotted by their surface area and distance to the centre of town without problems:\nWe could try building a model that ignores neighbourhood, and uses “Distance to the Centre” as a proxy. This is not a bad idea, but a lot of information is lost in the process. And what is the centre of Berlin anyway?\nHow would models handle these categorical variables like neighbourhoods? This is what this chapter is about.\nThere are two main types of categorical features:",
     "crumbs": [
       "Data Preprocessing",
       "<span class='chapter-number'>17</span>  <span class='chapter-title'>Encoding Categorical Features</span>"
     ]
   },
   {
-    "objectID": "chapters/categorical-variables.html#types-of-categorical",
-    "href": "chapters/categorical-variables.html#types-of-categorical",
+    "objectID": "chapters/categorical-variables.html#types-of-categorical-features",
+    "href": "chapters/categorical-variables.html#types-of-categorical-features",
     "title": "17  Encoding Categorical Features",
     "section": "",
     "text": "Ordinal variables: these variables have an order. The energy efficiency rating of a property ranges from A (most efficient) to G (least efficient)\nNominal variables: these variables have no intrinsic order. No possible ranking can be made of the neighbourhoods (e.g., “Neukölln” or “Kreuzberg”) mentioned in the previous example",
